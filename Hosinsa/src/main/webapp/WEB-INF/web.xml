@@ -30,7 +30,6 @@
 			<max-request-size>41943040</max-request-size> <!-- 40MB -->
 			<file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
 		</multipart-config>
-		
 	</servlet>
 		
 	<servlet-mapping>
