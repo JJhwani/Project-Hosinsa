@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosinsa.mapper.CrawlingMapper">
+	<!-- crawling -->
+	<insert id="crwaling" parameterType="com.hosinsa.domain.ProductVO">
+		<foreach collection="list" item="product" open="DECLARE BEGIN" close="; END;" separator=";">
+			insert into HOSINSA_PRODUCT(CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL)
+			values(#{product.CATEGORY}, #{product.PRONAME}, #{product.PROIMG}, #{product.BRAND}, #{product.PRONUM}, #{product.PRICE}, #{product.STOCK}, #{product.PROVIEW}, #{product.DETAIL})
+        </foreach>
+	</insert>
+	<!-- <insert id="crwaling">
+		insert into HOSINSA_PRODUCT(CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL)
+		values (#{CATEGORY}, #{PRONAME}, #{PROIMG}, #{BRAND}, #{PRONUM}, #{PRICE}, #{STOCK}, #{PROVIEW}, #{DETAIL})
+	</insert> -->
+
+</mapper>
