@@ -80,12 +80,11 @@
 </div>
 
 <ul class="sorting">
-	<li><a>기본순</a></li>
+	<li><a>인기순</a></li>
 	<li><a>신상품순</a></li>
 	<li><a>낮은가격순</a></li>
 	<li><a>높은가격순</a></li>
 	<li><a>후기순</a></li>
-	<li><a>판매순</a></li>
 </ul>
 <div class="mainList">
 	<section class="productList">
@@ -134,6 +133,16 @@
 		<li><a>이벤트 3</a></li>
 	</ul>
 	<a>전체보기</a>
+</div>
+
+<div class="recent">
+	<ul>
+		<li><a>최근본상품1</a></li>
+		<li><a>최근본상품2</a></li>
+		<li><a>최근본상품3</a></li>
+		<li><a>최근본상품4</a></li>
+	</ul>
+	<a>TOP</a>
 </div>
 
 <%@ include file="includes/footer.jsp" %>
