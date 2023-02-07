@@ -5,8 +5,8 @@
 	<update id="crawling" parameterType="java.util.List">
 		<foreach collection="list" item="item" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
 			INTO hosinsa_product VALUES 
-			(#{item.category},#{item.proname},#{item.proimg},#{item.brand},
-			#{item.pronum},#{item.price},#{item.stock},#{item.proview},#{item.detail})
+			(#{item.category},#{item.proname},#{item.proimg},#{item.brand},#{item.pronum},
+			#{item.price},#{item.stock},#{item.proview},#{item.detail},#{item.regdate},#{item.update_date})
 		</foreach>
 	</update>
 	<!-- getList -->
