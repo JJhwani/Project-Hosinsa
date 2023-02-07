@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,8 @@
 					<th>STOCK</th>
 					<th>PROVIEW</th>
 					<!-- <th>DETAIL</th> -->
+					<th>REGDATE</th>
+					<th>UPDATE_DATE</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,6 +39,8 @@
 						<td>${item.stock}</td>
 						<td>${item.proview}</td>
 						<!-- <td>${item.detail}</td> -->
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${item.regdate}" /></td>
+						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${item.update_date}" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
