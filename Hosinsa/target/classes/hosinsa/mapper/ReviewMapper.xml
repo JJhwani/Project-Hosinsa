@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hosinsa.mapper.ReviewMapper">
+
+	 	 <select id="getList" resultType="hosinsa.domain.ReviewVO">
+	   			select * from hosinsa_review where bno > 0
+	 	 </select>
+	 	 
+	 	 <insert id="insert">
+	 	 		insert into hosinsa_review (bno,title,content,nickname)
+	 	 		values(seq_review.nextval, #{title}, #{content}, #{nickname})
+	 	 </insert>
+	 	 	
+	 	 
+	 	 <insert id="insertSelectKey">
+	 	 	<selectKey keyProperty="bno" order="BEFORE" resultType="Long">
+	 	 		select seq_review.nextval from dual
+	 	 	</selectKey>
+		 	 	insert into hosinsa_review(bno, nickname, title, content)
+		 	 	values(#{bno}, #{nickname}, #{title}, #{content})
+	 	 </insert>
+	 	 
+	 	 <select id="read" resultType="hosinsa.domain.ReviewVO">
+	 	 		select * from hosinsa_review where bno = #{bno}
+	 	 </select>
+	 	 
+		
+		<delete id="delete">
+	 	 		delete from hosinsa_review where bno = #{bno}
+	 	</delete>
+	 	
+	 	
+	 	<update id="update">
+	 			update hosinsa_review
+	 			set title = #{title},
+	 			content = #{content},
+	 			nickname = #{nickname},
+	 			uploadDate = sysdate
+	 			where bno = #{bno}
+	 	</update>
+	 	 
+
+</mapper>
