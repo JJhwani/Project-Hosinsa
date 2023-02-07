@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.mapper.CrawlingMapper;
-import com.hosinsa.service.CrawlingService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -31,7 +28,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/crawling")
 @Log4j
 public class CrawlingController {
-
+	
 	@Autowired
 	private CrawlingMapper mapper;
 	
@@ -56,11 +53,6 @@ public class CrawlingController {
 				
 				Document doc_product = Jsoup.connect("https://www.musinsa.com/ranking/best?period=now&age=ALL&mainCategory="+categories[i]+"&subCategory=&leafCategory=&price=&golf=false&kids=false&newProduct=false&exclusive=false&discount=false&soldOut=false&page=1").get();
 				Elements img_product = doc_product.select("div.list-box li.li_box img.lazyload");
-				
-				//System.out.println(categories[i]);
-									
-				Path originPath = Paths.get("");
-				String originPath2 = originPath.toAbsolutePath().toString();
 				
 				switch(categories[i]) {
 					case "001" : category = "상의";
@@ -88,7 +80,7 @@ public class CrawlingController {
 				}
 				
 				//디렉토리 생성
-				String path = originPath2+"\\productImg\\"+category;
+				String path = "C:\\Work3\\Project-Hosinsa\\Hosinsa\\productImg\\"+category;
 									
 				try {
 		            Files.createDirectories(Paths.get(path));
@@ -137,8 +129,6 @@ public class CrawlingController {
 						//이미지 다운로드
 						String img = "http:"+imgBig.attr("src");
 						
-						//경로를 제외한 파일명
-						String filename = img.substring(img.lastIndexOf("/")+1);
 						HttpURLConnection conn = null;
 						
 						URL imgUrl;
@@ -149,7 +139,7 @@ public class CrawlingController {
 							//log.info("IMG URL :"+img);
 							
 							BufferedImage buffImg = ImageIO.read(conn.getInputStream());
-							FileOutputStream file = new FileOutputStream(path+"\\"+filename+".jpg");
+							FileOutputStream file = new FileOutputStream(path+"\\"+pronum+".jpg");
 							ImageIO.write(buffImg, "jpg", file);
 							
 						}catch(IOException e){
@@ -182,7 +172,6 @@ public class CrawlingController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-				
 		
 	}
 }
