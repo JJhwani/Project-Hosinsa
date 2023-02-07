@@ -1,5 +1,7 @@
 package com.hosinsa.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 /*CREATE TABLE HOSINSA_PRODUCT(
@@ -11,7 +13,9 @@ import lombok.Data;
 	    PRICE         NUMBER(8),
 	    STOCK         NUMBER(8),
 	    PROVIEW       NUMBER(8) DEFAULT 0,
-	    DETAIL        VARCHAR2(4000),
+	    DETAIL        CLOB,
+        REGDATE       DATE DEFAULT SYSDATE,
+        UPDATE_DATE   DATE DEFAULT SYSDATE,
 	    PRIMARY KEY(PRONUM)
 );*/
 
@@ -26,4 +30,6 @@ public class ProductVO {
 	private int stock; //재고
 	private int proview; //조회수
 	private String detail; //상품설명
+	private Date regdate; //상품등록일
+	private Date update_date; //상품수정일
 }

@@ -8,6 +8,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 
@@ -44,11 +45,13 @@ public class CrawlingController {
 		String proname; //제품명
 		String proimg; //제품 이미지
 		String brand; //브랜드
-		String detail; //상세이미지
 		int pronum; //품번
 		int price; //가격
 		int stock; //재고
 		int proview; //조회수
+		String detail; //상세이미지
+		Date regdate; // 등록일
+		Date update_date; // 등록일
 		
 		String[] categories = {"001","002","003","004","020","022","005","006","007","011"};			
 		//001:상의, 002:아우터, 003:바지, 004:가방, 020:원피스, 022:스커트, 005:신발, 006:시계, 007:모자, 011:액세서리
@@ -118,6 +121,8 @@ public class CrawlingController {
 						pronum = pNumber;
 						price = Integer.parseInt(pPrice.get(0).text());
 						detail = pDetail.html();
+						regdate = new Date();
+						update_date = new Date();
 						
 						System.out.println("번호 : "+(j+1));
 						System.out.println("카테고리 : "+category);							
@@ -129,6 +134,8 @@ public class CrawlingController {
 						System.out.println("재 고 : "+stock);
 						System.out.println("조회수 : "+proview);
 						System.out.println("상세정보 : "+detail);
+						System.out.println("등록일 : "+regdate);
+						System.out.println("수정일 : "+update_date);
 						System.out.println("==================================");
 									
 						//이미지 다운로드
@@ -155,25 +162,22 @@ public class CrawlingController {
 						vo.setCategory(category);
 						vo.setProname(proname);
 						vo.setProimg(proimg);
-						vo.setDetail(detail);
 						vo.setBrand(brand);
 						vo.setPronum(pronum);
 						vo.setPrice(price);
 						vo.setStock(stock);
 						vo.setProview(proview);
+						vo.setDetail(detail);
+						vo.setRegdate(regdate);
+						vo.setUpdate_date(update_date);
 						productList.add(vo);
 						
-					}//end for
-					
-					
+					}//end for					
 				} catch(Exception e) {
 					e.printStackTrace();
-				}
-				
-				mapper.crawling(productList);
-				
-			}//end for		
-			
+				}				
+				mapper.crawling(productList);				
+			}//end for			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}				
