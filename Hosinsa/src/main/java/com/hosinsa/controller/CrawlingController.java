@@ -85,7 +85,7 @@ public class CrawlingController {
 				}
 				
 				//디렉토리 생성
-				String path = "C:\\Work3\\Project-Hosinsa\\Hosinsa\\productImg\\"+category;
+				String path = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\productImg\\"+category;
 									
 				try {
 		            Files.createDirectories(Paths.get(path));
@@ -113,7 +113,7 @@ public class CrawlingController {
 						proview = (int)(Math.random()*100+1);	
 						
 						proname = pName.get(j).attr("title");
-						proimg = imgBig.attr("src").substring(imgBig.attr("src").lastIndexOf("/")+1);
+						proimg = categories[i]+"_"+pNumber+".jpg";
 						brand = pBrand.get(j).text();
 						pronum = pNumber;
 						price = Integer.parseInt(pPrice.get(0).text());
@@ -122,7 +122,7 @@ public class CrawlingController {
 						System.out.println("번호 : "+(j+1));
 						System.out.println("카테고리 : "+category);							
 						System.out.println("제품명 : "+proname);							
-						System.out.println("이미지주소 : "+proimg);
+						System.out.println("이미지 이름 : "+proimg);
 						System.out.println("브랜드 : "+brand);
 						System.out.println("제품번호 : "+pronum);
 						System.out.println("가 격 : "+price);
@@ -144,7 +144,7 @@ public class CrawlingController {
 							//log.info("IMG URL :"+img);
 							
 							BufferedImage buffImg = ImageIO.read(conn.getInputStream());
-							FileOutputStream file = new FileOutputStream(path+"\\"+pronum+".jpg");
+							FileOutputStream file = new FileOutputStream(path+"\\"+proimg);
 							ImageIO.write(buffImg, "jpg", file);
 							
 						}catch(IOException e){
