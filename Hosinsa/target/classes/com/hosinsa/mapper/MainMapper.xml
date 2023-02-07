@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosinsa.mapper.MainMapper">
+	<!-- getListProview -->
+	<select id="getListProview" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT * FROM HOSINSA_PRODUCT WHERE ROWNUM <=90 ORDER BY PROVIEW DESC
+		]]>
+	</select>
+	<!-- getListCategory -->
+	<select id="getListCategory" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category}
+	</select>
+	<!-- getListBast -->
+	<select id="getListBast" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT * FROM HOSINSA_PRODUCT WHERE ROWNUM <=4 ORDER BY PROVIEW DESC
+		]]>
+	</select>
+	<!-- getListNew -->
+	<select id="getListNew" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT * FROM HOSINSA_PRODUCT WHERE ROWNUM <=4 ORDER BY UPDATE_DATE DESC
+		]]>
+	</select>
+	<!-- getListWithPaging -->
+	<select id="getListWithPaging" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDAET_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDAET_DATE
+				FROM HOSINSA_PRODUCT WHERE
+		]]>
+		<include refid="criteria"></include>
+		<![CDATA[
+				ROWNUM <= #{pageNum} * #{amount}
+				)
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- getTotalCount -->
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM HOSINSA_PRODUCT WHERE
+		<include refid="criteria"></include>
+		PRONUM > 0
+	</select>
+	<!-- getSortBest -->
+	<select id="getSortBest" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PROVIEW DESC
+	</select>
+	<!-- getSortNew -->
+	<select id="getSortNew" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY REGDATE DESC
+	</select>
+	<!-- getSortLowPrice -->
+	<select id="getSortLowPrice" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PRICE ASC
+	</select>
+	<!-- getSortHighPrice -->
+	<select id="getSortHighPrice" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PRICE DESC
+	</select>
+	
+
+</mapper>
