@@ -31,14 +31,13 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/crawling")
 @Log4j
 public class CrawlingController {
-	
-	@Autowired
-	private CrawlingService service;
+
 	@Autowired
 	private CrawlingMapper mapper;
 	
-	@GetMapping("/crawling")
-	public void crawling(List<ProductVO> list) {
+	@GetMapping("/do")
+	public void crawling() {	
+		
 		String category=""; //카테고리
 		String proname; //제품명
 		String proimg; //제품 이미지
@@ -57,7 +56,7 @@ public class CrawlingController {
 				
 				Document doc_product = Jsoup.connect("https://www.musinsa.com/ranking/best?period=now&age=ALL&mainCategory="+categories[i]+"&subCategory=&leafCategory=&price=&golf=false&kids=false&newProduct=false&exclusive=false&discount=false&soldOut=false&page=1").get();
 				Elements img_product = doc_product.select("div.list-box li.li_box img.lazyload");
-			
+				
 				//System.out.println(categories[i]);
 									
 				Path originPath = Paths.get("");
@@ -102,7 +101,7 @@ public class CrawlingController {
 				ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
 				
 				try {
-					for(int j=0; j<1; j++) { //img_product.size() 로 바꿀 것
+					for(int j=0; j<img_product.size(); j++) {
 						Elements pNum = doc_product.select("div.list-box li.li_box");
 						Document doc2 = Jsoup.connect("https://www.musinsa.com/app/goods/"+pNum.get(j).attr("data-goods-no")+"?loc=goods_rank").get();
 						Elements pName = doc_product.select("div.list-box li.li_box div.article_info p.list_info a");
@@ -112,7 +111,6 @@ public class CrawlingController {
 						Elements pDetail = doc2.select("#detail_view");
 													
 						int pNumber = Integer.parseInt(pNum.get(j).attr("data-goods-no"));
-						int proPrice = Integer.parseInt(pPrice.get(0).text());
 						//재고, 조회수: 1~100 랜덤 생성
 						stock = (int)(Math.random()*100+1);
 						proview = (int)(Math.random()*100+1);	
@@ -121,7 +119,7 @@ public class CrawlingController {
 						proimg = imgBig.attr("src").substring(imgBig.attr("src").lastIndexOf("/")+1);
 						brand = pBrand.get(j).text();
 						pronum = pNumber;
-						price = proPrice;
+						price = Integer.parseInt(pPrice.get(0).text());
 						detail = pDetail.html();
 						
 						System.out.println("번호 : "+(j+1));
@@ -162,16 +160,15 @@ public class CrawlingController {
 						vo.setCategory(category);
 						vo.setProname(proname);
 						vo.setProimg(proimg);
+						vo.setDetail(detail);
 						vo.setBrand(brand);
 						vo.setPronum(pronum);
 						vo.setPrice(price);
 						vo.setStock(stock);
 						vo.setProview(proview);
-						vo.setDetail(detail);
 						productList.add(vo);
 						
 					}//end for
-					
 					
 					
 				} catch(Exception e) {
@@ -185,8 +182,7 @@ public class CrawlingController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+				
 		
 	}
 }
