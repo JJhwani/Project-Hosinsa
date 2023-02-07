@@ -24,4 +24,9 @@ public class CrawlingServiceImpl implements CrawlingService{
 		int result = mapper.crawling(list);
 		log.info(result);	
 	}
+
+	@Override
+	public List<ProductVO> getList() {
+		return mapper.getList();
+	}
 }

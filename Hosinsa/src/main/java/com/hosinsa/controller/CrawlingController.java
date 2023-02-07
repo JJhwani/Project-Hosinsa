@@ -16,11 +16,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.mapper.CrawlingMapper;
+import com.hosinsa.service.CrawlingService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -32,8 +34,11 @@ public class CrawlingController {
 	@Autowired
 	private CrawlingMapper mapper;
 	
+	@Autowired
+	private CrawlingService service;
+	
 	@GetMapping("/do")
-	public void crawling() {	
+	public void crawling(Model model) {	
 		
 		String category=""; //카테고리
 		String proname; //제품명
@@ -93,7 +98,7 @@ public class CrawlingController {
 				ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
 				
 				try {
-					for(int j=0; j<img_product.size(); j++) {
+					for(int j=0; j<img_product.size(); j++) {//img_product.size()
 						Elements pNum = doc_product.select("div.list-box li.li_box");
 						Document doc2 = Jsoup.connect("https://www.musinsa.com/app/goods/"+pNum.get(j).attr("data-goods-no")+"?loc=goods_rank").get();
 						Elements pName = doc_product.select("div.list-box li.li_box div.article_info p.list_info a");
@@ -171,7 +176,8 @@ public class CrawlingController {
 			
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
-		
+		}				
+		log.info("list ================>");
+		model.addAttribute("list", service.getList());
 	}
 }
