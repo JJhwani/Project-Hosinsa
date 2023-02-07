@@ -18,6 +18,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,8 +36,11 @@ public class CrawlingController {
 	@Autowired
 	private CrawlingMapper mapper;
 	
+	@Autowired
+	private CrawlingService service;
+	
 	@GetMapping("/do")
-	public void crawling() {	
+	public void crawling(Model model) {	
 		
 		String category=""; //카테고리
 		String proname; //제품명
@@ -101,7 +105,7 @@ public class CrawlingController {
 				ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
 				
 				try {
-					for(int j=0; j<img_product.size(); j++) {
+					for(int j=0; j<1; j++) {//img_product.size()
 						Elements pNum = doc_product.select("div.list-box li.li_box");
 						Document doc2 = Jsoup.connect("https://www.musinsa.com/app/goods/"+pNum.get(j).attr("data-goods-no")+"?loc=goods_rank").get();
 						Elements pName = doc_product.select("div.list-box li.li_box div.article_info p.list_info a");
@@ -138,7 +142,7 @@ public class CrawlingController {
 						String img = "http:"+imgBig.attr("src");
 						
 						//경로를 제외한 파일명
-						String filename = img.substring(img.lastIndexOf("/")+1);
+						//String filename = img.substring(img.lastIndexOf("/")+1);
 						HttpURLConnection conn = null;
 						
 						URL imgUrl;
@@ -149,7 +153,7 @@ public class CrawlingController {
 							//log.info("IMG URL :"+img);
 							
 							BufferedImage buffImg = ImageIO.read(conn.getInputStream());
-							FileOutputStream file = new FileOutputStream(path+"\\"+filename+".jpg");
+							FileOutputStream file = new FileOutputStream(path+"\\"+pronum+".jpg");
 							ImageIO.write(buffImg, "jpg", file);
 							
 						}catch(IOException e){
@@ -181,8 +185,8 @@ public class CrawlingController {
 			
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
-				
-		
+		}				
+		log.info("list ================>");
+		model.addAttribute("list", service.getList());
 	}
 }

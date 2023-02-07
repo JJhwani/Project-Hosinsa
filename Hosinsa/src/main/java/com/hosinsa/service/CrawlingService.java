@@ -6,4 +6,5 @@ import com.hosinsa.domain.ProductVO;
 
 public interface CrawlingService {
 	public void crawling(List<ProductVO> list);
+	public List<ProductVO> getList();
 }

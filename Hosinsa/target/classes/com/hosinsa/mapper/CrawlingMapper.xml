@@ -9,5 +9,9 @@
 			#{item.pronum},#{item.price},#{item.stock},#{item.proview},#{item.detail})
 		</foreach>
 	</update>
+	<!-- getList -->
+	<select id="getList" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT
+	</select>
 
 </mapper>
