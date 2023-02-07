@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.mapper.CrawlingMapper;
+import com.hosinsa.service.CrawlingService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -97,7 +98,7 @@ public class CrawlingController {
 				ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
 				
 				try {
-					for(int j=0; j<1; j++) {//img_product.size()
+					for(int j=0; j<img_product.size(); j++) {//img_product.size()
 						Elements pNum = doc_product.select("div.list-box li.li_box");
 						Document doc2 = Jsoup.connect("https://www.musinsa.com/app/goods/"+pNum.get(j).attr("data-goods-no")+"?loc=goods_rank").get();
 						Elements pName = doc_product.select("div.list-box li.li_box div.article_info p.list_info a");
