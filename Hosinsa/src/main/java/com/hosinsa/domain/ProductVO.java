@@ -11,7 +11,7 @@ import lombok.Data;
 	    PRICE         NUMBER(8),
 	    STOCK         NUMBER(8),
 	    PROVIEW       NUMBER(8) DEFAULT 0,
-	    DETAIL        VARCHAR2(1000),
+	    DETAIL        VARCHAR2(4000),
 	    PRIMARY KEY(PRONUM)
 );*/
 

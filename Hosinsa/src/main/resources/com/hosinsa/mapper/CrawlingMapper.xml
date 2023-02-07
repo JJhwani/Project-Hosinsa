@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hosinsa.mapper.CrawlingMapper">
 	<!-- crawling -->
-	<insert id="crwaling" parameterType="java.util.List">
-		insert into HOSINSA_PRODUCT(CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL) values
-		<foreach collection="list" item="product" index="index" open="(" close=")" separator=",">			
-			#{product.category}, #{product.proname}, #{product.proimg}, #{product.brand}, #{product.pronum}, #{product.price}, #{product.stock}, #{product.proview}, #{product.detail}
+	<update id="crwaling" parameterType="java.util.List">
+		<foreach collection="list" item="product" open="INSERT ALL" close="SELECT * FROM DUAL" separator=" ">
+			into HOSINSA_PRODUCT values (#{product.category}, #{product.proname}, #{product.proimg}, #{product.brand}, #{product.pronum}, #{product.price},
+										#{product.stock}, #{product.proview}, #{product.detail})
         </foreach>
-	</insert>
+	</update>
 	<!-- <insert id="crwaling">
 		insert into HOSINSA_PRODUCT(CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL)
 		values (#{CATEGORY}, #{PRONAME}, #{PROIMG}, #{BRAND}, #{PRONUM}, #{PRICE}, #{STOCK}, #{PROVIEW}, #{DETAIL})

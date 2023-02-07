@@ -5,5 +5,5 @@ import java.util.List;
 import com.hosinsa.domain.ProductVO;
 
 public interface CrawlingMapper {
-	public void crwaling(List<ProductVO> list);
+	public int crawling(List<ProductVO> list);
 }

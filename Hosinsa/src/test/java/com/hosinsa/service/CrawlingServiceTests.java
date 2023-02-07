@@ -38,7 +38,7 @@ public class CrawlingServiceTests {
 		list.add(vo);
 		//log.info(list);
 		
-		service.crwaling(list);
+		service.crawling(list);
 
 	}
 }
