@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hosinsa.mapper.CrawlingMapper">
 	<!-- crawling -->
-	<insert id="crwaling" parameterType="com.hosinsa.domain.ProductVO">
-		<foreach collection="list" item="product" open="DECLARE BEGIN" close="; END;" separator=";">
-			insert into HOSINSA_PRODUCT(CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL)
-			values(#{product.CATEGORY}, #{product.PRONAME}, #{product.PROIMG}, #{product.BRAND}, #{product.PRONUM}, #{product.PRICE}, #{product.STOCK}, #{product.PROVIEW}, #{product.DETAIL})
+	<insert id="crwaling" parameterType="java.util.List">
+		insert into HOSINSA_PRODUCT(CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL) values
+		<foreach collection="list" item="product" index="index" open="(" close=")" separator=",">			
+			#{product.category}, #{product.proname}, #{product.proimg}, #{product.brand}, #{product.pronum}, #{product.price}, #{product.stock}, #{product.proview}, #{product.detail}
         </foreach>
 	</insert>
 	<!-- <insert id="crwaling">

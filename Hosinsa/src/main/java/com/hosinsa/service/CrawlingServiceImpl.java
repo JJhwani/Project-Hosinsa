@@ -1,6 +1,6 @@
 package com.hosinsa.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,7 @@ public class CrawlingServiceImpl implements CrawlingService{
 	private CrawlingMapper mapper;
 	
 	@Override
-	public void crwaling(ArrayList<ProductVO> list) {
-		ArrayList<ProductVO> list1 = new ArrayList<ProductVO>();
-		mapper.crwaling(list1);
+	public void crwaling(List<ProductVO> list) {
+		mapper.crwaling(list);
 	}
 }

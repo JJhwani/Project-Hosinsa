@@ -1,6 +1,7 @@
 package com.hosinsa.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,7 @@ public class CrawlingServiceTests {
 	@Autowired
 	public CrawlingService service;
 	
-	ArrayList<ProductVO> list = new ArrayList<ProductVO>();
+	List<ProductVO> list = new ArrayList<ProductVO>();
 	
 	@Test
 	public void testCrawling() {
@@ -35,8 +36,9 @@ public class CrawlingServiceTests {
 		vo.setProview(50);
 		vo.setDetail("src://");
 		list.add(vo);
+		//log.info(list);
 		
 		service.crwaling(list);
-		log.info(list);
+
 	}
 }
