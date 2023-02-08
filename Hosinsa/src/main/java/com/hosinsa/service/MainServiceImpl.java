@@ -3,34 +3,36 @@ package com.hosinsa.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.mapper.MainMapper;
 
+@Service
 public class MainServiceImpl implements MainService{
 	
 	@Autowired
 	MainMapper mapper;
 
 	@Override
-	public List<ProductVO> getListProview(Criteria cri) {
-		return mapper.getListWithPaging(cri);
+	public List<ProductVO> getListProview() {
+		return mapper.getListProview();
 	}
 
 	@Override
-	public List<ProductVO> getListCategory(Criteria cri) {
-		return mapper.getListWithPaging(cri);
+	public List<ProductVO> getListCategory() {
+		return mapper.getListCategory();
 	}
 
 	@Override
-	public List<ProductVO> getListBast(Criteria cri) {
-		return mapper.getListWithPaging(cri);
+	public List<ProductVO> getListBast() {
+		return mapper.getListBast();
 	}
 
 	@Override
-	public List<ProductVO> getListNew(Criteria cri) {
-		return mapper.getListWithPaging(cri);
+	public List<ProductVO> getListNew() {
+		return mapper.getListNew();
 	}
 
 	@Override

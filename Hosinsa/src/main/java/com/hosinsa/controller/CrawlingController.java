@@ -88,7 +88,7 @@ public class CrawlingController {
 				}
 				
 				//디렉토리 생성
-				String path = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\productImg\\"+category;
+				String path = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\"+category;
 									
 				try {
 		            Files.createDirectories(Paths.get(path));
@@ -116,7 +116,7 @@ public class CrawlingController {
 						proview = (int)(Math.random()*100+1);	
 						
 						proname = pName.get(j).attr("title");
-						proimg = categories[i]+"_"+pNumber+".jpg";
+						proimg = "../../resources/productImg/"+category+"/"+categories[i]+"_"+pNumber+".jpg";
 						brand = pBrand.get(j).text();
 						pronum = pNumber;
 						price = Integer.parseInt(pPrice.get(0).text());
