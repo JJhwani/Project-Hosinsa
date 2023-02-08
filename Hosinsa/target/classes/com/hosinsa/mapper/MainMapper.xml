@@ -30,6 +30,7 @@
 			FROM
 				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 				FROM HOSINSA_PRODUCT WHERE
+		
 				ROWNUM <= #{pageNum} * #{amount}
 				)
 			WHERE RN > (#{pageNum} - 1) * #{amount}

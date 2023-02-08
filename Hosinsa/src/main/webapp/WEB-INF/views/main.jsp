@@ -27,16 +27,16 @@
 </div>
 
 <ul class="category">
-	<li><a class="category" href="${product.category}">상의</a></li>
-	<li><a>아우터</a></li>
-	<li><a>바지</a></li>
-	<li><a>원피스</a></li>
-	<li><a>스커트</a></li>
-	<li><a>가방</a></li>
-	<li><a>신발</a></li>
-	<li><a>시계</a></li>
-	<li><a>모자</a></li>
-	<li><a>액세서리</a></li>
+	<li><a class="category" href="상의">상의</a></li>
+	<li><a class="category" href="아우터">아우터</a></li>
+	<li><a class="category" href="바지">바지</a></li>
+	<li><a class="category" href="원피스">원피스</a></li>
+	<li><a class="category" href="스커트">스커트</a></li>
+	<li><a class="category" href="가방">가방</a></li>
+	<li><a class="category" href="신발">신발</a></li>
+	<li><a class="category" href="시계">시계</a></li>
+	<li><a class="category" href="모자">모자</a></li>
+	<li><a class="category" href="액세서리">액세서리</a></li>
 </ul>
 
 <h3 class="title">BEST</h3>
@@ -103,6 +103,22 @@
 	 	</c:forEach>
 	</section>
 </div>
+<!-- 페이지 처리 시작 -->
+<div class="pull-right">
+	<ul class="pagination">
+		<c:if test="${pageMaker.prev}">
+			<li class="paginate_button previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
+		</c:if>
+		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+			<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
+		</c:forEach>
+		<c:if test="${pageMaker.next}">
+			<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
+		</c:if>
+	</ul>
+</div>
+<!-- 페이지 처리 끝 -->
+					
 <ul class="pagination">
 	<li><a>1</a></li>
 	<li><a>2</a></li>
@@ -145,4 +161,5 @@
 	<a>TOP</a>
 </div>
 
+<script type="text/javascript" src="../../../resources/js/main.js"></script>
 <%@ include file="includes/footer.jsp" %>
