@@ -88,7 +88,7 @@ public class CrawlingController {
 				}
 				
 				//디렉토리 생성
-				String path = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\"+category;
+				String path = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\productImg\\"+category;
 									
 				try {
 		            Files.createDirectories(Paths.get(path));
@@ -124,6 +124,8 @@ public class CrawlingController {
 						regdate = new Date();
 						update_date = new Date();
 						
+						String proimgName = categories[i]+"_"+pNumber+".jpg";
+						
 						System.out.println("번호 : "+(j+1));
 						System.out.println("카테고리 : "+category);							
 						System.out.println("제품명 : "+proname);							
@@ -151,7 +153,7 @@ public class CrawlingController {
 							//log.info("IMG URL :"+img);
 							
 							BufferedImage buffImg = ImageIO.read(conn.getInputStream());
-							FileOutputStream file = new FileOutputStream(path+"\\"+proimg);
+							FileOutputStream file = new FileOutputStream(path+"\\"+proimgName);
 							ImageIO.write(buffImg, "jpg", file);
 							
 						}catch(IOException e){
