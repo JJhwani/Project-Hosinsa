@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ezen.mapper.NoticeMapper">
+
+
+	<select id="read" resultType="org.ezen.domain.NoticeVO">
+		select * from hosinsa_notice where
+		nno = #{nno}
+	</select>
+
+
+	<select id="getList" resultType="org.ezen.domain.NoticeVO">
+		select * from hosinsa_notice
+		where nno > 0 order by nno desc
+	</select>
+
+	<select id="getListWithPaging"
+		resultType="org.ezen.domain.NoticeVO">
+  <![CDATA[
+   select 
+     nno, ntitle, ncontent, id, nwritedate, nupdatedate
+   from 
+       (
+       select /*+INDEX_DESC(hosinsa_notice pkboard) */
+         rownum rn, nno, ntitle, ncontent, id, nwritedate, nupdatedate 
+       from 
+         hosinsa_notice
+      where rownum <= 20
+      )
+  where rn > 10 
+ 
+  ]]>
+	</select>
+
+
+	<insert id="insert">
+		insert into hosinsa_notice(nno, ntitle, ncontent, id)
+		values(seq_notice.nextval, #{ntitle}, #{ncontent}, #{id})
+	</insert>
+
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="nno" order="BEFORE"
+			resultType="long">
+			select seq_notice.nextval from dual
+		</selectKey>
+		insert into hosinsa_notice(nno, ntitle, ncontent, id)
+		values(#{nno},
+		#{ntitle}, #{ncontent}, #{id})
+	</insert>
+
+
+	<delete id="delete">
+		delete from hosinsa_notice where nno = #{nno}
+	</delete>
+
+
+	<update id="update">
+		update hosinsa_notice
+		set
+		ntitle= #{ntitle},
+		ncontent=
+		#{ncontent},
+		nupdatedate = sysdate
+		where nno = #{nno}
+	</update>
+</mapper>

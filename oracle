@@ -1,0 +1,45 @@
+create table hosinsa_notice(
+nno number(10,0),
+ntitle varchar2(300) not null,
+ncontent varchar2(3000) not null,
+id varchar2(30) not null,
+nwritedate date default sysdate,
+nupdatedate date default sysdate
+);
+
+alter table hosinsa_notice add constraint pk_board
+primary key(nno);
+
+
+drop SEQUENCE seq_notice;
+drop table hosinsa_notice;
+
+create SEQUENCE seq_notice;
+
+insert into hosinsa_notice(nno, ntitle, ncontent, id)
+values(SEQ_NOTICE.NEXTVAL, '테스트제목1', '테스트 내용1', 'AAA');
+insert into hosinsa_notice(nno, ntitle, ncontent, id)
+values(SEQ_NOTICE.NEXTVAL, '테스트제목2', '테스트 내용2', 'BBB');
+insert into hosinsa_notice(nno, ntitle, ncontent, id)
+values(SEQ_NOTICE.NEXTVAL, '테스트제목3', '테스트 내용3', 'CCC');
+insert into hosinsa_notice(nno, ntitle, ncontent, id)
+values(SEQ_NOTICE.NEXTVAL, '테스트제목4', '테스트 내용4', 'DDD');
+insert into hosinsa_notice(nno, ntitle, ncontent, id)
+values(SEQ_NOTICE.NEXTVAL, '테스트제목5', '테스트 내용5', 'EEE');
+
+commit;
+
+
+SELECT * FROM USER_SEQUENCES;
+
+select * from hosinsa_notice;
+
+select*from hosinsa_notice where nno >0;
+
+insert into HOSINSA_NOTICE (nno, ntitle, ncontent, id)
+(select seq_notice.nextval, ntitle, ncontent, id from HOSINSA_NOTICE);
+
+select count(*)from hosinsa_notice;
+
+
+
