@@ -1,5 +1,4 @@
 Manifest-Version: 1.0
- Yuna
 Built-By: 133
 Build-Jdk: 11.0.2
 Created-By: Maven Integration for Eclipse

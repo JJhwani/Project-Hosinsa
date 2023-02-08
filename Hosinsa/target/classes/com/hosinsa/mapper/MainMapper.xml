@@ -58,5 +58,8 @@
 		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PRICE DESC
 	</select>
 	
+	<select id="getProductByPronum" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE PRONUM = #{pronum}
+	</select>
 
 </mapper>
