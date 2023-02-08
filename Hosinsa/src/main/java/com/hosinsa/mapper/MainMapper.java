@@ -17,6 +17,6 @@ public interface MainMapper {
 	public List<ProductVO> getSortLowPrice();
 	public List<ProductVO> getSortHighPrice();
 	public List<ProductVO> getSortReview();
-
+	public ProductVO getProductByPronum(int pronum);
 	
 }

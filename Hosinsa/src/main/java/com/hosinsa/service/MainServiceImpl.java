@@ -65,4 +65,9 @@ public class MainServiceImpl implements MainService{
 		return mapper.getListWithPaging(cri);
 	}
 
+	@Override
+	public ProductVO getProductByPronum(int pronum) {
+		return mapper.getProductByPronum(pronum);
+	}
+
 }

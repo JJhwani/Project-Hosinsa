@@ -30,6 +30,7 @@
 			FROM
 				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 				FROM HOSINSA_PRODUCT WHERE
+		
 				ROWNUM <= #{pageNum} * #{amount}
 				)
 			WHERE RN > (#{pageNum} - 1) * #{amount}
@@ -57,5 +58,8 @@
 		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PRICE DESC
 	</select>
 	
+	<select id="getProductByPronum" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE PRONUM = #{pronum}
+	</select>
 
 </mapper>
