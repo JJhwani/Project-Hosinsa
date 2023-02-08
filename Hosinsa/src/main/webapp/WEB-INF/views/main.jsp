@@ -20,9 +20,10 @@
 			<a href="#"><img src="../../resources/images/event5.jpg"></a>
 		</li>
 	</ul>
+	<div class="deem"></div>
 	<div class="arrow">
-		<button>&lt;</button>
-		<button>&gt;</button>
+		<button class="left">&lt;</button>
+		<button class="right">&gt;</button>
 	</div>
 </div>
 

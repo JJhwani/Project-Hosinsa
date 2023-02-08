@@ -46,6 +46,16 @@ table {
 
 
 .header{background:black;color:white}
-.mainBanner{height:512px;position:relative;}
-.mainBanner .bannerView{width:1150px;height:512px;overflow:hidden;margin:0 auto}
-.mainBanner li{float:left;}
+.mainBanner{height:512px;position:relative;margin-top:50px;}
+.mainBanner .bannerView{position:relative;width:1150px;height:512px;overflow:hidden;margin:0 auto}
+.mainBanner li{position:absolute;bottom:0;transition:0.4s}
+.mainBanner .deem{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.5);z-index:3;}
+.mainBanner li:nth-child(1){left:-100%;}
+.mainBanner li:nth-child(2){left:50%;margin-left:-556px;transform:scale(0.8)}
+.mainBanner li:nth-child(3){z-index:5;left:50%;margin-left:-256px}
+.mainBanner li:nth-child(4){left:50%;margin-left:44px;transform:scale(0.8)}
+.mainBanner li:nth-child(5){left:150%}
+.mainBanner .arrow{position:absolute;top:220px;z-index:4;width:100%}
+.mainBanner .arrow button{position:absolute;background:transparent;width:50px;height:100px;cursor:pointer}
+.mainBanner .arrow .left{left:50%;margin-left:-600px}
+.mainBanner .arrow .right{right:50%;margin-right:-600px}
