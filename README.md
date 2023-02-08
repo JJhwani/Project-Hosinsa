@@ -1,29 +1,29 @@
 # Project-Hosinsa
-
+<br>
 TABLE
-
-CREATE TABLE HOSINSA_PRODUCT(
-    CATEGORY      VARCHAR2(20),
-    PRONAME       VARCHAR2(200),
-    PROIMG        VARCHAR2(500),
-    BRAND         VARCHAR2(50),
-    PRONUM        NUMBER(8),
-    PRICE         NUMBER(8),
-    STOCK         NUMBER(8),
-    PROVIEW       NUMBER(8) DEFAULT 0,
-    DETAIL        CLOB,
-    REGDATE       DATE DEFAULT SYSDATE,
-    UPDATE_DATE   DATE DEFAULT SYSDATE,
-    PRIMARY KEY(PRONUM)
-);
-
-CREATE TABLE HOSINSA_REVIEW (
-    BNO         NUMBER(10),
-    ID          VARCHAR2(50),
-    PW          VARCHAR2(50),
-    NICKNAME    VARCHAR2(100),
-    TITLE       VARCHAR2(1000),
-    CONTENT     VARCHAR2(2000),
-    UPLOADDATE  DATE DEFAULT SYSDATE
-);
+<br>
+CREATE TABLE HOSINSA_PRODUCT(<br>
+    CATEGORY      VARCHAR2(20),<br>
+    PRONAME       VARCHAR2(200),<br>
+    PROIMG        VARCHAR2(500),<br>
+    BRAND         VARCHAR2(50),<br>
+    PRONUM        NUMBER(8),<br>
+    PRICE         NUMBER(8),<br>
+    STOCK         NUMBER(8),<br>
+    PROVIEW       NUMBER(8) DEFAULT 0,<br>
+    DETAIL        CLOB,<br>
+    REGDATE       DATE DEFAULT SYSDATE,<br>
+    UPDATE_DATE   DATE DEFAULT SYSDATE,<br>
+    PRIMARY KEY(PRONUM)<br>
+);<br>
+<br>
+CREATE TABLE HOSINSA_REVIEW (<br>
+    BNO         NUMBER(10),<br>
+    ID          VARCHAR2(50),<br>
+    PW          VARCHAR2(50),<br>
+    NICKNAME    VARCHAR2(100),<br>
+    TITLE       VARCHAR2(1000),<br>
+    CONTENT     VARCHAR2(2000),<br>
+    UPLOADDATE  DATE DEFAULT SYSDATE<br>
+);<br>
 
