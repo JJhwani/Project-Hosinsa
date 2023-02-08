@@ -3,6 +3,7 @@ package hosinsa.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import hosinsa.domain.ReviewVO;
@@ -34,7 +35,8 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		return mapper.read(bno);
 	}
-
+	
+	
 	@Override
 	public boolean modify(ReviewVO vo) { 
 		

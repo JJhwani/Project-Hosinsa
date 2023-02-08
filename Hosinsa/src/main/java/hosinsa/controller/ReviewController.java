@@ -29,7 +29,7 @@ public class ReviewController {
 		model.addAttribute("list", service.getList());
 	}
 	
-	
+
 	@PostMapping("/register")
 	public String register(ReviewVO vo, RedirectAttributes rttr) {
 		
@@ -41,8 +41,8 @@ public class ReviewController {
 		
 	}
 	
-	@GetMapping("/get")
-	public void get(@RequestParam("bno")Long bno, Model model) {
+	@GetMapping({"/get","/modify"})
+	public void get(@RequestParam("bno") Long bno, Model model) {
 		
 		log.info("bno값을 좀 더 명시적으로 처리하는 RequestParam을 사용한다");
 		
@@ -69,6 +69,12 @@ public class ReviewController {
 		}
 		
 		return "redirect:/review/list";
+	}
+	
+	@GetMapping("/register")
+	public void register() {
+		
+		
 	}
 	
 	
