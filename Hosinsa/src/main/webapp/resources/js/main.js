@@ -25,5 +25,27 @@ $(document).ready(function(){
 			timeBanner = setInterval(slide,4000)
 		}
 	})
+
+	var selectCategory = $(".selectCategory");
+	var paging = $(".paging");
+
 	
+	//카테고리 클릭 -> 해당 카테고리 LIST 출력
+	$(".category").on("click",function(e){
+		e.preventDefault();
+		selectCategory.find("input[name='category']").val($(this).attr("href"));
+		//selectCategory.attr("action", "/category");
+		selectCategory.submit();
+	});
+
+	
+	$(".paginate_button a").on("click", function(e) {
+		e.preventDefault();
+		paging.find("input[name='pageNum']").val($(this).attr("href"));
+		paging.submit();
+	});
+
+
+	
+
 });

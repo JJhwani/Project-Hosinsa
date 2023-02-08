@@ -26,8 +26,8 @@
 		<button class="right">&gt;</button>
 	</div>
 </div>
-
-<ul class="category">
+<ul class="category_menu">
+	<li><a class="category" href="인기">인기</a></li>
 	<li><a class="category" href="상의">상의</a></li>
 	<li><a class="category" href="아우터">아우터</a></li>
 	<li><a class="category" href="바지">바지</a></li>
@@ -39,6 +39,7 @@
 	<li><a class="category" href="모자">모자</a></li>
 	<li><a class="category" href="액세서리">액세서리</a></li>
 </ul>
+
 
 <h3 class="title">BEST</h3>
 <p class="subTitle">이시간 가장 핫한 상품만 모아모아</p>
@@ -104,27 +105,30 @@
 	 	</c:forEach>
 	</section>
 </div>
+
 <!-- 페이지 처리 시작 -->
-<div class="pull-right">
-	<ul class="pagination">
-		<c:if test="${pageMaker.prev}">
-			<li class="paginate_button previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
-		</c:if>
-		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-			<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
-		</c:forEach>
-		<c:if test="${pageMaker.next}">
-			<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
-		</c:if>
-	</ul>
-</div>
-<!-- 페이지 처리 끝 -->
-					
 <ul class="pagination">
-	<li><a>1</a></li>
-	<li><a>2</a></li>
-	<li><a>3</a></li>
+	<c:if test="${pageMaker.prev}">
+		<li class="paginate_button previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
+	</c:if>
+	<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+		<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
+	</c:forEach>
+	<c:if test="${pageMaker.next}">
+		<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
+	</c:if>
 </ul>
+<form class="selectCategory" action="/category" method="get">
+	<input type="hidden" name="category" value="">
+</form>
+<form class="paging" action="/category" method="get">
+	<input type="text" name="category" value="${category}">
+	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+</form>
+
+
+<!-- 페이지 처리 끝 -->
 
 <div class="notice">
 	<h4 class="title">공지사항</h4>

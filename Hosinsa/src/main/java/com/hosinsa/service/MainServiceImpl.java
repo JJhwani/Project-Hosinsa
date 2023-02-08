@@ -9,25 +9,28 @@ import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.mapper.MainMapper;
 
+import lombok.extern.log4j.Log4j;
+
 @Service
+@Log4j
 public class MainServiceImpl implements MainService{
 	
 	@Autowired
 	MainMapper mapper;
 
 	@Override
-	public List<ProductVO> getListProview() {
-		return mapper.getListProview();
+	public List<ProductVO> getListProview(Criteria cri) {
+		return mapper.getListWithPagingView(cri);
 	}
 
 	@Override
-	public List<ProductVO> getListCategory() {
-		return mapper.getListCategory();
+	public List<ProductVO> getListCategory(Criteria cri) {
+		return mapper.getListWithPagingCategory(cri);
 	}
 
 	@Override
-	public List<ProductVO> getListBast() {
-		return mapper.getListBast();
+	public List<ProductVO> getListBest() {
+		return mapper.getListBest();
 	}
 
 	@Override
@@ -35,6 +38,11 @@ public class MainServiceImpl implements MainService{
 		return mapper.getListNew();
 	}
 
+	@Override
+	public int getTotalCountView(Criteria cri) {
+		return mapper.getTotalCountView(cri);
+	}
+	
 	@Override
 	public int getTotalCount(Criteria cri) {
 		return mapper.getTotalCount(cri);
@@ -64,5 +72,6 @@ public class MainServiceImpl implements MainService{
 	public List<ProductVO> getSortReview(Criteria cri) {
 		return mapper.getListWithPaging(cri);
 	}
+
 
 }
