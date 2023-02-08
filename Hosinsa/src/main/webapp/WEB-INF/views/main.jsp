@@ -3,21 +3,21 @@
 <%@ include file="includes/header.jsp" %>
 
 <div class="mainBanner">
-	<ul>
+	<ul class="bannerView">
 		<li>
-			<a>이벤트 1</a>
+			<a href="#"><img src="../../resources/images/event1.jpg"></a>
 		</li>
 		<li>
-			<a>이벤트 2</a>
+			<a href="#"><img src="../../resources/images/event2.jpg"></a>
 		</li>
 		<li>
-			<a>이벤트 3</a>
+			<a href="#"><img src="../../resources/images/event3.jpg"></a>
 		</li>
 		<li>
-			<a>이벤트 4</a>
+			<a href="#"><img src="../../resources/images/event4.jpg"></a>
 		</li>
 		<li>
-			<a>이벤트 5</a>
+			<a href="#"><img src="../../resources/images/event5.jpg"></a>
 		</li>
 	</ul>
 	<div class="arrow">
@@ -144,5 +144,7 @@
 	</ul>
 	<a>TOP</a>
 </div>
+
+<script src="../../../resources/js/main.js"></script>
 
 <%@ include file="includes/footer.jsp" %>

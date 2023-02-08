@@ -46,3 +46,6 @@ table {
 
 
 .header{background:black;color:white}
+.mainBanner{height:512px;position:relative;}
+.mainBanner .bannerView{width:1150px;height:512px;overflow:hidden;margin:0 auto}
+.mainBanner li{float:left;}
