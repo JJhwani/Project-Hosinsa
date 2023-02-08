@@ -34,12 +34,18 @@
 				<th > 재고 </th> <td> ${product.stock} </td>
 			</tr>			
 		</table>
-		<button class="btn modify">제품 수정</button>
-		<button class="btn delete">제품 삭제</button>
+		<c:if test="${loginUser.grade eq 'S'}">
+			<button class="btn modify">제품 수정</button>
+			<button class="btn delete">제품 삭제</button>
+		</c:if>		
+		<input type="number" name="quantity" min="1" value="1">
+		<button type="button" name="cart">addToCart</button>
+		
 		<button class="btn list">뒤로</button>
 		
 		<form action="" method="get">
 			<input type="hidden" name="pronum" value="${product.pronum}">
+			<input type="hidden" name="quantity" value="">
 		</form>
 			
 	</div>
