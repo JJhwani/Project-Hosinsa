@@ -27,7 +27,7 @@
 </div>
 
 <ul class="category">
-	<li><a>상의</a></li>
+	<li><a class="category" href="${product.category}">상의</a></li>
 	<li><a>아우터</a></li>
 	<li><a>바지</a></li>
 	<li><a>원피스</a></li>
@@ -42,17 +42,17 @@
 <h3 class="title">BEST</h3>
 <p class="subTitle">이시간 가장 핫한 상품만 모아모아</p>
 <div class="bestWrap">
-	<section class="productList">
-		<c:forEach var="productView_list" items="${productView_list}">
- 			<div class="list_box" onclick="location.href='HosinsaServlet?command=goods_view&pronum=${productView_list.pronum}'">
+	<section class="bestList">
+		<c:forEach var="bestList" items="${bestList}">
+ 			<div class="list_box">
 				<div class="list_img">
-					<img src="${productView_list.proimgSmall}">
+					<img src="${bestList.proimg}">
 				</div>
 				<div class="article_info">
-					<p class="pbrand">${productView_list.brand}</p>
-					<p class="pname">${productView_list.proname}</p>
-					<p class="price">${productView_list.price}</p>
-					<p class="view">view ${productView_list.proview}</p>
+					<p class="pbrand">${bestList.brand}</p>
+					<p class="pname">${bestList.proname}</p>
+					<p class="price">${bestList.price}</p>
+					<p class="view">view ${bestList.proview}</p>
 				</div>
 			</div>
 	 	</c:forEach>
@@ -62,17 +62,17 @@
 <h3 class="title">NEW</h3>
 <p class="subTitle">따끈따끈 신상품</p>
 <div class="newWrap">
-	<section class="productList">
-		<c:forEach var="productView_list" items="${productView_list}">
- 			<div class="list_box" onclick="location.href='HosinsaServlet?command=goods_view&pronum=${productView_list.pronum}'">
+	<section class="newList">
+		<c:forEach var="newList" items="${newList}">
+ 			<div class="list_box">
 				<div class="list_img">
-					<img src="${productView_list.proimgSmall}">
+					<img src="${newList.proimg}">
 				</div>
 				<div class="article_info">
-					<p class="pbrand">${productView_list.brand}</p>
-					<p class="pname">${productView_list.proname}</p>
-					<p class="price">${productView_list.price}</p>
-					<p class="view">view ${productView_list.proview}</p>
+					<p class="pbrand">${newList.brand}</p>
+					<p class="pname">${newList.proname}</p>
+					<p class="price">${newList.price}</p>
+					<p class="view">view ${newList.proview}</p>
 				</div>
 			</div>
 	 	</c:forEach>
@@ -88,16 +88,16 @@
 </ul>
 <div class="mainList">
 	<section class="productList">
-		<c:forEach var="productView_list" items="${productView_list}">
- 			<div class="list_box" onclick="location.href='HosinsaServlet?command=goods_view&pronum=${productView_list.pronum}'">
+		<c:forEach var="viewList" items="${viewList}">
+ 			<div class="list_box">
 				<div class="list_img">
-					<img src="${productView_list.proimgSmall}">
+					<img src="${viewList.proimg}">
 				</div>
 				<div class="article_info">
-					<p class="pbrand">${productView_list.brand}</p>
-					<p class="pname">${productView_list.proname}</p>
-					<p class="price">${productView_list.price}</p>
-					<p class="view">view ${productView_list.proview}</p>
+					<p class="pbrand">${viewList.brand}</p>
+					<p class="pname">${viewList.proname}</p>
+					<p class="price">${viewList.price}</p>
+					<p class="view">view ${viewList.proview}</p>
 				</div>
 			</div>
 	 	</c:forEach>

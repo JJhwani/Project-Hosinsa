@@ -4,7 +4,7 @@
 	<!-- getListProview -->
 	<select id="getListProview" resultType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
-			SELECT * FROM HOSINSA_PRODUCT WHERE ROWNUM <=90 ORDER BY PROVIEW DESC
+			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC) WHERE ROWNUM <= 90
 		]]>
 	</select>
 	<!-- getListCategory -->
@@ -14,25 +14,22 @@
 	<!-- getListBast -->
 	<select id="getListBast" resultType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
-			SELECT * FROM HOSINSA_PRODUCT WHERE ROWNUM <=4 ORDER BY PROVIEW DESC
+			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC) WHERE ROWNUM <= 4
 		]]>
 	</select>
 	<!-- getListNew -->
 	<select id="getListNew" resultType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
-			SELECT * FROM HOSINSA_PRODUCT WHERE ROWNUM <=4 ORDER BY UPDATE_DATE DESC
+			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY REGDATE DESC)	WHERE ROWNUM <= 4
 		]]>
 	</select>
 	<!-- getListWithPaging -->
 	<select id="getListWithPaging" resultType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
-			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDAET_DATE
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 			FROM
-				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDAET_DATE
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 				FROM HOSINSA_PRODUCT WHERE
-		]]>
-		<include refid="criteria"></include>
-		<![CDATA[
 				ROWNUM <= #{pageNum} * #{amount}
 				)
 			WHERE RN > (#{pageNum} - 1) * #{amount}
@@ -41,7 +38,6 @@
 	<!-- getTotalCount -->
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) FROM HOSINSA_PRODUCT WHERE
-		<include refid="criteria"></include>
 		PRONUM > 0
 	</select>
 	<!-- getSortBest -->
