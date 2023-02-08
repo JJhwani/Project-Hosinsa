@@ -28,6 +28,7 @@
 	</div>
 	
 	<ul class="category_menu">
+		<li><a class="category" href="인기">인기</a></li>
 		<li><a class="category" href="상의">상의</a></li>
 		<li><a class="category" href="아우터">아우터</a></li>
 		<li><a class="category" href="바지">바지</a></li>
@@ -109,9 +110,10 @@
 						</div>
 					</a>
 				</div>
-		 	</c:forEach>
+	 		</c:forEach>
 		</section>
 	</div>
+	
 	<!-- 페이지 처리 시작 -->
 	<ul class="pagination">
 		<c:if test="${pageMaker.prev}">
@@ -124,8 +126,16 @@
 			<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
 		</c:if>
 	</ul>
+	<form class="selectCategory" action="/category" method="get">
+		<input type="hidden" name="category" value="">
+	</form>
+	<form class="paging" action="/category" method="get">
+		<input type="hidden" name="category" value="${category}">
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+	</form>	
 	<!-- 페이지 처리 끝 -->
-	
+
 	<div class="notice">
 		<h4 class="title">공지사항</h4>
 		<ul>
