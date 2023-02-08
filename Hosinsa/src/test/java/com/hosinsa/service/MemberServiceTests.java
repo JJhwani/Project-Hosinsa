@@ -31,15 +31,15 @@ public class MemberServiceTests {
 	
 	@Test
 	public void testJoin() {
-		LocalDate localdate = LocalDate.of(1999, 01, 01);
-		Date birthday = Date.valueOf(localdate);
+//		LocalDate localdate = LocalDate.of(1999, 01, 01);
+//		Date birthday = Date.valueOf(localdate);
 		
 		MemberVO member = new MemberVO();
 		member.setId("member2");
 		member.setPw("1234");
 		member.setName("정재환");
 		member.setGender("남자");
-		member.setBirthday(birthday);
+		member.setBirthday("1995/01/01");
 		member.setEmail("abc@hosinsa.com");
 		member.setPhone("010-1111-1111");
 		member.setNickname("kikkk");

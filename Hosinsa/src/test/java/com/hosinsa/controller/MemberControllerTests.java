@@ -51,20 +51,34 @@ public class MemberControllerTests {
 	
 	@Test
 	public void testModify() throws Exception {
-		LocalDate localdate = LocalDate.of(1997, 01, 01);
-		Date birthday = Date.valueOf(localdate);
-		
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/hosinsa/member/modify")
 						.param("id", "member1")
 						.param("pw", "1234")
 						.param("name", "이은혜")
 						.param("gender", "여자")
-						.param("birthday", "1111")	
+						.param("birthday", "19990101")	
 						.param("email", "1234@hosinsa.com")
 						.param("phone", "010-1234-5678")
 						.param("nickname", "eeee")
 						.param("grade", "C"))
 				.andReturn().getModelAndView().getViewName();
 		log.info(resultPage);
+	}
+	
+	@Test
+	public void testJoin() throws Exception {
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/hosinsa/member/join")
+				.param("id", "member2")
+				.param("pw", "1234")
+				.param("name", "정재환")
+				.param("gender", "남자")
+				.param("birthday", "19880101")	
+				.param("email", "1234asd@hosinsa.com")
+				.param("phone", "010-1234-5678")
+				.param("nickname", "aaaa")
+				.param("grade", "C")
+				.param("introducer", "Admin"))
+		.andReturn().getModelAndView().getViewName();
+log.info(resultPage);
 	}
 }

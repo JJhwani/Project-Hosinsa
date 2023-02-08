@@ -30,15 +30,15 @@ public class MemberMapperTests {
 	// Create
 	@Test
 	public void testInsert() {
-		LocalDate localdate = LocalDate.of(1999, 01, 01);
-		Date birthday = Date.valueOf(localdate);
+//		LocalDate localdate = LocalDate.of(1999, 01, 01);
+//		Date birthday = Date.valueOf(localdate);
 		
 		MemberVO member = new MemberVO();
 		member.setId("member2");
 		member.setPw("1234");
 		member.setName("정재환");
 		member.setGender("남자");
-		member.setBirthday(birthday);
+		member.setBirthday("1999/01/01");
 		member.setEmail("abc@hosinsa.com");
 		member.setPhone("010-1111-1111");
 		member.setNickname("kikkk");
@@ -66,15 +66,15 @@ public class MemberMapperTests {
 	//Update
 	@Test
 	public void testUpdate() {
-		LocalDate localdate = LocalDate.of(1997, 01, 01);
-		Date birthday = Date.valueOf(localdate);
+//		LocalDate localdate = LocalDate.of(1997, 01, 01);
+//		Date birthday = Date.valueOf(localdate);
 		
 		MemberVO member = new MemberVO();
 		member.setId("member1");
 		member.setPw("1234");
 		member.setName("이은혜");
 		member.setGender("여자");
-		member.setBirthday(birthday);
+		member.setBirthday("1997/01/01");
 		member.setEmail("abcd@hosinsa.com");
 		member.setPhone("010-2222-1111");
 		member.setNickname("eeee");

@@ -11,9 +11,8 @@ CREATE TABLE MEMBER_ADDRESS (
 */
 
 @Data
-public class Member_AddressVO {
-
-	private int address_no;
+public class MemberAddressVO {
+	private long address_no;
 	private String id;
 	private String address;
 	private int zipcode;

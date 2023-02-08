@@ -17,7 +17,7 @@
 <insert id="insert">
 	insert into hosinsa_member values
 	(#{id}, #{pw}, #{name}, #{gender}, #{birthday}, #{email}, 
-	#{phone}, #{nickname}, #{profilimg}, #{grade}, #{introducer})
+	#{phone}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR})
 </insert>
 
 <!-- DELETE 문 -->
@@ -31,7 +31,7 @@
 	pw = #{pw, jdbcType=VARCHAR},
 	name = #{name, jdbcType=VARCHAR},
 	gender = #{gender, jdbcType=VARCHAR},
-	birthday = #{birthday, jdbcType=DATE},
+	birthday = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
 	email = #{email, jdbcType=VARCHAR},
 	phone = #{phone, jdbcType=CHAR},
 	nickname = #{nickname, jdbcType=VARCHAR},

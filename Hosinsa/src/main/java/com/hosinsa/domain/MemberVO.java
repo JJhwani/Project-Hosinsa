@@ -31,8 +31,8 @@ public class MemberVO {
 	private String name;
 	private String gender;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date birthday;
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private String birthday;
 	
 	private String email;
 	private String phone;
