@@ -19,8 +19,8 @@
 	<div class="imgWrap">
 		<img src="${product.proimg}">
 	</div>
-	<h4 class="miniTitle"><b>Product Info</b> 제품정보</h4>
-	<table>			
+	<h4 class="miniTitle">Product Info <i>제품정보</i></h4>
+	<table class="infoTable">			
 		<tr>
 			<th> 카테고리 </th> <td> ${product.category} </td>
 		</tr>
@@ -36,33 +36,36 @@
 			</tr>	
 		</c:if>		
 	</table>
-	<h4 class="miniTitle"><b>Price Info</b> 가격 정보</h4>
-	<table>	
+	<h4 class="miniTitle">Price Info <i>가격정보</i></h4>
+	<table class="infoTable">	
 		<tr>
-			<th> 가격(비회원) </th> <td> ${product.price} </td>
+			<th> 가격 (비회원) </th> <td> ${product.price} </td>
 		</tr>
 		<tr>
 			<c:choose>
-				<c:when test="${loginUser.grade eq 'C'}">
-					<th> 가격(브론즈) </th><td> ${product.price}*0.98</td>
+				<c:when test="${member.grade eq 'C'}">
+					<th> 가격 (브론즈) </th><td>  <fmt:parseNumber integerOnly= "true" value="${product.price*0.98}"/></td>
 				</c:when>
-				<c:when test="${loginUser.grade eq 'B'}">
-					<th> 가격(실버) </th><td> ${product.price}*0.97 </td>
+				<c:when test="${member.grade eq 'B'}">
+					<th> 가격 (실버) </th><td> <fmt:parseNumber integerOnly= "true" value="${product.price*0.97}"/> </td>
 				</c:when>
-				<c:when test="${loginUser.grade eq 'A'}">
-					<th> 가격(골드) </th><td> ${product.price}*0.96 </td>
+				<c:when test="${member.grade eq 'A'}">
+					<th> 가격 (골드) </th><td> <fmt:parseNumber integerOnly= "true" value="${product.price*0.96}"/> </td>
 				</c:when>
 			</c:choose>
 		</tr>
 	</table>
-	<c:if test="${loginUser.grade eq 'S'}">
-		<button class="btn modify">제품 수정</button>
-		<button class="btn delete">제품 삭제</button>
-	</c:if>		
-	<input type="number" name="quantity" min="1" value="1">
-	<button type="button" name="cart">addToCart</button>
-	
-	<button class="btn list">뒤로</button>
+	<div class="btnWrap">
+		<c:if test="${member.grade eq 'S'}">
+			<button class="btn modify">제품 수정</button>
+			<button class="btn delete">제품 삭제</button>
+		</c:if>		
+		
+		<input type="number" name="quantity" class="cart_quan" min="1" value="1">
+		<button type="button" name="cart" class="cart_in">addToCart</button>
+		
+		<button class="btn list">뒤로</button>
+	</div>
 	
 	<form action="" method="get">
 		<input type="hidden" name="pronum" value="${product.pronum}">
