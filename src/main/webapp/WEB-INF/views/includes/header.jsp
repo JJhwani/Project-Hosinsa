@@ -8,19 +8,54 @@
 <title>HOSINSA</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="../../../resources/css/hosinsa.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 <body>
-<div class="header">
-	<h1>HOSINSA</h1>
-	<form action="" method="post">
-		<input type="text">
-		<input type="submit" value="검색">
-	</form>
-	<ul class="menu">
-		<li><a href="/member/join">회원가입</a></li>
-		<li><a href="/member/login">로그인</a></li>
-		<li><a>마이페이지</a></li>
-		<li><a>장바구니</a></li>
-		<li><a>로그아웃</a></li>
-	</ul>
+<div class="headerWrap">
+	<div class="header">
+		<h1 class="logo"><a href="<c:url value='/'/>">HOSINSA</a></h1>
+		<form action="" method="post" class="search">
+			<input type="text">
+			<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+		</form>
+		<ul class="menu">
+			<c:if test="${empty loginUser}">
+				<li><a>회원가입</a></li>
+			</c:if>
+			<li class="user_grade">
+				<c:choose>
+					<c:when test="${empty loginUser}">
+						<a>로그인</a>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
+			 				<c:when test="${loginUser.grade eq 'C'}">
+			 					LV.1 브론즈 &nbsp;${loginUser.name}님
+			 				</c:when>
+			 				<c:when test="${loginUser.grade eq 'B'}">
+			 					LV.2 실버 &nbsp;${loginUser.name}님
+			 				</c:when>
+			 				<c:when test="${loginUser.grade eq 'A'}">
+			 					LV.3 골드 &nbsp;${loginUser.name}님
+			 				</c:when>
+			 				<c:otherwise>
+			 					LV.4 운영자 &nbsp;${loginUser.name}님
+			 				</c:otherwise>
+	 					</c:choose>
+	 				</c:otherwise>
+				</c:choose>
+			</li>
+			<c:if test="${not empty loginUser}">
+				<li><a>마이페이지</a></li>
+			</c:if>
+			<li><a>장바구니</a></li>
+			<c:if test="${loginUser.grade eq 'S'}">
+				<li><a>상품관리</a></li>
+				<li><a>회원관리</a></li>
+			</c:if>
+			<c:if test="${not empty loginUser}">
+				<li><a>로그아웃</a></li>
+			</c:if>
+		</ul>
+	</div>
 </div>
