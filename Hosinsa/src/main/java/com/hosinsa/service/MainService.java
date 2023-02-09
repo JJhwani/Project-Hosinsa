@@ -18,4 +18,5 @@ public interface MainService {
 	public List<ProductVO> getSortHighPrice(Criteria cri);
 	public List<ProductVO> getSortReview(Criteria cri);
 	public ProductVO getProductByPronum(int pronum);
+	public void setRecentView(int pronum);
 }
