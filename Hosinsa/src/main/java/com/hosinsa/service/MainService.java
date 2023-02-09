@@ -12,10 +12,15 @@ public interface MainService {
 	public List<ProductVO> getListNew();
 	public int getTotalCountView(Criteria cri);
 	public int getTotalCount(Criteria cri);
-	public List<ProductVO> getSortBest(Criteria cri);
-	public List<ProductVO> getSortNew(Criteria cri);
-	public List<ProductVO> getSortLowPrice(Criteria cri);
-	public List<ProductVO> getSortHighPrice(Criteria cri);
-	public List<ProductVO> getSortReview(Criteria cri);
+	public List<ProductVO> getSortBestMain(ProductVO vo);
+	public List<ProductVO> getSortNewMain(ProductVO vo);
+	public List<ProductVO> getSortLowPriceMain(ProductVO vo);
+	public List<ProductVO> getSortHighPriceMain(ProductVO vo);
+	public List<ProductVO> getSortReviewMain(ProductVO vo);
+	public List<ProductVO> getSortBest(ProductVO vo);
+	public List<ProductVO> getSortNew(ProductVO vo);
+	public List<ProductVO> getSortLowPrice(ProductVO vo);
+	public List<ProductVO> getSortHighPrice(ProductVO vo);
+	public List<ProductVO> getSortReview(ProductVO vo);
 	public ProductVO getProductByPronum(int pronum);
 }
