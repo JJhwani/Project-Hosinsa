@@ -50,7 +50,7 @@ public class MainController {
 		model.addAttribute("bestList", service.getListBest());
 		model.addAttribute("newList", service.getListNew());
 		model.addAttribute("category", "인기");
-		model.addAttribute("sort", "");
+		model.addAttribute("sort", "best");
 
 		int total = service.getTotalCountView(vo);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));	
@@ -78,6 +78,8 @@ public class MainController {
 						break;
 				case "" : model.addAttribute("viewList", service.getListProview(vo));
 						break;
+				default : model.addAttribute("viewList", service.getSortBest(vo));
+					break;
 			}
 			
 			total = service.getTotalCountView(vo);
@@ -115,6 +117,8 @@ public class MainController {
 			case "review" : model.addAttribute("viewList", service.getSortReview(vo));
 				break;
 			case "" : model.addAttribute("viewList", service.getListCategory(vo));
+				break;
+			default : model.addAttribute("viewList", service.getSortBest(vo));
 				break;
 		}
 		

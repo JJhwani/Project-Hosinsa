@@ -10,7 +10,7 @@ public interface MainService {
 	public List<ProductVO> getListCategory(ProductVO vo);				// 카테고리별 리스트 출력
 	public List<ProductVO> getListBest();								// Main 페이지 Best제품 출력
 	public List<ProductVO> getListNew();								// Main 페이지 신규제품 출력
-	public List<ProductVO> getListBestCategory(ProductVO vo);						// Category 페이지 Best제품 출력	
+	public List<ProductVO> getListBestCategory(ProductVO vo);			// Category 페이지 Best제품 출력	
 	
 	public int getTotalCountView(Criteria cri);							// 제품 전체수
 	public int getTotalCount(Criteria cri);								// 카테고리 별 제품 전체수

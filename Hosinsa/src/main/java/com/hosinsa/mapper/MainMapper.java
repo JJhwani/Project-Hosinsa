@@ -12,7 +12,7 @@ public interface MainMapper {
 	public List<ProductVO> getListCategory();							// 카테고리별 리스트 출력
 	public List<ProductVO> getListBest();								// Main 페이지 Best제품 출력
 	public List<ProductVO> getListNew();								// Main 페이지 신규제품 출력
-	public List<ProductVO> getListBestCategory(ProductVO vo);						// Category 페이지 Best제품 출력
+	public List<ProductVO> getListBestCategory(ProductVO vo);			// Category 페이지 Best제품 출력
 	
 	public List<ProductVO> getListWithPaging(ProductVO vo);				// 페이징
 	public List<ProductVO> getListWithPagingView(ProductVO vo);			// 카테고리 인기 페이징

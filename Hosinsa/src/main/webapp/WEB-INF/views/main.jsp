@@ -87,7 +87,7 @@
 	</div>
 	
 	<ul class="sorting">
-		<li><a class="sort" href="best">인기순</a></li>
+		<li class="on"><a class="sort" href="best">인기순</a></li>
 		<li><a class="sort" href="new">신상품순</a></li>
 		<li><a class="sort" href="lowPrice">낮은가격순</a></li>
 		<li><a class="sort" href="highPrice">높은가격순</a></li>
