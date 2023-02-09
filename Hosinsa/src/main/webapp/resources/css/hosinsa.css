@@ -189,7 +189,21 @@ float:left;
 .recent li{width:100px;height:100px;border:1px solid lightgray;margin-top:10px;}
 .recent>a{display:block;width:100px;height:40px;text-align:center;color:white;margin-top:10px;background:black;font-weight:bold;line-height:40px;cursor:pointer}
 
-.contentWrap{width:1400px;margin:50px auto;}
-.contentWrap .productName{float:left;background:black;padding:12px 5px;color:white;}
+.contentWrap{overflow:hidden;width:1400px;margin:50px auto;}
+.contentWrap .productName{float:left;background:black;width:1120px;padding:12px 5px;color:white;}
+.contentWrap .imgWrap{width:500px;float:left;margin-top:10px;padding:20px 10px 15px;border:1px solid lightgray}
+.contentWrap .imgWrap img{width:500px}
+.miniTitle{float:left;width:500px;padding:20px 10px 10px 20px;font-size:20px;font-weight:bold;letter-spacing:-1px}
+.miniTitle i{color:gray;font-size:14px;font-weight:normal;}
+.infoTable{float:left;margin:0 0 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray;}
+.infoTable tr th{width:30%;letter-spacing:-1px}
+.infoTable tr th::after{content:"|";float:right;color:lightgray}
+.infoTable tr td{width:70%;padding:10px;text-align:left;letter-spacing:-1px}
+
+.btnWrap{float:right;padding:20px 20px 0 0}
+input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid lightgray;text-align:center;}
+.btnWrap button{border-radius:0;height:27px;vertical-align:top;background-color:white;border:1px solid lightgray;cursor:pointer}
+.btnWrap button.cart_in{background-color:black;color:white}
+
 
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
