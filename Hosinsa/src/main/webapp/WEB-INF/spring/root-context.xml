@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
@@ -13,10 +13,8 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName"
-		value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl"
-		value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
 		<property name="username" value="scott"></property>
 		<property name="password" value="1234"></property>
 	</bean>
@@ -30,14 +28,16 @@
 	</bean>
 	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-			<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	<tx:annotation-driven/>
 	
+	<mybatis-spring:scan base-package="com.hosinsa.mapper"/>
 	
-	 <mybatis-spring:scan base-package="hosinsa.mapper"/>
-	<context:component-scan base-package="hosinsa.service"></context:component-scan>
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="com.hosinsa.service" />
+	<context:component-scan base-package="com.hosinsa.aop" />
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
-	</beans>
+</beans>

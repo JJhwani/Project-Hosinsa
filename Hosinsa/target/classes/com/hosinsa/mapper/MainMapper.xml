@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosinsa.mapper.MainMapper">
+	<!-- getListProview -->
+	<select id="getListProview" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC
+	</select>
+	<!-- getListCategory -->
+	<select id="getListCategory" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category}
+	</select>
+	<!-- getListBest -->
+	<select id="getListBest" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC) WHERE ROWNUM <= 4
+		]]>
+	</select>
+	<!-- getListNew -->
+	<select id="getListNew" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY REGDATE DESC)	WHERE ROWNUM <= 4
+		]]>
+	</select>
+	<!-- getListWithPaging -->
+	<select id="getListWithPaging" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+				FROM HOSINSA_PRODUCT WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+			
+		]]>
+	</select>
+	<!-- getListWithPagingView -->
+	<select id="getListWithPagingView" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+					(SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC)
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+			
+		]]>
+	</select>
+	<!-- getListWithPagingCategory -->
+	<select id="getListWithPagingCategory" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+					(SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category})
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+			
+		]]>
+	</select>
+	<!-- getTotalCountView -->
+	<select id="getTotalCountView" resultType="int">
+		
+		SELECT COUNT(*) FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC
+		
+	</select>
+	<!-- getTotalCount -->
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} AND PRONUM > 0
+	</select>
+	<!-- getSortBest -->
+	<select id="getSortBest" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PROVIEW DESC
+	</select>
+	<!-- getSortNew -->
+	<select id="getSortNew" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY REGDATE DESC
+	</select>
+	<!-- getSortLowPrice -->
+	<select id="getSortLowPrice" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PRICE ASC
+	</select>
+	<!-- getSortHighPrice -->
+	<select id="getSortHighPrice" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PRICE DESC
+	</select>
+	
+	<select id="getProductByPronum" resultType="com.hosinsa.domain.ProductVO">
+		SELECT * FROM HOSINSA_PRODUCT WHERE PRONUM = #{pronum}
+	</select>
+
+</mapper>
