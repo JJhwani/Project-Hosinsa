@@ -76,10 +76,15 @@ public class MainController {
 						break;
 				case "review" : model.addAttribute("viewList", service.getSortReviewMain(vo));
 						break;
+<<<<<<< Updated upstream
 				case "" : model.addAttribute("viewList", service.getListProview(vo));
 						break;
 				default : model.addAttribute("viewList", service.getSortBest(vo));
 					break;
+=======
+				case "" : model.addAttribute("viewList", service.getSortBest(vo));
+						break;
+>>>>>>> Stashed changes
 			}
 			
 			total = service.getTotalCountView(vo);
@@ -116,9 +121,13 @@ public class MainController {
 				break;
 			case "review" : model.addAttribute("viewList", service.getSortReview(vo));
 				break;
+<<<<<<< Updated upstream
 			case "" : model.addAttribute("viewList", service.getListCategory(vo));
 				break;
 			default : model.addAttribute("viewList", service.getSortBest(vo));
+=======
+			case "" : model.addAttribute("viewList", service.getSortBest(vo));
+>>>>>>> Stashed changes
 				break;
 		}
 		
