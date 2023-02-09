@@ -185,7 +185,6 @@ float:left;
 .event{width:30%;float:left;}
 .event .title{margin-bottom:10px}
 
-<<<<<<< Updated upstream
 .recent{position:fixed;top:150px;right:10px;z-index:4;}
 .recent li{overflow:hidden;width:100px;height:100px;border:1px solid lightgray;margin-top:10px;text-align:center}
 .recent li a{cursor:pointer}
@@ -208,14 +207,5 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .btnWrap button{border-radius:0;height:27px;vertical-align:top;background-color:white;border:1px solid lightgray;cursor:pointer}
 .btnWrap button.cart_in{background-color:black;color:white}
 
-=======
-.recent{position:fixed;top:150px;right:10px;z-index:4}
-.recent li{width:100px;height:100px;border:1px solid lightgray;margin-top:10px;}
-.recent>a{display:block;width:100px;height:40px;text-align:center;color:white;margin-top:10px;background:black;font-weight:bold;line-height:40px;cursor:pointer}
-
-.contentWrap{width:1400px;margin:50px auto;}
-.contentWrap .productName{float:left;background:black;padding:12px 5px;color:white;}
-.contentWrap .imgWrap{clear:left;}
->>>>>>> Stashed changes
 
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
