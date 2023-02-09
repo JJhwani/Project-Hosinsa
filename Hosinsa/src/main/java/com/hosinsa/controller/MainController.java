@@ -10,9 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,36 +43,85 @@ public class MainController {
 	}
 	
 	@GetMapping("/")
-	public String mainPage(@ModelAttribute("recentView")List<ProductVO> recentView,Criteria cri, Model model) {
-		model.addAttribute("viewList", service.getListProview(cri));
+	public String mainPage(@ModelAttribute("recentView")List<ProductVO> recentView, ProductVO vo, String sort, Model model) {
+		model.addAttribute("viewList", service.getListProview(vo));
 		model.addAttribute("bestList", service.getListBest());
 		model.addAttribute("newList", service.getListNew());
-		
-		int total = service.getTotalCountView(cri);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("category", "인기");
+		model.addAttribute("sort", "");
+
+		int total = service.getTotalCountView(vo);
+		model.addAttribute("pageMaker", new PageDTO(vo, total));	
+
 		return "main";
 	}
 	
 	@GetMapping(value="/category")
-	public String mainCategoryPage(@Param("category") String category, Criteria cri, Model model) {
+	public String categoryPage(@RequestParam("category") String category, ProductVO vo, Model model) {
+		
 		int total = 0;
 		if(category.equals("인기")) {
-			model.addAttribute("viewList", service.getListProview(cri));
+			model.addAttribute("viewList", service.getListProview(vo));
 			model.addAttribute("bestList", service.getListBest());
 			model.addAttribute("newList", service.getListNew());
-			total = service.getTotalCountView(cri);
+			total = service.getTotalCountView(vo);
 		}
 		else {
-			model.addAttribute("viewList", service.getListCategory(cri));
+			model.addAttribute("viewList", service.getListCategory(vo));
 			model.addAttribute("bestList", service.getListBest());
 			model.addAttribute("newList", service.getListNew());
-			total = service.getTotalCount(cri);
+			total = service.getTotalCount(vo);
 		}
-		
-		log.info("--------------------------------------dasdfaSDf"+category);
-		log.info("--------------------------------------dasdfaSDf"+cri);
+
 		model.addAttribute("category", category);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("pageMaker", new PageDTO(vo, total));
+		
+		return "main";
+	}
+	
+	@GetMapping(value="/category/sorting")
+	public String categoryPageSorting(String sort, String category, ProductVO vo, Model model) {
+		int total = 0;
+		log.info("category : "+category+"sort : "+sort);
+		if(category.equals("인기")) {
+			switch(sort) {
+				case "best" : model.addAttribute("viewList", service.getSortBestMain(vo));
+						break;
+				case "new" : model.addAttribute("viewList", service.getSortNewMain(vo));
+						break;
+				case "lowPrice" : model.addAttribute("viewList", service.getSortLowPriceMain(vo));
+						break;
+				case "highPrice" : model.addAttribute("viewList", service.getSortHighPriceMain(vo));
+						break;
+				case "review" : model.addAttribute("viewList", service.getSortReviewMain(vo));
+						break;
+				case "" : model.addAttribute("viewList", service.getListProview(vo));
+						break;
+			}
+			total = service.getTotalCountView(vo);
+		}
+
+		else {
+			switch(sort) {
+				case "best" : model.addAttribute("viewList", service.getSortBest(vo));
+					break;
+				case "new" : model.addAttribute("viewList", service.getSortNew(vo));
+					break;
+				case "lowPrice" : model.addAttribute("viewList", service.getSortLowPrice(vo));
+					break;
+				case "highPrice" : model.addAttribute("viewList", service.getSortHighPrice(vo));
+					break;
+				case "review" : model.addAttribute("viewList", service.getSortReview(vo));
+					break;
+				case "" : model.addAttribute("viewList", service.getListCategory(vo));
+					break;
+			}
+			total = service.getTotalCount(vo);
+		}
+
+		model.addAttribute("category", category);
+		model.addAttribute("sort", sort);
+		model.addAttribute("pageMaker", new PageDTO(vo, total));
 		
 		return "main";
 	}

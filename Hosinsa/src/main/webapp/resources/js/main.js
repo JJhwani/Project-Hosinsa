@@ -1,5 +1,5 @@
-$(document).ready(function(){		
-		
+$(document).ready(function(){      
+
 	$(".arrow button").on("click",function(){
 		if($(this).attr("class")=="left"){
 			$(".bannerView li:eq(4)").prependTo($(".bannerView"));
@@ -24,28 +24,36 @@ $(document).ready(function(){
 		mouseleave:function(){
 			timeBanner = setInterval(slide,4000)
 		}
-	})
-
+	});
+ 
 	var selectCategory = $(".selectCategory");
 	var paging = $(".paging");
-
+	var sorting = $(".sorting");
+ 
 	
 	//카테고리 클릭 -> 해당 카테고리 LIST 출력
 	$(".category").on("click",function(e){
 		e.preventDefault();
 		selectCategory.find("input[name='category']").val($(this).attr("href"));
-		//selectCategory.attr("action", "/category");
+		selectCategory.find("input[name='sort']").attr("value", "");
 		selectCategory.submit();
 	});
-
 	
+
+	$(".sort").on("click", function(e) {
+		e.preventDefault();
+		sorting.find("input[name='sort']").val($(this).attr("href"));
+		sorting.submit();
+	});
+	
+
 	$(".paginate_button a").on("click", function(e) {
 		e.preventDefault();
 		paging.find("input[name='pageNum']").val($(this).attr("href"));
 		paging.submit();
 	});
-
-
+ 
+ 
 	
-
-});
+ 
+ });
