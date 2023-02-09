@@ -62,10 +62,9 @@
 				</div>
 		 	</c:forEach>
 		</section>
-	</div>
+	</div>	
 	
-	
-	<%-- <div class="newWrap">
+	<div class="newWrap">
 		<h3 class="title">NEW</h3>
 		<p class="subTitle">따끈따끈 신상품</p>
 		<section class="newList">
@@ -85,7 +84,7 @@
 				</div>
 		 	</c:forEach>
 		</section>
-	</div> --%>
+	</div>
 	
 	<ul class="sorting">
 		<li><a class="sort" href="best">인기순</a></li>
@@ -127,15 +126,15 @@
 			<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
 		</c:if>
 	</ul>
-	<form class="selectCategory" action="/category/sorting" method="get">
+	<form class="selectCategory" action="/main/sorting" method="get">
 		<input type="hidden" name="category" value="${category}">
 		<input type="hidden" name="sort" value="${sort}">
 	</form>
-	<form class="sorting" action="/category/sorting" method="get">
+	<form class="sorting" action="/main/sorting" method="get">
 		<input type="hidden" name="category" value="${category}">
-		<input type="text" name="sort" value="${sort}">
+		<input type="hidden" name="sort" value="${sort}">
 	</form>	
-	<form class="paging" action="/category/sorting" method="get">
+	<form class="paging" action="/main/sorting" method="get">
 		<input type="hidden" name="category" value="${category}">
 		<input type="hidden" name="sort" value="${sort}">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">

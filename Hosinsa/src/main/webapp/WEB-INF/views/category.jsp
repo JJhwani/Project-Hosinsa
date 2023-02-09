@@ -40,11 +40,11 @@
 	</div>	
 	
 	<ul class="sorting">
-		<li class="on"><a>인기순</a></li>
-		<li><a>신상품순</a></li>
-		<li><a>낮은가격순</a></li>
-		<li><a>높은가격순</a></li>
-		<li><a>후기순</a></li>
+		<li><a class="sort" href="best">인기순</a></li>
+		<li><a class="sort" href="new">신상품순</a></li>
+		<li><a class="sort" href="lowPrice">낮은가격순</a></li>
+		<li><a class="sort" href="highPrice">높은가격순</a></li>
+		<li><a class="sort" href="review">후기순</a></li>
 	</ul>
 	<div class="mainList">
 		<section class="productList">
@@ -77,6 +77,21 @@
 			<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
 		</c:if>
 	</ul>
+	<form class="selectCategory" action="/category/sorting" method="get">
+		<input type="hidden" name="category" value="${category}">
+		<input type="hidden" name="sort" value="${sort}">
+	</form>
+	<form class="sorting" action="/category/sorting" method="get">
+		<input type="hidden" name="category" value="${category}">
+		<input type="hidden" name="sort" value="${sort}">
+	</form>	
+	<form class="paging" action="/category/sorting" method="get">
+		<input type="hidden" name="category" value="${category}">
+		<input type="hidden" name="sort" value="${sort}">
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+	</form>	
 	<!-- 페이지 처리 끝 -->
 
+<script src="../../../resources/js/main.js"></script>
 <%@ include file="includes/footer.jsp" %>

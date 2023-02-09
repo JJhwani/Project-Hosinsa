@@ -37,6 +37,11 @@ public class MainServiceImpl implements MainService{
 	public List<ProductVO> getListNew() {
 		return mapper.getListNew();
 	}
+	
+	@Override
+	public List<ProductVO> getListBestCategory(ProductVO vo) {
+		return mapper.getListBestCategory(vo);
+	}
 
 	@Override
 	public int getTotalCountView(Criteria cri) {

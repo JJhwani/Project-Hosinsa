@@ -6,21 +6,26 @@ import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.ProductVO;
 
 public interface MainService {
-	public List<ProductVO> getListProview(ProductVO vo);
-	public List<ProductVO> getListCategory(ProductVO vo);
-	public List<ProductVO> getListBest();
-	public List<ProductVO> getListNew();
-	public int getTotalCountView(Criteria cri);
-	public int getTotalCount(Criteria cri);
-	public List<ProductVO> getSortBestMain(ProductVO vo);
-	public List<ProductVO> getSortNewMain(ProductVO vo);
-	public List<ProductVO> getSortLowPriceMain(ProductVO vo);
-	public List<ProductVO> getSortHighPriceMain(ProductVO vo);
-	public List<ProductVO> getSortReviewMain(ProductVO vo);
-	public List<ProductVO> getSortBest(ProductVO vo);
-	public List<ProductVO> getSortNew(ProductVO vo);
-	public List<ProductVO> getSortLowPrice(ProductVO vo);
-	public List<ProductVO> getSortHighPrice(ProductVO vo);
-	public List<ProductVO> getSortReview(ProductVO vo);
+	public List<ProductVO> getListProview(ProductVO vo);				// 전체 제품 출력
+	public List<ProductVO> getListCategory(ProductVO vo);				// 카테고리별 리스트 출력
+	public List<ProductVO> getListBest();								// Main 페이지 Best제품 출력
+	public List<ProductVO> getListNew();								// Main 페이지 신규제품 출력
+	public List<ProductVO> getListBestCategory(ProductVO vo);						// Category 페이지 Best제품 출력	
+	
+	public int getTotalCountView(Criteria cri);							// 제품 전체수
+	public int getTotalCount(Criteria cri);								// 카테고리 별 제품 전체수
+	
+	public List<ProductVO> getSortBestMain(ProductVO vo);				// Main 페이지 인기순 소팅
+	public List<ProductVO> getSortNewMain(ProductVO vo);				// Main 페이지 신규순 소팅
+	public List<ProductVO> getSortLowPriceMain(ProductVO vo);			// Main 페이지 낮은가격순 소팅
+	public List<ProductVO> getSortHighPriceMain(ProductVO vo);			// Main 페이지 높은가격순 소팅
+	public List<ProductVO> getSortReviewMain(ProductVO vo);				// Main 페이지 리뷰순 소팅
+	
+	public List<ProductVO> getSortBest(ProductVO vo);					// Category 페이지 인기순 소팅
+	public List<ProductVO> getSortNew(ProductVO vo);					// Category 페이지 신규순 소팅
+	public List<ProductVO> getSortLowPrice(ProductVO vo);				// Category 페이지 낮은가격순 소팅
+	public List<ProductVO> getSortHighPrice(ProductVO vo);				// Category 페이지 높은가격순 소팅
+	public List<ProductVO> getSortReview(ProductVO vo);					// Category 페이지 리뷰순 소팅
+	
 	public ProductVO getProductByPronum(int pronum);
 }
