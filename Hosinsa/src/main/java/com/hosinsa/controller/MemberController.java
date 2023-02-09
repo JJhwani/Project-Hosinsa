@@ -27,6 +27,7 @@ public class MemberController {
 
 	private MemberService memberService;
 	
+	// 로그인
 	@GetMapping("/login")
 	public void login() {
 		log.info("login/get====");
@@ -49,6 +50,16 @@ public class MemberController {
 			return "redirect:/";
 		}
 		
+	} // 로그인
+	
+	// 로그아웃
+	@GetMapping("/logout")
+	public String logoutGet(HttpServletRequest request) {
+		log.info("logout====");
+		HttpSession session = request.getSession();
+		session.invalidate();
+        
+        return "redirect:/";     
 	}
 	
 	@GetMapping("/manager")

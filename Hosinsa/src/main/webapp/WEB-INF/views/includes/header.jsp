@@ -54,7 +54,7 @@
 				<li><a>회원관리</a></li>
 			</c:if>
 			<c:if test="${not empty member}">
-				<li><a>로그아웃</a></li>
+				<li><a href="<c:url value='/member/logout'/>">로그아웃</a></li>
 			</c:if>
 		</ul>
 	</div>
