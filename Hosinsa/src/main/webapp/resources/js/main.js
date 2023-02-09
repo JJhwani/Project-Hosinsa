@@ -43,6 +43,15 @@ $(document).ready(function(){
 	$(".sort").on("click", function(e) {
 		e.preventDefault();
 		sorting.find("input[name='sort']").val($(this).attr("href"));
+
+		var before = $(".sorting .on");
+		var after = $(this).parent("li");
+
+		if(before !== after){
+			before.toggleClass("on");
+		}
+		after.toggleClass("on");
+
 		sorting.submit();
 	});
 	
@@ -52,8 +61,7 @@ $(document).ready(function(){
 		paging.find("input[name='pageNum']").val($(this).attr("href"));
 		paging.submit();
 	});
- 
- 
+
 	
  
  });
