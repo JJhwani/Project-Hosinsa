@@ -19,41 +19,41 @@
 			<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 		</form>
 		<ul class="menu">
-			<c:if test="${empty loginUser}">
+			<c:if test="${empty member}">
 				<li><a>회원가입</a></li>
 			</c:if>
 			<li class="user_grade">
 				<c:choose>
-					<c:when test="${empty loginUser}">
-						<a>로그인</a>
+					<c:when test="${empty member}">
+						<a href="<c:url value='/member/login'/>">로그인</a>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
-			 				<c:when test="${loginUser.grade eq 'C'}">
-			 					LV.1 브론즈 &nbsp;${loginUser.name}님
+			 				<c:when test="${member.grade eq 'C'}">
+			 					LV.1 브론즈 &nbsp;${member.name}님
 			 				</c:when>
-			 				<c:when test="${loginUser.grade eq 'B'}">
-			 					LV.2 실버 &nbsp;${loginUser.name}님
+			 				<c:when test="${member.grade eq 'B'}">
+			 					LV.2 실버 &nbsp;${member.name}님
 			 				</c:when>
-			 				<c:when test="${loginUser.grade eq 'A'}">
-			 					LV.3 골드 &nbsp;${loginUser.name}님
+			 				<c:when test="${member.grade eq 'A'}">
+			 					LV.3 골드 &nbsp;${member.name}님
 			 				</c:when>
 			 				<c:otherwise>
-			 					LV.4 운영자 &nbsp;${loginUser.name}님
+			 					LV.4 운영자 &nbsp;${member.name}님
 			 				</c:otherwise>
 	 					</c:choose>
 	 				</c:otherwise>
 				</c:choose>
 			</li>
-			<c:if test="${not empty loginUser}">
+			<c:if test="${not empty member}">
 				<li><a>마이페이지</a></li>
 			</c:if>
 			<li><a>장바구니</a></li>
-			<c:if test="${loginUser.grade eq 'S'}">
+			<c:if test="${member.grade eq 'S'}">
 				<li><a>상품관리</a></li>
 				<li><a>회원관리</a></li>
 			</c:if>
-			<c:if test="${not empty loginUser}">
+			<c:if test="${not empty member}">
 				<li><a>로그아웃</a></li>
 			</c:if>
 		</ul>
