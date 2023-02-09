@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosinsa.mapper.ReviewMapper">
+
+	<sql id="reviewCriteria">			
+	 	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+	 		<foreach item='type' collection="typeArr">
+	 		  <trim prefix="OR">
+	 		    <choose>
+	 		      <when test="type == 'T'.toString()">
+	 		      	title like '%'||#{keyword}||'%'
+	 		      </when>
+	 		      
+	 		      <when test="type == 'C'.toString()">
+	 		      	content like '%'||#{keyword}||'%'
+	 		      </when>
+	 		      
+	 		      <when test="type == 'N'.toString()">
+	 		      	nickname like '%'||#{keyword}||'%'
+	 		      </when>
+	 		    </choose>
+	 		  </trim>	
+	 		</foreach> 			
+	 	</trim>
+	 </sql>	
+
+	 	 <select id="getList" resultType="com.hosinsa.domain.ReviewVO">
+	   			select * from hosinsa_review where bno > 0
+	 	 </select>
+	 	 
+	 	 <insert id="insert">
+	 	 		insert into hosinsa_review (bno,title,content,nickname, uploadDate)
+	 	 		values(seq_review.nextval, #{title}, #{content}, #{nickname}, sysdate)
+	 	 </insert>
+	 	 	
+	 	 
+	 	 <insert id="insertSelectKey">
+	 	 	<selectKey keyProperty="bno" order="BEFORE" resultType="Long">
+	 	 		select seq_review.nextval from dual
+	 	 	</selectKey>
+		 	 	insert into hosinsa_review(bno, nickname, title, content, uploadDate)
+		 	 	values(#{bno}, #{nickname}, #{title}, #{content}, sysdate)
+	 	 </insert>
+	 	 
+	 	 <select id="read" resultType="com.hosinsa.domain.ReviewVO">
+	 	 		select * from hosinsa_review where bno = #{bno}
+	 	 </select>
+	 	 
+		
+		<delete id="delete">
+	 	 		delete from hosinsa_review where bno = #{bno}
+	 	</delete>
+	 	
+	 	
+	 	<update id="update">
+	 			update hosinsa_review
+	 			set title = #{title},
+	 			content = #{content},
+	 			nickname = #{nickname},
+	 			uploadDate = sysdate
+	 			where bno = #{bno}
+	 	</update>
+	 	
+	 
+	 	<select id="getListWithPaging" resultType="com.hosinsa.domain.ReviewVO">
+	 			
+		 <![CDATA[
+		   select
+		 	bno, title, content, nickname, uploaddate
+		 	from
+		 		(
+		 		select /*+INDEX_DESC(HOSINSA_REVIEW PK_REVIEW) */
+		 		rownum rn, bno, title, content, nickname, uploaddate
+		   		from
+		 			HOSINSA_REVIEW
+		 		where
+		 ]]>
+		 			
+	 	<include refid="reviewCriteria"></include>		
+	 
+	 	<![CDATA[
+	 		rownum <= #{pageNum} * #{amount}
+	 		)
+	 	where rn > (#{pageNum} -1) * #{amount}
+	 	]]>		
+	 	</select> 
+	 	
+	 	<select id="getTotalCount" resultType="int">
+	 		select count(*) from hosinsa_review where 
+	 	
+	 	<include refid="reviewCriteria"></include>
+	 		
+	 	bno > 0
+	 	</select>
+	 	
+</mapper>
