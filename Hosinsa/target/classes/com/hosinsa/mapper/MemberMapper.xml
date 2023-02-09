@@ -18,6 +18,11 @@
 	select * from hosinsa_member where id = #{id} and pw = #{pw}
 </select>
 
+<!-- ID 중복체크 -->
+<select id="idCheck" resultType="int">
+	select count(*) from hosinsa_member where id = #{id}
+</select>
+
 <!-- INSERT 문 -->
 <insert id="insert">
 	insert into hosinsa_member values

@@ -85,4 +85,14 @@ public class MemberMapperTests {
 		int count = memberMapper.update(member);
 		log.info("UPDATE COUNT : " + count);
 	}
+	
+	@Test
+	public void testMemberIdCheck() {
+		String id = "admin";
+		String id2 = "gkwlakfkrh";
+		
+		memberMapper.idCheck(id);
+		memberMapper.idCheck(id2);
+	}
+	
 }
