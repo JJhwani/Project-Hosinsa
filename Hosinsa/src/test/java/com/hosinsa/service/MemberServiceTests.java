@@ -35,7 +35,7 @@ public class MemberServiceTests {
 //		Date birthday = Date.valueOf(localdate);
 		
 		MemberVO member = new MemberVO();
-		member.setId("member2");
+		member.setId("member111");
 		member.setPw("1234");
 		member.setName("정재환");
 		member.setGender("남자");

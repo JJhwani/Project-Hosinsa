@@ -95,13 +95,15 @@ public class MemberController {
 	}
 	
 	@GetMapping("/join")
-	public void join() {}
+	public void join() {
+		log.info("join====");
+	}
 	
 	@PostMapping("/join")
-	public String join(MemberVO member, RedirectAttributes rttr) {
-		log.info("join----" + member);
+	public String joinPOST(MemberVO member, RedirectAttributes rttr) {
+		log.info("joinPOST====" + member);
 		memberService.join(member);
 		rttr.addFlashAttribute("result", member.getId());
-		return "redirect:/member/login";
+		return "redirect:/";
 	}
 }
