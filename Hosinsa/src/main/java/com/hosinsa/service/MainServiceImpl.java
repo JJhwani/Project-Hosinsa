@@ -103,6 +103,9 @@ public class MainServiceImpl implements MainService{
 		return mapper.getProductByPronum(pronum);
 	}
 
-	
+	@Override
+	public void setRecentView(int pronum) {
+		
+	}
 
 }

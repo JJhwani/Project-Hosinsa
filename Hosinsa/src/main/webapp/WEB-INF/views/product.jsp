@@ -68,7 +68,7 @@
 	</div>
 	
 	<form action="" method="get">
-		<input type="hidden" name="pronum" value="${product.pronum}">
+		<input type="hidden" name="pronum" value="${product.proimg}">
 		<input type="hidden" name="quantity" value="">
 	</form>
 			
@@ -76,10 +76,9 @@
 	
 <div class="recent">
 	<ul>
-		<li><a>최근본상품1</a></li>
-		<li><a>최근본상품2</a></li>
-		<li><a>최근본상품3</a></li>
-		<li><a>최근본상품4</a></li>
+		<c:forEach var="recentView" items="${recentView}">
+			<li><a><img src="${recentView.proimg}"></a></li>
+		</c:forEach>			
 	</ul>
 	<a>TOP</a>
 </div>

@@ -185,8 +185,10 @@ float:left;
 .event{width:30%;float:left;}
 .event .title{margin-bottom:10px}
 
-.recent{position:fixed;top:150px;right:10px;z-index:4}
-.recent li{width:100px;height:100px;border:1px solid lightgray;margin-top:10px;}
+.recent{position:fixed;top:150px;right:10px;z-index:4;}
+.recent li{overflow:hidden;width:100px;height:100px;border:1px solid lightgray;margin-top:10px;text-align:center}
+.recent li a{cursor:pointer}
+.recent img{height:100%}
 .recent>a{display:block;width:100px;height:40px;text-align:center;color:white;margin-top:10px;background:black;font-weight:bold;line-height:40px;cursor:pointer}
 
 .contentWrap{overflow:hidden;width:1400px;margin:50px auto;}

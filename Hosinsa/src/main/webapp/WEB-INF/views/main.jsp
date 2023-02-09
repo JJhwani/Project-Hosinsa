@@ -56,7 +56,7 @@
 							<p class="pbrand">${bestList.brand}</p>
 							<p class="pname">${bestList.proname}</p>
 							<p class="price">${bestList.price}</p>
-							<p class="view">view ${bestList.proview}</p>
+							<p class="view"><i class="fa-solid fa-eye"></i> ${bestList.proview}</p>
 						</div>
 					</a>
 				</div>
@@ -79,7 +79,7 @@
 							<p class="pbrand">${newList.brand}</p>
 							<p class="pname">${newList.proname}</p>
 							<p class="price">${newList.price}</p>
-							<p class="view">view ${newList.proview}</p>
+							<p class="view"><i class="fa-solid fa-eye"></i> ${newList.proview}</p>
 						</div>
 					</a>
 				</div>
@@ -107,7 +107,7 @@
 							<p class="pbrand">${viewList.brand}</p>
 							<p class="pname">${viewList.proname}</p>
 							<p class="price">${viewList.price}</p>
-							<p class="view">view ${viewList.proview}</p>
+							<p class="view"><i class="fa-solid fa-eye"></i> ${viewList.proview}</p>
 						</div>
 					</a>
 				</div>
@@ -171,10 +171,9 @@
 	
 	<div class="recent">
 		<ul>
-			<li><a>최근본상품1</a></li>
-			<li><a>최근본상품2</a></li>
-			<li><a>최근본상품3</a></li>
-			<li><a>최근본상품4</a></li>
+			<c:forEach var="recentView" items="${recentView}">
+				<li><a><img src="${recentView.proimg}"></a></li>
+			</c:forEach>			
 		</ul>
 		<a>TOP</a>
 	</div>
