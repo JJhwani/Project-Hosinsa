@@ -23,5 +23,5 @@ public interface MainService {
 	public List<ProductVO> getSortHighPrice(ProductVO vo);
 	public List<ProductVO> getSortReview(ProductVO vo);
 	public ProductVO getProductByPronum(int pronum);
-	public void setRecentView(int pronum);
+
 }

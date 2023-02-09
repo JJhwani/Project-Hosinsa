@@ -43,7 +43,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/")
-	public String mainPage(ProductVO vo, String sort, Model model) {
+	public String mainPage(@ModelAttribute("recentView")List<ProductVO> recentView, ProductVO vo, String sort, Model model) {
 		model.addAttribute("viewList", service.getListProview(vo));
 		model.addAttribute("bestList", service.getListBest());
 		model.addAttribute("newList", service.getListNew());
@@ -51,14 +51,8 @@ public class MainController {
 		model.addAttribute("sort", "");
 
 		int total = service.getTotalCountView(vo);
-		model.addAttribute("pageMaker", new PageDTO(vo, total));
-	public String mainPage(@ModelAttribute("recentView")List<ProductVO> recentView,Criteria cri, Model model) {
-		model.addAttribute("viewList", service.getListProview(cri));
-		model.addAttribute("bestList", service.getListBest());
-		model.addAttribute("newList", service.getListNew());
-		
-		int total = service.getTotalCountView(cri);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("pageMaker", new PageDTO(vo, total));	
+
 		return "main";
 	}
 	
