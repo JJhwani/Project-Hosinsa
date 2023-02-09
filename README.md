@@ -18,12 +18,12 @@ CREATE TABLE HOSINSA_PRODUCT(<br>
 );<br>
 <br>
 CREATE TABLE HOSINSA_REVIEW (<br>
-    &nbsp&nbsp&nbsp&nbsp BNO &nbsp&nbsp&nbsp        NUMBER(10),<br>
-    &nbsp&nbsp&nbsp&nbsp ID &nbsp&nbsp&nbsp         VARCHAR2(50),<br>
-    &nbsp&nbsp&nbsp&nbsp PW &nbsp&nbsp&nbsp         VARCHAR2(50),<br>
-    &nbsp&nbsp&nbsp&nbsp NICKNAME &nbsp&nbsp&nbsp   VARCHAR2(100),<br>
-    &nbsp&nbsp&nbsp&nbsp TITLE &nbsp&nbsp&nbsp      VARCHAR2(1000),<br>
-    &nbsp&nbsp&nbsp&nbsp CONTENT &nbsp&nbsp&nbsp    VARCHAR2(2000),<br>
-    &nbsp&nbsp&nbsp&nbsp UPLOADDATE  DATE DEFAULT SYSDATE<br>
+    &nbsp&nbsp&nbsp&nbsp BNO &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp NUMBER(10),<br>
+    &nbsp&nbsp&nbsp&nbsp ID &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(50),<br>
+    &nbsp&nbsp&nbsp&nbsp PW &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(50),<br>
+    &nbsp&nbsp&nbsp&nbsp NICKNAME &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(100),<br>
+    &nbsp&nbsp&nbsp&nbsp TITLE &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(1000),<br>
+    &nbsp&nbsp&nbsp&nbsp CONTENT &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(2000),<br>
+    &nbsp&nbsp&nbsp&nbsp UPLOADDATE &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp DATE DEFAULT SYSDATE<br>
 );<br>
 
