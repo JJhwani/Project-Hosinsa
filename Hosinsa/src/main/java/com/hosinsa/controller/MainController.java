@@ -1,18 +1,13 @@
 package com.hosinsa.controller;
 
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.PageDTO;
@@ -29,36 +24,36 @@ public class MainController {
 	MainService service;
 
 	@GetMapping("/")
-	public String mainPage(Criteria cri, Model model) {
-		model.addAttribute("viewList", service.getListProview(cri));
+	public String mainPage(ProductVO vo, Model model) {
+		model.addAttribute("viewList", service.getListProview(vo));
 		model.addAttribute("bestList", service.getListBest());
 		model.addAttribute("newList", service.getListNew());
+		model.addAttribute("category", "인기");
 
-		int total = service.getTotalCountView(cri);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		int total = service.getTotalCountView(vo);
+		model.addAttribute("pageMaker", new PageDTO(vo, total));
 		return "main";
 	}
 	
 	@GetMapping(value="/category")
-	public String mainCategoryPage(@Param("category") String category, Criteria cri, Model model) {
+	public String mainCategoryPage(@RequestParam("category") String category, ProductVO vo, Model model) {
+		
 		int total = 0;
 		if(category.equals("인기")) {
-			model.addAttribute("viewList", service.getListProview(cri));
+			model.addAttribute("viewList", service.getListProview(vo));
 			model.addAttribute("bestList", service.getListBest());
 			model.addAttribute("newList", service.getListNew());
-			total = service.getTotalCountView(cri);
+			total = service.getTotalCountView(vo);
 		}
 		else {
-			model.addAttribute("viewList", service.getListCategory(cri));
+			model.addAttribute("viewList", service.getListCategory(vo));
 			model.addAttribute("bestList", service.getListBest());
 			model.addAttribute("newList", service.getListNew());
-			total = service.getTotalCount(cri);
+			total = service.getTotalCount(vo);
 		}
-		
-		log.info("--------------------------------------dasdfaSDf"+category);
-		log.info("--------------------------------------dasdfaSDf"+cri);
+
 		model.addAttribute("category", category);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("pageMaker", new PageDTO(vo, total));
 		
 		return "main";
 }

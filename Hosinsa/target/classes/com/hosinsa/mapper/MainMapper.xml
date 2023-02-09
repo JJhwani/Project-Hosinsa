@@ -46,7 +46,7 @@
 		]]>
 	</select>
 	<!-- getListWithPagingCategory -->
-	<select id="getListWithPagingCategory" resultType="com.hosinsa.domain.ProductVO">
+	<select id="getListWithPagingCategory" resultType="com.hosinsa.domain.ProductVO" parameterType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
 			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 			FROM

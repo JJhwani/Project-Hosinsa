@@ -6,8 +6,8 @@ import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.ProductVO;
 
 public interface MainService {
-	public List<ProductVO> getListProview(Criteria cri);
-	public List<ProductVO> getListCategory(Criteria cri);
+	public List<ProductVO> getListProview(ProductVO vo);
+	public List<ProductVO> getListCategory(ProductVO vo);
 	public List<ProductVO> getListBest();
 	public List<ProductVO> getListNew();
 	public int getTotalCountView(Criteria cri);

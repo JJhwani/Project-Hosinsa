@@ -19,13 +19,13 @@ public class MainServiceImpl implements MainService{
 	MainMapper mapper;
 
 	@Override
-	public List<ProductVO> getListProview(Criteria cri) {
-		return mapper.getListWithPagingView(cri);
+	public List<ProductVO> getListProview(ProductVO vo) {
+		return mapper.getListWithPagingView(vo);
 	}
 
 	@Override
-	public List<ProductVO> getListCategory(Criteria cri) {
-		return mapper.getListWithPagingCategory(cri);
+	public List<ProductVO> getListCategory(ProductVO vo) {
+		return mapper.getListWithPagingCategory(vo);
 	}
 
 	@Override
