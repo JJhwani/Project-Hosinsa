@@ -87,11 +87,11 @@
 	</div>
 	
 	<ul class="sorting">
-		<li class="on"><a class="sort" href="best">인기순</a></li>
-		<li><a class="sort" href="new">신상품순</a></li>
-		<li><a class="sort" href="lowPrice">낮은가격순</a></li>
-		<li><a class="sort" href="highPrice">높은가격순</a></li>
-		<li><a class="sort" href="review">후기순</a></li>
+		<li><a class="sort ${sort == 'best' ? 'on':''}" href="best">인기순</a></li>
+		<li><a class="sort ${sort == 'new' ? 'on':''}" href="new">신상품순</a></li>
+		<li><a class="sort ${sort == 'lowPrice' ? 'on':''}" href="lowPrice">낮은가격순</a></li>
+		<li><a class="sort ${sort == 'highPrice' ? 'on':''}" href="highPrice">높은가격순</a></li>
+		<li><a class="sort ${sort == 'review' ? 'on':''}" href="review">후기순</a></li>
 	</ul>
 	
 	<div class="mainList">

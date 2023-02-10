@@ -39,7 +39,7 @@ $(document).ready(function(){
 		selectCategory.submit();
 	});
 	
-
+	//소팅 클릭
 	$(".sort").on("click", function(e) {
 		e.preventDefault();
 		sorting.find("input[name='sort']").val($(this).attr("href"));
@@ -55,13 +55,17 @@ $(document).ready(function(){
 		sorting.submit();
 	});
 	
-
+	//페이징처리
 	$(".paginate_button a").on("click", function(e) {
 		e.preventDefault();
 		paging.find("input[name='pageNum']").val($(this).attr("href"));
 		paging.submit();
 	});
 
+<<<<<<< Updated upstream
+=======
+ 
+>>>>>>> Stashed changes
 	
  
  });

@@ -164,7 +164,7 @@ float:left;
 .sorting{clear:both;margin:50px 0 0 100px}
 .sorting li{float:left;margin:0 10px 10px 0}
 .sorting li a{color:lightgray;font-size:14px;cursor:pointer}
-.sorting li.on a{color:black;font-weight:bold}
+.sorting li a.on{color:black;font-weight:bold}
 .sorting li a:hover{color:gray}
 
 .mainList{clear:both}
