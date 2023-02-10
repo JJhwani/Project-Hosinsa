@@ -69,9 +69,6 @@
 		<button type="button" name="cart" class="cart_in">addToCart</button>
 		
 		<button class="btn list">뒤로</button>
-<<<<<<< Updated upstream
-	</div>	
-=======
 	</div>
 	<h4 class="miniTitle"><b>Product Info</b> 제품정보</h4>
 	<table>			
@@ -118,12 +115,20 @@
 	
 	<button class="btn list">뒤로</button>
 	
->>>>>>> Stashed changes
 	<form action="" method="get">
 		<input type="hidden" name="pronum" value="${product.pronum}">
 		<input type="hidden" name="quantity" value="">
 	</form>
-			
+	<div class="tabWrap tab2">
+		<button class="tab tab_info">Info</button>
+		<button class="tab tab_review">Review</button>
+	</div>
+	<div class="detailView">
+		${product.detail }
+	</div>
+	<div class="review hidden">
+		은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>
+	</div>
 </div>
 	
 <div class="recent">
@@ -135,5 +140,17 @@
 	<a>TOP</a>
 </div>
 
-<script src="../../../resources/js/main.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".tab_info").on("click",function(){
+			$(".detailView").removeClass("hidden");
+			$(".review").addClass("hidden");
+		});
+		$(".tab_review").on("click",function(){
+			$(".review").removeClass("hidden");
+			$(".detailView").addClass("hidden");
+		});
+	})
+</script>
+	
 <%@ include file="includes/footer.jsp" %>

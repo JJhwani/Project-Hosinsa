@@ -149,8 +149,5 @@ public class MainController {
 		
 		return "product";		
 	}
-	
-
-
 
 }
