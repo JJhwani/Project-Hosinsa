@@ -69,14 +69,13 @@
 		<input type="hidden" name="category" value="${category}">
 	</form>
 	<form class="productForm" action="/admin/modify" method="get">
-		<input type="text" name="pronum" value="">
+		<input type="hidden" name="pronum" value="">
 	</form>
 	<!-- 페이지 처리 끝 -->
 </div>
 
 <script type="text/javascript">
 $( document ).ready(function() {
-
 	var paging = $(".paging");
 	var selectCategory = $(".selectCategory");
 	var productForm = $(".productForm");
@@ -99,19 +98,18 @@ $( document ).ready(function() {
 	});
 	
 	$(".adminList button").on("click",function(e){
-		var pronum = $(this).parent().siblings(".pronum").text();
-		productForm.find("input[name='pronum']").val(pronum);
+		var tempNum = $(this).parent().siblings(".pronum").text();
+		productForm.find("input[name='pronum']").val(tempNum);
 		
 		if($(this).attr("class")=="modify"){
 			productForm.attr("action","/admin/modify");
 		}else if($(this).attr("class")=="delete"){
-			if(confirm("제품번호 ${product.pronum} : 정말로 삭제하시겠습니까?")){
+			if(confirm("제품번호 "+tempNum+" : 정말로 삭제하시겠습니까?")){
 				productForm.attr("action","/admin/delete");
 			}else{
 				return false;
 			}
-		}
-		
+		}		
 		productForm.submit();
 	})	
 	

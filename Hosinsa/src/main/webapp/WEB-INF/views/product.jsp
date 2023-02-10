@@ -106,7 +106,15 @@
 		
 		$(".modify").on("click",function(){
 			productForm.attr("action","/admin/modify").submit();
-		})
+		});
+		
+		$(".delete").on("click",function(){
+			if(confirm("제품번호 "+${product.pronum}+" : 정말로 삭제하시겠습니까?")){
+				productForm.attr("action","/admin/delete").submit();
+			}else{
+				return false;
+			}			
+		});
 		
 	})
 </script>
