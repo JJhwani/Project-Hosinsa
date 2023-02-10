@@ -69,7 +69,16 @@
 		<input type="hidden" name="pronum" value="${product.pronum}">
 		<input type="hidden" name="quantity" value="">
 	</form>
-			
+	<div class="tabWrap tab2">
+		<button class="tab tab_info">Info</button>
+		<button class="tab tab_review">Review</button>
+	</div>
+	<div class="detailView">
+		${product.detail }
+	</div>
+	<div class="review hidden">
+		은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>
+	</div>
 </div>
 	
 <div class="recent">
@@ -80,5 +89,18 @@
 	</ul>
 	<a>TOP</a>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".tab_info").on("click",function(){
+			$(".detailView").removeClass("hidden");
+			$(".review").addClass("hidden");
+		});
+		$(".tab_review").on("click",function(){
+			$(".review").removeClass("hidden");
+			$(".detailView").addClass("hidden");
+		});
+	})
+</script>
 	
 <%@ include file="includes/footer.jsp" %>
