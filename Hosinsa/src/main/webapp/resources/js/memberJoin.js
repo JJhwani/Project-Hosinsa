@@ -82,7 +82,6 @@ $(document).ready(function(){
             $("#id").focus();
             return false;
         }
-
         var memberId = $("#id").val();
         console.log(memberId);
         var data = {memberId : memberId}
