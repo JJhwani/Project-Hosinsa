@@ -26,25 +26,25 @@
 				<th>카테고리</th>
 				<th>가격</th>
 				<th>재고</th>
-				<th>조회수</th>
-				<th>상세정보</th>
+				<th>조회수</th>				
 				<th>등록일자</th>
 				<th>수정일자</th>
+				<th>상품관리</th>
 			</tr>
 		</thead>
 		<c:forEach var="product" items="${product }">
 			<tr>
-				<td>${product.pronum }</td>
+				<td class="pronum">${product.pronum }</td>
 				<td><img src="${product.proimg }"></td>
 				<td>${product.proname }</td>
 				<td>${product.brand }</td>
 				<td>${product.category }</td>
 				<td>${product.price }</td>
 				<td>${product.stock }</td>
-				<td>${product.proview }</td>
-				<td><button>수정</button></td>
+				<td>${product.proview }</td>				
 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${product.regdate }"></fmt:formatDate></td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${product.update_date }"></fmt:formatDate></td>			
+				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${product.update_date }"></fmt:formatDate></td>
+				<td><button class="modify">수정</button><button class="delete">삭제</button></td>		
 			</tr>
 		</c:forEach>
 	</table>
@@ -61,24 +61,69 @@
 		</c:if>
 	</ul>
 	<form class="paging" action="/admin/product" method="get">
-		<input type="text" name="pageNum" value="${pageMaker.cri.pageNum}">
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+		<input type="hidden" name="category" value="${category}">
 	</form>	
+	<form class="selectCategory" action="/admin/category" method="get">
+		<input type="hidden" name="pageNum" value="1">
+		<input type="hidden" name="category" value="${category}">
+	</form>
+	<form class="productForm" action="/admin/modify" method="get">
+		<input type="text" name="pronum" value="">
+	</form>
 	<!-- 페이지 처리 끝 -->
 </div>
 
 <script type="text/javascript">
 $( document ).ready(function() {
-	console.log("로딩성공");
 
 	var paging = $(".paging");
-
+	var selectCategory = $(".selectCategory");
+	var productForm = $(".productForm");
 
 	$(".paginate_button a").on("click", function(e) {
 		e.preventDefault();
 		paging.find("input[name='pageNum']").val($(this).attr("href"));
+		if(selectCategory.find("input[name='category']").val()){
+			paging.attr('action','/admin/category');
+		}else{
+			paging.attr('action','/admin/product');
+		}
 		paging.submit();
 	});
+	
+	$(".category").on("click",function(e){
+		e.preventDefault();
+		selectCategory.find("input[name='category']").val($(this).attr("href"));
+		selectCategory.submit();
+	});
+	
+	$(".adminList button").on("click",function(e){
+		var pronum = $(this).parent().siblings(".pronum").text();
+		productForm.find("input[name='pronum']").val(pronum);
+		
+		if($(this).attr("class")=="modify"){
+			productForm.attr("action","/admin/modify");
+		}else if($(this).attr("class")=="delete"){
+			if(confirm("제품번호 ${product.pronum} : 정말로 삭제하시겠습니까?")){
+				productForm.attr("action","/admin/delete");
+			}else{
+				return false;
+			}
+		}
+		
+		productForm.submit();
+	})	
+	
+	if("${modify}"==="success"){
+		alert("수정 요청이 성공적으로 처리되었습니다.");
+	}
+	if("${remove}"==="success"){
+		alert("제품 삭제가 성공적으로 처리되었습니다.");
+	}
 });
+
+
 
 </script>
 

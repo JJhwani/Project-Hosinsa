@@ -63,9 +63,9 @@
 		<input type="number" name="quantity" class="cart_quan" min="1" value="1">
 		<button type="button" name="cart" class="cart_in">addToCart</button>
 		
-		<button class="btn list">뒤로</button>
+		<button class="btn list" onclick="javascript:history.go(-1);">뒤로</button>
 	</div>	
-	<form action="" method="get">
+	<form class="productForm" action="" method="get">
 		<input type="hidden" name="pronum" value="${product.pronum}">
 		<input type="hidden" name="quantity" value="">
 	</form>
@@ -92,6 +92,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		
 		$(".tab_info").on("click",function(){
 			$(".detailView").removeClass("hidden");
 			$(".review").addClass("hidden");
@@ -100,6 +101,13 @@
 			$(".review").removeClass("hidden");
 			$(".detailView").addClass("hidden");
 		});
+		
+		var productForm = $(".productForm");
+		
+		$(".modify").on("click",function(){
+			productForm.attr("action","/admin/modify").submit();
+		})
+		
 	})
 </script>
 	
