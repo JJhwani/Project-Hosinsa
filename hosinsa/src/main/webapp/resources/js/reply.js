@@ -1,22 +1,21 @@
 console.log("Reply Module.......");
 
-var replyService = (function(){ //즉시 실행함수 내부에서 필요한 메서드를 구성해서 객체를 구성하는 방식
+var replyService = (function(){ 
 
-//댓글 등록
-    function add(reply, callback, error){ //json타입으로 reply에 값이 들어옴
+    function add(reply, callback, error){ 
         console.log("and reply..............");
-        //ajax을 이용해서 post 방식으로 호출
+    
         $.ajax({
-			type : 'post', // post 방식으로
-			url : '/replies/new', //이 경로로 전송함
-			data : JSON.stringify(reply), //json->string 타입으로 변환
-			contentType : "application/json; charset=utf-8", //데이터 전송타입
+			type : 'post', 
+			url : '/replies/new',
+			data : JSON.stringify(reply), 
+			contentType : "application/json; charset=utf-8", 
 			success : function(result, status, xhr) { 
-				if (callback) { //ajax 호출 성공후 casllback값으로 함수가 존재한다면
-					callback(result); //해당 함수를 호출해서 결과를 반영
+				if (callback) { 
+					callback(result); 
 				}
 			},
-			error : function(xhr, status, er) { //status=상태값
+			error : function(xhr, status, er) {
 				if (error) {
 					error(er);
 				}
@@ -24,16 +23,15 @@ var replyService = (function(){ //즉시 실행함수 내부에서 필요한 메
 		})
 	}
 
-	//댓글 목록
-		function getList(param, callback, error) {//param이라는 객체를 통해서 필요한 파라미터를 전달받음
+		function getList(param, callback, error) {
 
-		var bno = param.bno;
+		var qno = param.qno;
 		var page = param.page || 1;
 
-		$.getJSON("/replies/pages/" + bno + "/" + page + ".json", //json형태가 필요하므로 호출시 .json요구
+		$.getJSON("/replies/pages/" + qno + "/" + page + ".json", 
 				function(data) {
 					if (callback) {
-						callback(data);
+						callback(data.replyCnt, data.list);
 					}
 				}).fail(function(xhr, status, err) {
 			if (error) {
@@ -42,7 +40,6 @@ var replyService = (function(){ //즉시 실행함수 내부에서 필요한 메
 		});
 	}
 
-	//댓글 삭제
 	function remove(rno, callback, error) {
 		$.ajax({
 			type : 'delete',
@@ -60,7 +57,6 @@ var replyService = (function(){ //즉시 실행함수 내부에서 필요한 메
 		});
 	}
 
-	//댓글 수정
 	function update(reply, callback, error) {
 
 		console.log("RNO: " + reply.rno);
@@ -83,7 +79,7 @@ var replyService = (function(){ //즉시 실행함수 내부에서 필요한 메
 		});
 	}
 
-	//댓글 조회
+
 	function get(rno, callback, error) {
 
 		$.get("/replies/" + rno + ".json", function(result) {
@@ -99,11 +95,43 @@ var replyService = (function(){ //즉시 실행함수 내부에서 필요한 메
 		});
 	}
 
+
+function displayTime(timeValue) {
+
+		var today = new Date();
+
+		var gap = today.getTime() - timeValue;
+
+		var dateObj = new Date(timeValue);
+		var str = "";
+
+		if (gap < (1000 * 60 * 60 * 24)) {
+
+			var hh = dateObj.getHours();
+			var mi = dateObj.getMinutes();
+			var ss = dateObj.getSeconds();
+
+			return [ (hh > 9 ? '' : '0') + hh, ':', (mi > 9 ? '' : '0') + mi,
+					':', (ss > 9 ? '' : '0') + ss ].join('');
+
+		} else {
+			var yy = dateObj.getFullYear();
+			var mm = dateObj.getMonth() + 1; // getMonth() is zero-based
+			var dd = dateObj.getDate();
+
+			return [ yy, '/', (mm > 9 ? '' : '0') + mm, '/',
+					(dd > 9 ? '' : '0') + dd ].join('');
+		}
+	}
+	;
+	
+	
     return {
-        add : add, //참조변수 : 메서드
+        add : add,
 		getList : getList,
 		remove : remove,
 		update : update,
-		get : get
+		get : get,
+		displayTime : displayTime
     };
-})(); //replyService확인은 get.jsp를 이용해서 확인
+})();

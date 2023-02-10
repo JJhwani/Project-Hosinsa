@@ -148,7 +148,7 @@
 												+ " 번이 등록되었습니다.");
 							}
 
-							$("#myModal").modal("show");
+							$("#myModal").show();
 						}
 
 						$("#regBtn").on("click", function() {

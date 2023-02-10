@@ -91,3 +91,22 @@ select count(*)from HOSINSA_QNA;
 
 commit;
 
+--------------------------------------------------------------------------------------------------------------
+
+고객센터 댓글
+
+create table hosinsa_reply(
+rno number(10,0),
+qno number(10,0) not null,
+reply varchar2(1000) not null,
+replyer varchar2(50) not null,
+replyDate date default sysdate,
+updateDate date default sysdate
+);
+
+create sequence seq_reply;
+
+alter table hosinsa_reply add constraint pk_reply primary key(rno);
+
+alter table hosinsa_reply add constraint fk_reply_qna
+foreign key (qno) references hosinsa_qna (qno);
