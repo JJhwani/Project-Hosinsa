@@ -29,6 +29,7 @@ $(document).ready(function(){
 	var selectCategory = $(".selectCategory");
 	var paging = $(".paging");
 	var sorting = $(".sorting");
+	var search = $(".search");
  
 	
 	//카테고리 클릭 -> 해당 카테고리 LIST 출력
