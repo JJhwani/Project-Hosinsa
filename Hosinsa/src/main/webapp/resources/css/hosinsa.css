@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /*CSS reset*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -84,7 +85,7 @@ h1.logo a{color:white;font-size:40px;font-weight:bold;letter-spacing:-1px;}
 
 .bestWrap, .newWrap{float:left;margin-bottom:30px}
 
-.bigTitle{text-align:center;font-weight:bold;font-size:24px;}
+.bigTitle{text-align:center;font-weight:bold;font-size:30px;margin-bottom:20px;}
 .title{clear:both;font-size:24px;font-weight:bold;letter-spacing:-1px}
 .subTitle{color:gray;padding:5px 0 10px}
 .list_box{ 
@@ -212,6 +213,7 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .btnWrap button{border-radius:0;height:27px;vertical-align:top;background-color:white;border:1px solid lightgray;cursor:pointer}
 .btnWrap button:hover{background:rgb(245,245,245)}
 .btnWrap button.cart_in{background-color:black;color:white}
+.btnWrap.right{clear:both;padding-right:330px}
 
 .tabWrap{overflow:hidden;clear:both;text-align:center;padding:50px 0 20px;}
 .tabWrap .tab{display:block;float:left;border-radius:0;border:1px solid lightgray;box-sizing:border-box;background:white;font-size:24px;letter-spading:-1px;padding:10px 0;margin-right:-1px}
@@ -220,8 +222,13 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 
 .detailView{overflow:hidden;clear:both;text-align:center}
 
+/*admin - 제품관리 */
 .adminList{}
 .adminList th,.adminList td{border:1px solid lightgray;padding:10px 5px;vertical-align:middle;}
+.adminList th{background:black;color:white}
+.adminList td{text-align:center}
+.adminList td button:first-child{margin-bottom:5px;}
+.adminList td button{border-radius:0;background:white;border:1px solid lightgray;cursor:pointer}
 .adminList img{max-width:50px;vertical-align:middle;}
 .adminList.table1 th:nth-child(1){width:5%}
 .adminList.table1 th:nth-child(2){width:5%}
@@ -231,8 +238,12 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .adminList.table1 th:nth-child(6){width:5%}
 .adminList.table1 th:nth-child(7){width:5%}
 .adminList.table1 th:nth-child(8){width:5%}
-.adminList.table1 th:nth-child(9){width:6%}
+.adminList.table1 th:nth-child(9){width:7%}
 .adminList.table1 th:nth-child(10){width:7%}
-.adminList.table1 th:nth-child(11){width:7%}
+.adminList.table1 th:nth-child(11){width:6%}
+
+/* admin - 제품수정 */
+.productName input[name='proname']{width:calc(100% - 100px)}
+.inputDetail{padding:10px;margin-left:20px}
 
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
