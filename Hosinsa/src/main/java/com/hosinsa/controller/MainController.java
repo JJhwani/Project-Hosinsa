@@ -147,6 +147,8 @@ public class MainController {
 		}
 
 		total = service.getTotalCountSearch(vo);
+		
+		model.addAttribute("sort", sort);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));	
 		
 		return "search";
