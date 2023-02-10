@@ -3,7 +3,7 @@
 <%@ include file="includes/header.jsp" %>
 <div class="mainWrap">
 	
-	<ul class="category_menu">
+	<ul class="category_menu horizental tab10">
 		<li><a class="category" href="상의">상의</a></li>
 		<li><a class="category" href="아우터">아우터</a></li>
 		<li><a class="category" href="바지">바지</a></li>
@@ -16,37 +16,14 @@
 		<li><a class="category" href="액세서리">액세서리</a></li>
 	</ul>
 	
-	
-	<div class="bestWrap">
-		<h3 class="title">BEST</h3>
-		<p class="subTitle">이시간 가장 핫한 상품만 모아모아</p>
-		<section class="bestList">
-			<c:forEach var="bestList" items="${bestList}">
-	 			<div class="list_box">
-	 				<a href="/product/${bestList.pronum }">
-						<div class="list_img">
-							<img src="${bestList.proimg}">
-						</div>
-						<div class="article_info">
-							<p class="pbrand">${bestList.brand}</p>
-							<p class="pname">${bestList.proname}</p>
-							<p class="price">${bestList.price}</p>
-							<p class="view">view ${bestList.proview}</p>
-						</div>
-					</a>
-				</div>
-		 	</c:forEach>
-		</section>
-	</div>	
-	
 	<ul class="sorting">
 		<li><a class="sort ${sort == 'best' ? 'on':''}" href="best">인기순</a></li>
 		<li><a class="sort ${sort == 'new' ? 'on':''}" href="new">신상품순</a></li>
 		<li><a class="sort ${sort == 'lowPrice' ? 'on':''}" href="lowPrice">낮은가격순</a></li>
 		<li><a class="sort ${sort == 'highPrice' ? 'on':''}" href="highPrice">높은가격순</a></li>
 		<li><a class="sort ${sort == 'review' ? 'on':''}" href="review">후기순</a></li>
-		
 	</ul>
+	
 	<div class="mainList">
 		<section class="productList">
 			<c:forEach var="viewList" items="${viewList}">
@@ -59,11 +36,11 @@
 							<p class="pbrand">${viewList.brand}</p>
 							<p class="pname">${viewList.proname}</p>
 							<p class="price">${viewList.price}</p>
-							<p class="view">view ${viewList.proview}</p>
+							<p class="view"><i class="fa-solid fa-eye"></i> ${viewList.proview}</p>
 						</div>
 					</a>
 				</div>
-		 	</c:forEach>
+	 		</c:forEach>
 		</section>
 	</div>
 	
@@ -83,18 +60,53 @@
 		<input type="hidden" name="category" value="${category}">
 		<input type="hidden" name="sort" value="${sort}">
 	</form>
-	<form class="sorting" action="/category/sorting" method="get">
-		<input type="hidden" name="category" value="${category}">
+	<form class="sorting" action="/search/sorting" method="get">
 		<input type="hidden" name="sort" value="${sort}">
-	</form>	
-	<form class="paging" action="/category/sorting" method="get">
-		<input type="hidden" name="category" value="${category}">
-		<input type="hidden" name="sort" value="${sort}">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 	</form>	
+	<form class="paging" action="/search/sorting" method="get">
+		<input type="hidden" name="sort" value="${sort}">
+		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+	</form>	
 	<!-- 페이지 처리 끝 -->
+
+	<div class="notice">
+		<h4 class="title">공지사항</h4>
+		<ul>
+			<li><a>공지사항 1</a></li>
+			<li><a>공지사항 2</a></li>
+			<li><a>공지사항 3</a></li>
+		</ul>
+		<a>전체보기</a>
+	</div>
+	
+	<div class="cs">
+		<a>고객센터</a>
+		<a>QnA</a>
+		<a>1:1 문의</a>
+	</div>
+	
+	<div class="event">
+		<h4 class="title">이벤트</h4>
+		<ul>
+			<li><a>이벤트 1</a></li>
+			<li><a>이벤트 2</a></li>
+			<li><a>이벤트 3</a></li>
+		</ul>
+		<a>전체보기</a>
+	</div>
+	
+	<div class="recent">
+		<ul>
+			<c:forEach var="recentView" items="${recentView}">
+				<li><a><img src="${recentView.proimg}"></a></li>
+			</c:forEach>			
+		</ul>
+		<a>TOP</a>
+	</div>
 </div>
 <script src="../../../resources/js/main.js"></script>
+
 <%@ include file="includes/footer.jsp" %>

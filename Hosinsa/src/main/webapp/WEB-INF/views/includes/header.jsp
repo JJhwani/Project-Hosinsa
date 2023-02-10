@@ -15,8 +15,11 @@
 <div class="headerWrap">
 	<div class="header">
 		<h1 class="logo"><a href="<c:url value='/'/>">HOSINSA</a></h1>
-		<form action="" method="post" class="search">
-			<input type="text">
+		<form class="search" action="/search/sorting" method="get">
+			<input type="hidden" name="sort" value="best">
+			<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
+			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 			<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 		</form>
 		<ul class="menu">

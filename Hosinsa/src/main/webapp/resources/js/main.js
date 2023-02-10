@@ -43,15 +43,6 @@ $(document).ready(function(){
 	$(".sort").on("click", function(e) {
 		e.preventDefault();
 		sorting.find("input[name='sort']").val($(this).attr("href"));
-
-		var before = $(".sorting .on");
-		var after = $(this).parent("li");
-
-		if(before !== after){
-			before.toggleClass("on");
-		}
-		after.toggleClass("on");
-
 		sorting.submit();
 	});
 	
@@ -61,11 +52,16 @@ $(document).ready(function(){
 		paging.find("input[name='pageNum']").val($(this).attr("href"));
 		paging.submit();
 	});
-
-<<<<<<< Updated upstream
-=======
- 
->>>>>>> Stashed changes
 	
- 
+	//검색창
+	$(".search button").on("click", function(e){
+		if(!search.find("input[name='keyword']").val()){
+			alert("키워드를 입력하세요.");
+			return false;
+		}		
+		search.find("input[name='pageNum']").val("1");
+		e.preventDefault();
+		search.submit();
+	});
+
  });

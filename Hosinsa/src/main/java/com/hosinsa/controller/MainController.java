@@ -127,6 +127,31 @@ public class MainController {
 		return "category";
 	}
 	
+	//@PostMapping(value="/searchProduct")
+	@GetMapping(value="/search/sorting")
+	public String searchProduct(String sort, String keyword, ProductVO vo, Model model) {
+		int total = 0;
+		switch(sort) {
+			case "best" : model.addAttribute("viewList", service.getSortBestSearch(vo));
+				break;
+			case "new" : model.addAttribute("viewList", service.getSortNewSearch(vo));
+				break;
+			case "lowPrice" : model.addAttribute("viewList", service.getSortLowPriceSearch(vo));
+				break;
+			case "highPrice" : model.addAttribute("viewList", service.getSortHighPriceSearch(vo));
+				break;
+			case "review" : model.addAttribute("viewList", service.getSortReviewSearch(vo));
+				break;
+			case "" : model.addAttribute("viewList", service.getSortBestSearch(vo));
+				break;
+		}
+
+		total = service.getTotalCountSearch(vo);
+		model.addAttribute("pageMaker", new PageDTO(vo, total));	
+		
+		return "search";
+	}
+	
 	@GetMapping("/product/{pronum}")
 	public String get(@PathVariable int pronum,@ModelAttribute("recentView")List<ProductVO> recentView,Model model) {		
 		
@@ -149,5 +174,4 @@ public class MainController {
 		
 		return "product";		
 	}
-
 }

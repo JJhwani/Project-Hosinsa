@@ -14,6 +14,7 @@ public interface MainService {
 	
 	public int getTotalCountView(Criteria cri);							// 제품 전체수
 	public int getTotalCount(Criteria cri);								// 카테고리 별 제품 전체수
+	public int getTotalCountSearch(Criteria cri);						// 검색 제품 전체수
 	
 	public List<ProductVO> getSortBestMain(ProductVO vo);				// Main 페이지 인기순 소팅
 	public List<ProductVO> getSortNewMain(ProductVO vo);				// Main 페이지 신규순 소팅
@@ -26,6 +27,13 @@ public interface MainService {
 	public List<ProductVO> getSortLowPrice(ProductVO vo);				// Category 페이지 낮은가격순 소팅
 	public List<ProductVO> getSortHighPrice(ProductVO vo);				// Category 페이지 높은가격순 소팅
 	public List<ProductVO> getSortReview(ProductVO vo);					// Category 페이지 리뷰순 소팅
+	
+	public List<ProductVO> getSearchProduct(ProductVO vo);				// Header 페이지 제품 검색
+	public List<ProductVO> getSortBestSearch(ProductVO vo);				// Category 페이지 인기순 소팅
+	public List<ProductVO> getSortNewSearch(ProductVO vo);				// Category 페이지 신규순 소팅
+	public List<ProductVO> getSortLowPriceSearch(ProductVO vo);			// Category 페이지 낮은가격순 소팅
+	public List<ProductVO> getSortHighPriceSearch(ProductVO vo);		// Category 페이지 높은가격순 소팅
+	public List<ProductVO> getSortReviewSearch(ProductVO vo);			// Category 페이지 리뷰순 소팅
 	
 	public ProductVO getProductByPronum(int pronum);
 }
