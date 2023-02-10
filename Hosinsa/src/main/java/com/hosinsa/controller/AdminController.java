@@ -69,4 +69,9 @@ public class AdminController {
 		return "redirect:/admin/product";
 	}
 	
+	@GetMapping("/register")
+	public void adminRegisterForm() {
+		
+	}
+	
 }

@@ -3,7 +3,7 @@
 <%@ include file="../includes/header.jsp" %>
 
 <div class="contentWrap">
-	<h2 class="bigTitle">관리자 상품 관리 페이지</h2>
+	<h2 class="bigTitle">관리자 상품 관리 페이지 <a class="register" href="/admin/register">상품 등록</a></h2>
 	<ul class="category_menu horizental tab10">
 		<li><a class="category" href="상의">상의</a></li>
 		<li><a class="category" href="아우터">아우터</a></li>

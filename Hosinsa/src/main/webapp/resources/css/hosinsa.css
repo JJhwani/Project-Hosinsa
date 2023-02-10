@@ -223,6 +223,7 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .detailView{overflow:hidden;clear:both;text-align:center}
 
 /*admin - 제품관리 */
+.register{float:right;background:black;color:white;border-radius:0;margin-top:5px;font-size:16px;padding:10px 15px;cursor:pointer;}
 .adminList{}
 .adminList th,.adminList td{border:1px solid lightgray;padding:10px 5px;vertical-align:middle;}
 .adminList th{background:black;color:white}
