@@ -45,7 +45,4 @@ $(document).ready(function(){
 		paging.submit();
 	});
 
-
-	
-
 });

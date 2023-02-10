@@ -54,7 +54,22 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberVO memberLogin(MemberVO member) throws Exception {
+	public MemberVO memberLogin(MemberVO member) {
 		return memberMapper.memberLogin(member);
+	}
+
+	@Override
+	public int idCheck(String memberId) {
+		return memberMapper.idCheck(memberId);
+	}
+
+	@Override
+	public int nickCheck(String memberNickname) {
+		return memberMapper.nickCheck(memberNickname);
+	}
+
+	@Override
+	public int introCheck(String memberIntroducer) {
+		return memberMapper.introCheck(memberIntroducer);
 	}
 }
