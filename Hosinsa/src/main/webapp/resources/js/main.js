@@ -61,6 +61,7 @@ $(document).ready(function(){
 			return false;
 		}		
 		search.find("input[name='pageNum']").val("1");
+		search.find("input[name='amount']").val("28");
 		e.preventDefault();
 		search.submit();
 	});

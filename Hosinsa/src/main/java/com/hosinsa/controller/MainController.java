@@ -155,8 +155,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/product/{pronum}")
-	public String get(@PathVariable int pronum,@ModelAttribute("recentView")List<ProductVO> recentView,Model model) {		
-		
+	public String get(@PathVariable int pronum,@ModelAttribute("recentView")List<ProductVO> recentView,  Model model) {		
 		model.addAttribute("product", service.getProductByPronum(pronum));
 		
 		//최근 본 상품 기능

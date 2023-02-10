@@ -219,12 +219,6 @@
 	</select>
 	
 	
-	<!-- getProductByPronum -->
-	<select id="getProductByPronum" resultType="com.hosinsa.domain.ProductVO">
-		SELECT * FROM HOSINSA_PRODUCT WHERE PRONUM = #{pronum}
-	</select>
-
-	
 	
 	<!-- getSortBestSearch -->
 	<select id="getSortBestSearch" resultType="com.hosinsa.domain.ProductVO">
@@ -300,8 +294,7 @@
 				WHERE ROWNUM <= #{pageNum} * #{amount})				
 			WHERE RN > (#{pageNum} - 1) * #{amount}
 		]]>
-	</select>
-	
+	</select>	
 	<!-- getSearchProduct -->
 	<select id="getSearchProduct" resultType="com.hosinsa.domain.ProductVO" parameterType="com.hosinsa.domain.ProductVO">
 		<!-- SELECT * FROM HOSINSA_PRODUCT WHERE
@@ -317,4 +310,12 @@
 			WHERE RN > (#{pageNum} - 1) * #{amount}
     	]]>
 	</select>
+	
+		
+	
+	<!-- getProductByPronum -->
+	<select id="getProductByPronum" resultType="com.hosinsa.domain.ProductVO" >
+		SELECT * FROM HOSINSA_PRODUCT WHERE PRONUM = #{pronum}
+	</select>
+	
 </mapper>
