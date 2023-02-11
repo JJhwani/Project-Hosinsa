@@ -11,5 +11,6 @@ public class QnaVO {
 	private String qcontent;
 	private String id;
 	private Date qwritedate;
+	private int replyCnt;
 }
 

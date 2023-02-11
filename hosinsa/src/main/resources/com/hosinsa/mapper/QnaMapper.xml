@@ -32,11 +32,11 @@
 		resultType="com.hosinsa.domain.QnaVO">
   <![CDATA[
    select 
-     qno, qcategory, qtitle, qcontent, id, qwritedate
+     qno, qcategory, qtitle, qcontent, id, qwritedate, replycnt
    from 
        (
        select /*+INDEX_DESC(hosinsa_qna pk_qna) */
-         rownum rn, qno, qcategory, qtitle, qcontent, id, qwritedate
+         rownum rn, qno, qcategory, qtitle, qcontent, id, qwritedate, replycnt
        from 
          hosinsa_qna
       where
@@ -91,5 +91,10 @@
 		<include refid="criteria"></include>
 		qno > 0
 	</select>
+	
+	
+	<update id = "updateReplyCnt">
+		update hosinsa_qna set replycnt = replycnt + #{amount} where qno = #{qno}
+	</update>
 	
 	</mapper>

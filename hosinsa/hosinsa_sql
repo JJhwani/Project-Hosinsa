@@ -110,3 +110,21 @@ alter table hosinsa_reply add constraint pk_reply primary key(rno);
 
 alter table hosinsa_reply add constraint fk_reply_qna
 foreign key (qno) references hosinsa_qna (qno);
+
+select * from hosinsa_reply order by rno desc;
+
+select * from hosinsa_reply;
+
+create index idx_reply on hosinsa_reply (qno desc, rno asc);
+
+ select /*+index(hosinsa_reply idx_reply) */
+   		rownum rn, qno, rno, reply, replyer, replydate, updatedate
+   		from hosinsa_reply
+   		where qno = 406
+        and rno >0; 
+        
+alter table hosinsa_qna add(replycnt number default 0);
+
+update HOSINSA_QNA set REPLYCNT = (select count(rno) from hosinsa_reply
+where hosinsa_reply.qno = hosinsa_qna.qno);
+
