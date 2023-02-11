@@ -34,9 +34,9 @@ public class MemberMapperTests {
 //		Date birthday = Date.valueOf(localdate);
 		
 		MemberVO member = new MemberVO();
-		member.setId("member2");
+		member.setId("member25");
 		member.setPw("1234");
-		member.setName("정재환");
+		member.setName("asdsd");
 		member.setGender("남자");
 		member.setBirthday("19990101");
 		member.setEmail("abc@hosinsa.com");
@@ -45,6 +45,7 @@ public class MemberMapperTests {
 		member.setProfilimg("");
 		member.setGrade("C");
 		member.setIntroducer("");
+		member.setPoint(50000);
 		
 		memberMapper.insert(member);
 		log.info(member);
@@ -95,4 +96,21 @@ public class MemberMapperTests {
 		memberMapper.idCheck(id2);
 	}
 	
+	@Test
+	public void testMemberNickCheck() {
+		String nickname = "eeee";
+		String nickname2 = "sdfiies";
+		
+		memberMapper.nickCheck(nickname);
+		memberMapper.nickCheck(nickname2);
+	}
+	
+	@Test
+	public void testIntroducerCheck() {
+		String intro = "admin";
+		String intro2 = "dskjfalsfji";
+		
+		memberMapper.introCheck(intro);
+		memberMapper.introCheck(intro2);
+	}
 }

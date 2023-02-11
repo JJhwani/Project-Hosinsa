@@ -14,9 +14,9 @@
 	<br>
 	<br>
 	<div class="wrapper">
-		<form id="joinForm" action="/member/join" method="post"
-			accept-charset="utf-8">
+		<form id="joinForm" action="/member/join" method="post"	accept-charset="utf-8">
 			<input type="hidden" name="grade" value="C">
+			<input type="hidden" name="point" value="">	
 			<!--    <input type="hidden" name="profilimg" value="cccccc">
     	<input type="hidden" name="introducer" value="member"> -->
 			<table>
@@ -24,8 +24,12 @@
 					<th>아이디 *</th>
 					<td>
 						<input type="text" name="id" id="id" placeholder="영문소문자/숫자, 5~16자"> &nbsp;&nbsp;
-						<input type="button" id="id_check" value="중복체크"> 
+						<input type="button" id="idCheckBtn" value="중복체크"> 
 					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td><span id="idCheckSpan"></span></td>
 				</tr>
 				<tr>
 					<th>비밀번호 *</th>
@@ -41,24 +45,24 @@
 				</tr>
 				<tr>
 					<th>성 별 *</th>
-					<td><label><input type="radio" name="gender"
-							value="남자" required>남자</label> <label><input type="radio"
-							name="gender" value="여자" required>여자</label></td>
+					<td>
+						<label><input type="radio" name="gender" value="남자" required="required">남자</label>
+					    <label><input type="radio" name="gender" value="여자" required="required">여자</label>
+					</td>
 				</tr>
 				<tr>
 					<th>생년월일 *</th>
-					<td><input type="date" name="birthday" max="2030-12-31"
-						min="1950-01-01" required
-						oninvalid="this.setCustomValidity('생일을 입력해주세요.')"
-						oninput="this.setCustomvalidity('')"></td>
+					<td><input type="date" name="birthday" max="2030-12-31"	min="1950-01-01" required="required"></td>
+						<!-- oninvalid="this.setCustomValidity('생일을 입력해주세요.')"
+						oninput="this.setCustomvalidity('') "-->
 				</tr>
 				<tr>
 					<th>이메일 *</th>
-					<td><input type="text" name="email"></td>
+					<td><input type="text" name="email" id="email"></td>
 				</tr>
 				<tr>
 					<th>휴대전화 *</th>
-					<td><input type="text" name="phone1" id="phone1"></td>
+					<td><input type="text" name="phone" id="phone"></td>
 				</tr>
 				<%-- <tr>
     				<th>휴대전화 * </th>
@@ -75,18 +79,32 @@
     			</tr> --%>
 				<tr>
 					<th>닉네임 *</th>
-					<td><input type="text" name="nickname"></td>
+					<td>
+						<input type="text" name="nickname" id="nickname" placeholder="한글/영문소문자 2~14자"> &nbsp;&nbsp;
+						<input type="button" id="nickCheckBtn" value="중복체크"> 
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td><span id="nickCheckSpan"></span></td>
 				</tr>
 				<tr>
 					<th>추천인&nbsp;&nbsp;</th>
-					<td><input type="text" name="introducer"></td>
+					<td>
+						<input type="text" name="introducer" id="introducer"> &nbsp;&nbsp;
+						<input type="button" id="introCheckBtn" value="추천인 확인">
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td><span id="introCheckSpan"></span></td>
 				</tr>
 			</table>
 			<br>
 			<br>
 			<div>
 				<button type="submit" id="joinBtn">JOIN MEMBER</button>
-				<button type="submit" date-oper="close">CLOSE</button>
+				<button type="submit" data-oper="close">CLOSE</button>
 			</div>
 		</form>
 	</div>

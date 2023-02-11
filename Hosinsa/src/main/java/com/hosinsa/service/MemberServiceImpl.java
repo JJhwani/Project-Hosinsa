@@ -62,4 +62,14 @@ public class MemberServiceImpl implements MemberService{
 	public int idCheck(String memberId) {
 		return memberMapper.idCheck(memberId);
 	}
+
+	@Override
+	public int nickCheck(String memberNickname) {
+		return memberMapper.nickCheck(memberNickname);
+	}
+
+	@Override
+	public int introCheck(String memberIntroducer) {
+		return memberMapper.introCheck(memberIntroducer);
+	}
 }
