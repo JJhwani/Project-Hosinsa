@@ -63,6 +63,7 @@ public class MemberController {
         return "redirect:/";     
 	}
 	
+	// 회원 관리(관리자 전용)
 	@GetMapping("/manager")
 	public void list(Model model) {
 		log.info("list----");
@@ -71,18 +72,18 @@ public class MemberController {
 	
 	@GetMapping("/get")
 	public void get(@RequestParam("id") String id, Model model) {
-		log.info("/member/get");
+		log.info("/member/get====");
 		model.addAttribute("member", memberService.get(id));
 	}
 	
 	@PostMapping("/modify")
-	public String modify(MemberVO member, RedirectAttributes rttr) {
-		log.info("modify : " + member);
+	public String modifyPOST(MemberVO member, RedirectAttributes rttr) {
+		log.info("modifyPOST : " + member);
 		
 		if (memberService.modify(member)) {
 			rttr.addFlashAttribute("result", "success");
 		} 
-		return "redirect:/member/list";
+		return "redirect:/member/manager";
 	}
 	
 	@PostMapping("/remove")
@@ -92,7 +93,7 @@ public class MemberController {
 		if (memberService.remove(id)) {
 			rttr.addFlashAttribute("result", "seccess");
 		}
-		return "redirect:/member/list";
+		return "redirect:/member/manager";
 	}
 	
 	// 회원가입

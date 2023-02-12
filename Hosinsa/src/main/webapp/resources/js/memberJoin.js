@@ -1,4 +1,10 @@
 $(document).ready(function(){
+    $(document).on("keyup", "#phone", function() {
+        $(this).val( $(this).val().replace(/[^0-9]/g, "") // 숫자를 제외한 모든 문자 제거
+        // 00-000-0000 또는 000-0000-0000 전화번호를 (2, 3) - (3, 4) - (4) 자리에 숫자 그룹을 지어 묶어준다.
+        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`,"$1-$2-$3")
+        .replace("--", "-") );
+    });
     var count = 0;
     $("#joinBtn").click(function(){
         // $("#joinForm").attr("action", "/member/join");
