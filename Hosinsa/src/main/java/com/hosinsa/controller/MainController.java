@@ -24,9 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.RequestContextListener;
 
+import com.hosinsa.domain.BoardEventVO;
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
+import com.hosinsa.service.BoardService;
 import com.hosinsa.service.MainService;
 
 import lombok.extern.log4j.Log4j;
@@ -38,6 +40,9 @@ public class MainController {
 
 	@Autowired
 	MainService service;
+	
+	@Autowired
+	BoardService boardService;
 
 	@ModelAttribute("recentView")
 	public List<ProductVO> setEmptyRecentView() {
@@ -45,12 +50,13 @@ public class MainController {
 	}
 	
 	@GetMapping("/")
-	public String main(@ModelAttribute("recentView")List<ProductVO> recentView, ProductVO vo, String sort, Model model) {
+	public String main(@ModelAttribute("recentView")List<ProductVO> recentView, ProductVO vo, String sort, BoardEventVO bevo, Model model) {
 		model.addAttribute("viewList", service.getListProview(vo));
 		model.addAttribute("bestList", service.getListBest());
 		model.addAttribute("newList", service.getListNew());
 		model.addAttribute("category", "인기");
 		model.addAttribute("sort", "best");
+		model.addAttribute("event", boardService.getListMainEvent(bevo));
 
 		int total = service.getTotalCountView(vo);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));	
@@ -59,7 +65,7 @@ public class MainController {
 	}
 	
 	@GetMapping(value="/main/sorting")
-	public String mainPage(String sort, String category, ProductVO vo, Model model) throws UnsupportedEncodingException {
+	public String mainPage(String sort, String category, ProductVO vo, BoardEventVO bevo, Model model) throws UnsupportedEncodingException {
 		int total = 0;
 		if(category.equals("인기")) {
 			model.addAttribute("bestList", service.getListBest());
@@ -84,6 +90,7 @@ public class MainController {
 			
 			model.addAttribute("category", category);
 			model.addAttribute("sort", sort);
+			model.addAttribute("event", boardService.getListMainEvent(bevo));
 			model.addAttribute("pageMaker", new PageDTO(vo, total));
 			return "main";
 		}
