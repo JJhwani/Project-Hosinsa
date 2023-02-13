@@ -91,7 +91,7 @@
 <div class="recent">
 	<ul>
 		<c:forEach var="recentView" items="${recentView}">
-			<li><a><img src="${recentView.proimg}"></a></li>
+			<li><a href="/product/${recentView.pronum}"><img src="${recentView.proimg}"></a></li>
 		</c:forEach>         
 	</ul>
 	<a>TOP</a>
