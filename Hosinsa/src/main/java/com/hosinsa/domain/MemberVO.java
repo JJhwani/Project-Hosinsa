@@ -19,6 +19,7 @@ CREATE TABLE HOSINSA_MEMBER (
     PROFILIMG   VARCHAR2(100),
     GRADE       CHAR(1),
     INTRODUCER  VARCHAR2(30),
+    POINT		NUMBER(10),
     PRIMARY KEY(ID)
 );
 */
@@ -40,4 +41,5 @@ public class MemberVO {
 	private String profilimg;
 	private String grade;
 	private String introducer;
+	private int point;
 }

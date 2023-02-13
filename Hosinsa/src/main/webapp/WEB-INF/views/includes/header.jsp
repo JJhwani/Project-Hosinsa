@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt"   uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,16 +14,13 @@
 <div class="headerWrap">
 	<div class="header">
 		<h1 class="logo"><a href="<c:url value='/'/>">HOSINSA</a></h1>
-		<form class="search" action="/search/sorting" method="get">
-			<input type="hidden" name="sort" value="best">
-			<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
-			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+		<form action="" method="post" class="search">
+			<input type="text">
 			<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 		</form>
 		<ul class="menu">
 			<c:if test="${empty member}">
-				<li><a>회원가입</a></li>
+				<li><a href="<c:url value='/member/join'/>">회원가입</a></li>
 			</c:if>
 			<li class="user_grade">
 				<c:choose>
@@ -58,7 +54,7 @@
 				<li><a href="/admin/member">회원관리</a></li>
 			</c:if>
 			<c:if test="${not empty member}">
-				<li><a>로그아웃</a></li>
+				<li><a href="<c:url value='/member/logout'/>">로그아웃</a></li>
 			</c:if>
 		</ul>
 	</div>
