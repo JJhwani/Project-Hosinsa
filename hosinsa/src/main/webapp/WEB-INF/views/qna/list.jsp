@@ -49,6 +49,8 @@
 
 			<form id='searchForm' action="/qna/list" method='get'>
 				<select name='type'>
+					<option value=""
+						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>-검색 종류 선택-</option>
 					<option value="T"
 						<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
 					<option value="C"

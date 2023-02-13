@@ -41,6 +41,8 @@
 
 			<form id='searchForm' action="/notice/list" method='get'>
 				<select name='type'>
+				<option value=""
+						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>-검색 종류 선택-</option>
 					<option value="T"
 						<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
 					<option value="C"
@@ -145,7 +147,7 @@
 												+ " 번이 등록되었습니다.");
 							}
 
-							$("#myModal").modal("show");
+							$("#myModal").show();
 						}
 
 						$("#regBtn").on("click", function() {
