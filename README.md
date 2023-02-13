@@ -2,6 +2,21 @@
 <br>
 TABLE
 <br>
+CREATE TABLE HOSINSA_MEMBER(<br>
+     &nbsp&nbsp&nbsp&nbsp ID &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(30),<br>
+     &nbsp&nbsp&nbsp&nbsp PW &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(30),<br>
+     &nbsp&nbsp&nbsp&nbsp NAME &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(15 char),<br>
+     &nbsp&nbsp&nbsp&nbsp GENDER &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(6 char),<br>
+     &nbsp&nbsp&nbsp&nbsp BIRTHDAY &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp DATE,<br>
+     &nbsp&nbsp&nbsp&nbsp EMAIL &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(50),<br>
+     &nbsp&nbsp&nbsp&nbsp PHONE &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp CHAR(13),<br>
+     &nbsp&nbsp&nbsp&nbsp NICKNAME &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(30),<br>
+     &nbsp&nbsp&nbsp&nbsp PROFILIMG &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(100),<br>
+     &nbsp&nbsp&nbsp&nbsp GRADE &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp CHAR(1),<br>
+     &nbsp&nbsp&nbsp&nbsp INTRODUCER &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(30),<br>
+     &nbsp&nbsp&nbsp&nbsp PRIMARY KEY(ID)<br>
+);<br>
+<br>
 CREATE TABLE HOSINSA_PRODUCT(<br>
     &nbsp&nbsp&nbsp&nbsp CATEGORY &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(20),<br>
     &nbsp&nbsp&nbsp&nbsp PRONAME &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp VARCHAR2(200),<br>
