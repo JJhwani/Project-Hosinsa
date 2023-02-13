@@ -12,13 +12,13 @@
 	<!-- getListBest -->
 	<select id="getListBest" resultType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
-			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC) WHERE ROWNUM <= 5
+			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC) WHERE ROWNUM <= 6
 		]]>
 	</select>
 	<!-- getListNew -->
 	<select id="getListNew" resultType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
-			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY REGDATE DESC)	WHERE ROWNUM <= 5
+			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY REGDATE DESC)	WHERE ROWNUM <= 6
 		]]>
 	</select>
 	<!-- getListBestCategory -->
