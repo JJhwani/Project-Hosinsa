@@ -54,6 +54,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int getTotal(Criteria cri) {
 		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public List<MemberVO> searchMember(MemberVO member) {
+		return mapper.searchMember(member);
 	}	
 
 }

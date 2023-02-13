@@ -13,7 +13,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
-.searchInput {
+.search {
 	float: right;
 }
 </style>
@@ -23,9 +23,13 @@
 		<div>
 			<h2>Manager Page</h2>
 		</div>
-		<div class="searchInput">
-			<input type="text"> &nbsp;
-			<button>검색</button>
+		<div class="search">
+			<form class="searchForm" action="/search/member" method="get">
+         		<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
+         		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+         		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+         		<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+      		</form>
 		</div>
 		<table class="table table-hover">
 			<thead>
@@ -106,7 +110,18 @@ $(document).ready(function() {
 		actionForm.append("<input type='hideen' name='id' value='" + $(this).attr("href") +"'>");
 		actionForm.attr("action", "/admin/memberModify");
 		actionForm.submit();
-	})
+	});
+	
+	$(".searchForm button").on("click", function(e){
+	      if(!searchForm.find("input[name='keyword']").val()){
+	         alert("키워드를 입력하세요.");
+	         return false;
+	      }      
+	      searchForm.find("input[name='pageNum']").val("1");
+	      searchForm.find("input[name='amount']").val("28");
+	      e.preventDefault();
+	      searchForm.submit();
+	});
 });
 </script>
 </html>

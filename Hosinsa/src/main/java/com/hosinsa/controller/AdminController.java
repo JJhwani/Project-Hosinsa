@@ -57,6 +57,12 @@ public class AdminController {
 		return "redirect:/admin/member";
 	}
 	
+	/*
+	 * @GetMapping(value = "/search/member") public String searchMember(String
+	 * keyword, Model model, Criteria cri) { int total = 0; total =
+	 * adminService.searchMember(cri); }
+	 */
+	
 	@GetMapping("/product")
 	public void adminProList(Model model,Criteria cri){
 		int total = mainService.getTotalCountView(cri);
