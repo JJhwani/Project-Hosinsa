@@ -56,14 +56,13 @@
 							<p class="pbrand">${bestList.brand}</p>
 							<p class="pname">${bestList.proname}</p>
 							<p class="price">${bestList.price}</p>
-							<p class="view">view ${bestList.proview}</p>
+							<p class="view"><i class="fa-solid fa-eye"></i> ${bestList.proview}</p>
 						</div>
 					</a>
 				</div>
 		 	</c:forEach>
 		</section>
-	</div>
-	
+	</div>	
 	
 	<div class="newWrap">
 		<h3 class="title">NEW</h3>
@@ -79,7 +78,7 @@
 							<p class="pbrand">${newList.brand}</p>
 							<p class="pname">${newList.proname}</p>
 							<p class="price">${newList.price}</p>
-							<p class="view">view ${newList.proview}</p>
+							<p class="view"><i class="fa-solid fa-eye"></i> ${newList.proview}</p>
 						</div>
 					</a>
 				</div>
@@ -88,12 +87,13 @@
 	</div>
 	
 	<ul class="sorting">
-		<li class="on"><a>인기순</a></li>
-		<li><a>신상품순</a></li>
-		<li><a>낮은가격순</a></li>
-		<li><a>높은가격순</a></li>
-		<li><a>후기순</a></li>
+		<li><a class="sort ${sort == 'best' ? 'on':''}" href="best">인기순</a></li>
+		<li><a class="sort ${sort == 'new' ? 'on':''}" href="new">신상품순</a></li>
+		<li><a class="sort ${sort == 'lowPrice' ? 'on':''}" href="lowPrice">낮은가격순</a></li>
+		<li><a class="sort ${sort == 'highPrice' ? 'on':''}" href="highPrice">높은가격순</a></li>
+		<li><a class="sort ${sort == 'review' ? 'on':''}" href="review">후기순</a></li>
 	</ul>
+	
 	<div class="mainList">
 		<section class="productList">
 			<c:forEach var="viewList" items="${viewList}">
@@ -106,7 +106,7 @@
 							<p class="pbrand">${viewList.brand}</p>
 							<p class="pname">${viewList.proname}</p>
 							<p class="price">${viewList.price}</p>
-							<p class="view">view ${viewList.proview}</p>
+							<p class="view"><i class="fa-solid fa-eye"></i> ${viewList.proview}</p>
 						</div>
 					</a>
 				</div>
@@ -126,11 +126,17 @@
 			<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
 		</c:if>
 	</ul>
-	<form class="selectCategory" action="/category" method="get">
-		<input type="hidden" name="category" value="">
-	</form>
-	<form class="paging" action="/category" method="get">
+	<form class="selectCategory" action="/main/sorting" method="get">
 		<input type="hidden" name="category" value="${category}">
+		<input type="hidden" name="sort" value="${sort}">
+	</form>
+	<form class="sorting" action="/main/sorting" method="get">
+		<input type="hidden" name="category" value="${category}">
+		<input type="hidden" name="sort" value="${sort}">
+	</form>	
+	<form class="paging" action="/main/sorting" method="get">
+		<input type="hidden" name="category" value="${category}">
+		<input type="hidden" name="sort" value="${sort}">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 	</form>	
@@ -164,10 +170,9 @@
 	
 	<div class="recent">
 		<ul>
-			<li><a>최근본상품1</a></li>
-			<li><a>최근본상품2</a></li>
-			<li><a>최근본상품3</a></li>
-			<li><a>최근본상품4</a></li>
+			<c:forEach var="recentView" items="${recentView}">
+				<li><a href="/product/${recentView.pronum}"><img src="${recentView.proimg}"></a></li>
+			</c:forEach>			
 		</ul>
 		<a>TOP</a>
 	</div>
