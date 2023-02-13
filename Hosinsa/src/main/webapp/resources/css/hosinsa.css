@@ -47,6 +47,7 @@ table {
 a{text-decoration:none;}
 
 .hidden{display:none}
+.alert{color:red}
 .headerWrap{position:relative;background:black;color:white;z-index:5}
 .header{width:1400px;margin:0 auto;overflow:hidden;padding:20px 40px}
 h1.logo{float:left}
@@ -200,7 +201,7 @@ float:left;
 .contentWrap{overflow:hidden;width:1400px;margin:50px auto;}
 .contentWrap .productName{float:left;background:black;width:1120px;padding:12px 5px;color:white;}
 .contentWrap .imgWrap{width:500px;min-height:500px;float:left;margin-top:10px;padding:20px 10px 15px;border:1px solid lightgray}
-.contentWrap .imgWrap img{width:500px}
+.contentWrap .imgWrap img{width:500px;cursor:pointer}
 .miniTitle{float:left;width:500px;padding:20px 10px 10px 20px;font-size:20px;font-weight:bold;letter-spacing:-1px}
 .miniTitle i{color:gray;font-size:14px;font-weight:normal;}
 .infoTable{float:left;margin:0 0 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray;}
@@ -214,6 +215,8 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .btnWrap button:hover{background:rgb(245,245,245)}
 .btnWrap button.cart_in{background-color:black;color:white}
 .btnWrap.right{clear:both;padding-right:330px}
+.btnWrap .register{background:black;color:white;border:none}
+.btnWrap .register:hover{background:black;}
 
 .tabWrap{overflow:hidden;clear:both;text-align:center;padding:50px 0 20px;}
 .tabWrap .tab{display:block;float:left;border-radius:0;border:1px solid lightgray;box-sizing:border-box;background:white;font-size:24px;letter-spading:-1px;padding:10px 0;margin-right:-1px}
@@ -223,7 +226,7 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .detailView{overflow:hidden;clear:both;text-align:center}
 
 /*admin - 제품관리 */
-.register{float:right;background:black;color:white;border-radius:0;margin-top:5px;font-size:16px;padding:10px 15px;cursor:pointer;}
+h2 .register{float:right;background:black;color:white;border-radius:0;margin-top:5px;font-size:16px;padding:10px 15px;cursor:pointer;}
 .adminList{}
 .adminList th,.adminList td{border:1px solid lightgray;padding:10px 5px;vertical-align:middle;}
 .adminList th{background:black;color:white}
