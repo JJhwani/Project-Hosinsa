@@ -174,7 +174,7 @@
 				<li><a href="/product/${recentView.pronum}"><img src="${recentView.proimg}"></a></li>
 			</c:forEach>			
 		</ul>
-		<a>TOP</a>
+		<a href="javascript:window.scrollTo({top:0,behavior: 'smooth'})">TOP</a>
 	</div>
 </div>
 <script src="../../../resources/js/main.js"></script>

@@ -41,5 +41,6 @@ public interface MainMapper {
 	public List<ProductVO> getSortReviewSearch(ProductVO vo);			// Category 페이지 리뷰순 소팅
 	
 	public ProductVO getProductByPronum(int pronum);
+	public void updateView(int pronum);
 	
 }

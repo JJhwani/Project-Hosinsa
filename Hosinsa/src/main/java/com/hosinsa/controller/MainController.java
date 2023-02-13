@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -156,22 +157,31 @@ public class MainController {
 	
 	@GetMapping("/product/{pronum}")
 	public String get(@PathVariable int pronum,@ModelAttribute("recentView")List<ProductVO> recentView,  Model model) {		
-		model.addAttribute("product", service.getProductByPronum(pronum));
+		
+		//조회수 up+1
+		service.updateView(pronum);		
+		model.addAttribute("product", service.getProductByPronum(pronum));	
 		
 		//최근 본 상품 기능
 		//pronum을 받아 최근 본 최근 본 상품으로 추가
 		ProductVO current = service.getProductByPronum(pronum);
+		//중복제거
+		int index = 0;
+		for(ProductVO item : recentView){
+			if(item.getPronum()==current.getPronum()) {
+				recentView.remove(index);
+				break;
+			}
+			index++;
+	    }
 		recentView.add(current);
-		Collections.reverse(recentView);
-		//과거 4개 중 중복 있으면 제거
-		recentView = recentView.stream().distinct().collect(Collectors.toList());
-		Collections.reverse(recentView);
+				
 		//최근 4개 자르기
 		if(recentView.size()>4) {
 			recentView = recentView.subList(1,5);
 		}
 		//세션에 저장
-		model.addAttribute("recentView",recentView);
+		model.addAttribute("recentView",recentView);	
 		
 		return "product";		
 	}
