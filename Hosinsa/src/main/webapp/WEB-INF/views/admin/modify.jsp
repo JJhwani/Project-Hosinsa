@@ -3,11 +3,13 @@
 <%@ include file="../includes/header.jsp" %>
 
 <div class="contentWrap">
-	<form action="/admin/modify" method="post">
+	<form action="/admin/modify" enctype="multipart/form-data" method="post">
 		<h2 class="productName">제품명 : <input type="text" name="proname" value="${product.proname}"></h2>
 		<div class="imgWrap">
-			<img name="proimg" src="${product.proimg}">
+			<img class="proimg" src="${product.proimg}">
+			<input type="file" name="uploadFile" class="proimgFile hidden">
 		</div>
+		<input type="text" name="proimg">
 		<h4 class="miniTitle">Product Info <i>제품정보</i></h4>
 		<table class="infoTable">			
 			<tr>
@@ -43,6 +45,30 @@
 <script type="text/javascript">
 	
 $(document).ready(function(){
+	
+var registerForm = $(".registerForm");
+	
+	$("input[name='proimg']").val($(".proimg").attr("src"));
+	
+	$(".proimg").on("click",function(e){
+		$(".proimgFile").click();
+	})
+	
+	//업로드 이미지 미리보기
+	$(".proimgFile").change(function() {
+        readURL(this);
+    });
+	
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('.proimg').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+	
 	$(".btn.list").on("click",function(e){		
 		e.preventDefault();
 		history.go(-1);
