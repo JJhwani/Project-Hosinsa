@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
-import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.mapper.MemberMapper;
 
@@ -49,6 +48,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
+	public List<MemberVO> getList() {
+		log.info("getList....");
+		return memberMapper.getList();
+	}
+
+	@Override
 	public MemberVO memberLogin(MemberVO member) {
 		return memberMapper.memberLogin(member);
 	}
@@ -66,22 +71,5 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int introCheck(String memberIntroducer) {
 		return memberMapper.introCheck(memberIntroducer);
-	}
-
-	/*
-	 * @Override public List<MemberVO> getList() { log.info("getList...."); return
-	 * memberMapper.getList(); }
-	 */
-	
-	@Override
-	public List<MemberVO> getList(Criteria cri) {
-		log.info("Paging : " + cri);
-		return memberMapper.getListWithPaging(cri);
-	}
-
-	@Override
-	public int getTotal(Criteria cri) {
-		log.info("getTotal");
-		return memberMapper.getTotalCount(cri);
 	}
 }

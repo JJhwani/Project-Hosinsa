@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
-import com.hosinsa.domain.PageDTO;
 import com.hosinsa.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -65,35 +63,26 @@ public class MemberController {
         return "redirect:/";     
 	}
 	
-	// 회원 관리 리스트(관리자 전용)
+	// 회원 관리(관리자 전용)
 	@GetMapping("/manager")
-	public void list(Criteria cri, Model model) {
-		log.info("list---- : " + cri);
-		model.addAttribute("list", memberService.getList(cri));
-		
-		int total = memberService.getTotal(cri);
-		log.info("total : " + total);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	public void list(Model model) {
+		log.info("list----");
+		model.addAttribute("list", memberService.getList());
 	}
 	
-	@GetMapping("/managerGet")
-	public void managerGet(@RequestParam("id") String id, @ModelAttribute("cri") Criteria cri, Model model) {
-		log.info("/member/managerGet====");
+	@GetMapping("/get")
+	public void get(@RequestParam("id") String id, Model model) {
+		log.info("/member/get====");
 		model.addAttribute("member", memberService.get(id));
 	}
 	
-	@PostMapping("/managerModify")
-	public String modifyPOST(MemberVO member, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+	@PostMapping("/modify")
+	public String modifyPOST(MemberVO member, RedirectAttributes rttr) {
 		log.info("modifyPOST : " + member);
 		
 		if (memberService.modify(member)) {
 			rttr.addFlashAttribute("result", "success");
 		} 
-		 
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		 
-		
 		return "redirect:/member/manager";
 	}
 	

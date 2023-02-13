@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
 
 import lombok.extern.log4j.Log4j;
@@ -54,8 +53,7 @@ public class MemberServiceTests {
 	
 	@Test
 	public void testGetList() {
-//		memberService.getList().forEach(member -> log.info(member));
-		memberService.getList(new Criteria(2,10)).forEach(member -> log.info(member));
+		memberService.getList().forEach(member -> log.info(member));
 	}
 	
 	@Test

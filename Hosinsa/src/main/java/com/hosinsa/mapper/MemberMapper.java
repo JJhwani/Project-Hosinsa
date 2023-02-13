@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 
-import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
 
 public interface MemberMapper {
@@ -33,10 +32,5 @@ public interface MemberMapper {
 	
 	// Introducer 중복체크
 	public int introCheck(String memberIntroducer);
-	
-	// Paging 처리
-	public List<MemberVO> getListWithPaging(Criteria cri);
-	
-	public int getTotalCount(Criteria cri);
 	
 }

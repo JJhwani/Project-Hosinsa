@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.AdminService;
@@ -30,20 +31,20 @@ public class AdminController {
 	}
 	
 	@GetMapping("/product")
-	public void adminProList(Model model,ProductVO vo){
-		int total = mainService.getTotalCountView(vo);
-		model.addAttribute("pageMaker", new PageDTO(vo, total));
-		vo.setAmount(10);
-		model.addAttribute("product",mainService.getListProview(vo));
+	public void adminProList(Model model,Criteria cri){
+		int total = mainService.getTotalCountView(cri);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		cri.setAmount(10);
+		model.addAttribute("product",mainService.getListProview(cri));
 	}
 	
 	@GetMapping("/category")
-	public String adminCategory(Model model,ProductVO vo,@RequestParam("category") String category) {
+	public String adminCategory(Model model,Criteria cri,@RequestParam("category") String category) {
 		model.addAttribute("category",category);
-		vo.setAmount(10);
-		int total = mainService.getTotalCount(vo);
-		model.addAttribute("pageMaker", new PageDTO(vo, total));
-		model.addAttribute("product",mainService.getListCategory(vo));
+		cri.setAmount(10);
+		int total = mainService.getTotalCount(cri);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("product",mainService.getListCategory(cri));
 		
 		return "admin/product";
 	}

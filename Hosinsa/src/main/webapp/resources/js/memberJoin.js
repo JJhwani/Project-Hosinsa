@@ -7,6 +7,8 @@ $(document).ready(function(){
     });
     var count = 0;
     $("#joinBtn").click(function(){
+        // $("#joinForm").attr("action", "/member/join");
+        // $("#joinForm").submit();
 
         if($("#id").val() == "") {
             alert("아이디를 입력해주세요.");

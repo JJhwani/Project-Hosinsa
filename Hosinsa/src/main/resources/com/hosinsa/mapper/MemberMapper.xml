@@ -33,22 +33,6 @@
 	select count(*) from hosinsa_member where id = #{id}
 </select>
 
-<!-- Paging 처리 -->
-<select id="getListWithPaging" resultType="com.hosinsa.domain.MemberVO">
-<![CDATA[
-SELECT ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE, NICKNAME, PROFILIMG, GRADE,
-    INTRODUCER, POINT FROM
-        (SELECT ROWNUM RN, ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE,
-            NICKNAME, PROFILIMG, GRADE, INTRODUCER, POINT  FROM HOSINSA_MEMBER
-            WHERE ROWNUM <= #{pageNum} * #{amount})
-            WHERE RN > (#{pageNum} -1) * #{amount}
-]]>
-</select>
-
-<select id="getTotalCount" resultType="int">
-	select count(*) from hosinsa_member
-</select>
-
 <!-- INSERT 문 -->
 <insert id="insert">
 	insert into hosinsa_member values
