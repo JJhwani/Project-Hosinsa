@@ -2,33 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="includes/header.jsp" %>
 <div class="mainWrap">
-	<div class="mainBanner">
-		<ul class="bannerView">
-			<li>
-				<a href="#"><img src="../../resources/images/event1.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event2.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event3.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event4.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event5.jpg"></a>
-			</li>
-		</ul>
-		<div class="deem"></div>
-		<div class="arrow">
-			<button class="left"><i class="fa-solid fa-chevron-left"></i></button>
-			<button class="right"><i class="fa-solid fa-chevron-right"></i></button>
-		</div>
-	</div>
 	
-	<ul class="category_menu">
-		<li><a class="category" href="인기">인기</a></li>
+	<ul class="category_menu horizental tab10">
 		<li><a class="category" href="상의">상의</a></li>
 		<li><a class="category" href="아우터">아우터</a></li>
 		<li><a class="category" href="바지">바지</a></li>
@@ -40,51 +15,6 @@
 		<li><a class="category" href="모자">모자</a></li>
 		<li><a class="category" href="액세서리">액세서리</a></li>
 	</ul>
-	
-	
-	<div class="bestWrap">
-		<h3 class="title">BEST</h3>
-		<p class="subTitle">이시간 가장 핫한 상품만 모아모아</p>
-		<section class="bestList">
-			<c:forEach var="bestList" items="${bestList}">
-	 			<div class="list_box">
-	 				<a href="/product/${bestList.pronum }">
-						<div class="list_img">
-							<img src="${bestList.proimg}">
-						</div>
-						<div class="article_info">
-							<p class="pbrand">${bestList.brand}</p>
-							<p class="pname">${bestList.proname}</p>
-							<p class="price">${bestList.price}</p>
-							<p class="view"><i class="fa-solid fa-eye"></i> ${bestList.proview}</p>
-						</div>
-					</a>
-				</div>
-		 	</c:forEach>
-		</section>
-	</div>	
-	
-	<div class="newWrap">
-		<h3 class="title">NEW</h3>
-		<p class="subTitle">따끈따끈 신상품</p>
-		<section class="newList">
-			<c:forEach var="newList" items="${newList}">
-	 			<div class="list_box">
-	 				<a href="/product/${newList.pronum }">
-						<div class="list_img">
-							<img src="${newList.proimg}">
-						</div>
-						<div class="article_info">
-							<p class="pbrand">${newList.brand}</p>
-							<p class="pname">${newList.proname}</p>
-							<p class="price">${newList.price}</p>
-							<p class="view"><i class="fa-solid fa-eye"></i> ${newList.proview}</p>
-						</div>
-					</a>
-				</div>
-		 	</c:forEach>
-		</section>
-	</div>
 	
 	<ul class="sorting">
 		<li><a class="sort ${sort == 'best' ? 'on':''}" href="best">인기순</a></li>
@@ -126,17 +56,17 @@
 			<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
 		</c:if>
 	</ul>
-	<form class="selectCategory" action="/main/sorting" method="get">
+	<form class="selectCategory" action="/category/sorting" method="get">
 		<input type="hidden" name="category" value="${category}">
 		<input type="hidden" name="sort" value="${sort}">
 	</form>
-	<form class="sorting" action="/main/sorting" method="get">
-		<input type="hidden" name="category" value="${category}">
+	<form class="sorting" action="/search/sorting" method="get">
 		<input type="hidden" name="sort" value="${sort}">
+		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 	</form>	
-	<form class="paging" action="/main/sorting" method="get">
-		<input type="hidden" name="category" value="${category}">
+	<form class="paging" action="/search/sorting" method="get">
 		<input type="hidden" name="sort" value="${sort}">
+		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 	</form>	
@@ -171,7 +101,7 @@
 	<div class="recent">
 		<ul>
 			<c:forEach var="recentView" items="${recentView}">
-				<li><a href="/product/${recentView.pronum}"><img src="${recentView.proimg}"></a></li>
+				<li><a><img src="${recentView.proimg}"></a></li>
 			</c:forEach>			
 		</ul>
 		<a>TOP</a>

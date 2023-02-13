@@ -2,33 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="includes/header.jsp" %>
 <div class="mainWrap">
-	<div class="mainBanner">
-		<ul class="bannerView">
-			<li>
-				<a href="#"><img src="../../resources/images/event1.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event2.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event3.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event4.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event5.jpg"></a>
-			</li>
-		</ul>
-		<div class="deem"></div>
-		<div class="arrow">
-			<button class="left"><i class="fa-solid fa-chevron-left"></i></button>
-			<button class="right"><i class="fa-solid fa-chevron-right"></i></button>
-		</div>
-	</div>
 	
 	<ul class="category_menu">
-		<li><a class="category" href="인기">인기</a></li>
 		<li><a class="category" href="상의">상의</a></li>
 		<li><a class="category" href="아우터">아우터</a></li>
 		<li><a class="category" href="바지">바지</a></li>
@@ -56,7 +31,7 @@
 							<p class="pbrand">${bestList.brand}</p>
 							<p class="pname">${bestList.proname}</p>
 							<p class="price">${bestList.price}</p>
-							<p class="view"><i class="fa-solid fa-eye"></i> ${bestList.proview}</p>
+							<p class="view">view ${bestList.proview}</p>
 						</div>
 					</a>
 				</div>
@@ -64,36 +39,14 @@
 		</section>
 	</div>	
 	
-	<div class="newWrap">
-		<h3 class="title">NEW</h3>
-		<p class="subTitle">따끈따끈 신상품</p>
-		<section class="newList">
-			<c:forEach var="newList" items="${newList}">
-	 			<div class="list_box">
-	 				<a href="/product/${newList.pronum }">
-						<div class="list_img">
-							<img src="${newList.proimg}">
-						</div>
-						<div class="article_info">
-							<p class="pbrand">${newList.brand}</p>
-							<p class="pname">${newList.proname}</p>
-							<p class="price">${newList.price}</p>
-							<p class="view"><i class="fa-solid fa-eye"></i> ${newList.proview}</p>
-						</div>
-					</a>
-				</div>
-		 	</c:forEach>
-		</section>
-	</div>
-	
 	<ul class="sorting">
 		<li><a class="sort ${sort == 'best' ? 'on':''}" href="best">인기순</a></li>
 		<li><a class="sort ${sort == 'new' ? 'on':''}" href="new">신상품순</a></li>
 		<li><a class="sort ${sort == 'lowPrice' ? 'on':''}" href="lowPrice">낮은가격순</a></li>
 		<li><a class="sort ${sort == 'highPrice' ? 'on':''}" href="highPrice">높은가격순</a></li>
 		<li><a class="sort ${sort == 'review' ? 'on':''}" href="review">후기순</a></li>
+		
 	</ul>
-	
 	<div class="mainList">
 		<section class="productList">
 			<c:forEach var="viewList" items="${viewList}">
@@ -106,12 +59,20 @@
 							<p class="pbrand">${viewList.brand}</p>
 							<p class="pname">${viewList.proname}</p>
 							<p class="price">${viewList.price}</p>
-							<p class="view"><i class="fa-solid fa-eye"></i> ${viewList.proview}</p>
+							<p class="view">view ${viewList.proview}</p>
 						</div>
 					</a>
 				</div>
-	 		</c:forEach>
+		 	</c:forEach>
 		</section>
+	</div>
+	<div class="recent">
+		<ul>
+			<c:forEach var="recentView" items="${recentView}">
+				<li><a href="/product/${recentView.pronum}"><img src="${recentView.proimg}"></a></li>
+			</c:forEach>			
+		</ul>
+		<a>TOP</a>
 	</div>
 	
 	<!-- 페이지 처리 시작 -->
@@ -126,57 +87,22 @@
 			<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
 		</c:if>
 	</ul>
-	<form class="selectCategory" action="/main/sorting" method="get">
+	<form class="selectCategory" action="/category/sorting" method="get">
 		<input type="hidden" name="category" value="${category}">
 		<input type="hidden" name="sort" value="${sort}">
 	</form>
-	<form class="sorting" action="/main/sorting" method="get">
+	<form class="sorting" action="/category/sorting" method="get">
 		<input type="hidden" name="category" value="${category}">
 		<input type="hidden" name="sort" value="${sort}">
 	</form>	
-	<form class="paging" action="/main/sorting" method="get">
+	<form class="paging" action="/category/sorting" method="get">
 		<input type="hidden" name="category" value="${category}">
 		<input type="hidden" name="sort" value="${sort}">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 	</form>	
 	<!-- 페이지 처리 끝 -->
-
-	<div class="notice">
-		<h4 class="title">공지사항</h4>
-		<ul>
-			<li><a>공지사항 1</a></li>
-			<li><a>공지사항 2</a></li>
-			<li><a>공지사항 3</a></li>
-		</ul>
-		<a>전체보기</a>
-	</div>
-	
-	<div class="cs">
-		<a>고객센터</a>
-		<a>QnA</a>
-		<a>1:1 문의</a>
-	</div>
-	
-	<div class="event">
-		<h4 class="title">이벤트</h4>
-		<ul>
-			<li><a>이벤트 1</a></li>
-			<li><a>이벤트 2</a></li>
-			<li><a>이벤트 3</a></li>
-		</ul>
-		<a>전체보기</a>
-	</div>
-	
-	<div class="recent">
-		<ul>
-			<c:forEach var="recentView" items="${recentView}">
-				<li><a href="/product/${recentView.pronum}"><img src="${recentView.proimg}"></a></li>
-			</c:forEach>			
-		</ul>
-		<a>TOP</a>
-	</div>
 </div>
 <script src="../../../resources/js/main.js"></script>
-
 <%@ include file="includes/footer.jsp" %>
