@@ -26,8 +26,23 @@
 	SELECT * FROM HOSINSA_MEMBER
 </select>
 
+<select id="getListWithPaging" resultType="com.hosinsa.domain.MemberVO">
+<![CDATA[
+SELECT ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE, NICKNAME, PROFILIMG, GRADE,
+    INTRODUCER, POINT FROM
+        (SELECT ROWNUM RN, ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE,
+            NICKNAME, PROFILIMG, GRADE, INTRODUCER, POINT  FROM HOSINSA_MEMBER
+            WHERE ROWNUM <= #{pageNum} * #{amount})
+            WHERE RN > (#{pageNum} -1) * #{amount}
+]]>
+</select>
+
 <select id="read" resultType="com.hosinsa.domain.MemberVO">
-	select * from hosinsa_member where id = #{id}
+	SELECT * FROM HOSINSA_MEMBER WHERE id = #{id}
+</select>
+
+<select id="getTotalCount" resultType="int">
+	SELECT COUNT(*) FROM HOSINSA_MEMBER
 </select>
 
 <update id="memberUpdate">

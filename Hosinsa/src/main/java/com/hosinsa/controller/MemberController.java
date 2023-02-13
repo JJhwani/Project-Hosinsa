@@ -63,19 +63,6 @@ public class MemberController {
         return "redirect:/";     
 	}
 	
-	/*
-	 * // 회원 관리(관리자 전용)
-	 * 
-	 * @GetMapping("/manager") public void list(Model model) { log.info("list----");
-	 * model.addAttribute("list", memberService.getList()); }
-	 */
-	
-	/*
-	 * @GetMapping("/get") public void get(@RequestParam("id") String id, Model
-	 * model) { log.info("/member/get===="); model.addAttribute("member",
-	 * memberService.get(id)); }
-	 */
-	
 	@PostMapping("/modify")
 	public String modifyPOST(MemberVO member, RedirectAttributes rttr) {
 		log.info("modifyPOST : " + member);

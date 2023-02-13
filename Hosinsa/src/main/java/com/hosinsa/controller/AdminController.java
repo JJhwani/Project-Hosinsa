@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,20 +34,26 @@ public class AdminController {
 	private AdminService adminService;
 	
 	@GetMapping("/member")
-	public void adminMemberList(Model model) {
-		model.addAttribute("list", adminService.getList());
+	public void adminMemberList(Criteria cri, Model model) {
+		int total = adminService.getTotal(cri);
+		model.addAttribute("list", adminService.getList(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
 	@GetMapping("/memberModify")
-	public void memberModifyGET(@RequestParam("id") String id, Model model) {
-		model.addAttribute("member", adminService.get(id));
+	public void memberModifyGET(@RequestParam("id") String id, @ModelAttribute("cri") Criteria cri, Model model) {
+		model.addAttribute("member", adminService.get(id)); 	
 	}
 	
 	@PostMapping("/memberModify")
-	public String memberModifyPOST(MemberVO member, RedirectAttributes rttr){
+	public String memberModifyPOST(MemberVO member, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr){
 		if (adminService.memberModify(member)) {
 			rttr.addFlashAttribute("result", "success");
 		}
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		
 		return "redirect:/admin/member";
 	}
 	
