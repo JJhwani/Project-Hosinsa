@@ -13,7 +13,7 @@ public class Criteria {
 	private String category;
 	
 	public Criteria() {
-		this(1,90);
+		this(1,28);
 	}
 	
 	public Criteria(int pageNum, int amount) {

@@ -80,7 +80,7 @@
 				<tr>
 					<th>닉네임 *</th>
 					<td>
-						<input type="text" name="nickname" id="nickname" placeholder="한글/영문소문자 5~16자"> &nbsp;&nbsp;
+						<input type="text" name="nickname" id="nickname" placeholder="한글/영문소문자 2~14자"> &nbsp;&nbsp;
 						<input type="button" id="nickCheckBtn" value="중복체크"> 
 					</td>
 				</tr>

@@ -37,7 +37,7 @@ public class MemberControllerTests {
 	@Test
 	public void testList() throws Exception {
 		log.info(
-				mockMvc.perform(MockMvcRequestBuilders.get("/hosinsa/member/list"))
+				mockMvc.perform(MockMvcRequestBuilders.get("/member/manager"))
 						.andReturn().getModelAndView().getModelMap());
 	}
 	

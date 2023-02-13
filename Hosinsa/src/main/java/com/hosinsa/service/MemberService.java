@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
 
 public interface MemberService {
@@ -20,7 +21,11 @@ public interface MemberService {
 	// delete
 	public boolean remove(String id);
 	
-	public List<MemberVO> getList();
+	// 페이징처리
+//	public List<MemberVO> getList();
+	public List<MemberVO> getList(Criteria cri);
+	
+	public int getTotal(Criteria cri);
 	
 	// 로그인
 	public MemberVO memberLogin(MemberVO member);

@@ -1,8 +1,12 @@
 $(document).ready(function(){
+    $(document).on("keyup", "#phone", function() {
+        $(this).val( $(this).val().replace(/[^0-9]/g, "") // 숫자를 제외한 모든 문자 제거
+        // 00-000-0000 또는 000-0000-0000 전화번호를 (2, 3) - (3, 4) - (4) 자리에 숫자 그룹을 지어 묶어준다.
+        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`,"$1-$2-$3")
+        .replace("--", "-") );
+    });
     var count = 0;
     $("#joinBtn").click(function(){
-        $("#joinForm").attr("action", "/member/join");
-        $("#joinForm").submit();
 
         if($("#id").val() == "") {
             alert("아이디를 입력해주세요.");
@@ -20,7 +24,7 @@ $(document).ready(function(){
             alert("비밀번호를 입력해주세요.");
             $("#pw").focus();
             return false;
-        }/* else if($("#pw").val().length < 10){
+        } else if($("#pw").val().length < 10){
             alert("비밀번호는 10~16자로 입력해주세요.");
             $("#pw").focus();
             return false;
@@ -28,7 +32,7 @@ $(document).ready(function(){
             alert("비밀번호는 10~16자로 입력해주세요.");
             $("#pw").focus();
             return false;
-        } */else if($("#pw").val() != $("#pw_check").val()){
+        } else if($("#pw").val() != $("#pw_check").val()){
             alert("비밀번호가 일치하지 않습니다.");
             $("#pw_check").focus();
             return false;
@@ -48,12 +52,12 @@ $(document).ready(function(){
             alert("닉네임을 입력해주세요.");
             $("#nickname").focus();
             return false;
-        } else if($("#nickname").val().length < 5){
-            alert("닉네임은 5~16자로 입력해주세요.");
+        } else if($("#nickname").val().length < 2){
+            alert("닉네임은 2~14자로 입력해주세요.");
             $("#nickname").focus();
             return false;
-        } else if($("#nickname").val().length > 16){
-            alert("닉네임은 5~16자로 입력해주세요.");
+        } else if($("#nickname").val().length > 14){
+            alert("닉네임은 2~14자로 입력해주세요.");
             $("#nickname").focus();
             return false;
         } else if (count < 1) {
@@ -108,12 +112,12 @@ $(document).ready(function(){
             alert("닉네임을 입력해주세요.");
             $("#nickname").focus();
             return false;
-        } else if($("#nickname").val().length < 5){
-            alert("닉네임은 5~16자로 입력해주세요.");
+        } else if($("#nickname").val().length < 2){
+            alert("닉네임은 2~14자로 입력해주세요.");
             $("#nickname").focus();
             return false;
-        } else if($("#nickname").val().length > 16){
-            alert("닉네임은 5~16자로 입력해주세요.");
+        } else if($("#nickname").val().length > 14){
+            alert("닉네임은 2~14자로 입력해주세요.");
             $("#nickname").focus();
             return false;
         }

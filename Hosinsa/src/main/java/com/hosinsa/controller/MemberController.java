@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.PageDTO;
 import com.hosinsa.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -63,26 +65,36 @@ public class MemberController {
         return "redirect:/";     
 	}
 	
+	// 회원 관리 리스트(관리자 전용)
 	@GetMapping("/manager")
-	public void list(Model model) {
-		log.info("list----");
-		model.addAttribute("list", memberService.getList());
+	public void list(Criteria cri, Model model) {
+		log.info("list---- : " + cri);
+		model.addAttribute("list", memberService.getList(cri));
+		
+		int total = memberService.getTotal(cri);
+		log.info("total : " + total);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
-	@GetMapping("/get")
-	public void get(@RequestParam("id") String id, Model model) {
-		log.info("/member/get");
+	@GetMapping("/managerGet")
+	public void managerGet(@RequestParam("id") String id, @ModelAttribute("cri") Criteria cri, Model model) {
+		log.info("/member/managerGet====");
 		model.addAttribute("member", memberService.get(id));
 	}
 	
-	@PostMapping("/modify")
-	public String modify(MemberVO member, RedirectAttributes rttr) {
-		log.info("modify : " + member);
+	@PostMapping("/managerModify")
+	public String modifyPOST(MemberVO member, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+		log.info("modifyPOST : " + member);
 		
 		if (memberService.modify(member)) {
 			rttr.addFlashAttribute("result", "success");
 		} 
-		return "redirect:/member/list";
+		 
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		 
+		
+		return "redirect:/member/manager";
 	}
 	
 	@PostMapping("/remove")
@@ -92,7 +104,7 @@ public class MemberController {
 		if (memberService.remove(id)) {
 			rttr.addFlashAttribute("result", "seccess");
 		}
-		return "redirect:/member/list";
+		return "redirect:/member/manager";
 	}
 	
 	// 회원가입

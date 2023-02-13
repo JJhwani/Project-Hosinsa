@@ -8,7 +8,7 @@
 <br><br>
     <div class="slider">
         <div class="login">
-            <form id="loginForm" method="post" action="/login">
+            <form id="loginForm" method="post" action="/member/login">
             <input type="hidden" name="grade" value="${member.grade}">
                 <div class="login_box">
                 	<div>
@@ -25,7 +25,7 @@
                     	<div class="login_warn">ID 또는 비밀번호를 잘못 입력하였습니다.</div>
                     </c:if>
                     <div>
-                    	<input type="button" value="LOG IN" class="input_login" id="loginBtn">
+                    	<input type="submit" value="LOG IN" class="input_login" id="loginBtn">
                     	<br><br>
                     	<button id="JoinBtn" type="button">JOIN MEMBER</button>
                     </div>
@@ -42,12 +42,6 @@ $(document).ready(function() {
 	$("#JoinBtn").on("click", function() {
 		self.location = "/member/join";
 	});
-	
-	$(".input_login").click(function(){
-		$("#loginForm").attr("action", "/member/login");
-        $("#loginForm").submit();
-	});
-	
 });
 </script>
 </html>
