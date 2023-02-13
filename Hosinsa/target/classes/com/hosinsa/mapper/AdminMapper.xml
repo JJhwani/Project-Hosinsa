@@ -12,4 +12,13 @@
 	DELETE FROM HOSINSA_PRODUCT WHERE PRONUM=#{pronum}
 </delete>
 
+<insert id="register">
+	INSERT INTO HOSINSA_PRODUCT (CATEGORY,PROIMG,PRONUM,PRONAME,BRAND,STOCK,PRICE,DETAIL,REGDATE,UPDATE_DATE)
+	VALUES (#{category},#{proimg}, #{pronum}, #{proname}, #{brand}, #{stock}, #{price}, #{detail}, SYSDATE, SYSDATE)
+</insert>
+
+<select id="checkPronum" resultType="int">
+	SELECT COUNT(PRONUM) FROM HOSINSA_PRODUCT WHERE PRONUM=#{pronum}
+</select>
+
 </mapper>

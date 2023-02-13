@@ -22,6 +22,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public boolean remove(int pronum) {
 		return mapper.delete(pronum)==1?true:false;
+	}
+
+	@Override
+	public boolean register(ProductVO vo) {
+		return mapper.register(vo)==1?true:false;
+	}
+
+	@Override
+	public int checkPronum(int pronum) {
+		return mapper.checkPronum(pronum);
 	}	
 
 }
