@@ -37,6 +37,11 @@ public class MainServiceImpl implements MainService{
 	public List<ProductVO> getListNew() {
 		return mapper.getListNew();
 	}
+	
+	@Override
+	public List<ProductVO> getListBestCategory(ProductVO vo) {
+		return mapper.getListBestCategory(vo);
+	}
 
 	@Override
 	public int getTotalCountView(Criteria cri) {
@@ -46,6 +51,11 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public int getTotalCount(Criteria cri) {
 		return mapper.getTotalCount(cri);
+	}
+	
+	@Override
+	public int getTotalCountSearch(Criteria cri) {
+		return mapper.getTotalCountSearch(cri);
 	}
 	
 	@Override
@@ -99,8 +109,39 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
+	public List<ProductVO> getSearchProduct(ProductVO vo) {
+		return mapper.getSearchProduct(vo);
+	}
+	
+	@Override
+	public List<ProductVO> getSortBestSearch(ProductVO vo) {
+		return mapper.getSortBestSearch(vo);
+	}
+
+	@Override
+	public List<ProductVO> getSortNewSearch(ProductVO vo) {
+		return mapper.getSortNewSearch(vo);
+	}
+
+	@Override
+	public List<ProductVO> getSortLowPriceSearch(ProductVO vo) {
+		return mapper.getSortLowPriceSearch(vo);
+	}
+
+	@Override
+	public List<ProductVO> getSortHighPriceSearch(ProductVO vo) {
+		return mapper.getSortHighPriceSearch(vo);
+	}
+
+	@Override
+	public List<ProductVO> getSortReviewSearch(ProductVO vo) {
+		return mapper.getSortReviewSearch(vo);
+	}
+
+	@Override
 	public ProductVO getProductByPronum(int pronum) {
 		return mapper.getProductByPronum(pronum);
 	}
 
+	
 }
