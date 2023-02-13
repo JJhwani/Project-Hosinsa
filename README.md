@@ -42,3 +42,5 @@ CREATE TABLE HOSINSA_REVIEW (<br>
     &nbsp&nbsp&nbsp&nbsp UPLOADDATE &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp DATE DEFAULT SYSDATE<br>
 );<br>
 
+
+
