@@ -66,6 +66,14 @@
 		 	</c:forEach>
 		</section>
 	</div>
+	<div class="recent">
+		<ul>
+			<c:forEach var="recentView" items="${recentView}">
+				<li><a href="/product/${recentView.pronum}"><img src="${recentView.proimg}"></a></li>
+			</c:forEach>			
+		</ul>
+		<a>TOP</a>
+	</div>
 	
 	<!-- 페이지 처리 시작 -->
 	<ul class="pagination">
