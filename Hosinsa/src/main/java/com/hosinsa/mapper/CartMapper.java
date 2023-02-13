@@ -11,4 +11,7 @@ public interface CartMapper {
 	
 	public void insert(CartVO cart);
 	
+	//카트삭제
+	public int deleteCart(int cartnum);
+	
 }

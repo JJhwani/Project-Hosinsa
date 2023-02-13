@@ -7,7 +7,13 @@ import com.hosinsa.domain.CartVO;
 public interface CartService {
 	public void register(CartVO cart);
 	
-	public CartVO get(Long bno);
+	public CartVO get(Long pronum);
 	
 	public List<CartVO> getList(); 
+	
+	public List<CartVO> getOrder();
+	
+	//카트삭제
+	public int deleteCart(int cartnum);
+	
 }

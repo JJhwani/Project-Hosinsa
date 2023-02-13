@@ -2,6 +2,9 @@ package com.hosinsa.service;
 
 import java.util.List;
 
+import javax.xml.stream.events.Namespace;
+
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,7 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	@Override
-	public CartVO get(Long bno) {
+	public CartVO get(Long pronum) {
 		return null;
 	}
 
@@ -27,4 +30,15 @@ public class CartServiceImpl implements CartService {
 	public List<CartVO> getList() {
 		return mapper.getList();
 	}
+	
+	@Override
+	public List<CartVO> getOrder() {
+		return mapper.getList();
+	}
+	
+	@Override
+	public int deleteCart(int cartnum) {
+		return mapper.deleteCart(cartnum);
+	}
 }
+
