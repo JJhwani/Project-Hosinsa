@@ -84,7 +84,73 @@
 		${product.detail }
 	</div>
 	<div class="review hidden">
-		은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>
+		<div>
+			<table>
+			  <thead>
+				  <tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>내용</th>
+					<th>작성자</th>
+					<th>등록일자</th>
+				  </tr>
+			   <thead>
+			   <tbody class="reviewArea">
+			   
+			   </tbody>			
+			</table>
+			
+			<!-- 게시판 목록에서 검색하기 -->
+			<div>
+				<form id="searchForm" action="/review/list" method="get">
+					<select name="type">
+					  <option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>선택하세요</option>
+					  <option value="T" <c:out value="${pageMaker.cri.type eq 'T'? 'selected':'' }"/>>제목</option>
+					  <option value="C" <c:out value="${pageMaker.cri.type eq 'C'? 'selected': ''}"/>>내용</option>
+					  <option value="N" <c:out value="${pageMaker.cri.type eq 'N'? 'selected': ''}"/>>닉네임</option>
+					  <option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'? 'selected': ''}"/>>제목 ● 내용</option>
+					  <option value="TN" <c:out value="${pageMaker.cri.type eq 'TN'? 'selected': ''}"/>>제목 ● 닉네임</option>
+					  <option value="TCN" <c:out value="${pageMaker.cri.type eq 'TNC'? 'selected': ''}"/>>제목 ● 내용 ● 닉네임</option>
+					</select>
+					<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>' />
+					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+					<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+					<button class="btn btn-default">Search</button>
+				</form>
+			</div>	
+			
+			
+			<!-- 페이징 시작 -->
+			<div class="pull-right">
+			<ul class="pagination">
+			  
+			  <c:if test="${pageMaker.prev}">
+				  <li class="paginate_button previous" ><a href="${pageMaker.startPage-1 }">Privious</a></li>
+			  </c:if>
+			  
+			  <c:forEach var="num" begin="${pageMaker.startPage }" 
+			  					end="${pageMaker.endPage }">
+				 
+				  <li class="paginate_button ${pageMaker.cri.pageNum == num? "active":"" }" ><a href="${num}">${num}</a></li>
+			  </c:forEach>
+			  
+			  <c:if test="${pageMaker.next}">
+				  <li class="paginate_button next" ><a href="${pageMaker.endPage+1 }">Next</a></li>
+			  </c:if>
+			</ul>
+			</div>
+			<!-- 페이징 끝 -->
+			
+			<!-- 실제 페이지 클릭시 이동액션폼 -->
+			<div>
+			<form id="actionForm" action="/review/list" method="get">
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" >
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount }" >
+				<input type="hidden" name="type" value="${pageMaker.cri.type }" >
+				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }" >				
+			</form>
+			</div>
+		</div>
 	</div>
 </div>
    
@@ -105,10 +171,67 @@
 			$(".review").addClass("hidden");
 		});
 		
+		var reviewArea = $(".reviewArea");
+		
 		$(".tab_review").on("click",function(){
 			$(".review").removeClass("hidden");
 			$(".detailView").addClass("hidden");
+			$.ajax({
+				type:'get',
+				url:'/review/list',
+				contentType:"application/json;charset=utf-8",
+				async : false,
+				success:function(list){	
+					
+					console.log(list);
+					
+					var str="";
+					
+					for(var i=0, len=list.length || 0; i<len ; i++){
+						str += "<li class='left clearfix' data-rno='"+list[i].bno+" '>";
+						str += "<div>";
+						str += "<div class='header'>";
+						str += "<strong class='primary-font'>" + list[i].id + "</strong>";
+						str += "<small class='pull-right text-muted'>" + list[i].content  + "</small>";
+						str += "</div>";
+						str += "<p>"+ list[i].title +"</p>";
+						str += "</div></li>";
+					}
+					
+					reviewArea.html(str);
+				}
+			});
 		});
+		
+		
+		
+		function showList(page) {
+			
+			
+				var str="";
+								
+				if(list == null || list.length ==0){
+					reviewArea.html("");
+				
+					return ;
+				}
+				
+				for(var i=0, len=list.length || 0; i<len ; i++){
+					str += "<li class='left clearfix' data-rno='"+list[i].bno+" '>";
+					str += "<div>";
+					str += "<div class='header'>";
+					str += "<strong class='primary-font'>" + list[i].id + "</strong>";
+					str += "<small class='pull-right text-muted'>" + list[i].content  + "</small>";
+					str += "</div>";
+					str += "<p>"+ list[i].title +"</p>";
+					str += "</div></li>";
+				}
+
+				reviewArea.html(str);
+				
+				
+				
+			} //end showList
 		
 		var productForm = $(".productForm");
 		
@@ -123,6 +246,8 @@
 				return false;
 			}			
 		});
+		
+		
 		
 	})
 </script>
