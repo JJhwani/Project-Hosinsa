@@ -4,26 +4,20 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.hosinsa.domain.BoardEventVO;
 import com.hosinsa.domain.Criteria;
@@ -35,6 +29,7 @@ import com.hosinsa.service.MainService;
 import lombok.extern.log4j.Log4j;
 
 @Controller
+@SessionAttributes({"recentView"})
 @Log4j
 public class MainController {
 
@@ -44,6 +39,11 @@ public class MainController {
 	@Autowired
 	BoardService boardService;
 
+	@ModelAttribute("recentView")
+	public List<ProductVO> setEmptyRecentView() {
+	    return new ArrayList<ProductVO>();
+	}
+	
 	@GetMapping("/")
 	public String main(@ModelAttribute("recentView")List<ProductVO> recentView, ProductVO vo, String sort, BoardEventVO bevo, Model model) {
 		model.addAttribute("viewList", service.getListProview(vo));
@@ -56,8 +56,6 @@ public class MainController {
 		int total = service.getTotalCountView(vo);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));	
 
-		int total = service.getTotalCountView(cri);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		return "main";
 	}
 	
@@ -65,7 +63,6 @@ public class MainController {
 	public String mainPage(String sort, String category, ProductVO vo, BoardEventVO bevo, Model model) throws UnsupportedEncodingException {
 		int total = 0;
 		if(category.equals("인기")) {
-			model.addAttribute("viewList", service.getListProview(cri));
 			model.addAttribute("bestList", service.getListBest());
 			model.addAttribute("newList", service.getListNew());
 			
@@ -92,17 +89,42 @@ public class MainController {
 			model.addAttribute("pageMaker", new PageDTO(vo, total));
 			return "main";
 		}
-		else {
-			model.addAttribute("viewList", service.getListCategory(cri));
-			model.addAttribute("bestList", service.getListBest());
-			model.addAttribute("newList", service.getListNew());
-			total = service.getTotalCount(cri);
+		total = service.getTotalCount(vo);
+		//model.addAttribute("category", category);
+		category = URLEncoder.encode(category, "UTF-8");
+		model.addAttribute("sort", sort);
+		model.addAttribute("pageMaker", new PageDTO(vo, total));
+		
+		
+		return "redirect:/category/sorting?category="+category;
+	}
+	
+	@GetMapping(value="/category/sorting")
+	public String categoryPageSorting(String sort, String category, ProductVO vo, Model model) {
+		log.info("================================"+category);
+		int total = 0;
+		model.addAttribute("bestList", service.getListBestCategory(vo));
+		
+		switch(sort) {
+			case "best" : model.addAttribute("viewList", service.getSortBest(vo));
+				break;
+			case "new" : model.addAttribute("viewList", service.getSortNew(vo));
+				break;
+			case "lowPrice" : model.addAttribute("viewList", service.getSortLowPrice(vo));
+				break;
+			case "highPrice" : model.addAttribute("viewList", service.getSortHighPrice(vo));
+				break;
+			case "review" : model.addAttribute("viewList", service.getSortReview(vo));
+				break;
+			case "" : model.addAttribute("viewList", service.getSortBest(vo));
+				break;
 		}
 		
-		log.info("--------------------------------------dasdfaSDf"+category);
-		log.info("--------------------------------------dasdfaSDf"+cri);
+		total = service.getTotalCount(vo);
+
 		model.addAttribute("category", category);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("sort", sort);
+		model.addAttribute("pageMaker", new PageDTO(vo, total));
 		
 		return "category";
 	}
