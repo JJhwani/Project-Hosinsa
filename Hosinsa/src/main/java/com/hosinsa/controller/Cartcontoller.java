@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hosinsa.domain.CartVO;
+import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.CartService;
 
 import lombok.AllArgsConstructor;
@@ -49,20 +50,20 @@ public class Cartcontoller {
 	 log.info("delete cart");
         
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		 String userId = member.getUserId();
+		 String userId = member.getId();
 		 
 		 int result = 0;
 		 int cartNum = 0;
 		 
 		 
 		 if(member != null) {
-		  cart.setUserId(userId);
+		  cart.setId(userId);
 		  
 		  for(String i : chArr) {   
-		   cartNum = Integer.parseInt(i);
-		   cart.setCartNum(cartNum);
+		   long cartNumber = Long.valueOf(i);
+		   cart.setCartnum(cartNumber);
 		   service.deleteCart(cart);
-		  }   
+		  }
 		  result = 1;
 		 }  
 		 return result;  
