@@ -57,6 +57,21 @@
         
         
         
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
+                                        		
+        
+        
+        
+        
+        <property name="java-output-path" value="target/classes"/>
+                                                
+        
+        
+        
+        
         <property name="context-root" value="controller"/>
                                                 	
     
