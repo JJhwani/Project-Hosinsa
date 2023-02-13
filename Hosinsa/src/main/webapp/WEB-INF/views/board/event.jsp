@@ -51,11 +51,10 @@
 							</div>
 						</c:when>
 					</c:choose>
-				</div>
-				
+				</div>				
 	 		</c:forEach>
 		</section>
-	</div>
+	</div>	
 
 	<!-- 페이지 처리 시작 -->
 	<ul class="pagination">
@@ -73,6 +72,9 @@
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 	</form>	
+	<form class="productForm" action="/admin/modify" method="get">
+		<input type="hidden" name="pronum" value="">
+	</form>
 
 
 

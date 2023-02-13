@@ -37,7 +37,7 @@
 			<button class="btn modify">제품 수정</button>
 			<button class="btn delete">제품 삭제</button>
 			<button class="btn list">뒤로</button>
-		</div>	
+		</div>
 	</form>
 </div>
 

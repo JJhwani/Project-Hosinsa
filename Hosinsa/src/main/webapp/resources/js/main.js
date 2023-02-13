@@ -78,12 +78,15 @@ $(document).ready(function(){
 		eventBoard.submit();
 	});
 
+	// Main 페이지에서 클릭한 이벤트로 이동
 	$(".event ul a").on("click", function(e) {
 		e.preventDefault();
 		eventBoard.append("<input type='hidden' name='event_no' value='"+$(this).attr("href")+"'>");
 		eventBoard.attr("action", "/board/event/read");
 		eventBoard.submit();
 	});
+
+
 
 
  });
