@@ -52,8 +52,13 @@
 				<p>댓글댓글<p>
 			 </li>
 			</ul>
+				<!--  댓글 페이지 번호 출력 -->
+			<div class= "panel-footer">
+			</div>
 		</div>
 		<!-- 댓글 처리 종료 -->
+		
+		
 		
 		
 		<!-- 새로운 댓글등록 버튼 -->
@@ -107,15 +112,28 @@
 
 $(document).ready(function() {
 	
-	var bnoValue = '<c:out value="${review.bno}"/>';
-	var replyUL = $(".chat");
-	
-		showList(1);
-		
-		function showList(page) {
+			var bnoValue = '<c:out value="${review.bno}"/>';
+			var replyUL = $(".chat");
+			
+			showList(1);
+			
+			function showList(page) {
+			
+			console.lig("show list" + page);
 			
 			reviewreplyService.getList(
-					{bno: bnovalue, page: page|| 1}, function(list) {
+				{bno: bnovalue, page: page|| 1}, function(reviewreplyCnt,list) {
+						
+				console.log("cnt==========" + reviewreplyCnt);
+				console.log("list=========" + list);
+				console.log(list);
+						
+				if(page == -1) {//-1 전달시 마지막 페이지를 찾아서 다시 호출
+					pageNum = Math.ceil(reviewreplyCnt/10.0);
+					showList(pageNum);
+					return;
+				}
+						
 			
 				var str="";
 				if(list == null || list.length ==0){
@@ -136,6 +154,8 @@ $(document).ready(function() {
 				}
 
 				replyUL.html(str);
+				
+				showReviewReplyPage(reviewreplyCnt);
 				
 				});
 			} //end showList
@@ -165,10 +185,9 @@ $(document).ready(function() {
 			});
 			
 			//새로운 댓글추가
-			
 			modalRegisterBtn.on("click", function(e){
 			
-					var reply = {
+				var reply = {
 							reply : modalInputReply.val(),
 							replyer : modalInputReplyer.val(),
 							bno : bnoValue
@@ -179,6 +198,8 @@ $(document).ready(function() {
 					
 					modal.find("input").val("");
 					modal.modal("hide");
+					
+					showList(-1);
 				});
 			});
 
@@ -212,7 +233,7 @@ $(document).ready(function() {
 					
 					alert(result);
 					modal.modal("hide");
-					showList(1);
+					showList(pageNum);
 					
 				
 				});
@@ -227,9 +248,61 @@ $(document).ready(function() {
 					
 					alert(result);
 					modal.modal("hide");
-					showList(1);
+					showList(pageNum);
 				});
 			});
+			
+			//댓글 페이지 번호 출력
+			var pageNum = 1;
+		    var reviewreplyPageFooter = $(".panel-footer");
+		    
+		    function showReplyPage(reviewreplyCnt){
+			    var endNum = Math.ceil(pageNum / 10.0) * 10;  
+			    var startNum = endNum - 9; 
+			    var prev = startNum != 1;
+			    var next = false;
+			    
+			    if(endNum * 10 >= reviewreplyCnt){
+			      endNum = Math.ceil(reviewreplyCnt/10.0);
+			    }
+			    
+			    if(endNum * 10 < reviewreplyCnt){
+			      next = true;
+			    }
+			    
+			    var str = "<ul class='pagination pull-right'>";
+			    if(prev){
+			      str+= "<li class='page-item'><a class='page-link' href='"+(startNum -1)+"'>Previous</a></li>";
+			    }
+			    
+			    for(var i = startNum ; i <= endNum; i++){
+			      var active = pageNum == i? "active":"";
+			      str+= "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+			    }
+			    
+			    if(next){
+			      str+= "<li class='page-item'><a class='page-link' href='"+(endNum + 1)+"'>Next</a></li>";
+			    }
+			    
+			    str += "</ul></div>";
+			    console.log(str);
+			    reviewreplyPageFooter.html(str);
+		    }
+		    
+		    //새로운 댓글을 가져오는 이벤트처리
+		     reviewreplyPageFooter.on("click","li a", function(e){
+		    		
+		    	 e.priventDefault();
+		    	 
+		    	 console.log("page click");
+		    	 var targetPageNum = $(this).attr("href");
+		    	 console.log("targetPageNum==========" + targetPageNum);
+		    	 pageNum = targetPageNum;
+		  
+		    	 showList(pageNum);
+		    	 
+		     });
+	
 	
 </script>
 

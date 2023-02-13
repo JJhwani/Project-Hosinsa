@@ -38,7 +38,7 @@
 		]]>
 	</select>
 	
-	<select id="getCountByBno">
+	<select id="getCountByBno" resultType="int">
 		<![CDATA[
 		select count(rno) from hosinsa_reviewreply where bno = #{bno}
 		]]>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hosinsa.domain.ReviewCriteria;
+import com.hosinsa.domain.ReviewReplyPageDTO;
 import com.hosinsa.domain.ReviewReplyVO;
 import com.hosinsa.service.ReviewReplyService;
 
@@ -47,22 +48,7 @@ public class ReviewReplyController {
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@GetMapping(value = "/pages/{bno}/{page}",
-				produces= {
-						MediaType.APPLICATION_XML_VALUE,
-						MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<List<ReviewReplyVO>> getList(
-			@PathVariable("page") int page,
-			@PathVariable("bno") Long bno) {
-		
-		log.info("get list=================");
-		
-		ReviewCriteria cri = new ReviewCriteria(page, 10);
-		
-		log.info(cri);
-		
-		return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
-	}
+
 						
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH }, 
 			value = "/{rno}",
@@ -81,9 +67,24 @@ public class ReviewReplyController {
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		
-		}
-	
+	}
 		
+		@GetMapping(value = "/pages/{bno}/{page}",
+				produces= {
+						MediaType.APPLICATION_XML_VALUE,
+						MediaType.APPLICATION_JSON_VALUE })
+		public ResponseEntity<ReviewReplyPageDTO> getList(@PathVariable("page") 
+		int page, @PathVariable("bno") Long bno) {
+			
+			ReviewCriteria cri = new ReviewCriteria(page, 10);
+			
+			log.info("get Reply===================" + bno);
+			
+			log.info("cri==========" + cri);
+			
+			return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
+			
+		}
 	
 	
 }
