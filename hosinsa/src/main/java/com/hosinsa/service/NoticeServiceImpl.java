@@ -29,6 +29,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public NoticeVO get(Long nno) { // 조회
+		
 		return noticeMapper.read(nno);
 	}
 
@@ -56,6 +57,12 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public int getTotal(Criteria cri) {
 		return noticeMapper.getTotalCount(cri);
+	}
+
+	@Override
+	public int readCount(Long nno) { //추가
+		return noticeMapper.readCount(nno);
+		
 	}
 
 }

@@ -25,4 +25,6 @@ public interface NoticeMapper {
 	
 	public int getTotalCount(Criteria cri);
 	
+	public int readCount(Long nno); //추가
+	
 }

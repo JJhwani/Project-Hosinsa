@@ -12,4 +12,5 @@ public class NoticeVO {
 	private String id;
 	private Date nwritedate;
 	private Date nupdatedate;
+	private int readcount; //추가
 }

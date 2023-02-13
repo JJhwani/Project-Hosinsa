@@ -22,6 +22,7 @@
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성일</th>
+				<th>조회</th> <!-- 추가 -->
 			</tr>
 		</thead>
 
@@ -32,6 +33,7 @@
 									<c:out value="${notice.ntitle}" /></a></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${notice.nwritedate}" /></td>
+						<td><c:out value="${notice.readcount}" /></td> <!-- 추가 -->
 			</tr>
 		</c:forEach>
 	</table>

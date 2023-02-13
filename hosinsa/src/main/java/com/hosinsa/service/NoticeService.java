@@ -18,4 +18,6 @@ public interface NoticeService {
 
 	public int getTotal(Criteria cri);
 	
+	public int readCount(Long nno); //추가
+	
 }

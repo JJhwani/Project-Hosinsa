@@ -30,9 +30,7 @@ public class NoticeController {
 	@GetMapping("/list") // 목록
 	public void list(Criteria cri, Model model) { 
 		model.addAttribute("list", service.getList(cri));
-
 		int total = service.getTotal(cri);
-
 		log.info("total: " + total);
 		
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
@@ -53,6 +51,8 @@ public class NoticeController {
 
 	@GetMapping({ "/get", "/modify" }) // 조회
 	public void get(@RequestParam("nno") Long nno, @ModelAttribute("cri") Criteria cri, Model model) {
+		service.readCount(nno); //추가
+		
 		model.addAttribute("notice", service.get(nno));
 	}
 

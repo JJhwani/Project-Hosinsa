@@ -40,11 +40,11 @@
 		resultType="com.hosinsa.domain.NoticeVO">
   <![CDATA[
    select 
-     nno, ntitle, ncontent, id, nwritedate, nupdatedate
+     nno, ntitle, ncontent, id, nwritedate, nupdatedate, readcount 
    from 
        (
        select /*+INDEX_DESC(hosinsa_notice pk_notice) */
-         rownum rn, nno, ntitle, ncontent, id, nwritedate, nupdatedate 
+         rownum rn, nno, ntitle, ncontent, id, nwritedate, nupdatedate, readcount 
        from 
          hosinsa_notice
       where
@@ -98,6 +98,12 @@
 
 		nno > 0
 	</select>
+	
+	<update id="readCount">  <!-- 추가 -->
+    update hosinsa_notice
+    set readcount = readcount +1
+    where nno = #{nno}
+</update>
 
 	
 </mapper>
