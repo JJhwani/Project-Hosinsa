@@ -1,11 +1,13 @@
 package com.hosinsa.controller;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -37,37 +39,34 @@ public class Cartcontoller {
 	@Autowired
 	private CartService service;
 	
+	@RequestMapping(value = "/favicon.ico", method = RequestMethod.GET)
+	public void favicon( HttpServletRequest request, HttpServletResponse reponse ) {
+	try {
+	  reponse.sendRedirect("/resources/favicon.ico");
+	} catch (IOException e) {
+	  e.printStackTrace();
+	}
+	}
+	
 	@GetMapping("/list")
 	public void list(Model model) {
 		log.info("list.............");
 		model.addAttribute("list", service.getList());
 	
 	}
-	@ResponseBody
-	@RequestMapping(value = "/deleteCart", method = RequestMethod.POST)
-	public int deleteCart(HttpSession session,
-	     @RequestParam(value = "chbox[]") List<String> chArr, CartVO cart) throws Exception {
-	 log.info("delete cart");
-        
-		MemberVO member = (MemberVO)session.getAttribute("member");
-		 String userId = member.getId();
-		 
-		 int result = 0;
-		 int cartNum = 0;
-		 
-		 
-		 if(member != null) {
-		  cart.setId(userId);
-		  
-		  for(String i : chArr) {   
-		   long cartNumber = Long.valueOf(i);
-		   cart.setCartnum(cartNumber);
-		   service.deleteCart(cart);
-		  }
-		  result = 1;
-		 }  
-		 return result;  
+	
+	@PostMapping(value = "/deleteCart")
+	public String deleteCart(int[] cartnum, HttpServletRequest request) {
+		log.info("delete Cart =============");
+		
+		int size = cartnum.length;
+		
+		for(int i=0; i<size;i++) {
+			service.deleteCart(cartnum[i]);
 		}
+		
+		return "redirect:/cart/list";
+	}
 	
 	@GetMapping("/get")
 	public void get(@RequestParam("pronum") long pronum, Model model) {

@@ -14,6 +14,6 @@ public interface CartService {
 	public List<CartVO> getOrder();
 	
 	//카트삭제
-	public int deleteCart(CartVO cart);
+	public int deleteCart(int cartnum);
 	
 }

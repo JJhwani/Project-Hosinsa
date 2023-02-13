@@ -19,7 +19,7 @@
 					<thead>
 						<tr>
 							<th>선택 <br>
-							 <input type="checkbox" name="allCheck"></th>
+							 <input type="checkbox" name="Chk_SelectAll"></th>
 							<th>주문 번호</th>
 							<th></th>
 							<th>제품 번호</th>
@@ -32,7 +32,7 @@
 
 						<c:forEach items="${list}" var="cart">
 							<tr class="odd gradeX">
-								<td><input type="checkbox" name="chBox" class="chBox" data-cartNum="${cart.cartnum}"></td>
+								<td><input type="checkbox" name="Chk_List" id="Chk_List"></td>
 								<td>${cart.cartnum}</td>
 								<td>${cart.proimg}</td>
 								<td>${cart.pronum}</td>
@@ -50,7 +50,7 @@
                   </form>
 
 				<div>
-					<button class="del_Btn" data-cartNum="${cart.cartnum}"> 선택상품 삭제</button>
+					<button class="del_Btn" > 선택상품 삭제</button>
 				</div>
 
 
@@ -117,24 +117,65 @@
 		$(".del_Btn").on("click",function(e){
 		console.log("버튼 클릭은 댐");
 		
-		 var confirm_val = confirm("정말 삭제하시겠습니까?");
-		  
-		  if(confirm_val) {
-		   var checkArr = new Array();
-		   
-		   $("input[class='chBox']:checked").each(function(){
-		    checkArr.push($(this).attr("data-cartNum"));
-		   });
-		    
-		   $.ajax({
-		    url : "/shop/deleteCart",
-		    type : "post",
-		    data : { chbox : checkArr },
-		    success : function(){
-		     location.href = "/shop/cartList";
-		    }
-		   });
-		  } 
+		var text = $("tbody input[type='checkbox']:checked").parent().next().text();
+		var list = $("tbody input[type='checkbox']");
+		var valueArr = new Array();
+		
+		$("tbody input[type='checkbox']").each(function(){
+			console.log("티바디 안에 들어옴");
+			if($(this).is(":checked")){ //선택되어 있으면 배열에 값을 저장함
+	            valueArr.push($(this).parent().next().text());
+	            console.log("선택된 배열 저장");
+	        }
+			else{
+				console.log($(this));		
+			}
+		});
+		console.log(valueArr);
+		
+		if (valueArr.length == 0){
+	    	alert("선택된 글이 없습니다.");
+	    }else{
+			var chk = confirm("정말 삭제하시겠습니까?");				 
+			
+		}
+		
+		
+		
+		
+		/* var url = "delete";    // Controller로 보내고자 하는 URL (.dh부분은 자신이 설정한 값으로 변경해야됨)
+		var valueArr = new Array();
+	    var list = $("input[name='Chk_List']");
+	    for(var i = 0; i < list.length; i++){
+	        if(list[i].checked){ //선택되어 있으면 배열에 값을 저장함
+	            valueArr.push(list[i].value);
+	            console.log("선택된 배열 저장");
+	        }
+	    }
+	    if (valueArr.length == 0){
+	    	alert("선택된 글이 없습니다.");
+	    }
+	    else{
+	    	console.log("이프문 진입");
+			var chk = confirm("정말 삭제하시겠습니까?");				 
+			$.ajax({
+			    url : url,                    // 전송 URL
+			    type : 'POST',                // GET or POST 방식
+			    traditional : true,
+			    data : {
+			    	valueArr : valueArr        // 보내고자 하는 data 변수 설정
+			    },
+                success: function(jdata){
+                    if(jdata = 1) {
+                        alert("삭제 성공");
+                        location.replace("list")
+                    }
+                    else{
+                        alert("삭제 실패");
+                    }
+                }
+			});
+		} */
 		});
 	})
 </script>

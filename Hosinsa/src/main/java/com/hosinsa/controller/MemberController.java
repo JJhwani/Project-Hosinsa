@@ -93,4 +93,4 @@ public class MemberController {
 		rttr.addFlashAttribute("result", member.getId());
 		return "redirect:/member/login";
 	}
-}
+}   
