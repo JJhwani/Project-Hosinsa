@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.PageDTO;
@@ -71,7 +72,21 @@ public class AdminController {
 	
 	@GetMapping("/register")
 	public void adminRegisterForm() {
-		
+	}
+	
+	@PostMapping("/register")
+	public String adminResister(ProductVO vo,RedirectAttributes rttr) {
+		if(adminService.register(vo)) {
+			rttr.addFlashAttribute("register","success");
+			rttr.addFlashAttribute("newPronum",vo.getPronum());
+		}
+		return "redirect:/admin/product";
+	}
+	
+	@ResponseBody
+	@GetMapping("/register/checkPronum")	
+	public int checkPronum(@RequestParam("pronum") int pronum) {		
+		return adminService.checkPronum(pronum);
 	}
 	
 }

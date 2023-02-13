@@ -3,11 +3,12 @@
 <%@ include file="../includes/header.jsp" %>
 
 <div class="contentWrap">
-	<form action="/admin/modify" method="post">
+	<form class="registerForm" action="/admin/register" method="post">
 		<h2 class="productName">제품명 : <input type="text" name="proname"></h2>
 		<div class="imgWrap">
-			<img name="proimg" src="${product.proimg}">
+			<img class="proimg" src="/resources/images/upload.jpg">
 		</div>
+		<input type="hidden" name="proimg">
 		<h4 class="miniTitle">Product Info <i>제품정보</i></h4>
 		<table class="infoTable">			
 			<tr>
@@ -28,7 +29,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th> 품번 </th> <td><input type="text" name="pronum"></td>
+				<th> 품번 </th> <td><input type="text" name="pronum"> <span class="alert hidden">이미 있는 품번입니다.</span></td>
 			</tr>
 			<tr>
 				<th> 브랜드 </th> <td><input type="text" name="brand"></td>
@@ -46,8 +47,7 @@
 		<h4 class="miniTitle">상세정보</h4>
 		<textarea class="inputDetail" name="detail" cols="70" rows="16"></textarea>
 		<div class="btnWrap right">
-			<button class="btn modify">제품 수정</button>
-			<button class="btn delete">제품 삭제</button>
+			<button class="btn register">상품 등록</button>
 			<button class="btn list">뒤로</button>
 		</div>	
 	</form>
@@ -57,9 +57,37 @@
 <script type="text/javascript">
 	
 $(document).ready(function(){
+	var registerForm = $(".registerForm");
+	
+	$("input[name='proimg']").val($(".proimg").attr("src"));
+	
 	$(".btn.list").on("click",function(e){		
 		e.preventDefault();
 		history.go(-1);
+	})
+	
+	$(".btn.register").on("click",function(e){
+		e.preventDefault();
+		var pronum = {'pronum':$("input[name='pronum']").val()};
+		var data = 100;
+		$.ajax({
+			type:'get',
+			url:'/admin/register/checkPronum',
+			async:false,
+			dataType:"json",
+			data:pronum,
+			success:function(result){
+				data=result;
+			}
+		})
+		
+		if(data==0){
+			registerForm.submit();
+		}else{
+			$("input[name='pronum']").next().removeClass("hidden");
+			$("input[name='pronum']").focus();
+			return false;
+		}
 	})
 });
 </script>

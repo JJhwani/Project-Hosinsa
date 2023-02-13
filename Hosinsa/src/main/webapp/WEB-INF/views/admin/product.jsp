@@ -119,6 +119,13 @@ $( document ).ready(function() {
 	if("${remove}"==="success"){
 		alert("제품 삭제가 성공적으로 처리되었습니다.");
 	}
+	if("${register}"==="success"){
+		if(confirm("등록하신 제품을 지금 확인하시겠습니까?")){
+			window.location.href="/product/${newPronum}";
+		}else{
+			return false;
+		}
+	}
 });
 
 
