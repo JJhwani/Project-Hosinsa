@@ -8,14 +8,9 @@ import com.hosinsa.domain.MemberVO;
 
 public interface MemberMapper {
 
-//	@Select("select * from hosinsa_member")
-	public List<MemberVO> getList();
-	
 	public void insert(MemberVO member);
 	
 //	public void insertSelectKey(MemberVO member);
-	
-	public MemberVO read(String id);
 	
 	public int delete(String id);
 	

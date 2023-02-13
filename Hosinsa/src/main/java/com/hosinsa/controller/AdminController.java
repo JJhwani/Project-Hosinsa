@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.Criteria;
+import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.AdminService;
@@ -33,7 +34,20 @@ public class AdminController {
 	
 	@GetMapping("/member")
 	public void adminMemberList(Model model) {
-		
+		model.addAttribute("list", adminService.getList());
+	}
+	
+	@GetMapping("/memberModify")
+	public void memberModifyGET(@RequestParam("id") String id, Model model) {
+		model.addAttribute("member", adminService.get(id));
+	}
+	
+	@PostMapping("/memberModify")
+	public String memberModifyPOST(MemberVO member, RedirectAttributes rttr){
+		if (adminService.memberModify(member)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/admin/member";
 	}
 	
 	@GetMapping("/product")

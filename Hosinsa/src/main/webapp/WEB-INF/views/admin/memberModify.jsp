@@ -14,7 +14,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<form role="form" action="/member/modify" method="post">
+	<form role="form" action="/admin/memberModify" method="post">
 		<div class="container">
 			<h2>Manager Page</h2>
 			<table class="table table-hover">
@@ -84,7 +84,7 @@ $(document).ready(function() {
 		console.log(operation);
 		
 		if(operation === 'list') {
-			self.location = "/member/manager";
+			self.location = "/admin/member";
 			return;
 		}
 		formObj.submit();

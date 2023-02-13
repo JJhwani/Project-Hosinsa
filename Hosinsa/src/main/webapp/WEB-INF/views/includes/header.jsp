@@ -48,10 +48,10 @@
 			<c:if test="${not empty member}">
 				<li><a>마이페이지</a></li>
 			</c:if>
-			<li><a>장바구니</a></li>
+			<li><a><i class="fa-solid fa-basket-shopping"></i> 장바구니</a></li>
 			<c:if test="${member.grade eq 'S'}">
-				<li><a>상품관리</a></li>
-				<li><a href="<c:url value='/member/manager'/>">회원관리</a></li>
+				<li><a href="/admin/product">상품관리</a></li>
+				<li><a href="/admin/member">회원관리</a></li>
 			</c:if>
 			<c:if test="${not empty member}">
 				<li><a href="<c:url value='/member/logout'/>">로그아웃</a></li>

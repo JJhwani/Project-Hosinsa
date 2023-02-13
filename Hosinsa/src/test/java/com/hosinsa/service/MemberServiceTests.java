@@ -51,30 +51,10 @@ public class MemberServiceTests {
 		log.info(member);
 	}
 	
-	@Test
-	public void testGetList() {
-		memberService.getList().forEach(member -> log.info(member));
-	}
-	
-	@Test
-	public void testRead() {
-		log.info(memberService.get("member"));
-	}
-	
-	
-	@Test
-	public void testModify() {
-		MemberVO member = memberService.get("member1");
-		
-		if(member == null) {
-			return;
-		}
-		
-		member.setEmail("sdfsdfd@naver.com");
-		log.info("MODIFY RESULT : " + memberService.modify(member));
-		log.info("나여기 까지 옴");
-	}
-	
+	/*
+	 * @Test public void testGetList() { memberService.getList().forEach(member ->
+	 * log.info(member)); }
+	 */
 	
 	@Test
 	public void testRemove() {
