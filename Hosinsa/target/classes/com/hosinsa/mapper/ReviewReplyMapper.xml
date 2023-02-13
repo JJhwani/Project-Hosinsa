@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosinsa.mapper.ReviewReplyMapper">
+
+	<insert id="insert">
+		insert into hosinsa_reviewreply (rno, bno, reply, replyer, replyDate)
+		values (seq_reviewreply.nextval, #{bno}, #{reply}, #{replyer}, sysdate)
+	</insert>
+	
+	<select id="read" resultType="com.hosinsa.domain.ReviewReplyVO">
+		select * from hosinsa_reviewreply where rno = #{rno}
+	</select>
+	
+	<delete id="delete">
+		delete from hosinsa_reviewreply where rno = #{rno}	
+	</delete>
+	
+	<update id="update">
+		update hosinsa_reviewreply set reply = #{reply}, updateDate = sysdate where rno = #{rno}
+	</update>
+	
+	<select id="getListWithPaging" resultType="com.hosinsa.domain.ReviewReplyVO">
+		
+		<![CDATA[
+		select rno, bno, reply, replyer, replyDate, updateDate
+		from 
+		    (
+			select /*+INDEX(hosinsa_reviewreply idx_reviewreply) */
+			  rownum rn, rno, bno, reply, replyer, replyDate, updateDate
+		from hosinsa_reviewreply
+		
+		where bno = #{bno}
+		and rno > 0
+		and rownum <= #{cri.pageNum} * #{cri.amount}
+	   ) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<select id="getCountByBno" resultType="int">
+		<![CDATA[
+		select count(rno) from hosinsa_reviewreply where bno = #{bno}
+		]]>
+	</select>
+	
+
+
+
+
+
+
+
+
+</mapper>
