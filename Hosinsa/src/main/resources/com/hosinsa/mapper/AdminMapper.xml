@@ -21,29 +21,4 @@
 	SELECT COUNT(PRONUM) FROM HOSINSA_PRODUCT WHERE PRONUM=#{pronum}
 </select>
 
-<!-- MEMBER -->
-<select id="getList" resultType="com.hosinsa.domain.MemberVO">
-	SELECT * FROM HOSINSA_MEMBER
-</select>
-
-<select id="read" resultType="com.hosinsa.domain.MemberVO">
-	select * from hosinsa_member where id = #{id}
-</select>
-
-<update id="memberUpdate">
-	update hosinsa_member set
-	pw = #{pw, jdbcType=VARCHAR},
-	name = #{name, jdbcType=VARCHAR},
-	gender = #{gender, jdbcType=VARCHAR},
-	birthday = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
-	email = #{email, jdbcType=VARCHAR},
-	phone = #{phone, jdbcType=CHAR},
-	nickname = #{nickname, jdbcType=VARCHAR},
-	profilimg = #{profilimg, jdbcType=VARCHAR},
-	grade = #{grade, jdbcType=CHAR},
-	introducer = #{introducer, jdbcType=VARCHAR},
-	point = #{point, jdbcType=INTEGER}
-	where id = #{id}
-</update>
-
 </mapper>
