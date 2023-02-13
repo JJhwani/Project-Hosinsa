@@ -92,84 +92,84 @@ h1.logo a{color:white;font-size:40px;font-weight:bold;letter-spacing:-1px;}
 float:left;
 	overflow:hidden;
 	height:250px;
-   text-align: center;
-   margin:3px;
-   padding-top:20px;
-   border:1px solid #ddd
+	text-align: center;
+	margin:3px;
+	padding-top:20px;
+	border:1px solid #ddd
 }
 .list_box:hover{cursor:pointer;background:rgb(245, 245, 245)}
 
 .list_box .list_img {
-   width: 100%;
-   height: 150px;
-   padding: 0;
+	width: 100%;
+	height: 150px;
+	padding: 0;
 }
 
 .list_box .list_img img {
-   width: 125px;
-   height: 150px;
-   justify-content: center;
-   align-items: center;
-   marigin: 0 auto;
-   padding: 0 auto;
+	width: 125px;
+	height: 150px;
+	justify-content: center;
+	align-items: center;
+	marigin: 0 auto;
+	padding: 0 auto;
 }
 
 .list_box .article_info {
-   width: 100%;
-   text-align: center;
-   margin-top:10px
+	width: 100%;
+	text-align: center;
+	margin-top:10px
 }
 
 .list_box .pbrand {
-   width: 150px;
-   padding: 0 10px 0 10px;
-   display: block;
-   white-space:nowrap;
-   text-overflow:ellipsis;
-   overflow: hidden;
-   font-size:14px;
-   line-height:14px;
-   color:gray;
-   margin-bottom:0;
+	width: 150px;
+	padding: 0 10px 0 10px;
+	display: block;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+	font-size:14px;
+	line-height:14px;
+	color:gray;
+	margin-bottom:0;
 }
 
 .list_box .pname{
-   width: 150px;
-   padding: 0 10px 0 10px;
-   display: block;
-   overflow: hidden;
-   white-space:nowrap;
-   text-overflow:ellipsis;
-   margin:5px 0;
-   font-size:14px;
-   color:black;
+	width: 150px;
+	padding: 0 10px 0 10px;
+	display: block;
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	margin:5px 0;
+	font-size:14px;
+	color:black;
 }
 
 .list_box .price{
-   width: 150px;
-   height: 20px;
-   marigin: 0 atuo;
-   padding: 0 10px 0 10px;
-   display: block;
-   overflow: hidden;
-   color:black;
-   font-size:14px;
-   font-weight:bold;
+	width: 150px;
+	height: 20px;
+	marigin: 0 atuo;
+	padding: 0 10px 0 10px;
+	display: block;
+	overflow: hidden;
+	color:black;
+	font-size:14px;
+	font-weight:bold;
 }
 .list_box .view{
-   width: 150px;
-   padding: 0 10px 0 10px;
-   display: block;
-   overflow: hidden;
-   font-size:14px;
-   color:lightgray;
+	width: 150px;
+	padding: 0 10px 0 10px;
+	display: block;
+	overflow: hidden;
+	font-size:14px;
+	color:lightgray;
 }
 
 .productList{display:flex;justify-content:center;flex-wrap:wrap}
 .sorting{clear:both;margin:50px 0 0 100px}
 .sorting li{float:left;margin:0 10px 10px 0}
 .sorting li a{color:lightgray;font-size:14px;cursor:pointer}
-.sorting li.on a{color:black;font-weight:bold}
+.sorting li a.on{color:black;font-weight:bold}
 .sorting li a:hover{color:gray}
 
 .mainList{clear:both}

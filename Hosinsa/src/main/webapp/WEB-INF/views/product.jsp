@@ -15,12 +15,17 @@
 		<li><a class="category" href="모자">모자</a></li>
 		<li><a class="category" href="액세서리">액세서리</a></li>
 	</ul>
+	<form class="selectCategory" action="/category/sorting" method="get">
+		<input type="hidden" name="category" value="${category}">
+		<input type="hidden" name="sort" value="${sort}">
+	</form>
+	
 	<h2 class="productName">${product.proname}</h2>
 	<div class="imgWrap">
 		<img src="${product.proimg}">
 	</div>
 	<h4 class="miniTitle">Product Info <i>제품정보</i></h4>
-	<table class="infoTable">			
+	<table class="infoTable">         
 		<tr>
 			<th> 카테고리 </th> <td> ${product.category} </td>
 		</tr>
@@ -33,11 +38,12 @@
 		<c:if test="${loginUser.grade eq 'S'}">
 			<tr>
 				<th > 재고 </th> <td> ${product.stock} </td>
-			</tr>	
-		</c:if>		
+			</tr>   
+		</c:if>      
 	</table>
+	
 	<h4 class="miniTitle">Price Info <i>가격정보</i></h4>
-	<table class="infoTable">	
+	<table class="infoTable">   
 		<tr>
 			<th> 가격 (비회원) </th> <td> ${product.price} </td>
 		</tr>
@@ -55,11 +61,12 @@
 			</c:choose>
 		</tr>
 	</table>
+
 	<div class="btnWrap">
 		<c:if test="${member.grade eq 'S'}">
 			<button class="btn modify">제품 수정</button>
 			<button class="btn delete">제품 삭제</button>
-		</c:if>		
+		</c:if>      
 		<input type="number" name="quantity" class="cart_quan" min="1" value="1">
 		<button type="button" name="cart" class="cart_in">addToCart</button>
 		
@@ -80,12 +87,12 @@
 		은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>은혜언니가 작업한 리뷰 영역입니다.<br>
 	</div>
 </div>
-	
+   
 <div class="recent">
 	<ul>
 		<c:forEach var="recentView" items="${recentView}">
 			<li><a><img src="${recentView.proimg}"></a></li>
-		</c:forEach>			
+		</c:forEach>         
 	</ul>
 	<a>TOP</a>
 </div>
@@ -97,6 +104,7 @@
 			$(".detailView").removeClass("hidden");
 			$(".review").addClass("hidden");
 		});
+		
 		$(".tab_review").on("click",function(){
 			$(".review").removeClass("hidden");
 			$(".detailView").addClass("hidden");
@@ -118,5 +126,6 @@
 		
 	})
 </script>
-	
+
+<script src="../../../resources/js/main.js"></script>
 <%@ include file="includes/footer.jsp" %>
