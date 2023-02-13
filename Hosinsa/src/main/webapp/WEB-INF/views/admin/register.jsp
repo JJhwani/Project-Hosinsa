@@ -3,10 +3,11 @@
 <%@ include file="../includes/header.jsp" %>
 
 <div class="contentWrap">
-	<form class="registerForm" action="/admin/register" method="post">
+	<form class="registerForm" enctype="multipart/form-data" action="/admin/register" method="post">
 		<h2 class="productName">제품명 : <input type="text" name="proname"></h2>
 		<div class="imgWrap">
 			<img class="proimg" src="/resources/images/upload.jpg">
+			<input type="file" name="uploadFile" class="proimgFile hidden">
 		</div>
 		<input type="hidden" name="proimg">
 		<h4 class="miniTitle">Product Info <i>제품정보</i></h4>
@@ -57,9 +58,30 @@
 <script type="text/javascript">
 	
 $(document).ready(function(){
+	
 	var registerForm = $(".registerForm");
 	
 	$("input[name='proimg']").val($(".proimg").attr("src"));
+	
+	$(".proimg").on("click",function(e){
+		$(".proimgFile").click();
+	})
+	
+	//업로드 이미지 미리보기
+	$(".proimgFile").change(function() {
+        readURL(this);
+    });
+	
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('.proimg').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+	
 	
 	$(".btn.list").on("click",function(e){		
 		e.preventDefault();
@@ -68,6 +90,8 @@ $(document).ready(function(){
 	
 	$(".btn.register").on("click",function(e){
 		e.preventDefault();
+		
+		//품번 중복체크
 		var pronum = {'pronum':$("input[name='pronum']").val()};
 		var data = 100;
 		$.ajax({
@@ -82,8 +106,11 @@ $(document).ready(function(){
 		})
 		
 		if(data==0){
+			
 			registerForm.submit();
+			
 		}else{
+			
 			$("input[name='pronum']").next().removeClass("hidden");
 			$("input[name='pronum']").focus();
 			return false;
