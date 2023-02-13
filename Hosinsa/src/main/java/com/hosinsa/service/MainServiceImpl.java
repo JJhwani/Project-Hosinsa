@@ -19,13 +19,13 @@ public class MainServiceImpl implements MainService{
 	MainMapper mapper;
 
 	@Override
-	public List<ProductVO> getListProview(ProductVO vo) {
-		return mapper.getListWithPagingView(vo);
+	public List<ProductVO> getListProview(Criteria cri) {
+		return mapper.getListWithPagingView(cri);
 	}
 
 	@Override
-	public List<ProductVO> getListCategory(ProductVO vo) {
-		return mapper.getListWithPagingCategory(vo);
+	public List<ProductVO> getListCategory(Criteria cri) {
+		return mapper.getListWithPagingCategory(cri);
 	}
 
 	@Override
@@ -37,11 +37,6 @@ public class MainServiceImpl implements MainService{
 	public List<ProductVO> getListNew() {
 		return mapper.getListNew();
 	}
-	
-	@Override
-	public List<ProductVO> getListBestCategory(ProductVO vo) {
-		return mapper.getListBestCategory(vo);
-	}
 
 	@Override
 	public int getTotalCountView(Criteria cri) {
@@ -52,90 +47,30 @@ public class MainServiceImpl implements MainService{
 	public int getTotalCount(Criteria cri) {
 		return mapper.getTotalCount(cri);
 	}
-	
+
 	@Override
-	public int getTotalCountSearch(Criteria cri) {
-		return mapper.getTotalCountSearch(cri);
-	}
-	
-	@Override
-	public List<ProductVO> getSortBestMain(ProductVO vo) {
-		return mapper.getSortBestMain(vo);
+	public List<ProductVO> getSortBest(Criteria cri) {
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
-	public List<ProductVO> getSortNewMain(ProductVO vo) {
-		return mapper.getSortNewMain(vo);
+	public List<ProductVO> getSortNew(Criteria cri) {
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
-	public List<ProductVO> getSortLowPriceMain(ProductVO vo) {
-		return mapper.getSortLowPriceMain(vo);
+	public List<ProductVO> getSortLowPrice(Criteria cri) {
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
-	public List<ProductVO> getSortHighPriceMain(ProductVO vo) {
-		return mapper.getSortHighPriceMain(vo);
+	public List<ProductVO> getSortHighPrice(Criteria cri) {
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
-	public List<ProductVO> getSortReviewMain(ProductVO vo) {
-		return mapper.getSortReviewMain(vo);
-	}
-	
-	@Override
-	public List<ProductVO> getSortBest(ProductVO vo) {
-		return mapper.getSortBest(vo);
-	}
-
-	@Override
-	public List<ProductVO> getSortNew(ProductVO vo) {
-		return mapper.getSortNew(vo);
-	}
-
-	@Override
-	public List<ProductVO> getSortLowPrice(ProductVO vo) {
-		return mapper.getSortLowPrice(vo);
-	}
-
-	@Override
-	public List<ProductVO> getSortHighPrice(ProductVO vo) {
-		return mapper.getSortHighPrice(vo);
-	}
-
-	@Override
-	public List<ProductVO> getSortReview(ProductVO vo) {
-		return mapper.getSortReview(vo);
-	}
-
-	@Override
-	public List<ProductVO> getSearchProduct(ProductVO vo) {
-		return mapper.getSearchProduct(vo);
-	}
-	
-	@Override
-	public List<ProductVO> getSortBestSearch(ProductVO vo) {
-		return mapper.getSortBestSearch(vo);
-	}
-
-	@Override
-	public List<ProductVO> getSortNewSearch(ProductVO vo) {
-		return mapper.getSortNewSearch(vo);
-	}
-
-	@Override
-	public List<ProductVO> getSortLowPriceSearch(ProductVO vo) {
-		return mapper.getSortLowPriceSearch(vo);
-	}
-
-	@Override
-	public List<ProductVO> getSortHighPriceSearch(ProductVO vo) {
-		return mapper.getSortHighPriceSearch(vo);
-	}
-
-	@Override
-	public List<ProductVO> getSortReviewSearch(ProductVO vo) {
-		return mapper.getSortReviewSearch(vo);
+	public List<ProductVO> getSortReview(Criteria cri) {
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override

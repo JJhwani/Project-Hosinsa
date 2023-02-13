@@ -3,7 +3,6 @@ package com.hosinsa.domain;
 import java.util.Date;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /*CREATE TABLE HOSINSA_PRODUCT(
 	    CATEGORY      VARCHAR2(20),
@@ -21,8 +20,7 @@ import lombok.EqualsAndHashCode;
 );*/
 
 @Data
-@EqualsAndHashCode(callSuper=false)
-public class ProductVO extends Criteria{
+public class ProductVO {
 	private String category; //카테고리 
 	private String proname; //제품명
 	private String proimg; //제품이미지

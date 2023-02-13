@@ -28,12 +28,6 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.insert(member);
 	}
 
-	@Override
-	public MemberVO get(String id) {
-		log.info("get...." + id);
-		return memberMapper.read(id);
-	}
-	
 	@DateTimeFormat
 	@Override
 	public boolean modify(MemberVO member) {
@@ -47,14 +41,28 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.delete(id) == 1;
 	}
 
+	/*
+	 * @Override public List<MemberVO> getList() { log.info("getList...."); return
+	 * memberMapper.getList(); }
+	 */
+
 	@Override
-	public List<MemberVO> getList() {
-		log.info("getList....");
-		return memberMapper.getList();
+	public MemberVO memberLogin(MemberVO member) {
+		return memberMapper.memberLogin(member);
 	}
 
 	@Override
-	public MemberVO memberLogin(MemberVO member) throws Exception {
-		return memberMapper.memberLogin(member);
+	public int idCheck(String memberId) {
+		return memberMapper.idCheck(memberId);
+	}
+
+	@Override
+	public int nickCheck(String memberNickname) {
+		return memberMapper.nickCheck(memberNickname);
+	}
+
+	@Override
+	public int introCheck(String memberIntroducer) {
+		return memberMapper.introCheck(memberIntroducer);
 	}
 }
