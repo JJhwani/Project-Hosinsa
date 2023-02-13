@@ -2,6 +2,7 @@ package com.hosinsa.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.hosinsa.domain.ReviewCriteria;
@@ -20,6 +21,8 @@ public interface ReviewMapper {
 			public int delete(Long bno);
 			public int update(ReviewVO vo);
 			public int getTotalCount(ReviewCriteria cri);
+			public int getCountByBno(Long bno);
+			
 			
 
 }

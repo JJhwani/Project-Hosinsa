@@ -1,8 +1,14 @@
 package com.hosinsa.domain;
 
+import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 @Data
+@AllArgsConstructor
+@Getter
 public class ReviewPageDTO {
 	
 	
@@ -12,6 +18,9 @@ public class ReviewPageDTO {
 	
 	private int total;
 	private ReviewCriteria cri;
+	
+	private int reviewreplyCnt;
+	private List<ReviewReplyVO> list;
 	
 	public ReviewPageDTO(ReviewCriteria cri, int total) {
 		this.cri = cri;

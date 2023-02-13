@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hosinsa.domain.ReviewCriteria;
+import com.hosinsa.domain.ReviewReplyPageDTO;
 import com.hosinsa.domain.ReviewReplyVO;
 import com.hosinsa.mapper.ReviewReplyMapper;
 
@@ -48,6 +49,14 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 	public List<ReviewReplyVO> getList(ReviewCriteria cri, Long bno) {
 		log.info("댓글list of 게시판=========>" + bno);
 		return mapper.getListWithPaging(cri, bno);
+	}
+
+	@Override
+	public ReviewReplyPageDTO getListPage(ReviewCriteria cri, Long bno) {
+		return new ReviewReplyPageDTO (
+				mapper.getCountByBno(bno),
+				mapper.getListWithPaging(cri, bno));
+		
 	}
 
 }

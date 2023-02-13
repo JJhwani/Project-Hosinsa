@@ -88,6 +88,15 @@ public class ReviewReplyMapperTests {
 		replies.forEach(n -> log.info(n));
 	}
 	
+	@Test
+	public void testList2() {
+		ReviewCriteria cri = new ReviewCriteria(1,1);
+		
+		List<ReviewReplyVO> replies = mapper.getListWithPaging(cri, 114L);
+		
+		replies.forEach(n -> log.info(n));
+	}
+	
 	
 	
 }

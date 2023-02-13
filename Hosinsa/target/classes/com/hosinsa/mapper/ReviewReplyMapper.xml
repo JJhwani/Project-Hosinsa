@@ -22,10 +22,26 @@
 	</update>
 	
 	<select id="getListWithPaging" resultType="com.hosinsa.domain.ReviewReplyVO">
+		
+		<![CDATA[
 		select rno, bno, reply, replyer, replyDate, updateDate
+		from 
+		    (
+			select /*+INDEX(hosinsa_reviewreply idx_reviewreply) */
+			  rownum rn, rno, bno, reply, replyer, replyDate, updateDate
 		from hosinsa_reviewreply
+		
 		where bno = #{bno}
-		order by rno asc
+		and rno > 0
+		and rownum <= #{cri.pageNum} * #{cri.amount}
+	   ) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+		]]>
+	</select>
+	
+	<select id="getCountByBno">
+		<![CDATA[
+		select count(rno) from hosinsa_reviewreply where bno = #{bno}
+		]]>
 	</select>
 	
 

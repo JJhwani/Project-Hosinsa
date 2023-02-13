@@ -16,5 +16,6 @@ public interface ReviewReplyMapper {
 	public List<ReviewReplyVO> getListWithPaging (
 			@Param("cri") ReviewCriteria cri,
 			@Param("bno") Long bno);
+	public int getCountByBno(Long bno);
 
 }
