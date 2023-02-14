@@ -49,8 +49,8 @@
 
 			<form id='searchForm' action="/qna/list" method='get'>
 				<select name='type'>
-					<option value=""
-						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>-검색 종류 선택-</option>
+<%-- 					<option value=""
+						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>-검색 종류 선택-</option> --%>
 					<option value="T"
 						<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
 					<option value="C"
@@ -70,7 +70,7 @@
 				<input type='text' name='keyword' placeholder="검색어를 입력하세요." value='<c:out value="${pageMaker.cri.keyword}"/>' /> 
 				<input type='hidden' name='pageNum' value='<c:out value="${pageMaker.cri.pageNum}"/>' /> 
 				<input type='hidden' name='amount' value='<c:out value="${pageMaker.cri.amount}"/>' />
-				<button class='btn btn-default'>조회</button>
+				<button class='btn btn-default'>검색</button>
 			</form>
 		</div>
 	</div>
