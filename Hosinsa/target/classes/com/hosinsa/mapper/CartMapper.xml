@@ -14,7 +14,7 @@
 <!-- 카트 삭제 -->
 <delete id="deleteCart">
  delete hosinsa_Cart
-     where cartNum = #{cartNum};
+     where CARTNUM = #{cartNum}
 </delete>
 
 </mapper>

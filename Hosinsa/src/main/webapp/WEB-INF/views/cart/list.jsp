@@ -44,14 +44,16 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<div>
+					<button type="submit" class="del_Btn" > 선택상품 삭제</button>
+				</div>
+				
 				<form id="actionForm" action="/cart/list" method="get">
                   	<input type="hidden" name="pronum" value="${pronum}">
                   	<input type="hidden" name="proname" value="${proname}">
                   </form>
 
-				<div>
-					<button class="del_Btn" > 선택상품 삭제</button>
-				</div>
+				
 
 
 				<div>
@@ -87,14 +89,14 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		//var actionForm = $("#actionForm");
+		var actionForm = $("#actionForm");
 		
-		$(".order").on("click",function(e){
+		/* $(".order").on("click",function(e){
 		console.log("버튼 클릭은 댐");
 		self.location = "order";
-		});
+		});*/
 		
-		$(function(){
+		 $(function(){
 			var chkObj = document.getElementsByName("Chk_List");
 			var rowCnt = chkObj.length;
 			
@@ -137,7 +139,13 @@
 	    	alert("선택된 글이 없습니다.");
 	    }else{
 			var chk = confirm("정말 삭제하시겠습니까?");				 
-			
+			$.ajax({
+			    url : "/cart/deleteCart",					// 전송 URL
+			    dataType: "json",
+			    type : 'POST',								// GET or POST 방식
+			    data : {valueArr : valueArr},				//보내고자 하는 data 변수 설정
+                
+			});
 		}
 		
 		
