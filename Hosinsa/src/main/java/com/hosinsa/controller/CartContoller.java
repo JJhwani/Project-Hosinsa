@@ -1,33 +1,22 @@
 package com.hosinsa.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hosinsa.domain.CartVO;
-import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.CartService;
-import com.hosinsa.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -35,7 +24,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/cart/*")
 @AllArgsConstructor
-public class Cartcontoller {
+public class CartContoller {
 
 	@Autowired
 	private CartService service;
@@ -51,10 +40,7 @@ public class Cartcontoller {
 
 	@GetMapping("/list")
 	public void list(Model model) {
-		MemberVO vo= null;
-		String id = vo.getId();
 		log.info("list.............2");
-		log.info(id);
 		model.addAttribute("list", service.getList());
 
 	}
