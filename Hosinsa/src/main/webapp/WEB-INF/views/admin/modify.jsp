@@ -11,7 +11,7 @@
 		</div>
 		<input type="text" name="proimg">
 		<h4 class="miniTitle">Product Info <i>제품정보</i></h4>
-		<table class="infoTable">			
+		<table class="infoTable">
 			<tr>
 				<th> 카테고리 </th> <td> <input type="text" name="category" value="${product.category}" readonly> </td>
 			</tr>

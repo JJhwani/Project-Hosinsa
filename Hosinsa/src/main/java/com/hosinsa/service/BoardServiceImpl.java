@@ -26,14 +26,14 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void registerEvent(BoardEventVO vo) {
-		mapper.registerSelectKeyEvent(vo);
+	public boolean registerEvent(BoardEventVO bevo) {
+		return mapper.registerSelectKeyEvent(bevo);
 		
 	}
 
 	@Override
-	public boolean modifyEvent(BoardEventVO vo) {
-		return mapper.modifyEvent(vo) == 1 ? true : false;
+	public boolean modifyEvent(BoardEventVO bevo) {
+		return mapper.modifyEvent(bevo) == 1 ? true : false;
 	}
 
 	@Override
@@ -46,8 +46,8 @@ public class BoardServiceImpl implements BoardService{
 		return mapper.getTotalCountEvent(cri);	}
 
 	@Override
-	public List<BoardEventVO> getListMainEvent(BoardEventVO vo) {
-		return mapper.getListMainEvent(vo);
+	public List<BoardEventVO> getListMainEvent(BoardEventVO bevo) {
+		return mapper.getListMainEvent(bevo);
 	} 
 	
 

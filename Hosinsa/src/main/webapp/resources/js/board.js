@@ -2,6 +2,7 @@ $(document).ready(function(){
 	
 	var paging = $(".paging");
 	var eventForm = $(".eventForm")
+	var eventModify = $(".eventModify")
 
 	// 개별 이벤트 페이지로 이동
 	$(".move").on("click", function(e){
@@ -18,17 +19,25 @@ $(document).ready(function(){
 		paging.find("input[name='pageNum']").val($(this).attr("href"));
 		paging.submit();
 	});
+
+	// 이벤트 등록 페이지로 이동
+	$(".register").on("click", function(e) {
+		e.preventDefault();
+		$(".register").attr("href", "/board/event/register");
+		$(".register").submit();
+	});
 	
 	// 이벤트 수정 페이지로 이동
-	$("button[data-oper='modify']").on("click",function(e){
-		paging.attr("action","/board/event/modify").submit();
+	$(".eventRead .modify").on("click",function(e){
+		eventForm.attr("method","get")
+		eventForm.attr("action","/board/event/modify").submit();
 	});
 	
 	// 이벤트 리스트 페이지로 이동
-	$("button[data-oper='list']").on("click",function(e){
-		paging.find("input[name='event_no']").remove();
-		paging.attr("action","/board/event/list");
-		paging.submit();
+	$(".eventRead .list").on("click",function(e){
+		eventForm.find("input[name='event_no']").remove();
+		eventForm.attr("action","/board/event/list");
+		eventForm.submit();
 	})
 
 	$("input[name='event_img']").val($(".event_img").attr("src"));
@@ -52,32 +61,47 @@ $(document).ready(function(){
         }
     }
 	
+
+
+	// 이벤트 수정 페이지에서 이벤트 리드 페이지로 가기
 	$(".btn.list").on("click",function(e){		
 		e.preventDefault();
 		history.go(-1);
 	})
 
-	$(".adminList button").on("click",function(e){
-		var tempNum = $(this).parent().siblings(".pronum").text();
-		eventForm.find("input[name='pronum']").val(tempNum);
-		
-		if($(this).attr("class")=="modify"){
-			eventForm.attr("action","/board/event/modify");
-		}else if($(this).attr("class")=="delete"){
-			if(confirm("제품번호 "+tempNum+" : 정말로 삭제하시겠습니까?")){
-				eventForm.attr("action","/board/event/remove");
-			}else{
-				return false;
-			}
-		}		
-		productForm.submit();
-	})	
+	// 이벤트 수정 페이지에서 이벤트 삭제 페이지로 가기
+	$(".btn.remove").on("click",function(e){		
+		e.preventDefault();
+		eventModify.attr("action","/board/event/remove");
+		eventModify.submit();
+	})
 
-	if("${modify}"==="success"){
-		alert("수정 요청이 성공적으로 처리되었습니다.");
-	}
-	if("${remove}"==="success"){
-		alert("제품 삭제가 성공적으로 처리되었습니다.");
-	}
+
+
+	//이벤트 수정 유효성 체크
+//	$(".btn.modify").on("click",function(e){		
+//		e.preventDefault();
+//		if($("input[name=title]").val("")){
+//			alert("제목을 입력해 주세요.");
+//			return false;
+//		}
+//		else if($("input[name=subtext]").val("")){
+//			alert("소제목을 입력해 주세요.");
+//         return false;
+//		}
+//		else if($("input[name=start_date]").val("")){
+//			alert("시작날짜를 입력해 주세요.");
+//			return false;
+//		}
+//		else if($("input[name=end_date]").val("")){
+//			alert("종료날짜를 입력해 주세요.");
+//			return false;
+//		}
+//		else if($("input[name=content]").val("")){
+//			alert("상세정보를 입력해 주세요.");
+//			return false;
+//		}
+//	})
+
 
  });

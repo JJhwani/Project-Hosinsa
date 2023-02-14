@@ -1,6 +1,7 @@
 package com.hosinsa.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -56,39 +57,70 @@ public class BoardController {
 	}
 	
 	// 이벤트 추가
-	@PostMapping("/event/register")
-	public String eventRegister(BoardEventVO bevo, RedirectAttributes rttr) {
-		log.info("register ===> "+bevo);
-		service.registerEvent(bevo);
-		
-		rttr.addFlashAttribute("result", bevo.getEvent_no());
-		return "redirect:/board/event/list";
-		
-		
-	}
-	
-	@GetMapping("/event/modify")
-	public void eventModifyForm(Model model,Long event_no) {
-		model.addAttribute("product",service.readEvent(event_no));	
-	}
-	
-	// 이벤트 수정
-	@PostMapping("/event/modify")
-	public String eventModify(BoardEventVO bevo, Criteria cri,  MultipartFile uploadFile, RedirectAttributes rttr) {
+	@PostMapping("/register")
+	public String eventResister(BoardEventVO bevo, Criteria cri, MultipartFile uploadFile, Model model) {
 		//==========================배포 전 경로 Works3로 수정해 주세요.
-		File saveFile = new File("C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\");
-
+		String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\eventBanner\\";
+		String fileName = uploadFile.getOriginalFilename();
+		File saveFile = new File(uploadFolder, fileName);
+		
 		try {
 			uploadFile.transferTo(saveFile);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
+		bevo.setEvent_img("../../resources/images/eventBanner/"+fileName);
+		
+		if(service.registerEvent(bevo)) {
+			model.addAttribute("register","success");
+		}
+		
+		int total = service.getTotalEvent(cri);
+		Date today = new Date();
+		
+		model.addAttribute("event", service.getListEvent(cri));
+		model.addAttribute("today", today);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		
+		return "/board/event";
+	}
+	
+	@GetMapping("/event/modify")
+	public String eventModifyForm(Model model,Long event_no) {
+		model.addAttribute("event",service.readEvent(event_no));
+		
+		return "/board/eventModify";
+	}
+	
+	// 이벤트 수정
+	@PostMapping("/event/modify")
+	public String eventModify(BoardEventVO bevo, Criteria cri,  MultipartFile uploadFile, Model model) throws IOException{
+		//==========================배포 전 경로 Works3로 수정해 주세요.
+		String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\eventBanner\\";
+		String fileName = uploadFile.getOriginalFilename();
+		File saveFile = new File(uploadFolder, fileName);
+				
+		try {
+			uploadFile.transferTo(saveFile);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		bevo.setEvent_img("../../resources/images/eventBanner/"+fileName);
+		
 		if(service.modifyEvent(bevo)) {
-			rttr.addFlashAttribute("modify","success");
-		}		
-		return "redirect:/board/event/list"+cri.getListLink();
-
+			model.addAttribute("modify","success");
+		}
+		
+		int total = service.getTotalEvent(cri);
+		Date today = new Date();
+		
+		model.addAttribute("event", service.getListEvent(cri));
+		model.addAttribute("today", today);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+				
+		return "/board/event";
 	}
 	
 	// 이벤트 삭제

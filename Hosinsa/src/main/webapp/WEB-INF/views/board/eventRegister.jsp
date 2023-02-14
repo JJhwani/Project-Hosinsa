@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
 <div class="contentWrap">
-	<form class="eventModify"role="form" action="/board/event/modify" enctype="multipart/form-data" method="post">
+	<form class="eventRegister"role="form" action="/board/event/register" enctype="multipart/form-data" method="post">
 		<div class="imgWrap">
 			<img class="event_img" src="${event.event_img}">
 			<input type="file" name="uploadFile" class="event_imgFile hidden">
@@ -22,30 +22,29 @@
 			</tr>
 			<tr>
 				<th> 타이틀 </th>
-				<td><input type="text" name="title" value="${event.title}"></td>
+				<td><input type="text" name="title" value=""></td>
 			</tr>
 			<tr>
 				<th> 소제목 </th>
-				<td><input type="text" name="subtext" value="${event.subtext}"></td>
+				<td><input type="text" name="subtext" value=""></td>
 			</tr>			
 			<tr>
 				<th> 시작일 </th>
 				<td>
-					<input type="date" name="start_date" value="<fmt:formatDate pattern='yyyy-MM-dd' value='${event.start_date}'/>">
+					<input type="date" name="start_date" value="<fmt:formatDate pattern='yyyy-MM-dd' value=''/>">
 				</td>
 			</tr>
 			<tr>
 				<th> 종료일 </th>
 				<td>
-					<input type="date" name="end_date" value="<fmt:formatDate pattern='yyyy-MM-dd' value='${event.end_date}'/>">
+					<input type="date" name="end_date" value="<fmt:formatDate pattern='yyyy-MM-dd' value=''/>">
 				</td>
 			</tr>
 		</table>
 		<h4 class="miniTitle">상세정보</h4>
-		<textarea class="inputDetail" name="content" cols="70" rows="16">${event.content}</textarea>
+		<textarea class="inputDetail" name="content" cols="70" rows="16"></textarea>
 		<div class="btnWrap right">
-			<button class="btn modify">이벤트 수정</button>
-			<button class="btn remove">이벤트 삭제</button>
+			<button class="btn register">이벤트 등록</button>
 			<button class="btn list">뒤로</button>
 		</div>
 	</form>

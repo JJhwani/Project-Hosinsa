@@ -2,6 +2,8 @@ package com.hosinsa.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -11,7 +13,9 @@ public class BoardEventVO {
 	private String title;
 	private String content;
 	private String subtext;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date start_date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date end_date;
 	private Date regdate;
 	private Date update_date;
