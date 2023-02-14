@@ -28,8 +28,6 @@ import com.hosinsa.domain.CartVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.CartService;
 import com.hosinsa.service.MemberService;
-import com.sun.java.util.jar.pack.Package.Class.Member;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
