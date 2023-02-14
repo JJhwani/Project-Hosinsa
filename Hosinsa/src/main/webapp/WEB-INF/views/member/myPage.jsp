@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../includes/header.jsp" %>
 
-마이페이지 마이페이지
+<div class="contentWrap">
+	<h2 class="title">마이페이지</h2>
+	
+	${member.name }
+</div>
 
 <%@ include file="../includes/footer.jsp" %>

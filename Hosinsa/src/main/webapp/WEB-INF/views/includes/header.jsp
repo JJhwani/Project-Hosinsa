@@ -50,7 +50,7 @@
 				</c:choose>
 			</li>
 			<c:if test="${not empty member}">
-				<li><a>마이페이지</a></li>
+				<li><a href="/member/myPage">마이페이지</a></li>
 			</c:if>
 			<li><a href="/cart/list"><i class="fa-solid fa-basket-shopping"></i> 장바구니</a></li>
 			<c:if test="${member.grade eq 'S'}">
