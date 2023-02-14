@@ -9,8 +9,6 @@ public interface CartMapper {
 	
 	public List<CartVO> getList();
 	
-	public void insert(CartVO cart);
-	
 	//카트삭제
 	public int deleteCart(long cartnum);
 	

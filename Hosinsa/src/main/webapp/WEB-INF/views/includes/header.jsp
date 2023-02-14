@@ -52,7 +52,7 @@
 			<c:if test="${not empty member}">
 				<li><a>마이페이지</a></li>
 			</c:if>
-			<li><a><i class="fa-solid fa-basket-shopping"></i> 장바구니</a></li>
+			<li><a href="/cart/list"><i class="fa-solid fa-basket-shopping"></i> 장바구니</a></li>
 			<c:if test="${member.grade eq 'S'}">
 				<li><a href="/admin/product">상품관리</a></li>
 				<li><a href="/admin/member">회원관리</a></li>

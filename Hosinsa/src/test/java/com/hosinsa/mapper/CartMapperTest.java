@@ -24,17 +24,5 @@ public class CartMapperTest {
 	}
 	
 	
-	@Test
-	public void testInsert() {
-		CartVO vo = new CartVO();
-		vo.setPronum(1L);
-		vo.setId("sangho");
-		vo.setQuantity(43L);
-		vo.setPrice(35500L);
-		vo.setProname("가죽자켓");
-		vo.setSale("0");
-		mapper.insert(vo);
-		log.info(vo);
-	}
 	
 }

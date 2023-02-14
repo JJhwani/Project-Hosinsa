@@ -17,24 +17,12 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	public CartMapper mapper;
 	
-	@Override
-	public void register(CartVO cart) {
-	}
-	
-	@Override
-	public CartVO get(Long pronum) {
-		return null;
-	}
 
 	@Override
 	public List<CartVO> getList() {
 		return mapper.getList();
 	}
 	
-	@Override
-	public List<CartVO> getOrder() {
-		return mapper.getList();
-	}
 	
 	@Override
 	public boolean deleteCart(long cartnum) {

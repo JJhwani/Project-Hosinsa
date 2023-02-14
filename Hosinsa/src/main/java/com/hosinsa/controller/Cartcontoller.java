@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hosinsa.domain.CartVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.CartService;
+import com.hosinsa.service.MemberService;
+import com.sun.java.util.jar.pack.Package.Class.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -51,7 +53,10 @@ public class Cartcontoller {
 
 	@GetMapping("/list")
 	public void list(Model model) {
+		MemberVO vo= null;
+		String id = vo.getId();
 		log.info("list.............2");
+		log.info(id);
 		model.addAttribute("list", service.getList());
 
 	}
@@ -73,18 +78,6 @@ public class Cartcontoller {
 		log.info("포문 빠져나감");
 
 		return "redirect:/";
-	}
-
-	@GetMapping("/get")
-	public void get(@RequestParam("pronum") long pronum, Model model) {
-		log.info("get.............");
-		model.addAttribute("get", service.get(pronum));
-	}
-
-	@GetMapping("/order")
-	public void order(Model model) {
-		log.info("order.............");
-		model.addAttribute("order", service.getList());
 	}
 
 }
