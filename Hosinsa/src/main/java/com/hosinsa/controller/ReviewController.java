@@ -29,19 +29,15 @@ public class ReviewController {
 	
 	@ResponseBody
 	@GetMapping("/list")
-	public List<ReviewVO> list(ReviewCriteria cri, Model model) {
-		
-		log.info("list" + cri);
-		
-		model.addAttribute("list", service.getList(cri));
+	public List<ReviewVO> list(ReviewCriteria cri,Integer pronum,Model model) {
+				
+		model.addAttribute("list", service.getList(pronum,cri));
 
 		int total = service.getTotal(cri);
 		
-		log.info("total" + total);
-		
 		model.addAttribute("pageMaker", new ReviewPageDTO(cri, total));
 		
-		return service.getList(cri);
+		return service.getList(pronum,cri);
 	}
 	
 
@@ -83,7 +79,7 @@ public class ReviewController {
 	
 	
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr) {
+	public String remove(@RequestParam("bno") Long bno, @RequestParam("pronum") int pronum, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr) {
 		
 		log.info("삭제삭제=========>" + bno);
 		
@@ -91,12 +87,13 @@ public class ReviewController {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
+		rttr.addAttribute("pronum",pronum);
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
+		//rttr.addAttribute("type", cri.getType());
+		//rttr.addAttribute("keyword", cri.getKeyword());
 		
-		return "redirect:/review/list";
+		return "redirect:/product/{pronum}";
 	}
 	
 	
