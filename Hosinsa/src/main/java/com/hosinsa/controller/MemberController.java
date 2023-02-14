@@ -1,5 +1,7 @@
 package com.hosinsa.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,6 +25,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @RequestMapping("/member/*")
+@SessionAttributes("member")
 @AllArgsConstructor
 public class MemberController {
 
@@ -33,7 +37,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String logPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception {
+	public String logPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr, Model model) throws Exception {
 		log.info("loginPOST===");
 		log.info("loginPOST : " + member);
 		
@@ -45,9 +49,10 @@ public class MemberController {
 			rttr.addFlashAttribute("result", result);
 			return "redirect:/member/login";
 		} else {
-			session.setAttribute("member", vo);
+			model.addAttribute("member", vo);
 			return "redirect:/";
-		}
+		} 
+		
 		
 	}
 	

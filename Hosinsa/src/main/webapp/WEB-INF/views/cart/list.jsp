@@ -4,10 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
+<%@ include file="../includes/header.jsp" %>
 <div class="row">
-	<div class="col-lg-12">
-		<h2 class="page-header">장바구니</h2>
-	</div>
 	<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
@@ -15,7 +14,7 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<table width="80%">
+				<table width="100%">
 					<thead>
 						<tr>
 							<th>선택 <br>
@@ -29,7 +28,6 @@
 						</tr>
 					</thead>
 					<tbody>
-
 						<c:forEach items="${list}" var="cart">
 							<tr class="odd gradeX">
 								<td><input type="checkbox" name="Chk_List" id="Chk_List"></td>
@@ -85,6 +83,8 @@
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
+
+<%@ include file="../includes/footer.jsp" %>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">

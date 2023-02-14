@@ -11,11 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.CartService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -23,6 +26,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 @RequestMapping("/cart/*")
+@SessionAttributes("member")
 @AllArgsConstructor
 public class CartContoller {
 
@@ -39,9 +43,12 @@ public class CartContoller {
 	}
 
 	@GetMapping("/list")
-	public void list(Model model) {
+	public void list(Model model, @ModelAttribute("member") MemberVO vo) {
+		
+		String id = vo.getId();
+		log.info(id);
 		log.info("list.............2");
-		model.addAttribute("list", service.getList());
+		model.addAttribute("list", service.getList(id));
 
 	}
 
@@ -61,7 +68,7 @@ public class CartContoller {
 		} 
 		log.info("포문 빠져나감");
 
-		return "redirect:/";
+		return "redirect:/cart/list";
 	}
 
 }

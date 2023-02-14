@@ -7,7 +7,7 @@
 
 <select id="getList" resultType="com.hosinsa.domain.CartVO">
  <![CDATA[
-  	select * from hosinsa_cart where cartnum > 0 
+  	select * from hosinsa_cart where id = #{id}
 	]]>
 </select>
 
