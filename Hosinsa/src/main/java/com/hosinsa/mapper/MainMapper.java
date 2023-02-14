@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.hosinsa.domain.BoardEventVO;
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.ProductVO;
 
@@ -41,5 +42,7 @@ public interface MainMapper {
 	public List<ProductVO> getSortReviewSearch(ProductVO vo);			// Category 페이지 리뷰순 소팅
 	
 	public ProductVO getProductByPronum(int pronum);
+	public void updateView(int pronum);
 	
+		
 }

@@ -55,9 +55,9 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public List<ReviewVO> getList(ReviewCriteria cri) { 
+	public List<ReviewVO> getList(Integer pronum, ReviewCriteria cri) { 
 		log.info("리스트================" + cri);
-		return mapper.getListWithPaging(cri);
+		return mapper.getListWithPaging(pronum,cri);
 	}
 
 	@Override

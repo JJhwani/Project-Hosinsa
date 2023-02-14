@@ -159,13 +159,15 @@
 	</div>
 	
 	<div class="event">
-		<h4 class="title">이벤트</h4>
-		<ul>
-			<li><a>이벤트 1</a></li>
-			<li><a>이벤트 2</a></li>
-			<li><a>이벤트 3</a></li>
-		</ul>
-		<a>전체보기</a>
+		<form class="eventBoard" action="/board/event/list" method="post">
+			<h4 class="title">이벤트</h4>
+			<ul>
+				<c:forEach var="event" items="${event}">
+					<li><a href="${event.event_no}">${event.title}</a></li>
+				</c:forEach>
+			</ul>
+			<a>전체보기</a>
+		</form>
 	</div>
 	
 	<div class="recent">
@@ -174,7 +176,7 @@
 				<li><a href="/product/${recentView.pronum}"><img src="${recentView.proimg}"></a></li>
 			</c:forEach>			
 		</ul>
-		<a>TOP</a>
+		<a href="javascript:window.scrollTo({top:0,behavior: 'smooth'})">TOP</a>
 	</div>
 </div>
 <script src="../../../resources/js/main.js"></script>
