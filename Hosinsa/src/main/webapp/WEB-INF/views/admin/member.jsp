@@ -13,7 +13,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
-.search {
+.search_area {
 	float: right;
 }
 </style>
@@ -23,9 +23,9 @@
 		<div>
 			<h2>Manager Page</h2>
 		</div>
-		<div class="search">
-			<form class="searchForm" action="/search/member" method="get">
-         		<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
+		<div class="search_area">
+			<form class="searchForm" action="/admin/search/member" method="get">
+         		<input type="text" name="keyword"/>
          		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
          		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
          		<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -89,6 +89,7 @@
 		<form class="paging" action="/admin/member" method="get">
 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 		</form>
 		<!-- 페이지 처리 끝 -->
 	</div>
@@ -97,6 +98,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	var actionForm = $(".paging");
+	var searchForm = $(".searchForm");
 	
 	$(".paginate_button a").on("click", function(e) {
 		e.preventDefault();
@@ -107,7 +109,7 @@ $(document).ready(function() {
 	
 	$(".move").on("click", function(e) {
 		e.preventDefault();
-		actionForm.append("<input type='hideen' name='id' value='" + $(this).attr("href") +"'>");
+		actionForm.append("<input type='hidden' name='id' value='" + $(this).attr("href") +"'>");
 		actionForm.attr("action", "/admin/memberModify");
 		actionForm.submit();
 	});
@@ -115,8 +117,10 @@ $(document).ready(function() {
 	$(".searchForm button").on("click", function(e){
 	      if(!searchForm.find("input[name='keyword']").val()){
 	         alert("키워드를 입력하세요.");
+	         $("input[name='keyword']").focus();
 	         return false;
-	      }      
+	      }   
+	      
 	      searchForm.find("input[name='pageNum']").val("1");
 	      searchForm.find("input[name='amount']").val("28");
 	      e.preventDefault();

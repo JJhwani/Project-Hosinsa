@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,11 +24,17 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
+@SessionAttributes("member")
 @RequestMapping("/member/*")
 @AllArgsConstructor
 public class MemberController {
 
 	private MemberService memberService;
+	
+	@GetMapping("/agree")
+	public void agreeGET( ) {
+		log.info("Agree====>");
+	}
 	
 	// 로그인
 	@GetMapping("/login")
@@ -35,30 +43,28 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String logPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception {
+	public String logPOST(MemberVO member, RedirectAttributes rttr, Model model) throws Exception {
 		log.info("loginPOST===");
 		log.info("loginPOST : " + member);
 		
-		HttpSession session = request.getSession();
-		MemberVO vo = memberService.memberLogin(member); 
+		MemberVO vo = memberService.memberLogin(member);
 		
 		if (vo == null) {
 			int result = 0;
 			rttr.addFlashAttribute("result", result);
 			return "redirect:/member/login";
 		} else {
-			session.setAttribute("member", vo);
+			model.addAttribute("member", vo);
 			return "redirect:/";
 		}
 		
-	} // 로그인
+	} // 로그인 끝
 	
 	// 로그아웃
 	@GetMapping("/logout")
-	public String logoutGet(HttpServletRequest request) {
+	public String logoutGet(SessionStatus session) {
 		log.info("logout====");
-		HttpSession session = request.getSession();
-		session.invalidate();
+		session.setComplete();
         
         return "redirect:/";     
 	}

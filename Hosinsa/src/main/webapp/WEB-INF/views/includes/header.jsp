@@ -20,7 +20,7 @@
 		</form>
 		<ul class="menu">
 			<c:if test="${empty member}">
-				<li><a href="<c:url value='/member/join'/>">회원가입</a></li>
+				<li><a href="<c:url value='/member/agree'/>">회원가입</a></li>
 			</c:if>
 			<li class="user_grade">
 				<c:choose>

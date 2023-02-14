@@ -57,8 +57,13 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<MemberVO> searchMember(MemberVO member) {
-		return mapper.searchMember(member);
+	public List<MemberVO> searchMember(Criteria cri) {
+		return mapper.searchMember(cri);
+	}
+
+	@Override
+	public int searchTotal(Criteria cri) {
+		return mapper.searchTotal(cri)	;
 	}	
 
 }

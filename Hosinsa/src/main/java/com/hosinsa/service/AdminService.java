@@ -15,5 +15,6 @@ public interface AdminService {
 	public boolean memberModify(MemberVO member);
 	public List<MemberVO> getList(Criteria cri);
 	public int getTotal(Criteria cri);
-	public List<MemberVO> searchMember(MemberVO member);
+	public List<MemberVO> searchMember(Criteria cri);
+	public int searchTotal(Criteria cri);
 }

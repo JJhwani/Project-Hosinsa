@@ -16,5 +16,6 @@ public interface AdminMapper {
 	public MemberVO read(String id);
 	public List<MemberVO> getList();
 	public List<MemberVO> getListWithPaging(Criteria cri);
-	public List<MemberVO> searchMember(MemberVO member);
+	public List<MemberVO> searchMember(Criteria cri);
+	public int searchTotal(Criteria cri);
 }

@@ -52,6 +52,13 @@ SELECT ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE, NICKNAME, PROFILIMG, GRADE,
 ]]>
 </select>
 
+<select id="searchTotal" resultType="int">
+	SELECT COUNT(*) FROM HOSINSA_MEMBER WHERE (
+			LOWER(ID) LIKE '%'||#{keyword}||'%' OR
+            LOWER(NICKNAME) LIKE '%'||#{keyword}||'%' OR
+            LOWER(NAME) LIKE '%'||#{keyword}||'%')
+</select>
+
 <select id="read" resultType="com.hosinsa.domain.MemberVO">
 	SELECT * FROM HOSINSA_MEMBER WHERE id = #{id}
 </select>
@@ -61,19 +68,19 @@ SELECT ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE, NICKNAME, PROFILIMG, GRADE,
 </select>
 
 <update id="memberUpdate">
-	update hosinsa_member set
-	pw = #{pw, jdbcType=VARCHAR},
-	name = #{name, jdbcType=VARCHAR},
-	gender = #{gender, jdbcType=VARCHAR},
-	birthday = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
-	email = #{email, jdbcType=VARCHAR},
-	phone = #{phone, jdbcType=CHAR},
-	nickname = #{nickname, jdbcType=VARCHAR},
-	profilimg = #{profilimg, jdbcType=VARCHAR},
-	grade = #{grade, jdbcType=CHAR},
-	introducer = #{introducer, jdbcType=VARCHAR},
-	point = #{point, jdbcType=INTEGER}
-	where id = #{id}
+	UPDATE HOSINSA_MEMBER SET
+	PW = #{pw, jdbcType=VARCHAR},
+	NAME = #{name, jdbcType=VARCHAR},
+	GENDER = #{gender, jdbcType=VARCHAR},
+	BIRTHDAY = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
+	EMAIL = #{email, jdbcType=VARCHAR},
+	PHONE = #{phone, jdbcType=CHAR},
+	NICKNAME = #{nickname, jdbcType=VARCHAR},
+	PROFILIMG = #{profilimg, jdbcType=VARCHAR},
+	GRADE = #{grade, jdbcType=CHAR},
+	INTRODUCER = #{introducer, jdbcType=VARCHAR},
+	POINT = #{point, jdbcType=INTEGER}
+	WHERE ID = #{id}
 </update>
 
 </mapper>
