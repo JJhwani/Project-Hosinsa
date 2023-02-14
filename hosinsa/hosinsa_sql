@@ -1,3 +1,5 @@
+공지사항>>>>>
+
 create table hosinsa_notice(
 nno number(10,0),
 ntitle varchar2(300) not null,
@@ -8,20 +10,13 @@ nupdatedate date default sysdate
 );
 
 
-create table hosinsa_notice(
-nno number(10,0),
-ntitle varchar2(300) not null,
-ncontent varchar2(3000) not null,
-id varchar2(30) not null,
-nwritedate date default sysdate,
-nupdatedate date default sysdate,
-ncnt number(8) default 0
-);
+alter table hosinsa_notice drop column readcount;
+
+alter table hosinsa_notice add readcount number(8) default 0;
 
 
 alter table hosinsa_notice add constraint pk_notice
 primary key(nno);
-
 
 drop SEQUENCE seq_notice;
 drop table hosinsa_notice;
@@ -54,6 +49,9 @@ insert into HOSINSA_NOTICE (nno, ntitle, ncontent, id)
 select count(*)from hosinsa_notice;
 
 -------------------------------------------------------------------------------------------------------
+
+고객센터>>>>>
+
 
 create SEQUENCE seq_qna;
 
@@ -93,7 +91,7 @@ commit;
 
 --------------------------------------------------------------------------------------------------------------
 
-고객센터 댓글
+고객센터 댓글>>>>>>
 
 create table hosinsa_reply(
 rno number(10,0),

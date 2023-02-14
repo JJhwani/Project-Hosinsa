@@ -21,6 +21,7 @@
 			<tr>
 				<th>번호</th>
 				<th>제목</th>
+				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회</th> <!-- 추가 -->
 			</tr>
@@ -31,6 +32,7 @@
 				<td><c:out value="${notice.nno}" /></td>
 				<td><a class='move' href='<c:out value="${notice.nno}"/>'>
 									<c:out value="${notice.ntitle}" /></a></td>
+				<td><c:out value="${notice.id}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${notice.nwritedate}" /></td>
 						<td><c:out value="${notice.readcount}" /></td> <!-- 추가 -->
