@@ -143,5 +143,10 @@ public class MainServiceImpl implements MainService{
 		return mapper.getProductByPronum(pronum);
 	}
 
+	@Override
+	public void updateView(int pronum) {
+		mapper.updateView(pronum);		
+	}
+
 	
 }

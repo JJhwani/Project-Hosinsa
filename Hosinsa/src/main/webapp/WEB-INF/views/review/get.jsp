@@ -119,7 +119,7 @@ $(document).ready(function() {
 			
 			function showList(page) {
 			
-			console.lig("show list" + page);
+			console.log("show list" + page);
 			
 			reviewreplyService.getList(
 				{bno: bnovalue, page: page|| 1}, function(reviewreplyCnt,list) {

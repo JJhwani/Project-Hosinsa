@@ -1,5 +1,8 @@
 package com.hosinsa.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,10 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +26,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
+@SessionAttributes("member")
 @RequestMapping("/member/*")
 @AllArgsConstructor
 public class MemberController {
@@ -30,14 +36,11 @@ public class MemberController {
 	@GetMapping("/login")
 	public void login() {
 		log.info("login/get====");
-	}
+	}	
 	
 	@PostMapping("/login")
-	public String logPOST(HttpServletRequest request, MemberVO member, RedirectAttributes rttr) throws Exception {
-		log.info("loginPOST===");
-		log.info("loginPOST : " + member);
-		
-		HttpSession session = request.getSession();
+	public String logPOST(MemberVO member, RedirectAttributes rttr,Model model) throws Exception {
+				
 		MemberVO vo = memberService.memberLogin(member); 
 		
 		if (vo == null) {
@@ -45,7 +48,7 @@ public class MemberController {
 			rttr.addFlashAttribute("result", result);
 			return "redirect:/member/login";
 		} else {
-			session.setAttribute("member", vo);
+			model.addAttribute("member",vo);
 			return "redirect:/";
 		}
 		
@@ -93,4 +96,10 @@ public class MemberController {
 		rttr.addFlashAttribute("result", member.getId());
 		return "redirect:/member/login";
 	}
-}
+	
+	@GetMapping("/myPage")
+	public String myPage(@ModelAttribute("member") MemberVO vo,Model model) {
+		model.addAttribute("member",vo);
+		return "/member/myPage";		
+	}
+}   
