@@ -17,11 +17,11 @@ import lombok.extern.log4j.Log4j;
 @Service
 @Log4j
 @AllArgsConstructor
-public class MemberServiceImpl implements MemberService{
-	
+public class MemberServiceImpl implements MemberService {
+
 	@Autowired
 	private MemberMapper memberMapper;
-	
+
 	@Override
 	public void join(MemberVO member) {
 		log.info("join...." + member);
@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService{
 		log.info("get...." + id);
 		return memberMapper.read(id);
 	}
-	
+
 	@DateTimeFormat
 	@Override
 	public boolean modify(MemberVO member) {
@@ -56,5 +56,20 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberVO memberLogin(MemberVO member) throws Exception {
 		return memberMapper.memberLogin(member);
+	}
+
+	@Override
+	public int idCheck(String memberId) {
+		return memberMapper.idCheck(memberId);
+	}
+
+	@Override
+	public int nickCheck(String memberNickname) {
+		return memberMapper.nickCheck(memberNickname);
+	}
+
+	@Override
+	public int introCheck(String memberIntroducer) {
+		return memberMapper.introCheck(memberIntroducer);
 	}
 }

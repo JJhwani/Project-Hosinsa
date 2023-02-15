@@ -75,30 +75,4 @@
 		</div>
 	</form>
 </body>
-
-<script type="text/javascript">
-$(document).ready(function() {
-	var formObj = $("form");
-	
-	$("button").on("click", function(e) {
-		e.preventDefault();
-		var operation = $(this).data("oper");
-		
-		console.log(operation);
-		
-		if(operation === 'list') {
-			formObj.attr("action", "/admin/member").attr("method", "get");
-			var pageNumTag = $("input[name='pageNum']").clone();
-			var amountTag = $("input[name='amount']").clone();
-			var keywordTag = $("input[name='keyword']").clone();
-			
-			formObj.empty();
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(keywordTag);
-		}
-		formObj.submit();
-	});
-});
-</script>
 </html>
