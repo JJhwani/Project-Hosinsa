@@ -153,6 +153,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		$(".cart_in").on("click",function(){
+			
+		});
+		
+		
 		$(".tab_info").on("click",function(){
 			$(".detailView").removeClass("hidden");
 			$(".review").addClass("hidden");

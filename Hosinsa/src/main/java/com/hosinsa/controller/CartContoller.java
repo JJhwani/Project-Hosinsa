@@ -46,7 +46,6 @@ public class CartContoller {
 	public void list(Model model, @ModelAttribute("member") MemberVO vo) {
 		
 		String id = vo.getId();
-		log.info(id);
 		log.info("list.............2");
 		model.addAttribute("list", service.getList(id));
 
@@ -71,4 +70,12 @@ public class CartContoller {
 		return "redirect:/cart/list";
 	}
 
+	@GetMapping("/order")
+	public void order(Model model, @ModelAttribute("member") MemberVO vo) {
+		
+		String id = vo.getId();
+		log.info("list.............2");
+		model.addAttribute("list", service.getList(id));
+
+	}
 }
