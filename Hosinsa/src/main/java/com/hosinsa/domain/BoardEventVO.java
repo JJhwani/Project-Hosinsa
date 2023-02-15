@@ -11,8 +11,8 @@ public class BoardEventVO {
 	private Long event_no;
 	private String event_img;
 	private String title;
-	private String content;
 	private String subtext;
+	private String content;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date start_date;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

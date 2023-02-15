@@ -50,6 +50,15 @@
 	
 	
 	
+	<!-- getEventList -->
+	<select id="getEventList" resultType="com.hosinsa.domain.BoardEventVO">
+		<![CDATA[
+			SELECT EVENT_NO, EVENT_IMG, TITLE, CONTENT, SUBTEXT, START_DATE, END_DATE, REGDATE, UPDATE_DATE, WRITER, EVENT_PW
+				FROM 
+				(SELECT * FROM HOSINSA_BOARD_EVENT)
+			 WHERE START_DATE <= SYSDATE AND SYSDATE <= END_DATE
+		]]>
+	</select>
 	<!-- getListMainEvent -->
 	<select id="getListMainEvent" resultType="com.hosinsa.domain.BoardEventVO">
 		<![CDATA[

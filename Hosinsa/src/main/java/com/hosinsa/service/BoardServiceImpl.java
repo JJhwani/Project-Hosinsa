@@ -43,12 +43,19 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int getTotalEvent(Criteria cri) {
-		return mapper.getTotalCountEvent(cri);	}
-
+		return mapper.getTotalCountEvent(cri);
+	}
+	
+	@Override
+	public List<BoardEventVO> getEventList(BoardEventVO bevo) {
+		return mapper.getEventList(bevo);
+	} 
+	
 	@Override
 	public List<BoardEventVO> getListMainEvent(BoardEventVO bevo) {
 		return mapper.getListMainEvent(bevo);
-	} 
+	}
+	
 	
 
 

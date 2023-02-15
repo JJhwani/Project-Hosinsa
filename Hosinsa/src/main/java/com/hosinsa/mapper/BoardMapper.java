@@ -12,5 +12,6 @@ public interface BoardMapper {
 	public int modifyEvent(BoardEventVO vo);								// 이벤트 수정
 	public int removeEvent(Long event_no);									// 이벤트 삭제
 	public int getTotalCountEvent(Criteria cri);							// 이벤트 전체 개수
+	public List<BoardEventVO> getEventList(BoardEventVO vo);	 			// Main 페이지 Banner에 이벤트 5개 출력
 	public List<BoardEventVO> getListMainEvent(BoardEventVO vo);	 		// Main 페이지 진행중인 이벤트 3개 출력
 }

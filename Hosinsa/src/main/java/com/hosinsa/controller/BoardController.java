@@ -50,7 +50,6 @@ public class BoardController {
 	// 개별 이벤트 
 	@PostMapping("/event/read")
 	public String eventRead(@RequestParam("event_no") Long event_no, @ModelAttribute("cri") Criteria cri, Model model) {
-		log.info(event_no);
 		model.addAttribute("event", service.readEvent(event_no));
 		
 		return "/board/eventRead";
@@ -105,8 +104,15 @@ public class BoardController {
 		//==========================배포 전 경로 Works3로 수정해 주세요.
 		String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\eventBanner\\";
 		String fileName = uploadFile.getOriginalFilename();
+		
+		log.info("========================="+fileName);
+		
+		if(fileName.equals("")) {
+			fileName = bevo.getEvent_img().substring(bevo.getEvent_img().lastIndexOf("/")+1);
+		}
+		
 		File saveFile = new File(uploadFolder, fileName);
-				
+		
 		try {
 			uploadFile.transferTo(saveFile);
 		}catch(Exception e){
@@ -114,7 +120,7 @@ public class BoardController {
 		}
 		
 		bevo.setEvent_img("../../resources/images/eventBanner/"+fileName);
-		
+
 		if(service.modifyEvent(bevo)) {
 			model.addAttribute("modify","success");
 		}

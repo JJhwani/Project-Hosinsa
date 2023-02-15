@@ -4,21 +4,11 @@
 <div class="mainWrap">
 	<div class="mainBanner">
 		<ul class="bannerView">
-			<li>
-				<a href="#"><img src="../../resources/images/event1.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event2.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event3.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event4.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event5.jpg"></a>
-			</li>
+			<c:forEach var="eventList" items="${eventList}">
+	 			<li>
+					<a href="${eventList.event_no}"><img src="${eventList.event_img}"></a>
+				</li>
+		 	</c:forEach>
 		</ul>
 		<div class="deem"></div>
 		<div class="arrow">
