@@ -15,8 +15,8 @@
 			<fmt:formatDate pattern="yyyy-MM-dd" value="${event.end_date}"></fmt:formatDate>
 		</h5>
 		<c:if test="${member.grade eq 'S'}">
-			<button class="modify">수정</button>
-			<button class="list">뒤로</button>
+			<button class="btn modify">수정</button>
+			<button class="btn list">뒤로</button>
 		</c:if>
 		<br><br>
 		<img src="${event.content}">

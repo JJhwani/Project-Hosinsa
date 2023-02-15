@@ -56,9 +56,15 @@ public class BoardController {
 		return "/board/eventRead";
 	}
 	
+	// 이벤트 추가 폼
+	@GetMapping("/event/register")
+	public String eventRegisterForm() {
+		return "/board/eventRegister";
+	}
+	
 	// 이벤트 추가
-	@PostMapping("/register")
-	public String eventResister(BoardEventVO bevo, Criteria cri, MultipartFile uploadFile, Model model) {
+	@PostMapping("/event/register")
+	public String eventRegister(BoardEventVO bevo, Criteria cri, MultipartFile uploadFile, Model model) {
 		//==========================배포 전 경로 Works3로 수정해 주세요.
 		String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\eventBanner\\";
 		String fileName = uploadFile.getOriginalFilename();
@@ -124,14 +130,13 @@ public class BoardController {
 	}
 	
 	// 이벤트 삭제
-	@PostMapping("/remove")
-	public String eventRemove(@RequestParam("event_no") Long event_no, Criteria cri, RedirectAttributes rttr) {
-		log.info("remove ===> ");
+	@PostMapping("/event/remove")
+	public String eventRemove(@RequestParam("event_no") Long event_no, Criteria cri, Model model) {
 		if(service.removeEvent(event_no)) {
-			rttr.addFlashAttribute("result", "success");
+			model.addAttribute("result", "success");
 		}
 		
-		return "redirect:/board/event/list"+cri.getListLink();
+		return "/board/event";
 	}
 	
 }

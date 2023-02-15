@@ -1,10 +1,18 @@
 $(document).ready(function(){      
 	
 	var paging = $(".paging");
-	var eventForm = $(".eventForm")
-	var eventModify = $(".eventModify")
+	var eventForm = $(".eventForm");
+	var eventRegister = $(".eventRegister");
+	var eventModify = $(".eventModify");
+	
+	//페이징처리
+	$(".paginate_button a").on("click", function(e) {
+		e.preventDefault();
+		paging.find("input[name='pageNum']").val($(this).attr("href"));
+		paging.submit();
+	});
 
-	// 개별 이벤트 페이지로 이동
+	// 이벤트 리스트 페이지에서 개별 이벤트 페이지로 이동
 	$(".move").on("click", function(e){
 		e.preventDefault();
 		paging.find("input[name='event_no']").remove();
@@ -13,32 +21,82 @@ $(document).ready(function(){
 		paging.submit();
 	});
 
-	//페이징처리
-	$(".paginate_button a").on("click", function(e) {
-		e.preventDefault();
-		paging.find("input[name='pageNum']").val($(this).attr("href"));
-		paging.submit();
-	});
-
-	// 이벤트 등록 페이지로 이동
-	$(".register").on("click", function(e) {
-		e.preventDefault();
-		$(".register").attr("href", "/board/event/register");
-		$(".register").submit();
-	});
-	
-	// 이벤트 수정 페이지로 이동
-	$(".eventRead .modify").on("click",function(e){
+	// 개별 이벤트 페이지에서 이벤트 수정 페이지로 이동
+	$(".eventRead .btn.modify").on("click",function(e){
 		eventForm.attr("method","get")
 		eventForm.attr("action","/board/event/modify").submit();
 	});
 	
-	// 이벤트 리스트 페이지로 이동
-	$(".eventRead .list").on("click",function(e){
+	// 개별 이벤트 페이지에서 이벤트 리스트 페이지로 이동
+	$(".eventRead .btn.list").on("click",function(e){
 		eventForm.find("input[name='event_no']").remove();
 		eventForm.attr("action","/board/event/list");
 		eventForm.submit();
 	})
+
+	// 이벤트 등록폼에서 이벤트 등록 페이지로 이동
+	$(".eventRegister .btn.register").on("click",function(e){
+		eventRegister.attr("action","/board/event/register").submit();
+	});
+	
+	// 이벤트 등록 페이지에서 이벤트 리스트 페이지로 이동
+	$(".eventRegister .btn.list").on("click",function(e){
+		eventRegister.attr("action","/board/event/list");
+		eventRegister.submit();
+	})
+
+	// 이벤트 등록 유효성 체크
+	$(".eventRegister .btn.register").on("click",function(e){		
+		e.preventDefault();
+		if($("input[name=event_pw]").val() == ""){
+			alert("비밀번호를 입력해 주세요.");
+			return false;
+		}
+		else if($("input[name=event_pw]").val().length < 4){
+			alert("비밀번호는 4자 이상 10자 이내로 입력해주세요.");
+			return false;
+		}
+		else if($("input[name=event_pw]").val().length > 10){
+			alert("비밀번호는 4자 이상 10자 이내로 입력해주세요.");
+			return false;
+		}
+		else if($("input[name=title]").val() == ""){
+			alert("제목을 입력해 주세요.");
+			return false;
+		}
+		else if($("input[name=subtext]").val() == ""){
+			alert("소제목을 입력해 주세요.");
+         return false;
+		}
+		else if($("input[name=start_date]").val() == ""){
+			alert("시작날짜를 입력해 주세요.");
+			return false;
+		}
+		else if($("input[name=end_date]").val() == ""){
+			alert("종료날짜를 입력해 주세요.");
+			return false;
+		}
+		else if($(".inputDetail").val() == ""){
+			alert("상세정보를 입력해 주세요.");
+			return false;
+		}
+	})
+
+	// 이벤트 수정 페이지에서 이벤트 리드 페이지로 가기
+	$(".eventModify .btn.list").on("click",function(e){		
+		e.preventDefault();
+		history.go(-1);
+	})
+
+	// 이벤트 수정 페이지에서 이벤트 삭제 페이지로 가기
+	$(".eventModify .btn.remove").on("click",function(e){		
+		e.preventDefault();
+		eventModify.append("<input type='hidden' name='event_no' value='"
+			+eventModify.find("input[name=event_no]").val()+"'>");
+		eventModify.attr("action","/board/event/remove");
+		eventModify.submit();
+	})
+
 
 	$("input[name='event_img']").val($(".event_img").attr("src"));
 	
@@ -59,49 +117,8 @@ $(document).ready(function(){
             }
             reader.readAsDataURL(input.files[0]);
         }
-    }
+    }	
+
 	
-
-
-	// 이벤트 수정 페이지에서 이벤트 리드 페이지로 가기
-	$(".btn.list").on("click",function(e){		
-		e.preventDefault();
-		history.go(-1);
-	})
-
-	// 이벤트 수정 페이지에서 이벤트 삭제 페이지로 가기
-	$(".btn.remove").on("click",function(e){		
-		e.preventDefault();
-		eventModify.attr("action","/board/event/remove");
-		eventModify.submit();
-	})
-
-
-
-	//이벤트 수정 유효성 체크
-//	$(".btn.modify").on("click",function(e){		
-//		e.preventDefault();
-//		if($("input[name=title]").val("")){
-//			alert("제목을 입력해 주세요.");
-//			return false;
-//		}
-//		else if($("input[name=subtext]").val("")){
-//			alert("소제목을 입력해 주세요.");
-//         return false;
-//		}
-//		else if($("input[name=start_date]").val("")){
-//			alert("시작날짜를 입력해 주세요.");
-//			return false;
-//		}
-//		else if($("input[name=end_date]").val("")){
-//			alert("종료날짜를 입력해 주세요.");
-//			return false;
-//		}
-//		else if($("input[name=content]").val("")){
-//			alert("상세정보를 입력해 주세요.");
-//			return false;
-//		}
-//	})
-
 
  });

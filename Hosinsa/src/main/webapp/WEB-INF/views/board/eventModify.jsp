@@ -8,12 +8,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
 <div class="contentWrap">
-	<form class="eventModify"role="form" action="/board/event/modify" enctype="multipart/form-data" method="post">
+	<form class="eventModify" role="form" action="/board/event/modify" enctype="multipart/form-data" method="post">
 		<div class="imgWrap">
 			<img class="event_img" src="${event.event_img}">
 			<input type="file" name="uploadFile" class="event_imgFile hidden">
 		</div>
-		<input type="hidden" name="event_img">
+		<input type="text" name="event_img" value="${event.event_img}">
 		<h4 class="miniTitle">Event Info <i>이벤트 정보</i></h4>
 		<table class="infoTable">
 			<tr>
@@ -52,5 +52,19 @@
 </div>
 
 <script src="../../../resources/js/board.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	if("${register}"==="success"){
+		alert("수정 요청이 성공적으로 처리되었습니다.");
+	}
+	if("${modify}"==="success"){
+		alert("수정 요청이 성공적으로 처리되었습니다.");
+	}
+	if("${remove}"==="success"){
+		alert("제품 삭제가 성공적으로 처리되었습니다.");
+	}
+});
+</script>
 
 <%@ include file="../includes/footer.jsp" %>

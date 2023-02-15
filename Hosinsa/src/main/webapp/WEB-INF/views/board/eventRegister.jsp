@@ -10,15 +10,19 @@
 <div class="contentWrap">
 	<form class="eventRegister"role="form" action="/board/event/register" enctype="multipart/form-data" method="post">
 		<div class="imgWrap">
-			<img class="event_img" src="${event.event_img}">
+			<img class="event_img" src="/resources/images/eventBanner/upload.jpg">
 			<input type="file" name="uploadFile" class="event_imgFile hidden">
 		</div>
 		<input type="hidden" name="event_img">
 		<h4 class="miniTitle">Event Info <i>이벤트 정보</i></h4>
 		<table class="infoTable">
 			<tr>
-				<th> 번호 </th>
-				<td><input type="text" name="event_no" value="${event.event_no}" readonly></td>
+				<th> 작성자 </th>
+				<td><input type="text" name="writer" value="${member.id}" readonly></td>
+			</tr>
+			<tr>
+				<th> 비밀번호 </th>
+				<td><input type="password" name="event_pw" value=""></td>
 			</tr>
 			<tr>
 				<th> 타이틀 </th>
