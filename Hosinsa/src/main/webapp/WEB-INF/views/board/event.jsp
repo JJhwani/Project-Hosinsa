@@ -16,28 +16,12 @@
 	<div class="eventView">
 		<section class="eventList">
 			<c:forEach var="event" items="${event}">
-	 			<div class="event_box">
+	 			<div class="event_area">
 					<c:choose>
 						<c:when test="${event.start_date <= today and today <= event.end_date}">
-							<div class="event_img">
-								<p>진행중 이벤트</p>
-								<a class="move" href="${event.event_no}">
-									<img src="${event.event_img}" width="250px" height="200px">
-								</a>
-							</div>
-							<div class="event_info">
-								<span class="period">
-									<fmt:formatDate pattern="yyyy-MM-dd" value="${event.start_date}"></fmt:formatDate>~
-									<fmt:formatDate pattern="yyyy-MM-dd" value="${event.end_date}"></fmt:formatDate>
-								</span>
-								<p class="title">${event.title}</p>
-								<p class="subtext">${event.subtext}</p>							
-							</div>
-						</c:when>
-						<c:when test="${today <= event.start_date and today <= event.end_date}">
-							<c:if test="${member.grade eq 'S'}">
+							<div class="event_box">
 								<div class="event_img">
-									<p>준비중 이벤트</p>
+									<p>진행중 이벤트</p>
 									<a class="move" href="${event.event_no}">
 										<img src="${event.event_img}" width="250px" height="200px">
 									</a>
@@ -50,22 +34,44 @@
 									<p class="title">${event.title}</p>
 									<p class="subtext">${event.subtext}</p>							
 								</div>
-							</c:if>
+							</div>
+						</c:when>
+						<c:when test="${today <= event.start_date and today <= event.end_date}">
+							<div class="event_box">
+								<c:if test="${member.grade eq 'S'}">
+									<div class="event_img">
+										<p>준비중 이벤트</p>
+										<a class="move" href="${event.event_no}">
+											<img src="${event.event_img}" width="250px" height="200px">
+										</a>
+									</div>
+									<div class="event_info">
+										<span class="period">
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${event.start_date}"></fmt:formatDate>~
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${event.end_date}"></fmt:formatDate>
+										</span>
+										<p class="title">${event.title}</p>
+										<p class="subtext">${event.subtext}</p>							
+									</div>
+								</c:if>
+							</div>
 						</c:when>
 						<c:when test="${event.start_date <= today and event.end_date <= today}">
-							<div class="event_img">
-								<p>완료된 이벤트</p>
-								<a class="move" href="${event.event_no}">
-									<img src="${event.event_img}" width="250px" height="200px">
-								</a>
-							</div>
-							<div class="event_info">
-								<span class="period">
-									<fmt:formatDate pattern="yyyy-MM-dd" value="${event.start_date}"></fmt:formatDate>~
-									<fmt:formatDate pattern="yyyy-MM-dd" value="${event.end_date}"></fmt:formatDate>
-								</span>
-								<p class="title">${event.title}</p>
-								<p class="subtext">${event.subtext}</p>							
+							<div class="event_box">
+								<div class="event_img">
+									<p>완료된 이벤트</p>
+									<a class="move" href="${event.event_no}">
+										<img src="${event.event_img}" width="250px" height="200px">
+									</a>
+								</div>
+								<div class="event_info">
+									<span class="period">
+										<fmt:formatDate pattern="yyyy-MM-dd" value="${event.start_date}"></fmt:formatDate>~
+										<fmt:formatDate pattern="yyyy-MM-dd" value="${event.end_date}"></fmt:formatDate>
+									</span>
+									<p class="title">${event.title}</p>
+									<p class="subtext">${event.subtext}</p>							
+								</div>
 							</div>
 						</c:when>
 					</c:choose>
