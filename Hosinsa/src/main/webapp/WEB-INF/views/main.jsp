@@ -156,7 +156,7 @@
 					<li><a href="${event.event_no}">${event.title}</a></li>
 				</c:forEach>
 			</ul>
-			<a>전체보기</a>
+			<a href="">전체보기</a>
 		</form>
 	</div>
 	

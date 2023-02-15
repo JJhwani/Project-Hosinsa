@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.Criteria;
+import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.AdminService;
