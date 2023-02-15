@@ -15,6 +15,9 @@
 </head>
 <body>
 	<form role="form" action="/admin/memberModify" method="post">
+	<input type="hidden" name="pageNum" value="${cri.pageNum}">
+	<input type="hidden" name="amount" value="${cri.amount}">
+	<input type="hidden" name="keyword" value="${cri.keyword}">
 		<div class="container">
 			<h2>Manager Page</h2>
 			<table class="table table-hover">
@@ -84,13 +87,18 @@ $(document).ready(function() {
 		console.log(operation);
 		
 		if(operation === 'list') {
-			self.location = "/admin/member";
-			return;
+			formObj.attr("action", "/admin/member").attr("method", "get");
+			var pageNumTag = $("input[name='pageNum']").clone();
+			var amountTag = $("input[name='amount']").clone();
+			var keywordTag = $("input[name='keyword']").clone();
+			
+			formObj.empty();
+			formObj.append(pageNumTag);
+			formObj.append(amountTag);
+			formObj.append(keywordTag);
 		}
 		formObj.submit();
 	});
-	
-	
 });
 </script>
 </html>
