@@ -12,15 +12,27 @@
 	<!-- getListBest -->
 	<select id="getListBest" resultType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
-			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC) WHERE ROWNUM <= 4
+			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC) WHERE ROWNUM <= 6
 		]]>
 	</select>
 	<!-- getListNew -->
 	<select id="getListNew" resultType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
-			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY REGDATE DESC)	WHERE ROWNUM <= 4
+			SELECT * FROM (SELECT * FROM HOSINSA_PRODUCT ORDER BY REGDATE DESC)	WHERE ROWNUM <= 6
 		]]>
 	</select>
+	<!-- getListBestCategory -->
+	<select id="getListBestCategory" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT * FROM 
+				(SELECT * FROM
+					(SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC)
+				WHERE CATEGORY = #{category})
+			WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
+	
 	<!-- getListWithPaging -->
 	<select id="getListWithPaging" resultType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
@@ -32,6 +44,7 @@
 			
 		]]>
 	</select>
+	
 	<!-- getListWithPagingView -->
 	<select id="getListWithPagingView" resultType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
@@ -46,7 +59,7 @@
 		]]>
 	</select>
 	<!-- getListWithPagingCategory -->
-	<select id="getListWithPagingCategory" resultType="com.hosinsa.domain.ProductVO">
+	<select id="getListWithPagingCategory" resultType="com.hosinsa.domain.ProductVO" parameterType="com.hosinsa.domain.ProductVO">
 		<![CDATA[
 			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 			FROM
@@ -59,34 +72,254 @@
 		]]>
 	</select>
 	<!-- getTotalCountView -->
-	<select id="getTotalCountView" resultType="int">
-		
-		SELECT COUNT(*) FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC
-		
+	<select id="getTotalCountView" resultType="int">		
+		SELECT COUNT(*) FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC		
 	</select>
 	<!-- getTotalCount -->
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} AND PRONUM > 0
 	</select>
+	<!-- getTotalCountSearch -->
+	<select id="getTotalCountSearch" resultType="int">
+		SELECT COUNT(*) FROM HOSINSA_PRODUCT
+			WHERE (LOWER(PRONAME) LIKE '%'||#{keyword}||'%' OR
+    				LOWER(BRAND) LIKE '%'||#{keyword}||'%' OR PRONUM LIKE '%'||#{keyword}||'%')
+	</select>
+	
+	
+	<!-- getSortBestMain -->
+	<select id="getSortBestMain" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+					(SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC)
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- getSortNewMain  -->
+	<select id="getSortNewMain" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+					(SELECT * FROM HOSINSA_PRODUCT ORDER BY REGDATE DESC)
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- getSortLowPriceMain  -->
+	<select id="getSortLowPriceMain" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+					(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE ASC)
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- getSortHighPriceMain  -->
+	<select id="getSortHighPriceMain" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+					(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE DESC)
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- getSortReviewMain  -->
+	<select id="getSortReviewMain" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+					(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE DESC)
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
 	<!-- getSortBest -->
 	<select id="getSortBest" resultType="com.hosinsa.domain.ProductVO">
-		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PROVIEW DESC
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM 
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC)
+						WHERE CATEGORY = #{category})
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
 	</select>
 	<!-- getSortNew -->
 	<select id="getSortNew" resultType="com.hosinsa.domain.ProductVO">
-		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY REGDATE DESC
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM 
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY REGDATE DESC)
+						WHERE CATEGORY = #{category})
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
 	</select>
 	<!-- getSortLowPrice -->
 	<select id="getSortLowPrice" resultType="com.hosinsa.domain.ProductVO">
-		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PRICE ASC
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM 
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE ASC)
+						WHERE CATEGORY = #{category})
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
 	</select>
 	<!-- getSortHighPrice -->
 	<select id="getSortHighPrice" resultType="com.hosinsa.domain.ProductVO">
-		SELECT * FROM HOSINSA_PRODUCT WHERE CATEGORY = #{category} ORDER BY PRICE DESC
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM 
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE DESC)
+						WHERE CATEGORY = #{category})
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- getSortReview -->
+	<select id="getSortReview" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM 
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE DESC)
+						WHERE CATEGORY = #{category})
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
 	</select>
 	
-	<select id="getProductByPronum" resultType="com.hosinsa.domain.ProductVO">
+	
+	
+	<!-- getSortBestSearch -->
+	<select id="getSortBestSearch" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+				FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC)
+						WHERE (LOWER(PRONAME) LIKE '%'||#{keyword}||'%' OR
+    						LOWER(BRAND) LIKE '%'||#{keyword}||'%' OR PRONUM LIKE '%'||#{keyword}||'%'))
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- getSortNewSearch -->
+	<select id="getSortNewSearch" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+				FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY REGDATE DESC)
+						WHERE (LOWER(PRONAME) LIKE '%'||#{keyword}||'%' OR
+    						LOWER(BRAND) LIKE '%'||#{keyword}||'%' OR PRONUM LIKE '%'||#{keyword}||'%'))
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- getSortLowPriceSearch -->
+	<select id="getSortLowPriceSearch" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+				FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE ASC)
+						WHERE (LOWER(PRONAME) LIKE '%'||#{keyword}||'%' OR
+    						LOWER(BRAND) LIKE '%'||#{keyword}||'%' OR PRONUM LIKE '%'||#{keyword}||'%'))
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- getSortHighPriceSearch -->
+	<select id="getSortHighPriceSearch" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+				FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE DESC)
+						WHERE (LOWER(PRONAME) LIKE '%'||#{keyword}||'%' OR
+    						LOWER(BRAND) LIKE '%'||#{keyword}||'%' OR PRONUM LIKE '%'||#{keyword}||'%'))
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- getSortReviewSearch -->
+	<select id="getSortReviewSearch" resultType="com.hosinsa.domain.ProductVO">
+		<![CDATA[
+			SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+				FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE DESC)
+						WHERE (LOWER(PRONAME) LIKE '%'||#{keyword}||'%' OR
+    						LOWER(BRAND) LIKE '%'||#{keyword}||'%' OR PRONUM LIKE '%'||#{keyword}||'%'))
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>	
+	<!-- getSearchProduct -->
+	<select id="getSearchProduct" resultType="com.hosinsa.domain.ProductVO" parameterType="com.hosinsa.domain.ProductVO">
+		<!-- SELECT * FROM HOSINSA_PRODUCT WHERE
+    		(LOWER(PRONAME) LIKE '%#{keyword}%' OR LOWER(BRAND) LIKE '%#{keyword}%' OR PRONUM LIKE '%#{keyword}%') -->
+		<![CDATA[
+    		SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
+					FROM
+						(SELECT * FROM HOSINSA_PRODUCT WHERE (LOWER(PRONAME) LIKE '%'||#{keyword}||'%' OR
+    						LOWER(BRAND) LIKE '%'||#{keyword}||'%' OR PRONUM LIKE '%'||#{keyword}||'%'))
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+    	]]>
+	</select>
+	
+		
+	
+	<!-- getProductByPronum -->
+	<select id="getProductByPronum" resultType="com.hosinsa.domain.ProductVO" >
 		SELECT * FROM HOSINSA_PRODUCT WHERE PRONUM = #{pronum}
 	</select>
-
+	
+	<update id="updateView">
+		UPDATE HOSINSA_PRODUCT SET PROVIEW=PROVIEW+1 WHERE PRONUM = #{pronum}
+	</update>
+	
 </mapper>

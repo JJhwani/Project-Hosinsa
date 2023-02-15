@@ -10,7 +10,7 @@ public class Criteria {
 	private int amount;
 	private String type;
 	private String keyword;
-	private String category;
+	//private String category;
 	
 	public Criteria() {
 		this(1,28);

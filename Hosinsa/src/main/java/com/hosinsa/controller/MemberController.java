@@ -1,5 +1,8 @@
 package com.hosinsa.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -40,7 +44,7 @@ public class MemberController {
 	@GetMapping("/login")
 	public void login() {
 		log.info("login/get====");
-	}
+	}	
 	
 	@PostMapping("/login")
 	public String logPOST(MemberVO member, RedirectAttributes rttr, Model model) throws Exception {
@@ -54,29 +58,32 @@ public class MemberController {
 			rttr.addFlashAttribute("result", result);
 			return "redirect:/member/login";
 		} else {
-			model.addAttribute("member", vo);
+			model.addAttribute("member",vo);
 			return "redirect:/";
 		}
 		
-	} // 로그인 끝
+	}
 	
-	// 로그아웃
-	@GetMapping("/logout")
-	public String logoutGet(SessionStatus session) {
-		log.info("logout====");
-		session.setComplete();
-        
-        return "redirect:/";     
+	@GetMapping("/manager")
+	public void list(Model model) {
+		log.info("list----");
+		model.addAttribute("list", memberService.getList());
+	}
+	
+	@GetMapping("/get")
+	public void get(@RequestParam("id") String id, Model model) {
+		log.info("/member/get");
+		model.addAttribute("member", memberService.get(id));
 	}
 	
 	@PostMapping("/modify")
-	public String modifyPOST(MemberVO member, RedirectAttributes rttr) {
-		log.info("modifyPOST : " + member);
+	public String modify(MemberVO member, RedirectAttributes rttr) {
+		log.info("modify : " + member);
 		
 		if (memberService.modify(member)) {
 			rttr.addFlashAttribute("result", "success");
 		} 
-		return "redirect:/member/manager";
+		return "redirect:/member/list";
 	}
 	
 	@PostMapping("/remove")
@@ -86,62 +93,23 @@ public class MemberController {
 		if (memberService.remove(id)) {
 			rttr.addFlashAttribute("result", "seccess");
 		}
-		return "redirect:/member/manager";
+		return "redirect:/member/list";
 	}
 	
-	// 회원가입
 	@GetMapping("/join")
-	public void join() {
-		log.info("join====");
-	}
-	// 회원가입
+	public void join() {}
+	
 	@PostMapping("/join")
-	public String joinPOST(MemberVO member, RedirectAttributes rttr) {
-		log.info("joinPOST====" + member);
+	public String join(MemberVO member, RedirectAttributes rttr) {
+		log.info("join----" + member);
 		memberService.join(member);
 		rttr.addFlashAttribute("result", member.getId());
-		return "redirect:/";
+		return "redirect:/member/login";
 	}
-	// 아이디 중복체크
-	@PostMapping("/memberIdChk")
-	@ResponseBody // join.jsp로 메서드의 결과 반환
-	public String memberIdChkPOST(String memberId) {
-		log.info("memberIdChk====");
-		int result = memberService.idCheck(memberId);
-		
-		log.info("결과값 = " + result);
-		if(result != 0) {
-			return "fail";	// 중복 아이디가 존재
-		} else {
-			return "success";	// 중복 아이디 x
-		}
+	
+	@GetMapping("/myPage")
+	public String myPage(@ModelAttribute("member") MemberVO vo,Model model) {
+		model.addAttribute("member",vo);
+		return "/member/myPage";		
 	}
-	// 닉네임 중복체크
-	@PostMapping("/memberNickChk")
-	@ResponseBody
-	public String memberNicknamePOST(String memberNickname) {
-		log.info("memberNickChk====");
-		
-		int result = memberService.nickCheck(memberNickname);
-		log.info("결과값 : " + result);
-		if (result != 0) {
-			return "fail";	// 중복 닉네임이 존재
-		} else {
-			return "success";	// 중복 닉네임 x
-		}
-	}
-	// 추천인 확인
-	@PostMapping("/memberIntroChk")
-	@ResponseBody
-	public String memberIntroducerPOST(String memberIntroducer) {
-		log.info("memberIntroChk");
-		
-		int result = memberService.introCheck(memberIntroducer);
-		log.info("결과값 : " + result);
-		if (result != 0) {
-			return "success"; // 추천인 있음
-		} else {
-			return "fail";	// 추천인 없음 X
-		}
-	}
-}
+}   
