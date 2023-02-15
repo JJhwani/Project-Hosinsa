@@ -46,7 +46,78 @@
 				</c:forEach>
 			</c:otherwise>		
 		</c:choose>		
-	</table>	
-</div>
+	</table>
+	
+	<h4 class="miniTitle">내 리뷰 관리</h4>
+	<div class="tabWrap tab2">
+		<button class="tab tab_possible">작성 가능한 리뷰</button>
+		<button class="tab tab_already">내가 작성한 리뷰</button>
+	</div>
+	<div class="tabArea area1 reviewArea">
+		<div class="reviewWrap">
+			<div class="topper">
+				<img class="proimg" src="../../resources/images/upload.jpg">
+				<span class="ordernum">2</span>
+				<b class="brand">브랜드브랜드</b>
+				<a href="/product/{pronum}"><b>상품이름</b></a>
+				<button class="review_register black">작성하기</button>
+				<i>~2023-02-13</i>
+			</div>
+		</div>
+		<div class="reviewWrap">
+			<div class="topper">
+				<img class="proimg" src="../../resources/images/upload.jpg">
+				<span class="ordernum">2</span>
+				<b class="brand">브랜드브랜드</b>
+				<a href="/product/{pronum}"><b>상품이름</b></a>
+				<button class="review_register black">작성하기</button>
+				<i>~2023-02-13</i>
+			</div>
+		</div>
+	</div>
+	<div class="tabArea area2 reviewArea hidden">
+		<div class="reviewWrap">
+			<div class="topper">
+				<img class="proimg" src="../../resources/images/upload.jpg">
+				<span class="bno">2</span>
+				<a href="/product/{pronum}"><b>상품이름</b></a>
+				<button class="review_modify">수정</button>
+				<button class="review_delete">삭제</button>
+				<i>2023-02-13</i>
+			</div>
+			<p class="reviewTitle">집에가고싶다2</p>
+			<p class="content">기절하겠네</p>
+		</div>
+		<div class="reviewWrap">
+			<div class="topper">
+				<img class="proimg" src="../../resources/images/upload.jpg">
+				<span class="bno">2</span>
+				<a href="/product/{pronum}"><b>상품이름</b></a>
+				<button class="review_modify">수정</button>
+				<button class="review_delete">삭제</button>
+				<i>2023-02-13</i>
+			</div>
+			<p class="reviewTitle">집에가고싶다2</p>
+			<p class="content">기절하겠네</p>
+		</div>
+	</div>
+	<form class="reviewForm" action="/review/register" method="get">
+		<input type="hidden" name="ordernum" value="">
+	</form>
+</div><!-- //contentWrap -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".tabWrap .tab").on("click",function(){
+		if($(this).hasClass("tab_possible")){
+			$(".area1").removeClass("hidden");
+			$(".area2").addClass("hidden");
+		}else if($(this).hasClass("tab_already")){
+			$(".area1").addClass("hidden");
+			$(".area2").removeClass("hidden");
+		}
+	})
+})
+</script>
 
 <%@ include file="../includes/footer.jsp" %>
