@@ -2,10 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp" %>
 
+<%@ include file="../includes/header.jsp" %>
 <div class="row">
-	<div class="col-lg-12">
-		<h2 class="page-header">장바구니</h2>
-	</div>
 	<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
@@ -13,7 +11,7 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<table width="80%">
+				<table width="100%">
 					<thead>
 						<tr>
 							<th>선택 <br>
@@ -27,7 +25,6 @@
 						</tr>
 					</thead>
 					<tbody>
-
 						<c:forEach items="${list}" var="cart">
 							<tr class="odd gradeX">
 								<td><input type="checkbox" name="Chk_List" id="Chk_List"></td>
@@ -46,17 +43,9 @@
 					<button type="submit" class="del_Btn" > 선택상품 삭제</button>
 				</div>
 				
-				<form id="actionForm" action="/cart/list" method="get">
-                  	<input type="hidden" name="pronum" value="${pronum}">
-                  	<input type="hidden" name="proname" value="${proname}">
-                  </form>
-
-				
-
-
 				<div>
 					<ul class="cart_info">
-						<li>무신사는 전 상품 무료 배송입니다.</li>
+						<li>호신사는 전 상품 무료 배송입니다.</li>
 						<li>2개 이상의 브랜드를 주문하신 경우, 개별 배송됩니다.</li>
 						<li>결제 시 각종 할인 적용이 달라질 수 있습니다.</li>
 
@@ -74,7 +63,7 @@
 
 				<div>
 					<button class="order">주문하기</button>
-					<button>계속 쇼핑하기</button>
+					<button class="move_main">계속 쇼핑하기</button>
 				</div>
 			</div>
 			<!-- /.panel-body -->
@@ -84,16 +73,20 @@
 	<!-- /.col-lg-12 -->
 </div>
 
+<%@ include file="../includes/footer.jsp" %>
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var actionForm = $("#actionForm");
 		
-		/* $(".order").on("click",function(e){
-		console.log("버튼 클릭은 댐");
-		self.location = "order";
-		});*/
+		// 오더 목록
+		$(".order").on("click",function(e){
+		self.location = "./order";
+		});
 		
+		
+		// 카트 목록 전체선택
 		 $(function(){
 			var chkObj = document.getElementsByName("Chk_List");
 			var rowCnt = chkObj.length;
@@ -114,8 +107,15 @@
 			});
 		});
 		
+		
+		// 계속 쇼핑하기 버튼
+		$(".move_main").on("click",function(e){
+			self.location = "../";
+		})
+		
+		
+		// 카트삭제 버튼
 		$(".del_Btn").on("click",function(e){
-		console.log("버튼 클릭은 댐");
 		
 		var text = $("tbody input[type='checkbox']:checked").parent().next().text();
 		var list = $("tbody input[type='checkbox']");
@@ -146,42 +146,6 @@
 			});
 		}
 		
-		
-		
-		
-		/* var url = "delete";    // Controller로 보내고자 하는 URL (.dh부분은 자신이 설정한 값으로 변경해야됨)
-		var valueArr = new Array();
-	    var list = $("input[name='Chk_List']");
-	    for(var i = 0; i < list.length; i++){
-	        if(list[i].checked){ //선택되어 있으면 배열에 값을 저장함
-	            valueArr.push(list[i].value);
-	            console.log("선택된 배열 저장");
-	        }
-	    }
-	    if (valueArr.length == 0){
-	    	alert("선택된 글이 없습니다.");
-	    }
-	    else{
-	    	console.log("이프문 진입");
-			var chk = confirm("정말 삭제하시겠습니까?");				 
-			$.ajax({
-			    url : url,                    // 전송 URL
-			    type : 'POST',                // GET or POST 방식
-			    traditional : true,
-			    data : {
-			    	valueArr : valueArr        // 보내고자 하는 data 변수 설정
-			    },
-                success: function(jdata){
-                    if(jdata = 1) {
-                        alert("삭제 성공");
-                        location.replace("list")
-                    }
-                    else{
-                        alert("삭제 실패");
-                    }
-                }
-			});
-		} */
 		});
 	})
 </script>

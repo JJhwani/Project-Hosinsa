@@ -2,6 +2,7 @@ package com.hosinsa.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,6 +29,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @SessionAttributes("member")
 @RequestMapping("/member/*")
+@SessionAttributes("member")
 @AllArgsConstructor
 public class MemberController {
 
@@ -50,7 +52,8 @@ public class MemberController {
 		} else {
 			model.addAttribute("member",vo);
 			return "redirect:/";
-		}
+		} 
+		
 		
 	}
 	

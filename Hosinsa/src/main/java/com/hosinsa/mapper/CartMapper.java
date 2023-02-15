@@ -7,7 +7,7 @@ import com.hosinsa.domain.CartVO;
 
 public interface CartMapper {
 	
-	public List<CartVO> getList();
+	public List<CartVO> getList(String id);
 	
 	public void insert(CartVO cart);
 	
