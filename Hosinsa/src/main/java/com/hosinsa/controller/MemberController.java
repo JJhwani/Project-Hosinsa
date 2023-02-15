@@ -73,45 +73,6 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/manager")
-	public void list(Model model) {
-		log.info("list----");
-		model.addAttribute("list", memberService.getList());
-	}
-
-	@GetMapping("/get")
-	public void get(@RequestParam("id") String id, Model model) {
-		log.info("/member/get");
-		model.addAttribute("member", memberService.get(id));
-	}
-
-	@GetMapping("/modify")
-	public void modifyGET(@ModelAttribute("member") MemberVO vo, Model model) {
-		log.info("modofyGET====");
-		model.addAttribute("member", vo);
-	}
-
-	@PostMapping("/modify")
-	public String modify(MemberVO member, RedirectAttributes rttr, Model model) {
-		log.info("modify : " + member);
-		model.addAttribute("member", member);
-		
-		if (memberService.modify(member)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		return "redirect:/member/myPage";
-	}
-
-	@PostMapping("/remove")
-	public String remove(@RequestParam("id") String id, RedirectAttributes rttr) {
-		log.info("remove----" + id);
-
-		if (memberService.remove(id)) {
-			rttr.addFlashAttribute("result", "seccess");
-		}
-		return "redirect:/member/list";
-	}
-
 	@GetMapping("/join")
 	public void join() {
 	}
@@ -170,7 +131,39 @@ public class MemberController {
 	}
 
 	@GetMapping("/myPage")
-	public void myPage(@RequestParam("id") String id, Model model) {
-		model.addAttribute("member", memberService.get(id));
+	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
+		model.addAttribute("member", vo);
+	}
+	
+	@GetMapping("/modify")
+	public void modifyGET(@ModelAttribute("member") MemberVO vo, Model model) {
+		log.info("modofyGET====");
+		model.addAttribute("member", vo);
+	}
+	
+	@PostMapping("/modify")
+	public String modifyPOST(MemberVO member, RedirectAttributes rttr, Model model) {
+		log.info("modify : " + member);
+		model.addAttribute("member", member);
+		
+		if (memberService.modify(member)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		return "redirect:/member/myPage";
+	}
+	
+	@GetMapping("/remove")
+	public void removeGET(@ModelAttribute("member") MemberVO vo, Model model) {
+		model.addAttribute("member", vo);
+	}
+	
+	@PostMapping("/remove")
+	public String removePOST(@RequestParam("id") String id, RedirectAttributes rttr) {
+		log.info("remove----" + id);
+		
+		if (memberService.remove(id)) {
+			rttr.addFlashAttribute("result", "seccess");
+		}
+		return "redirect:/member/list";
 	}
 }
