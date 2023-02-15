@@ -29,16 +29,23 @@
 	</table>
 	<button>배송지 추가</button>
 	
-	<h4 class="miniTitle">주문내역</h4>
+	<h4 class="miniTitle">주문내역</h4>	
 	<table class="table1">
-		<tr>
-			<th>주문번호</th><th>주문날짜</th><th>주문상품</th><th>주문금액</th><th>진행상태</th>
-		</tr>
-		<c:forEach var="orderList" items="${orderList}">
-			<tr>
-				<td>{orderList.ordernum}</td><td>{orderList.orderDate}</td><td>{orderList.product}</td><td>{orderList.price}</td><td>{orderList.process}</td>
-			</tr>
-		</c:forEach>
+		<c:choose>
+			<c:when test="${empty orderList}">
+				<tr><td>주문 내역이 없습니다.</td><tr>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<th>주문번호</th><th>주문날짜</th><th>주문상품</th><th>주문금액</th><th>진행상태</th>
+				</tr>
+				<c:forEach var="orderList" items="${orderList}">
+					<tr>
+						<td>{orderList.ordernum}</td><td>{orderList.orderDate}</td><td>{orderList.product}</td><td>{orderList.price}</td><td>{orderList.process}</td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>		
+		</c:choose>		
 	</table>	
 </div>
 
