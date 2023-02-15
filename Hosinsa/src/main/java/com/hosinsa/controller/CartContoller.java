@@ -71,9 +71,9 @@ public class CartContoller {
 	}
 
 	@GetMapping("/order")
-	public void order(Model model, @ModelAttribute("member") MemberVO vo) {
+	public void order(HttpSession session, Model model, @ModelAttribute("member") MemberVO member) {
 		
-		String id = vo.getId();
+		String id = member.getId();
 		log.info("list.............2");
 		model.addAttribute("list", service.getList(id));
 

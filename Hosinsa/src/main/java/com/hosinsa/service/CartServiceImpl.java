@@ -35,5 +35,10 @@ public class CartServiceImpl implements CartService {
 	public List<CartVO> getList(String id) {
 		return mapper.getList(id);
 	}
+	
+	@Override
+	public List<CartVO> getOrder(String id) {
+		return mapper.getOrder(id);
+	}
 }
 

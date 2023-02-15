@@ -11,6 +11,12 @@
 	]]>
 </select>
 
+<select id="getOrder" resultType="com.hosinsa.domain.CartVO">
+ <![CDATA[
+  	select * from hosinsa_cart where CARTNUM = #{cartNum}
+	]]>
+</select>
+
 <!-- 카트 삭제 -->
 <delete id="deleteCart">
  delete hosinsa_Cart
