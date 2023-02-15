@@ -35,5 +35,10 @@ public class CartServiceImpl implements CartService {
 	public List<CartVO> getList(String id) {
 		return mapper.getList(id);
 	}
+
+	@Override
+	public boolean cartIn(CartVO vo) {
+		return mapper.cartIn(vo)==1?true:false;
+	}
 }
 

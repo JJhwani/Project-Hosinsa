@@ -67,14 +67,15 @@
 			<button class="btn modify">제품 수정</button>
 			<button class="btn delete">제품 삭제</button>
 		</c:if>      
-		<input type="number" name="quantity" class="cart_quan" min="1" value="1">
+		<input type="number" class="cart_quan" min="1" value="1">
 		<button type="button" name="cart" class="cart_in">addToCart</button>
 		
 		<button class="btn list" onclick="javascript:history.go(-1);">뒤로</button>
 	</div>	
-	<form class="productForm" action="" method="get">
+	<form class="productForm" action="/cart/cartIn" method="post">
 		<input type="hidden" name="pronum" value="${product.pronum}">
 		<input type="hidden" name="quantity" value="">
+		<input type="hidden" name="id" value="${member.id }">
 	</form>
 	<div class="tabWrap tab2">
 		<button class="tab tab_info">Info</button>
@@ -177,8 +178,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		var productForm = $(".productForm");
+		
 		$(".cart_in").on("click",function(){
-			
+			productForm.find("input[name='quantity']").val($(".cart_quan").val());
+			productForm.attr("method","post").submit();
 		});
 		
 		
@@ -249,18 +253,17 @@
 		    
 		    return [year, month, day].join('-');
 		    
-	    }
+	    }	
 		
-		var productForm = $(".productForm");
 		
 		//댓글 삭제
 		$(".modify").on("click",function(){
-			productForm.attr("action","/admin/modify").submit();
+			productForm.attr("action","/admin/modify").attr("method","get").submit();
 		});
 		
 		$(".delete").on("click",function(){
 			if(confirm("제품번호 "+${product.pronum}+" : 정말로 삭제하시겠습니까?")){				
-				productForm.attr("action","/admin/delete").submit();
+				productForm.attr("action","/admin/delete").attr("method","get").submit();
 			}else{
 				return false;
 			}			
@@ -370,7 +373,15 @@
 				return false;
 			}
 		})
+		
+		if("${cartIn}"=="success"){
+			if(confirm("장바구니에 상품이 담겼습니다. 지금 확인하시겠습니까?")){
+				location.href="/cart/list";
+			}else{
+				return false;
+			}
+		}
 	})
 </script>
-
+<script src="../../resources/js/main.js"></script>
 <%@ include file="includes/footer.jsp" %>

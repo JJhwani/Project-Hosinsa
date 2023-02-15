@@ -13,6 +13,6 @@ public interface CartService {
 	
 	//카트삭제
 	public boolean deleteCart(long cartnum);
-
+	public boolean cartIn(CartVO vo);
 	
 }

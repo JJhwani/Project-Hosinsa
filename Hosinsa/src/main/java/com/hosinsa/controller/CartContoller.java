@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.CartVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.CartService;
 import lombok.AllArgsConstructor;
@@ -77,5 +80,13 @@ public class CartContoller {
 		log.info("list.............2");
 		model.addAttribute("list", service.getList(id));
 
+	}
+	
+	@PostMapping("/cartIn")
+	public String cartIn(CartVO vo,RedirectAttributes rttr) {
+		if(service.cartIn(vo));
+		rttr.addFlashAttribute("cartIn","success");		
+		rttr.addAttribute("pronum",vo.getPronum());
+		return "redirect:/product/{pronum}";
 	}
 }
