@@ -87,6 +87,7 @@
 			</div>
 			<p class="reviewTitle">집에가고싶다2</p>
 			<p class="content">기절하겠네</p>
+			<p class="reReply">댓글 0개</p>
 		</div>
 		<div class="reviewWrap">
 			<div class="topper">
@@ -99,6 +100,7 @@
 			</div>
 			<p class="reviewTitle">집에가고싶다2</p>
 			<p class="content">기절하겠네</p>
+			<p class="reReplyWrap"><button class="reReply">댓글 0개</button></p>
 		</div>
 	</div>
 	<form class="reviewForm" action="/review/register" method="get">

@@ -29,7 +29,6 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @SessionAttributes("member")
 @RequestMapping("/member/*")
-@SessionAttributes("member")
 @AllArgsConstructor
 public class MemberController {
 

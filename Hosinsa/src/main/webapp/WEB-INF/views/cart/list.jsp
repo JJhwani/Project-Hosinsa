@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp" %>
 
-<%@ include file="../includes/header.jsp" %>
-<div class="row">
-	<!-- /.col-lg-12 -->
-</div>
+
 <!-- /.row -->
 <div class="row">
 	<div class="col-lg-12">
@@ -72,8 +69,6 @@
 	</div>
 	<!-- /.col-lg-12 -->
 </div>
-
-<%@ include file="../includes/footer.jsp" %>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
