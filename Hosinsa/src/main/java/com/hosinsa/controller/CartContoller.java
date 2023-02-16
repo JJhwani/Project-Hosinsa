@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.CartVO;
 import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.CartService;
@@ -53,8 +54,6 @@ public class CartContoller {
 		String id = vo.getId();
 		log.info("list.............2");
 		model.addAttribute("list", service.getList(id));
-		log.info("list.............3");
-
 	}
 
 

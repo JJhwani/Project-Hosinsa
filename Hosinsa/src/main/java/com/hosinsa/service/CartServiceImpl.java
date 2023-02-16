@@ -39,6 +39,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public List<CartVO> getOrder(long cartnum) {
 		return mapper.getOrder(cartnum);
+	}
 
 	@Override
 	public boolean cartIn(CartVO vo) {
