@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="../includes/header.jsp" %>
+	pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ include file="../includes/header.jsp"%>
+<div class="row">
+	<!-- /.col-lg-12 -->
+</div>
 <!-- /.row -->
 <div class="row">
 	<div class="col-lg-12">
@@ -11,8 +16,7 @@
 				<table width="100%">
 					<thead>
 						<tr>
-							<th>선택 <br>
-							 <input type="checkbox" name="Chk_SelectAll"></th>
+							<th>선택 <br> <input type="checkbox" name="Chk_SelectAll"></th>
 							<th>주문 번호</th>
 							<th></th>
 							<th>제품 번호</th>
@@ -37,9 +41,9 @@
 					</tbody>
 				</table>
 				<div>
-					<button type="submit" class="del_Btn" > 선택상품 삭제</button>
+					<button class="del_Btn">선택상품 삭제</button>
 				</div>
-				
+
 				<div>
 					<ul class="cart_info">
 						<li>호신사는 전 상품 무료 배송입니다.</li>
@@ -56,10 +60,13 @@
 							주문 합산)</li>
 					</ul>
 				</div>
-
+				
+				<form action="/cart/order" method="get" class="cartForm">
+					<input type="text" name="cartnum" value="">
+				</form>
 
 				<div>
-					<button class="order">주문하기</button>
+					<button type="button" class="order">주문하기</button>
 					<button class="move_main">계속 쇼핑하기</button>
 				</div>
 			</div>
@@ -73,13 +80,44 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var actionForm = $("#actionForm");
 		
 		// 오더 목록
 		$(".order").on("click",function(e){
-		self.location = "./order";
+			var text = $("tbody input[type='checkbox']:checked").parent().next().text();
+			var list = $("tbody input[type='checkbox']");
+			var valueArr = new Array();			
+			
+			$("tbody input[type='checkbox']").each(function(){
+				if($(this).is(":checked")){ //선택되어 있으면 배열에 값을 저장함
+		            valueArr.push($(this).parent().next().text());
+		        }
+				else{
+					console.log($(this));		
+				}
+			});		
+			if (valueArr.length == 0){
+		    	alert("선택된 상품이 없습니다.");
+		    }else{
+				/* $.ajax({
+				    url : "/cart/order",						
+				    dataType: "json",
+				    type : 'GET',								
+				    data : {chbox : valueArr},				
+				 	success : function(result){
+				 		console.log("success까지 들어옴");
+				      if(result == 1) {     
+				       location.href = "/cart/order"
+				      } else {
+				       alert("삭제 실패")
+				      }
+				     } 
+				});*/
+				$(".cartForm input").val(valueArr);
+				$(".cartForm").submit();
+				
+			}
 		});
-		
+	
 		
 		// 카트 목록 전체선택
 		 $(function(){
@@ -111,34 +149,35 @@
 		
 		// 카트삭제 버튼
 		$(".del_Btn").on("click",function(e){
-		
 		var text = $("tbody input[type='checkbox']:checked").parent().next().text();
 		var list = $("tbody input[type='checkbox']");
 		var valueArr = new Array();
 		
 		$("tbody input[type='checkbox']").each(function(){
-			console.log("티바디 안에 들어옴");
 			if($(this).is(":checked")){ //선택되어 있으면 배열에 값을 저장함
 	            valueArr.push($(this).parent().next().text());
-	            console.log("선택된 배열 저장");
 	        }
 			else{
 				console.log($(this));		
 			}
 		});
-		console.log(valueArr);
 		
 		if (valueArr.length == 0){
 	    	alert("선택된 글이 없습니다.");
 	    }else{
-			var chk = confirm("정말 삭제하시겠습니까?");				 
-			$.ajax({
-			    url : "/cart/deleteCart",					// 전송 URL
-			    dataType: "json",
-			    type : 'POST',								// GET or POST 방식
-			    data : {valueArr : valueArr},				//보내고자 하는 data 변수 설정
-                
-			});
+	    	
+	    	if(!confirm("정말 삭제하시겠습니까?")) {
+	    		alert("취소되었습니다.");
+	    	}else {
+	    		$.ajax({
+				    url : "/cart/deleteCart",					// 전송 URL
+				    dataType: "json",
+				    type : 'POST',								// GET or POST 방식
+				    data : {valueArr : valueArr}				//보내고자 하는 data 변수 설정
+	    		});
+	    		console.log("리로드 설정");	
+	    		location.reload();
+	    	}
 		}
 		
 		});
