@@ -16,12 +16,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.CartService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+
 
 @Controller
 @Log4j
@@ -41,41 +46,45 @@ public class CartContoller {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@GetMapping("/list")
 	public void list(Model model, @ModelAttribute("member") MemberVO vo) {
-		
+
 		String id = vo.getId();
 		log.info("list.............2");
 		model.addAttribute("list", service.getList(id));
+		log.info("list.............3");
 
 	}
 
+
+	
+	@ResponseBody
 	@PostMapping(value = "/deleteCart")
-	public String deleteCart(HttpSession session,
-			@RequestParam(value = "valueArr[]", required = false) List<String> chArr) {
+	public void deleteCart(HttpSession session,
+			@RequestParam(value = "valueArr[]") List<String> chArr ,RedirectAttributes rttr) {
 		log.info("delete Cart =============");
 
 		long cartNum = 0;
 		log.info(chArr);
 
-
-		for(String i : chArr) { 
-			log.info("포문까지 들어옴");
+		for (String i : chArr) {
 			cartNum = Integer.parseInt(i);
-			service.deleteCart(cartNum); 
-		} 
-		log.info("포문 빠져나감");
-
-		return "redirect:/cart/list";
+			service.deleteCart(cartNum);
+		}
 	}
 
-	@GetMapping("/order")
-	public void order(HttpSession session, Model model, @ModelAttribute("member") MemberVO member) {
+	@ResponseBody
+	@GetMapping("/order") 
+	public String order(String cartnum, HttpSession session,
+	Model model, @ModelAttribute("member") MemberVO member) {
 		
-		String id = member.getId();
-		log.info("list.............2");
-		model.addAttribute("list", service.getList(id));
-
+	log.info("order~~~~~~~~~~~~~~"); 
+	log.info(cartnum);
+	
+	return "cart/order";
 	}
+	 
+	  
+	  
 }

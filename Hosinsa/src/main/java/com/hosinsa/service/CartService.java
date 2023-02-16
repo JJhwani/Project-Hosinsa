@@ -11,10 +11,12 @@ public interface CartService {
 	
 	public List<CartVO> getList(String id); 
 	
-	public List<CartVO> getOrder(String id); 
+	public List<CartVO> getOrder(long cartnum); 
 	
 	//카트삭제
 	public boolean deleteCart(long cartnum);
+	
+	
 
 	
 }
