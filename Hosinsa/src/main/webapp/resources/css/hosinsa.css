@@ -288,6 +288,12 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .table3 input[type=radio]{width:auto;margin-right:0;vertical-align:top}
 .table3 input[type=button]{margin-top:5px;font-size:12px;cursor:pointer;box-sizing:content-box;}
 .table3 .grade{font-size:14px}
+.member_info{margin-top:10px}
+
+/* 탈퇴하기 */
+.remove header{padding:15px 20px;background:black;color:white;margin-bottom:15px}
+.remove input{width:200px;border:1px solid lightgray;padding:5px;margin-top:10px}
+.remove button{margin-top:15px}
 
 /* 회원가입 - 약관동의 */
 .checkbox_group{margin-top:20px}

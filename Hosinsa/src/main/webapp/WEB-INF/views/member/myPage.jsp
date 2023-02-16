@@ -10,7 +10,7 @@
 	
 	<p class="grade">나의 등급 : ${member.grade }</p>
 	<table class="table1 member_info">
-		<tr><th>프로필이미지</th><td>${member.profilimg }</td></tr>
+		<tr><th>프로필이미지</th><td><img src="${member.profilimg }"></td></tr>
 		<tr><th>이름</th><td>${member.name }</td></tr>
 		<tr><th>아이디</th><td>${member.id }</td></tr>
 		<tr><th>닉네임</th><td>${member.nickname }</td></tr>
@@ -76,20 +76,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tabArea area2 reviewArea hidden">
-		<div class="reviewWrap">
-			<div class="topper">
-				<img class="proimg" src="../../resources/images/upload.jpg">
-				<span class="bno">2</span>
-				<a href="/product/{pronum}"><b>상품이름</b></a>
-				<button class="review_modify">수정</button>
-				<button class="review_delete">삭제</button>
-				<i>2023-02-13</i>
-			</div>
-			<p class="reviewTitle">집에가고싶다2</p>
-			<p class="content">기절하겠네</p>
-			<p class="reReply">댓글 0개</p>
-		</div>
+	<div class="tabArea area2 reviewArea hidden">		
 		<div class="reviewWrap">
 			<div class="topper">
 				<img class="proimg" src="../../resources/images/upload.jpg">
