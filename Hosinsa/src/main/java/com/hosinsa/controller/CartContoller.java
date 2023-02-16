@@ -92,9 +92,22 @@ public class CartContoller {
 		return "redirect:/product/{pronum}";
 	}
 	
+	
 	@ResponseBody
 	@PostMapping("/checkCart")
-	public int checkCart(CartVO vo,Model model) {
-		
+	public int checkCart(CartVO vo, Model model) {
+		return 0;
+	}
+	/*
+	 * @PostMapping("/updateQuantity") public void updateQuantity(CartVO
+	 * vo,RedirectAttributes rttr) { log.info("업데이트 ~~~~~~~~~~~~~~");
+	 * service.updateQuantity(vo); }
+	 */
+	
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/updateQuantity")
+	public String updateQuantity1(CartVO vo,RedirectAttributes rttr) {
+		log.info("업데이트 ~~~~~~~~~~~~~~");
+		service.updateQuantity(vo);
+		return "redirect:/cart/list";
 	}
 }

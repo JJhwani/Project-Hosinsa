@@ -13,6 +13,14 @@
 		(select proname from hosinsa_product where pronum = #{pronum}))
 </insert>
 
+<update id="updateQuantity">
+  	update hosinsa_cart
+  	set  
+  	quantity = quantity +1 
+  	where cartnum = #{cartnum}
+</update>
+
+
 <select id="getList" resultType="com.hosinsa.domain.CartVO">
  <![CDATA[
   	select * from hosinsa_cart where id = #{id}
