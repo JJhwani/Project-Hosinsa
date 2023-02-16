@@ -15,8 +15,8 @@
 	</h2>
 	<div class="eventView">
 		<section class="eventList">
-			<c:forEach var="event" items="${event}">
-	 			<div class="event_area">
+	 		<div class="event_area">
+				<c:forEach var="event" items="${event}">
 					<c:choose>
 						<c:when test="${event.start_date <= today and today <= event.end_date}">
 							<div class="event_box">
@@ -75,8 +75,8 @@
 							</div>
 						</c:when>
 					</c:choose>
-				</div>				
-	 		</c:forEach>
+	 			</c:forEach>
+			</div>				
 		</section>
 	</div>	
 
