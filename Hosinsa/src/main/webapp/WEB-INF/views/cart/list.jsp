@@ -175,6 +175,7 @@
 				    type : 'POST',								// GET or POST 방식
 				    data : {valueArr : valueArr}				//보내고자 하는 data 변수 설정
 	    		});
+	    		console.log("리로드 설정");	
 	    		location.reload();
 	    	}
 		}
