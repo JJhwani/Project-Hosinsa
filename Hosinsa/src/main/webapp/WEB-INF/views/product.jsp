@@ -42,11 +42,14 @@
 		</c:if>      
 	</table>
 	
+	
 	<h4 class="miniTitle">Price Info <i>가격정보</i></h4>
+	
 	<table class="infoTable">   
 		<tr>
 			<th> 가격 (비회원) </th> <td> ${product.price} </td>
 		</tr>
+	
 		<tr>
 			<c:choose>
 				<c:when test="${member.grade eq 'C'}">
@@ -60,8 +63,9 @@
 				</c:when>
 			</c:choose>
 		</tr>
+		
 	</table>
-
+	
 	<div class="btnWrap">
 		<c:if test="${member.grade eq 'S'}">
 			<button class="btn modify">제품 수정</button>
@@ -76,6 +80,8 @@
 		<input type="hidden" name="pronum" value="${product.pronum}">
 		<input type="hidden" name="quantity" value="">
 	</form>
+	
+	
 	<div class="tabWrap tab2">
 		<button class="tab tab_info">Info</button>
 		<button class="tab tab_review">Review</button>
@@ -96,6 +102,23 @@
 	</ul>
 	<a>TOP</a>
 </div>
+
+	<!-- 카카오톡 공유하기 -->
+	<div>
+	<a id="kakaotalk-sharing-btn" href="javascript:;">
+	  <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+	    alt="카카오톡 공유 보내기 버튼" />
+	</a>
+	</div>
+	<!-- 카카오톡 공유하기 -->
+	
+	<!-- 찜하기 -->
+		<div class = "likes">
+			<button type="button" class="fa-solid fa-heart" id="likes"> 찜</button>
+		</div>
+	
+	<!-- 찜하기 -->
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -126,6 +149,54 @@
 		
 	})
 </script>
+
+<!-- 카카오톡 공유하기 -->
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+  integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('7bd2d13525d6c910e9ea9b4979c6439b'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+
+<script>
+Kakao.Share.createDefaultButton({
+    container: '#kakaotalk-sharing-btn',
+    objectType: 'feed',
+    content: {
+      title: '${product.proname}',
+      description: '',
+      imageUrl:
+    	  'https://www.venturesquare.net/wp-content/uploads/2021/02/%EB%AC%B4%EC%8B%A0%EC%82%AC_%EC%82%AC%EC%A7%84%EC%9E%90%EB%A3%8C-%EB%AC%B4%EC%8B%A0%EC%82%AC-CI-%EB%A1%9C%EA%B3%A0.jpg',
+      link: {
+        // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+        mobileWebUrl: 'http://localhost:8081/product/${product.pronum}',
+        webUrl: 'http://localhost:8081/product/${product.pronum}',
+      },
+    },
+    social: {
+      likeCount: 286, //찜
+      commentCount: 45,
+      sharedCount: 845,
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: 'http://localhost:8081/product/${product.pronum}',
+          webUrl: 'http://localhost:8081/product/${product.pronum}',
+        },
+      },
+      {
+        title: '앱으로 보기',
+        link: {
+          mobileWebUrl: 'http://localhost:8081/product/${product.pronum}',
+          webUrl: 'http://localhost:8081/product/${product.pronum}',
+        },
+      },
+    ],
+  });
+</script>
+
+
 
 <script src="../../../resources/js/main.js"></script>
 <%@ include file="includes/footer.jsp" %>

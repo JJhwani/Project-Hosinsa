@@ -31,8 +31,8 @@
 	 	 </select>
 	 	 
 	 	 <insert id="insert">
-	 	 		insert into hosinsa_review (bno,title,content,nickname, uploadDate)
-	 	 		values(seq_review.nextval, #{title}, #{content}, #{nickname}, sysdate)
+	 	 		insert into hosinsa_review (bno,title,content,nickname, uploadDate, pronum)
+	 	 		values(seq_review.nextval, #{title}, #{content}, #{nickname}, sysdate, #{pronum})
 	 	 </insert>
 	 	 	
 	 	 
@@ -40,8 +40,8 @@
 	 	 	<selectKey keyProperty="bno" order="BEFORE" resultType="Long">
 	 	 		select seq_review.nextval from dual
 	 	 	</selectKey>
-		 	 	insert into hosinsa_review(bno, nickname, title, content, uploadDate)
-		 	 	values(#{bno}, #{nickname}, #{title}, #{content}, sysdate)
+		 	 	insert into hosinsa_review(bno, nickname, title, content, uploadDate, pronum)
+		 	 	values(#{bno}, #{nickname}, #{title}, #{content}, sysdate, #{pronum})
 	 	 </insert>
 	 	 
 	 	 <select id="read" resultType="com.hosinsa.domain.ReviewVO">
