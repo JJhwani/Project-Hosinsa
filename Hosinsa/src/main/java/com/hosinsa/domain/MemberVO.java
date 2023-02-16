@@ -1,6 +1,7 @@
 package com.hosinsa.domain;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,8 +32,8 @@ public class MemberVO {
 	private String name;
 	private String gender;
 	
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private String birthday;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date birthday;
 	
 	private String email;
 	private String phone;
@@ -40,4 +41,5 @@ public class MemberVO {
 	private String profilimg;
 	private String grade;
 	private String introducer;
+	private int point;
 }

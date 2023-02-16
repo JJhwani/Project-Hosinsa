@@ -98,6 +98,7 @@
 		  		</div>
 		  		
 		  		<div class="modal-footer">
+		  			<button id="modalRegBtn" type="button" class="btn">Modify</button>
 		  			<button id="modalModBtn" type="button" class="btn btn-warning">Modify</button>
 		  			<button id="modalRemoveBtn" type="button" class="btn btn-danger">Remove</button>
 		  			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>

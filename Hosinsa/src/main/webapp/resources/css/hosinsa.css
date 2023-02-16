@@ -218,24 +218,32 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .btnWrap.right{clear:both;padding-right:330px}
 .btnWrap .register{background:black;color:white;border:none}
 .btnWrap .register:hover{background:black;}
+.black{background:black!important;border:none;color:white!important}
 
 .tabWrap{overflow:hidden;clear:both;text-align:center;padding:50px 0 20px;}
-.tabWrap .tab{display:block;float:left;border-radius:0;border:1px solid lightgray;box-sizing:border-box;background:white;font-size:24px;letter-spading:-1px;padding:10px 0;margin-right:-1px}
+.tabWrap .tab{display:block;float:left;border-radius:0;border:1px solid lightgray;box-sizing:border-box;background:white;font-size:24px;letter-spacing:-1px;padding:10px 0;margin-right:-1px}
 .tabWrap .tab:hover{cursor:pointer;background:rgb(245,245,245)}
 .tabWrap.tab2 .tab{width:50%;}
 
 .detailView{overflow:hidden;clear:both;text-align:center}
 .reviewArea .reviewWrap{margin-top:20px;border:1px solid lightgray;}
-.reviewArea .reviewWrap button{border-radius:0;background:white;border:1px solid lightgray;cursor:pointer}
-.reviewArea .reviewWrap .topper{border-bottom:1px solid lightgray;padding:10px}
-.reviewArea .reviewWrap .topper *{vertical-align:middle;margin-right:5px}
+.reviewArea .reviewWrap button{border-radius:0;background:white;border:1px solid lightgray;cursor:pointer;padding:5px 10px;cursor:pointer;font-size:12px;color:gray}
+.reviewArea .reviewWrap .topper{position:relative;border-bottom:1px solid lightgray;padding:10px}
+.reviewArea .reviewWrap .topper *{vertical-align:middle}
+.reviewArea .reviewWrap .topper a{margin-left:-5px;color:black;}
+.reviewArea .reviewWrap .topper b{font-weight:bolder;margin-right:5px}
+.reviewArea .reviewWrap .topper b.brand{position:absolute;top:12px;left:72px;color:gray;font-size:12px}
 .reviewArea .reviewWrap .topper i{float:right;margin-top:20px}
-.reviewArea .proimg{width:50px;height:50px;}
+.reviewArea .proimg{width:50px;height:50px;margin-right:5px}
 .reviewArea .reviewTitle{font-weight:bold;font-size:20px;padding:20px}
 .reviewArea .content{padding:0 20px 20px}
 .reviewArea span{font-size:0}
 .reviewArea .no_review{text-align:center;font-size:20px;padding:50px 0;line-height:30px;font-weight:bold;letter-spacing:-2px;}
 .reviewArea #searchForm>i{border:1px solid lightgray}
+.reviewArea .reReplyWrap{margin:0 20px 20px;}
+.reviewArea .reviewWrap2{margin-top:10px;border:1px solid lightgray;}
+.reviewArea .reviewWrap2 .content{padding-top:20px}
+.reviewArea .reReply_register{float:right}
 
 /*admin - 제품관리 */
 h2 .register{float:right;background:black;color:white;border-radius:0;margin-top:5px;font-size:16px;padding:10px 15px;cursor:pointer;}

@@ -84,7 +84,12 @@ public class CartContoller {
 	
 	return "cart/order";
 	}
-	 
-	  
-	  
+	
+	@PostMapping("/cartIn")
+	public String cartIn(CartVO vo,RedirectAttributes rttr) {
+		if(service.cartIn(vo));
+		rttr.addFlashAttribute("cartIn","success");		
+		rttr.addAttribute("pronum",vo.getPronum());
+		return "redirect:/product/{pronum}";
+	}
 }

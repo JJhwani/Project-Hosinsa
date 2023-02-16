@@ -9,7 +9,7 @@
 			<img class="proimg" src="${product.proimg}">
 			<input type="file" name="uploadFile" class="proimgFile hidden">
 		</div>
-		<input type="text" name="proimg">
+		<input type="hidden" name="proimg">
 		<h4 class="miniTitle">Product Info <i>제품정보</i></h4>
 		<table class="infoTable">			
 			<tr>
@@ -35,7 +35,6 @@
 		<textarea class="inputDetail" name="detail" cols="70" rows="16">${product.detail }</textarea>
 		<div class="btnWrap right">
 			<button class="btn modify">제품 수정</button>
-			<button class="btn delete">제품 삭제</button>
 			<button class="btn list">뒤로</button>
 		</div>	
 	</form>

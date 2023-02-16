@@ -24,7 +24,7 @@
 		</form>
 		<ul class="menu">
 			<c:if test="${empty member}">
-				<li><a>회원가입</a></li>
+				<li><a href="/member/agree">회원가입</a></li>
 			</c:if>
 			<li class="user_grade">
 				<c:choose>
@@ -50,7 +50,7 @@
 				</c:choose>
 			</li>
 			<c:if test="${not empty member}">
-				<li><a>마이페이지</a></li>
+				<li><a class="move" >마이페이지</a></li>
 			</c:if>
 			<li><a href="/cart/list"><i class="fa-solid fa-basket-shopping"></i> 장바구니</a></li>
 			<c:if test="${member.grade eq 'S'}">
@@ -58,8 +58,23 @@
 				<li><a href="/admin/member">회원관리</a></li>
 			</c:if>
 			<c:if test="${not empty member}">
-				<li><a>로그아웃</a></li>
+				<li><a href="/member/logout">로그아웃</a></li>
 			</c:if>
 		</ul>
+		<form class="formObj" action="/member/myPage" method="get">
+			<input type="hidden" name="id" value="${member.id }">
+		</form>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	var formObj = $(".formObj");
+	
+	$(".move").on("click", function(e) {
+		e.preventDefault();
+		formObj.attr("action", "/member/myPage");
+		formObj.submit();
+	});
+});
+</script>
