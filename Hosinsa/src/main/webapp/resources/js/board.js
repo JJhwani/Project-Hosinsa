@@ -4,7 +4,11 @@ $(document).ready(function(){
 	var eventForm = $(".eventForm");
 	var eventRegister = $(".eventRegister");
 	var eventModify = $(".eventModify");
-	
+	var search = $(".search");
+	var noticeRead = $(".noticeRead")
+	var noticeModify = $(".noticeModify")
+
+
 	//페이징처리
 	$(".paginate_button a").on("click", function(e) {
 		e.preventDefault();
@@ -13,7 +17,7 @@ $(document).ready(function(){
 	});
 
 	// 이벤트 리스트 페이지에서 개별 이벤트 페이지로 이동
-	$(".move").on("click", function(e){
+	$(".event_box .move").on("click", function(e){
 		e.preventDefault();
 		paging.find("input[name='event_no']").remove();
 		paging.append("<input type='hidden' name='event_no' value='"+$(this).attr("href")+"'>");
@@ -119,6 +123,56 @@ $(document).ready(function(){
         }
     }	
 
-	
+	// 공지사항 게시판에서 개별 공지사항 페이지로 이동
+	$(".Notice .move").on("click", function(e){
+		e.preventDefault();
+		paging.find("input[name='nno']").remove();
+		paging.append("<input type='hidden' name='nno' value='"+$(this).attr("href")+"'>");
+		paging.attr("action", "/board/notice/read");
+		paging.submit();
+	});
 
+	// 공지사항 게시판에서 검색버튼 클릭시
+	$(".search button").on("click", function(e){
+		if(!search.find("input[name='keyword']").val()){
+			alert("키워드를 입력하세요.");
+			return false;
+		}		
+		search.find("input[name='pageNum']").val("1");
+		search.find("input[name='amount']").val("28");
+		e.preventDefault();
+		search.submit();
+	});
+
+	// 개별 공지사항 페이지에서 공지사항 수정 페이지로 이동
+	$(".noticeRead .btn.modify").on("click",function(e){
+		noticeRead.attr("method","get")
+		noticeRead.attr("action","/board/notice/modify");
+		noticeRead.submit();
+	});
+	
+	// 개별 공지사항 페이지에서 공지사항 게시판으로 이동
+	$(".noticeRead .btn.list").on("click",function(e){
+		noticeRead.find("input[name='event_no']").remove();
+		noticeRead.attr("action","/board/notice/list");
+		noticeRead.submit();
+	})
+
+
+	// 공지사항 수정 페이지에서 공지사항 게시판으로 가기
+	$(".noticeModify .btn.list").on("click",function(e){		
+		e.preventDefault();
+		noticeModify.attr("action","/board/notice/list");
+		noticeModify.attr("method","post");
+		noticeModify.submit();
+	})
+
+	// 공지사항 수정 페이지에서 공지사항 삭제 페이지로 가기
+	$(".noticeModify .btn.remove").on("click",function(e){		
+		e.preventDefault();
+		noticeModify.append("<input type='hidden' name='nno' value='"
+			+noticeModify.find("input[name=nno]").val()+"'>");
+		noticeModify.attr("action","/board/notice/remove");
+		noticeModify.submit();
+	})
  });

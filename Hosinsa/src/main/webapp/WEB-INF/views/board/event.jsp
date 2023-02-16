@@ -103,13 +103,13 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	if("${register}"==="success"){
-		alert("수정 요청이 성공적으로 처리되었습니다.");
+		alert("이벤트 등록이 성공적으로 처리되었습니다.");
 	}
 	if("${modify}"==="success"){
-		alert("수정 요청이 성공적으로 처리되었습니다.");
+		alert("이벤트 수정이 성공적으로 처리되었습니다.");
 	}
 	if("${remove}"==="success"){
-		alert("제품 삭제가 성공적으로 처리되었습니다.");
+		alert("이벤트 삭제가 성공적으로 처리되었습니다.");
 	}
 });
 </script>

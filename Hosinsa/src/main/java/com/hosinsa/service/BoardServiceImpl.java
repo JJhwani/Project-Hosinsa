@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hosinsa.domain.BoardEventVO;
+import com.hosinsa.domain.BoardNoticeVO;
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.mapper.BoardMapper;
 
@@ -54,6 +55,51 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<BoardEventVO> getListMainEvent(BoardEventVO bevo) {
 		return mapper.getListMainEvent(bevo);
+	}
+
+	@Override
+	public List<BoardNoticeVO> getListNotice(Criteria cri) {
+		return mapper.getListWithPagingNotice(cri);
+	}
+
+	@Override
+	public BoardNoticeVO readNotice(Long nno) {
+		return mapper.readNotice(nno);
+	}
+
+	@Override
+	public boolean registerNotice(BoardNoticeVO bnvo) {
+		return mapper.registerSelectKeyNotice(bnvo);
+	}
+
+	@Override
+	public boolean modifyNotice(BoardNoticeVO bnvo) {
+		return mapper.modifyNotice(bnvo) == 1 ? true : false;
+	}
+
+	@Override
+	public boolean removeNotice(Long nno) {
+		return mapper.removeNotice(nno) == 1 ? true : false;
+	}
+
+	@Override
+	public int getTotalNotice(Criteria cri) {
+		return mapper.getTotalCountNotice(cri);
+	}
+
+	@Override
+	public List<BoardNoticeVO> getListMainNotice(BoardNoticeVO bnvo) {
+		return mapper.getListMainNotice(bnvo);
+	}
+
+	@Override
+	public int readCountNotice(Long nno) {
+		return mapper.readCountNotice(nno);
+	}
+
+	@Override
+	public int getTotalCountSearch(Criteria cri) {
+		return mapper.getTotalCountSearch(cri);
 	}
 	
 	
