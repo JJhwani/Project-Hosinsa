@@ -131,39 +131,55 @@ public class MemberController {
 	}
 
 	@GetMapping("/myPage")
-	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
+	public void myPage(@ModelAttribute("member") MemberVO vo, Model model) {
 		model.addAttribute("member", vo);
 	}
-	
+
 	@GetMapping("/modify")
 	public void modifyGET(@ModelAttribute("member") MemberVO vo, Model model) {
 		log.info("modofyGET====");
 		model.addAttribute("member", vo);
 	}
-	
+
 	@PostMapping("/modify")
 	public String modifyPOST(MemberVO member, RedirectAttributes rttr, Model model) {
 		log.info("modify : " + member);
 		model.addAttribute("member", member);
-		
+
 		if (memberService.modify(member)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/member/myPage";
 	}
-	
+
 	@GetMapping("/remove")
 	public void removeGET(@ModelAttribute("member") MemberVO vo, Model model) {
+		log.info("removeGET====>");
 		model.addAttribute("member", vo);
 	}
-	
+
 	@PostMapping("/remove")
-	public String removePOST(@RequestParam("id") String id, RedirectAttributes rttr) {
-		log.info("remove----" + id);
+	public String removePOST(@ModelAttribute("member")MemberVO vo ,RedirectAttributes rttr, MemberVO member, SessionStatus session, Model model) {
+		log.info("remove----");
+		String pw = vo.getPw();
+		String id = vo.getId();
+		log.info(pw);
+		log.info(id);
 		
-		if (memberService.remove(id)) {
-			rttr.addFlashAttribute("result", "seccess");
+		int result = memberService.remove(member);
+		
+		if (result == 1) {
+			model.addAttribute("result",result);
+			//rttr.addFlashAttribute("result", result);
+			session.setComplete();
+			//return "redirect:/";
+			return "/member/remove";
+		} else  {
+			model.addAttribute("result",result);
+			//rttr.addFlashAttribute("result", result);
+			//return "redirect:/member/remove";
+			return "/member/remove";
 		}
-		return "redirect:/member/list";
 	}
+
 }

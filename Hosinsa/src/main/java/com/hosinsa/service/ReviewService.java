@@ -15,6 +15,5 @@ public interface ReviewService {
 	public boolean remove(Long bno);
 	public List<ReviewVO> getList(Integer pronum,ReviewCriteria cri);
 	public int getTotal(ReviewCriteria cri);
-	
 
 }

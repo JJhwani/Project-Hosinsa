@@ -42,7 +42,7 @@
 
 <!-- DELETE 문 -->
 <delete id="delete">
-	delete from hosinsa_member where id = #{id}
+	delete from hosinsa_member where id = #{id} and pw = #{pw}
 </delete>
 
 <!-- UPDATE 문 -->

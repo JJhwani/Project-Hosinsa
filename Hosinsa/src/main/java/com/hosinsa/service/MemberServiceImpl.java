@@ -42,9 +42,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean remove(String id) {
-		log.info("remove...." + id);
-		return memberMapper.delete(id) == 1;
+	public int remove(MemberVO member) {
+		log.info("remove...." + member);
+		return memberMapper.delete(member);
 	}
 
 	@Override
@@ -72,4 +72,5 @@ public class MemberServiceImpl implements MemberService {
 	public int introCheck(String memberIntroducer) {
 		return memberMapper.introCheck(memberIntroducer);
 	}
+
 }
