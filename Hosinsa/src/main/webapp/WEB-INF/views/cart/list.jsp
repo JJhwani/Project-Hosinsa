@@ -21,6 +21,7 @@
 							<th></th>
 							<th>제품 번호</th>
 							<th>제품 이름</th>
+							<th>수량</th>
 							<th>아이디</th>
 							<th>가격</th>
 						</tr>
@@ -34,8 +35,13 @@
 								<td>${cart.pronum}</td>
 								<td><a class="move" href='${cart.pronum}'>
 										${cart.proname} </a></td>
+								<td>
+										<button class="quantity_btn_minus">-</button>
+										${cart.quantity}
+										<button class="quantity_btn_plus">+</button>
+								</td>		
 								<td>${cart.id}</td>
-								<td>${cart.price}</td>
+								<td> pat ${cart.price}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -69,6 +75,17 @@
 					<button type="button" class="order">주문하기</button>
 					<button class="move_main">계속 쇼핑하기</button>
 				</div>
+				
+				
+				
+				
+				
+				<!-- 수량 조정 form -->
+			<form action="/cart/update" method="post" class="quantity_update_form">
+				<input type="hidden" name="cartnum" class="update_cartnum">
+				<input type="hidden" name="quantity" class="update_quantity">
+			</form>
+				
 			</div>
 			<!-- /.panel-body -->
 		</div>
@@ -81,11 +98,31 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		/* 수량 수정 버튼 */
+		$(".quantity_btn").on("click", function(){
+			let cartnum = $(this).data("cartnum");
+			let quantity = $(this).parent("td").find("input").val();
+			
+		});
+		
+		// 수량버튼
+		$(".quantity_btn_plus").on("click", function(){
+			let quantity = $(this).parent("div").find("input").val();
+			$(this).parent("div").find("input").val(++quantity);
+		});
+		$(".quantity_btn_minus").on("click", function(){
+			let quantity = $(this).parent("div").find("input").val();
+			if(quantity > 1){
+				$(this).parent("div").find("input").val(--quantity);		
+			}
+		});
+		
+		
 		// 오더 목록
 		$(".order").on("click",function(e){
 			var text = $("tbody input[type='checkbox']:checked").parent().next().text();
 			var list = $("tbody input[type='checkbox']");
-			var valueArr = new Array();			
+			var valueArr = new Array();
 			
 			$("tbody input[type='checkbox']").each(function(){
 				if($(this).is(":checked")){ //선택되어 있으면 배열에 값을 저장함
@@ -173,9 +210,9 @@
 				    url : "/cart/deleteCart",					// 전송 URL
 				    dataType: "json",
 				    type : 'POST',								// GET or POST 방식
+				    async : false,
 				    data : {valueArr : valueArr}				//보내고자 하는 data 변수 설정
 	    		});
-	    		console.log("리로드 설정");	
 	    		location.reload();
 	    	}
 		}

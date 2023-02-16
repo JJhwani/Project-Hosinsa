@@ -52,7 +52,7 @@
 			<c:if test="${not empty member}">
 				<li><a class="move" >마이페이지</a></li>
 			</c:if>
-			<li><a href="/cart/list"><i class="fa-solid fa-basket-shopping"></i> 장바구니</a></li>
+			<li><a href="/cart/list" class="cart_btn"><i class="fa-solid fa-basket-shopping"></i> 장바구니</a></li>
 			<c:if test="${member.grade eq 'S'}">
 				<li><a href="/admin/product">상품관리</a></li>
 				<li><a href="/admin/member">회원관리</a></li>
@@ -75,6 +75,17 @@ $(document).ready(function() {
 		e.preventDefault();
 		formObj.attr("action", "/member/myPage");
 		formObj.submit();
+	});
+	
+	
+	var member = "${member}";
+	$(".cart_btn").on("click", function(e) {
+		e.preventDefault();
+		if(member == "") {
+			self.location="/member/login";
+		}else {
+			self.location="/cart/list";
+		}
 	});
 });
 </script>
