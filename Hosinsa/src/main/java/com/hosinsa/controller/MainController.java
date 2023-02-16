@@ -51,6 +51,7 @@ public class MainController {
 		model.addAttribute("newList", service.getListNew());
 		model.addAttribute("category", "인기");
 		model.addAttribute("sort", "best");
+		model.addAttribute("eventList", boardService.getEventList(bevo));
 		model.addAttribute("event", boardService.getListMainEvent(bevo));
 
 		int total = service.getTotalCountView(vo);
@@ -85,6 +86,7 @@ public class MainController {
 			
 			model.addAttribute("category", category);
 			model.addAttribute("sort", sort);
+			model.addAttribute("eventList", boardService.getEventList(bevo));
 			model.addAttribute("event", boardService.getListMainEvent(bevo));
 			model.addAttribute("pageMaker", new PageDTO(vo, total));
 			return "main";
@@ -101,7 +103,6 @@ public class MainController {
 	
 	@GetMapping(value="/category/sorting")
 	public String categoryPageSorting(String sort, String category, ProductVO vo, Model model) {
-		log.info("================================"+category);
 		int total = 0;
 		model.addAttribute("bestList", service.getListBestCategory(vo));
 		

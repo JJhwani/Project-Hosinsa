@@ -19,20 +19,20 @@
 	</select>
 	<!-- registerSelectKeyEvent -->
 	<insert id="registerSelectKeyEvent">
-		<selectKey keyProperty="EVENT_NO" order="BEFORE" resultType="Long">
+		<selectKey keyProperty="event_no" order="BEFORE" resultType="Long">
 			SELECT BOARD_EVENT_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO HOSINSA_BOARD_EVENT(EVENT_NO, EVENT_IMG, ,TITLE, SUBTEXT,  CONTENT, START_DATE, END_DATE,
+		INSERT INTO HOSINSA_BOARD_EVENT(EVENT_NO, EVENT_IMG, TITLE, SUBTEXT, CONTENT, START_DATE, END_DATE,
 			REGDATE, UPDATE_DATE, WRITER, EVENT_PW)
 			VALUES(#{event_no}, #{event_img}, #{title}, #{subtext}, #{content}, #{start_date}, #{end_date},
-				#{regdate}, #{update_date}, #{writer}, #{event_pw})
+				SYSDATE, SYSDATE, #{writer}, #{event_pw})
 	</insert>
 	<!-- modifyEvent -->
 	<update id="modifyEvent">
 		UPDATE HOSINSA_BOARD_EVENT
 		SET EVENT_IMG = #{event_img},
 		TITLE = #{title},
-		SUBTEXT = #{subtext}
+		SUBTEXT = #{subtext},
 		CONTENT = #{content},
 		START_DATE = #{start_date},
 		END_DATE = #{end_date},
@@ -46,6 +46,18 @@
 	<!-- getTotalCountEvent -->
 	<select id="getTotalCountEvent" resultType="int">
 		SELECT COUNT(*) FROM HOSINSA_BOARD_EVENT WHERE EVENT_NO > 0
+	</select>
+	
+	
+	
+	<!-- getEventList -->
+	<select id="getEventList" resultType="com.hosinsa.domain.BoardEventVO">
+		<![CDATA[
+			SELECT EVENT_NO, EVENT_IMG, TITLE, CONTENT, SUBTEXT, START_DATE, END_DATE, REGDATE, UPDATE_DATE, WRITER, EVENT_PW
+				FROM 
+				(SELECT * FROM HOSINSA_BOARD_EVENT)
+			 WHERE START_DATE <= SYSDATE AND SYSDATE <= END_DATE
+		]]>
 	</select>
 	<!-- getListMainEvent -->
 	<select id="getListMainEvent" resultType="com.hosinsa.domain.BoardEventVO">

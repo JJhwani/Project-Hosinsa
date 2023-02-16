@@ -6,7 +6,7 @@
 
 <insert id="cartIn">
 	insert into hosinsa_cart(cartnum,proimg,pronum,id,quantity,price,proname)
-		values (seq_cart.nextval,
+		values (SEQ_CART.nextval,
 		(select proimg from hosinsa_product where pronum = #{pronum})
 		,#{pronum},#{id},#{quantity},
 		(select price from hosinsa_product where pronum = #{pronum}),
