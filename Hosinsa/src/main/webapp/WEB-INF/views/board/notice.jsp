@@ -14,7 +14,7 @@
 		</c:if>
 	</h2>
 
-	<table class="Notice table1">
+	<table class="Notice table4">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -40,7 +40,7 @@
 		</c:forEach>
 	</table>
 	
-	<div class="searchNocite">
+	<div class="searchNotice">
 		<form class="search" action="board/notice/search" method="get">
 			<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
@@ -64,7 +64,7 @@
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 		<input type="hidden" name="type" value="${pageMaker.cri.type}">
-		<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
+		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 	</form>	
 </div>
 
