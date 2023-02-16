@@ -18,11 +18,4 @@ public class CartMapperTest {
 	@Autowired
 	CartMapper mapper;
 	
-	@Test
-	public void testGetList() {
-		mapper.getList().forEach(cart -> log.info(cart));
-	}
-	
-	
-	
 }

@@ -15,12 +15,16 @@
 		<tr><th>아이디</th><td>${member.id }</td></tr>
 		<tr><th>닉네임</th><td>${member.nickname }</td></tr>
 		<tr><th>성별</th><td>${member.gender }</td></tr>
-		<tr><th>생일</th><td>${member.birthday }</td></tr>
+		<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/> </td></tr>
 		<tr><th>이메일</th><td>${member.email }</td></tr>
 		<tr><th>연락처</th><td>${member.phone }</td></tr>
 	</table>
-	<button>회원정보 수정</button>
-	<button>탈퇴하기</button>
+	<button data-oper="modify" class="btn btn-default btn-info">회원정보 수정</button>
+	<button data-oper="delete" class="btn btn-default">탈퇴하기</button>
+	
+	<form id="operForm" action="/member/modify" method="get">
+		<input type="hidden" id="id" name="id" value="${member.id}">
+	</form>
 	
 	<h4 class="miniTitle">배송지 관리</h4>
 	<table class="table1">
@@ -87,6 +91,7 @@
 			</div>
 			<p class="reviewTitle">집에가고싶다2</p>
 			<p class="content">기절하겠네</p>
+			<p class="reReply">댓글 0개</p>
 		</div>
 		<div class="reviewWrap">
 			<div class="topper">
@@ -99,6 +104,7 @@
 			</div>
 			<p class="reviewTitle">집에가고싶다2</p>
 			<p class="content">기절하겠네</p>
+			<p class="reReplyWrap"><button class="reReply">댓글 0개</button></p>
 		</div>
 	</div>
 	<form class="reviewForm" action="/review/register" method="get">
@@ -119,5 +125,7 @@ $(document).ready(function(){
 	})
 })
 </script>
+
+<script src="../../../resources/js/member.js"></script>
 
 <%@ include file="../includes/footer.jsp" %>

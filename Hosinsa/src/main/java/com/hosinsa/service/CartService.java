@@ -9,11 +9,10 @@ public interface CartService {
 	
 	public CartVO get(Long pronum);
 	
-	public List<CartVO> getList(); 
-	
-	public List<CartVO> getOrder();
+	public List<CartVO> getList(String id); 
 	
 	//카트삭제
 	public boolean deleteCart(long cartnum);
+	public boolean cartIn(CartVO vo);
 	
 }

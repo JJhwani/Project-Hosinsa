@@ -22,5 +22,4 @@ public class CartVO {
 	private Long quantity;
 	private Long price;
 	private String proname;
-	private String sale;
 }

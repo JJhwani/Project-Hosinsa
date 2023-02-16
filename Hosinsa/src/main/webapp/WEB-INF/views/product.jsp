@@ -67,14 +67,15 @@
 			<button class="btn modify">제품 수정</button>
 			<button class="btn delete">제품 삭제</button>
 		</c:if>      
-		<input type="number" name="quantity" class="cart_quan" min="1" value="1">
+		<input type="number" class="cart_quan" min="1" value="1">
 		<button type="button" name="cart" class="cart_in">addToCart</button>
 		
 		<button class="btn list" onclick="javascript:history.go(-1);">뒤로</button>
 	</div>	
-	<form class="productForm" action="" method="get">
+	<form class="productForm" action="/cart/cartIn" method="post">
 		<input type="hidden" name="pronum" value="${product.pronum}">
 		<input type="hidden" name="quantity" value="">
+		<input type="hidden" name="id" value="${member.id }">
 	</form>
 	<div class="tabWrap tab2">
 		<button class="tab tab_info">Info</button>
@@ -150,8 +151,40 @@
 	<a href="javascript:window.scrollTo({top:0,behavior: 'smooth'})">TOP</a>
 </div>
 
+<!-- Modal -->
+ <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 	<div class="modal-dialog">
+ 	  <div class="modal-content">
+ 		<div class="modal-header">
+ 		  <h4 class="modal-title" id="myModalLabel">댓글 작성</h4>
+ 		</div>
+ 		<div class="modal-body">
+ 		
+ 		  <div class="form-group">
+ 		  <label>Reply</label>
+ 		  <input class="form-control" name="reply">
+ 		  </div>
+ 		</div>
+ 		
+ 		<div class="modal-footer">
+ 			<button id="modalRegBtn" type="button" class="btn btn-warning">Register</button>
+ 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+ 		</div>	
+ 	  </div>
+ 	</div> 		  
+ </div>
+<!-- Modal 끝 -->
+<script type="text/javascript" src="../../../resources/js/reviewreply.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		var productForm = $(".productForm");
+		
+		$(".cart_in").on("click",function(){
+			productForm.find("input[name='quantity']").val($(".cart_quan").val());
+			productForm.attr("method","post").submit();
+		});
+		
 		
 		$(".tab_info").on("click",function(){
 			$(".detailView").removeClass("hidden");
@@ -187,13 +220,18 @@
 							
 							var time = new Date(list[i].uploadDate);
 							
-							str += "<div class='reviewWrap'><div class='topper'><img class='proimg' src='../../resources/images/upload.jpg'><span class='bno'>"+list[i].bno+"</span><b>"+list[i].nickname+"</b>";
+							str += "<div class='reviewWrap' data-bno='"+list[i].bno+"'><div class='topper'><img class='proimg' src='../../resources/images/upload.jpg'><span class='bno'>"+list[i].bno+"</span><b>"+list[i].nickname+"</b>";
 							if("${member.grade}"=="S"){
 								str+="<button class='review_delete'>삭제</button>"
 							}							
 							str += "<i>"+formatDate(time)+"</i></div>";
 							str += "<p class='reviewTitle'>" + list[i].title + "</p>";
-							str += "<p class='content'>" + list[i].content + "</p></div>";
+							str += "<p class='content'>" + list[i].content + "</p>";
+							str += "<p class='reReplyWrap'><button class='reReply'> 댓글 "+list[i].reReply +"개</button>";
+							if("${member}"!=""){
+								str+="<button class='reReply_register'>댓글 쓰기</button>";
+							}
+							str += "</p></div>";
 						}
 					}
 					reviewArea.html(str);
@@ -215,17 +253,17 @@
 		    
 		    return [year, month, day].join('-');
 		    
-	    }
+	    }	
 		
-		var productForm = $(".productForm");
 		
+		//댓글 삭제
 		$(".modify").on("click",function(){
-			productForm.attr("action","/admin/modify").submit();
+			productForm.attr("action","/admin/modify").attr("method","get").submit();
 		});
 		
 		$(".delete").on("click",function(){
 			if(confirm("제품번호 "+${product.pronum}+" : 정말로 삭제하시겠습니까?")){				
-				productForm.attr("action","/admin/delete").submit();
+				productForm.attr("action","/admin/delete").attr("method","get").submit();
 			}else{
 				return false;
 			}			
@@ -245,8 +283,105 @@
 			
 		})
 		
+		//대댓글 표시
+		$(document).on("click",".reReply",function(e){
+			var replyNum = $(this).parent().siblings(".topper").find(".bno").text();
+			var reviewWrap = $(this).parent(".reReplyWrap");
+			var button = $(this);
+			$(this).attr("disabled","disabled");		
+			$.ajax({
+				type:'get',
+				url:'/replies/'+replyNum,
+				dataType:'json',
+				success:function(list){	
+					var str="";
+					for(var i=0, len=list.length; i<len ; i++){
+						
+						var time = new Date(list[i].replyDate);
+						str += "<div class='reviewWrap2'><div class='topper'><img class='proimg' src='../../resources/images/upload.jpg'><span class='bno'>"+list[i].rno+"</span><b>"+list[i].replyer+"</b>";
+						if(list[i].id == "${member.id}"){
+							str+= "<button class='reReply_delete'>삭제</button>";
+						}
+						str += "<i>"+formatDate(time)+"</i></div>";
+						str += "<p class='content'>" + list[i].reply + "</p></div>";
+					}					
+					reviewWrap.append(str);
+					button.html("댓글 "+list.length+"개");
+				}
+			})
+			
+		})//대댓글 표시 끝
+		
+		var modal = $("#myModal");
+		var closeBtn = $("#modalCloseBtn");
+		
+		var replyNum = 0;
+		
+		closeBtn.on("click",function(){
+			modal.find("input").val("");
+			modal.addClass("hidden");
+		})
+		
+		//대댓글 작성
+		$(document).on("click",".reReply_register",function(e){
+			modal.removeClass("hidden");
+			
+			replyNum = $(this).parent().siblings(".topper").find(".bno").text();			
+		});		
+		
+		$("#modalRegBtn").on("click",function(){
+			if ($("input[name='reply']").val()==""){
+				alert("댓글 내용을 입력하세요");
+				$("input[name='reply']").focus();
+				return false;
+			}
+			
+			var reviewreply = {
+					reply : $("input[name='reply']").val(),
+					replyer : "${member.nickname}",
+					bno : replyNum,
+					id : "${member.id}"
+			};
+			replyService.add(reviewreply, function(result) {
+				
+				alert("댓글이 등록되었습니다.");
+				
+				var selectDiv = $(".reviewWrap[data-bno="+replyNum+"]");
+				selectDiv.find(".reviewWrap2").remove();
+				
+				selectDiv.find(".reReply").removeAttr("disabled").trigger("click").attr("disabled","disabled");
+				
+				modal.find("input").val("");
+				modal.addClass("hidden");
+				
+			});
+		})
+		
+		//대댓글 삭제
+		$(document).on("click",".reReply_delete",function(e){
+			var rno = $(this).siblings(".bno").text();
+			var selectDiv = $(this).parents(".reReplyWrap")
+			
+			
+			if(confirm("댓글을 삭제하시겠습니까?")){
+				replyService.remove(rno,function(){
+					alert("삭제되었습니다.");
+					selectDiv.find(".reviewWrap2").remove();
+					selectDiv.find(".reReply").removeAttr("disabled").trigger("click").attr("disabled","disabled");
+				});
+			}else{
+				return false;
+			}
+		})
+		
+		if("${cartIn}"=="success"){
+			if(confirm("장바구니에 상품이 담겼습니다. 지금 확인하시겠습니까?")){
+				location.href="/cart/list";
+			}else{
+				return false;
+			}
+		}
 	})
 </script>
-
-<script src="../../../resources/js/main.js"></script>
+<script src="../../resources/js/main.js"></script>
 <%@ include file="includes/footer.jsp" %>

@@ -7,11 +7,11 @@ import com.hosinsa.domain.CartVO;
 
 public interface CartMapper {
 	
-	public List<CartVO> getList();
+	public List<CartVO> getList(String id);
 	
 	public void insert(CartVO cart);
 	
 	//카트삭제
 	public int deleteCart(long cartnum);
-	
+	public int cartIn(CartVO cart);
 }
