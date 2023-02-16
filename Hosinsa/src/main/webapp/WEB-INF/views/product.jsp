@@ -177,15 +177,35 @@
 <script type="text/javascript" src="../../../resources/js/reviewreply.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
+				
 		var productForm = $(".productForm");
 		
 		//카트담기
 		$(".cart_in").on("click",function(){
+			if("${member}"==""){
+				alert("로그인이 필요한 서비스입니다.");
+				self.location="/member/login";
+				return false;
+			}
 			//기존 카트에 같은 상품이 있는지 중복체크
 			productForm.find("input[name='quantity']").val($(".cart_quan").val());
-			productForm.attr({"action":"checkCart","method":"post"}).submit();
+			productForm.attr({"action":"/cart/checkCart","method":"post"}).submit();			
 		});
+		
+		//체크 후
+		if("${check}"=="success"&&"${duplicate}"=="0"){
+			//중복이 없는 경우
+			productForm.find("input[name='quantity']").val(${quantity});
+			productForm.attr({"action":"/cart/cartIn","method":"post"}).submit();
+		}else if("${check}"=="success"&&"${duplicate}"!="0"){
+			//중복이 존재하는 경우
+			if(confirm("해당 상품이 장바구니에 이미 존재합니다. 더 담으시겠습니까?")){
+				productForm.find("input[name='quantity']").val(${quantity});
+				productForm.attr({"action":"/cart/cartUpdate","method":"post"}).submit();
+			}else{
+				return false;
+			}		
+		}
 		
 		
 		$(".tab_info").on("click",function(){

@@ -45,5 +45,17 @@ public class CartServiceImpl implements CartService {
 	public boolean cartIn(CartVO vo) {
 		return mapper.cartIn(vo)==1?true:false;
 	}
+	
+	@Override
+	public boolean cartUpdate(CartVO vo) {
+		return mapper.cartUpdate(vo)==1?true:false;
+	}
+
+	@Override
+	public int checkCart(CartVO vo) {
+		return mapper.checkCart(vo);
+	}
+
+	
 }
 
