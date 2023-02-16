@@ -159,27 +159,17 @@ public class MemberController {
 	}
 
 	@PostMapping("/remove")
-	public String removePOST(@ModelAttribute("member")MemberVO vo ,RedirectAttributes rttr, MemberVO member, SessionStatus session, Model model) {
-		log.info("remove----");
-		String pw = vo.getPw();
-		String id = vo.getId();
-		log.info(pw);
-		log.info(id);
-		
-		int result = memberService.remove(member);
-		
-		if (result == 1) {
-			model.addAttribute("result",result);
-			//rttr.addFlashAttribute("result", result);
+	public String removePOST(@ModelAttribute("member")MemberVO vo, SessionStatus session, RedirectAttributes rttr, Model model) {
+		log.info("removePOST====>");
+		int result = memberService.remove(vo);
+		if(result != 0) {
+			rttr.addFlashAttribute("result", "success");
 			session.setComplete();
-			//return "redirect:/";
-			return "/member/remove";
-		} else  {
-			model.addAttribute("result",result);
-			//rttr.addFlashAttribute("result", result);
-			//return "redirect:/member/remove";
+			return "redirect:/";
+		} else {
+			model.addAttribute("msg", result);
+			log.info("나여기있음ㅋㅋ");
 			return "/member/remove";
 		}
 	}
-
 }

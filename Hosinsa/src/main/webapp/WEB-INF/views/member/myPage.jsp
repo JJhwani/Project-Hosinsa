@@ -25,6 +25,9 @@
 	<form id="operForm" action="/member/modify" method="get">
 		<input type="hidden" id="id" name="id" value="${member.id}">
 	</form>
+	<form id="removeForm" action="/member/remove" method="get">
+		<input type="hidden" id="id" name="id" value="${member.id}">
+	</form>
 	
 	<h4 class="miniTitle">주문내역</h4>	
 	<table class="table1">
