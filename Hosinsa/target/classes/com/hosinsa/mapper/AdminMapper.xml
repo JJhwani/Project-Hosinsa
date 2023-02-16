@@ -69,16 +69,7 @@ SELECT ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE, NICKNAME, PROFILIMG, GRADE,
 
 <update id="memberUpdate">
 	UPDATE HOSINSA_MEMBER SET
-	PW = #{pw, jdbcType=VARCHAR},
-	NAME = #{name, jdbcType=VARCHAR},
-	GENDER = #{gender, jdbcType=VARCHAR},
-	BIRTHDAY = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
-	EMAIL = #{email, jdbcType=VARCHAR},
-	PHONE = #{phone, jdbcType=CHAR},
-	NICKNAME = #{nickname, jdbcType=VARCHAR},
-	PROFILIMG = #{profilimg, jdbcType=VARCHAR},
 	GRADE = #{grade, jdbcType=CHAR},
-	INTRODUCER = #{introducer, jdbcType=VARCHAR},
 	POINT = #{point, jdbcType=INTEGER}
 	WHERE ID = #{id}
 </update>

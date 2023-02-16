@@ -48,18 +48,18 @@
 <!-- UPDATE 문 -->
 <update id="update">
 	update hosinsa_member set
-	pw = #{pw, jdbcType=VARCHAR},
-	name = #{name, jdbcType=VARCHAR},
-	gender = #{gender, jdbcType=VARCHAR},
-	birthday = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
-	email = #{email, jdbcType=VARCHAR},
-	phone = #{phone, jdbcType=CHAR},
-	nickname = #{nickname, jdbcType=VARCHAR},
-	profilimg = #{profilimg, jdbcType=VARCHAR},
-	grade = #{grade, jdbcType=CHAR},
-	introducer = #{introducer, jdbcType=VARCHAR},
-	point = #{point}
-	where id = #{id}
+	PW = #{pw, jdbcType=VARCHAR},
+	NAME = #{name, jdbcType=VARCHAR},
+	GENDER = #{gender, jdbcType=VARCHAR},
+	BIRTHDAY = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
+	EMAIL = #{email, jdbcType=VARCHAR},
+	PHONE = #{phone, jdbcType=CHAR},
+	NICKNAME = #{nickname, jdbcType=VARCHAR},
+	PROFILIMG = #{profilimg, jdbcType=VARCHAR},
+	GRADE = #{grade, jdbcType=CHAR},
+	INTRODUCER = #{introducer, jdbcType=VARCHAR},
+	POINT = #{point, jdbcType=INTEGER}
+	WHERE ID = #{id}
 </update>
 
 </mapper>
