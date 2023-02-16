@@ -16,6 +16,6 @@ public class ReviewVO {
 	private String content; //내용
 	private Date uploadDate; // 작성날짜
 	private int pronum; //품번
-	private int reReply;
+	private int reReply; //리리플 수
 
 }

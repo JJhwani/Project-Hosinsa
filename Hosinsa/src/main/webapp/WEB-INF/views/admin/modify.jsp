@@ -11,7 +11,7 @@
 		</div>
 		<input type="hidden" name="proimg">
 		<h4 class="miniTitle">Product Info <i>제품정보</i></h4>
-		<table class="infoTable">			
+		<table class="infoTable">
 			<tr>
 				<th> 카테고리 </th> <td> <input type="text" name="category" value="${product.category}" readonly> </td>
 			</tr>
@@ -36,7 +36,7 @@
 		<div class="btnWrap right">
 			<button class="btn modify">제품 수정</button>
 			<button class="btn list">뒤로</button>
-		</div>	
+		</div>
 	</form>
 </div>
 

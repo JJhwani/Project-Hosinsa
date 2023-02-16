@@ -245,6 +245,12 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .reviewArea .reviewWrap2 .content{padding-top:20px}
 .reviewArea .reReply_register{float:right}
 
+/* 로그인 폼 */
+#loginForm{width:400px;margin:0 auto}
+#loginForm input, #loginForm button{width:100%;border-radius:0;padding:10px;margin-bottom:10px;font-size:16px;box-sizing:border-box;border:1px solid lightgray}
+#loginForm p.welcome{font-size:20px;margin-bottom:30px;font-weight:bold;text-align:center;letter-spacing:-1px}
+#loginForm #loginBtn,#loginForm #JoinBtn{cursor:pointer}
+
 /*admin - 제품관리 */
 h2 .register{float:right;background:black;color:white;border-radius:0;margin-top:5px;font-size:16px;padding:10px 15px;cursor:pointer;}
 .adminList{}
@@ -271,3 +277,33 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .inputDetail{padding:10px;margin-left:20px}
 
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
+
+/* board event - 이벤트 게시판 */
+.event_area .event_box{
+	float:left;
+	overflow:hidden;
+	height:300px;
+	text-align: center;
+	margin:3px;
+	padding-top:20px;
+	border:1px solid #ddd
+}
+.event_img img{
+	width:200px ;
+	height:200px;
+
+}
+
+/* 장바구니 */
+.cart table{border-top:1px solid lightgray;margin-top:30px}
+.cart table tr{border-bottom:1px solid lightgray}
+.cart table th,.cart table td{padding:10px;vertical-align:middle;text-align:center;}
+.cart table td a{color:black;}
+.cart table input[type=checkbox]{width:20px;height:20px;vertical-align:middle}
+.cart table img{max-width:100px;max-height:100px;}
+button{border-radius:0;background:white;border:1px solid lightgray;padding:5px 10px;cursor:pointer}
+button.order{float:right;font-size:24px;padding:10px 20px;margin-top:-195px;font-weight:bold}
+button.del_Btn{margin-top:10px}
+.cart_info{list-style: none;padding:10px}
+.cart_info li::before {content: "+ ";}
+.cart_info li{font-size:14px;color:gray;padding:2px}
