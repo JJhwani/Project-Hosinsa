@@ -245,6 +245,13 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .reviewArea .reviewWrap2 .content{padding-top:20px}
 .reviewArea .reReply_register{float:right}
 
+/* 로그인 폼 */
+#loginForm{width:400px;margin:0 auto}
+#loginForm input, #loginForm button{width:100%;border-radius:0;padding:10px;margin-bottom:10px;font-size:16px;box-sizing:border-box;border:1px solid lightgray}
+#loginForm p.welcome{font-size:20px;margin-bottom:30px;font-weight:bold;text-align:center;letter-spacing:-1px}
+#loginForm #loginBtn,#loginForm #JoinBtn{cursor:pointer}
+
+
 /*admin - 제품관리 */
 h2 .register{float:right;background:black;color:white;border-radius:0;margin-top:5px;font-size:16px;padding:10px 15px;cursor:pointer;}
 .adminList{}
