@@ -28,7 +28,7 @@
 						<td class="cartNum">${cart.cartnum}</td>
 						<td><img src="${cart.proimg}"></td>
 						<td>${cart.pronum}</td>
-						<td><a class="move" href='${cart.pronum}'>${cart.proname}</a></td>
+						<td><a class="move" href='/product/${cart.pronum}'>${cart.proname}</a></td>
 						<td>${cart.quantity}</td>
 						<td>${cart.price}</td>
 					</tr>

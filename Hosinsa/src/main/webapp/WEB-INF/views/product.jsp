@@ -180,9 +180,11 @@
 		
 		var productForm = $(".productForm");
 		
+		//카트담기
 		$(".cart_in").on("click",function(){
+			//기존 카트에 같은 상품이 있는지 중복체크
 			productForm.find("input[name='quantity']").val($(".cart_quan").val());
-			productForm.attr("method","post").submit();
+			productForm.attr({"action":"checkCart","method":"post"}).submit();
 		});
 		
 		
@@ -374,7 +376,7 @@
 				return false;
 			}
 		})
-		
+			
 		if("${cartIn}"=="success"){
 			if(confirm("장바구니에 상품이 담겼습니다. 지금 확인하시겠습니까?")){
 				location.href="/cart/list";
