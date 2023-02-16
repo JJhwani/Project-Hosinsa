@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosinsa.mapper.CartMapper">
+
+<insert id="cartIn">
+	insert into hosinsa_cart(cartnum,proimg,pronum,id,quantity,price,proname)
+		values (SEQ_CART.nextval,
+		(select proimg from hosinsa_product where pronum = #{pronum})
+		,#{pronum},#{id},#{quantity},
+		(select price from hosinsa_product where pronum = #{pronum}),
+		(select proname from hosinsa_product where pronum = #{pronum}))
+</insert>
+
+<select id="getList" resultType="com.hosinsa.domain.CartVO">
+ <![CDATA[
+  	select * from hosinsa_cart where id = #{id}
+	]]>
+</select>
+
+<!-- 카트 삭제 -->
+<delete id="deleteCart">
+ delete hosinsa_Cart
+     where CARTNUM = #{cartNum}
+</delete>
+
+</mapper>

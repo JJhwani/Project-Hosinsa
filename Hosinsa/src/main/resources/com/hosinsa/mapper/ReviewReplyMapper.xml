@@ -5,8 +5,8 @@
 <mapper namespace="com.hosinsa.mapper.ReviewReplyMapper">
 
 	<insert id="insert">
-		insert into hosinsa_reviewreply (rno, bno, reply, replyer, replyDate)
-		values (seq_reviewreply.nextval, #{bno}, #{reply}, #{replyer}, sysdate)
+		insert into hosinsa_reviewreply (rno, bno, reply, replyer, replyDate, id)
+		values (seq_reviewreply.nextval, #{bno}, #{reply}, #{replyer}, sysdate, #{id})
 	</insert>
 	
 	<select id="read" resultType="com.hosinsa.domain.ReviewReplyVO">
@@ -21,20 +21,17 @@
 		update hosinsa_reviewreply set reply = #{reply}, updateDate = sysdate where rno = #{rno}
 	</update>
 	
-	<select id="getListWithPaging" resultType="com.hosinsa.domain.ReviewReplyVO">
+	<select id="getList" resultType="com.hosinsa.domain.ReviewReplyVO">
 		
 		<![CDATA[
-		select rno, bno, reply, replyer, replyDate, updateDate
+		select rno, bno, reply, replyer, replyDate, updateDate, id
 		from 
-		    (
-			select /*+INDEX(hosinsa_reviewreply idx_reviewreply) */
-			  rownum rn, rno, bno, reply, replyer, replyDate, updateDate
-		from hosinsa_reviewreply
+		    (select /*+INDEX(hosinsa_reviewreply idx_reviewreply) */
+			  rownum rn, rno, bno, reply, replyer, replyDate, updateDate, id
+		from hosinsa_reviewreply)
 		
 		where bno = #{bno}
 		and rno > 0
-		and rownum <= #{cri.pageNum} * #{cri.amount}
-	   ) where rn > (#{cri.pageNum} -1) * #{cri.amount}
 		]]>
 	</select>
 	
@@ -44,12 +41,4 @@
 		]]>
 	</select>
 	
-
-
-
-
-
-
-
-
 </mapper>

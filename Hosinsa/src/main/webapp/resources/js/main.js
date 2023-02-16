@@ -30,8 +30,13 @@ $(document).ready(function(){
 	var paging = $(".paging");
 	var sorting = $(".sorting");
 	var search = $(".search");
- 
-	
+	var notice  = $(".notice");
+	var cs = $(".cs");
+	var event = $(".event");
+	var noticeBoard = $(".noticeBoard");
+	var csBoard = $(".csBoard");
+	var eventBoard = $(".eventBoard");
+
 	//카테고리 클릭 -> 해당 카테고리 LIST 출력
 	$(".category").on("click",function(e){
 		e.preventDefault();
@@ -65,5 +70,24 @@ $(document).ready(function(){
 		e.preventDefault();
 		search.submit();
 	});
+
+	// Main 페이지에서 클릭한 이벤트로 이동
+	$(".bannerView li a").on("click", function(e) {
+		e.preventDefault();
+		eventBoard.append("<input type='hidden' name='event_no' value='"+$(this).attr("href")+"'>");
+		eventBoard.attr("action", "/board/event/read");
+		eventBoard.submit();
+	});
+
+	// 이벤트 게시판으로 이동
+	$(".eventBoard a").on("click", function(e) {
+		e.preventDefault();
+		eventBoard.attr("action","/board/event/list");
+		eventBoard.submit();
+	});
+
+
+
+
 
  });
