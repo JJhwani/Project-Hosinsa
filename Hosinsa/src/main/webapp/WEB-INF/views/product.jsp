@@ -161,14 +161,13 @@
  		<div class="modal-body">
  		
  		  <div class="form-group">
- 		  <label>Reply</label>
- 		  <input class="form-control" name="reply">
+ 		  <input class="form-control" name="reply" placeholder="비속어를 포함한 내용은 예고 없이 제재될 수 있습니다.">
  		  </div>
  		</div>
  		
  		<div class="modal-footer">
- 			<button id="modalRegBtn" type="button" class="btn btn-warning">Register</button>
- 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+ 			<button id="modalRegBtn" type="button" class="btn black">작성하기</button>
+ 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
  		</div>	
  	  </div>
  	</div> 		  
@@ -343,11 +342,13 @@
 		closeBtn.on("click",function(){
 			modal.find("input").val("");
 			modal.addClass("hidden");
+			$("body").removeClass("fix");
 		})
 		
 		//대댓글 작성
 		$(document).on("click",".reReply_register",function(e){
 			modal.removeClass("hidden");
+			$("body").addClass("fix");
 			
 			replyNum = $(this).parent().siblings(".topper").find(".bno").text();			
 		});		
