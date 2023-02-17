@@ -33,6 +33,10 @@
 	select * from hosinsa_member where id = #{id} and pw = #{pw}
 </select>
 
+<select id="getOrderList" resultType="com.hosinsa.domain.OrderVO">
+	select * from hosinsa_order where id = #{id} order by order_date desc
+</select>
+
 <!-- INSERT 문 -->
 <insert id="insert">
 	insert into hosinsa_member values

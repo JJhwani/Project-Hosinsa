@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="../../../resources/css/hosinsa.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
-<div class="mainWrap">
+<div class="contentWrap">
 	<div class="eventRead">
 		<h2>${event.title}</h2>
 		<h5>기간
@@ -15,17 +15,18 @@
 			<fmt:formatDate pattern="yyyy-MM-dd" value="${event.end_date}"></fmt:formatDate>
 		</h5>
 		<c:if test="${member.grade eq 'S'}">
-			<button class="btn modify">수정</button>
-			<button class="btn list">뒤로</button>
+			<button class="btn modify">수정</button>			
 		</c:if>
 		<br><br>
 		<img src="${event.content}">
 	</div>
+	<button class="btn list" onclick="javascript:history.go(-1)">뒤로</button>
 	<form class="eventForm" action="/board/event/modify" method="post">
 		<input type="hidden" name="event_no" value="${event.event_no}">
 		<input type="hidden" name="event_img" value="${event.event_img}">
 	</form>
 </div>
+
 
 <script src="../../../resources/js/board.js"></script>
 

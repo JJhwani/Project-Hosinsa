@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
 
 public interface MemberMapper {
 
@@ -32,5 +33,8 @@ public interface MemberMapper {
 
 	// Introducer 중복체크
 	public int introCheck(String memberIntroducer);
+	
+	// 주문내역 불러오기
+	public List<OrderVO> getOrderList(String id);
 
 }

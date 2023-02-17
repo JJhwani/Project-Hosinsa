@@ -185,9 +185,9 @@ float:left;
 .pagination li a:hover{background:rgb(245,245,245)}
 
 .notice{float:left;margin-bottom:50px;width:calc(40% - 20px);margin-right:20px;}
-.notice .title{margin-bottom:10px}
-.notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px}
-.notice>a,.event>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;}
+.notice .title{margin:5px 0 10px}
+.notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px;color:black}
+.notice form>a,.event form>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;color:black}
 .cs{width:calc(30% - 20px);margin-right:20px;float:left;}
 .cs a{display:block;padding:10px 0;margin:10px 0;width:100%;text-align:center;border:1px solid lightgray;cursor:pointer}
 .cs a:hover{cursor:pointer;background:rgb(245, 245, 245)}
@@ -282,13 +282,33 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .search_area .searchForm input{padding:5px;border-radius:0;border:1px solid lightgray}
 .array_center{width:550px;margin:0 auto}
 .table3{padding:10px 0;margin-bottom:30px;border-bottom:1px solid lightgray;border-top:3px solid black}
-.table3 th{width:20%}
+.table3 img{width:100px;height:100px}
+.table3 th{width:20%;vertical-align:middle}
 .table3 td{width:80%;padding:10px}
 .table3 input{width:100%;padding:5px;border-radius:0;border:1px solid lightgray}
 .table3 input[type=radio]{width:auto;margin-right:0;vertical-align:top}
 .table3 input[type=button]{margin-top:5px;font-size:12px;cursor:pointer;box-sizing:content-box;}
 .table3 .grade{font-size:14px}
 .member_info{margin-top:10px}
+.table3 .proimg{cursor:pointer}
+
+/* 나의 정보 */
+.myInfo .title{padding:20px 0;}
+.info1{width:50%;float:left;padding-right:50px;box-sizing:border-box;}
+.info1 table{width:100%;margin:0 0 20px}
+.info2{width:50%;max-height:528px;overflow-y:scroll;float:left;padding-right:20px;box-sizing:border-box;}
+.info2 table tr{border-bottom:1px solid lightgray}
+.info2 table th,.info2 table td{padding:10px;text-align:center;vertical-align:middle}
+.info2 table th:nth-child(1),.info2 table td:nth-child(1){width:14%}
+.info2 table th:nth-child(2),.info2 table td:nth-child(2){width:20%}
+.info2 table th:nth-child(3),.info2 table td:nth-child(3){width:35%}
+.info2 table th:nth-child(4),.info2 table td:nth-child(4){width:15%}
+.info2 table th:nth-child(5),.info2 table td:nth-child(5){width:16%}
+.info2 table a{color:black}
+.info3{clear:both;padding-top:60px}
+.info3 .tabWrap {padding:10px 0}
+.info3 .reviewWrap{margin-top:10px}
+.info3 .reviewWrap .topper{border-bottom:0}
 
 /* 탈퇴하기 */
 .remove header{padding:15px 20px;background:black;color:white;margin-bottom:15px}
@@ -307,20 +327,23 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
 
 /* board event - 이벤트 게시판 */
-.event_area .event_box{
-	float:left;
-	overflow:hidden;
-	height:300px;
-	text-align: center;
-	margin:3px;
-	padding-top:20px;
-	border:1px solid #ddd
-}
-.event_img img{
-	width:200px ;
-	height:200px;
-
-}
+.event_area{display:flex;flex-wrap:wrap;justify-content:center}
+.event_area .event_box{width:20%;position:relative;float:left;overflow:hidden;height:290px;text-align: center;margin:10px 3px;padding:20px 0;border:1px solid #ddd}
+.event_area .event_box a{color:black}
+.event_area .event_box p{padding-bottom:10px;letter-spacing:-1px}
+.event_area .event_box .event_img{margin-bottom:5px}
+.event_area .event_box .period{font-weight:bold;letter-spacing:-1px}
+.event_area .event_box .title{overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding:3px 10px;}
+.event_area .event_box .subtext{overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding-bottom:0}
+.event_area .event_box .event_area .event_box{padding:5px 0}
+.event_area .event_box.complete::after{position:absolute;top:0;left:0;content:'';display:block;background:rgba(0,0,0,0.5);width:100%;height:100%}
+.event_img img{width:200px;height:200px;}
+.eventRead{padding:10px 0;border-top:1px solid lightgray;border-bottom:1px solid lightgray;}
+.eventRead h2{font-weight:bold;padding-bottom:10px}
+.eventRead h5{border-bottom:1px solid lightgray;padding-bottom:10px}
+.eventRead h5+.modify{float:right;margin-top:-45px;margin-right:10px}
+.eventRead img{display:block;margin:0 auto}
+.eventRead+.list{margin-top:10px;float:right}
 
 /* 장바구니 */
 .cart table{border-top:1px solid lightgray;margin-top:30px}

@@ -5,7 +5,7 @@
 	<div class="array_center">
 		<h2 class="bigTitle">회원정보 수정</h2>
 		
-		<form role="form" action="/member/modify" method="post">
+		<form role="form" action="/member/modify" enctype="multipart/form-data" method="post">
 		<input type="hidden" name="grade" value="${member.grade }">
 		<input type="hidden" name="introducer" value="${member.introducer }">
 		<input type="hidden" name="point" value="${member.point }">
@@ -13,7 +13,10 @@
 			<table class="table3 member_info">
 				<tr>
 					<th>프로필이미지</th>
-					<td><input name="profilimg" type="text" value="${member.profilimg }"></td>
+					<td><img src = "../${member.profilimg }" class="proimg">
+					<input type="file" name="uploadFile" class="proimgFile hidden">
+					<input name="profilimg" type="hidden" value="${member.profilimg }">
+					</td>
 				</tr>
 				<tr>
 					<th>아이디</th>
@@ -33,7 +36,7 @@
 				</tr>
 				<tr>
 					<th>생일</th>
-					<td><input name="birthday" type="text" value="<fmt:formatDate pattern='yyyy-MM-dd' value='${member.birthday}'/>"> </td>
+					<td><input name="birthday" type="date" value="<fmt:formatDate pattern='yyyy-MM-dd' value='${member.birthday}'/>"> </td>
 				</tr>
 				<tr>
 					<th>닉네임</th>
@@ -70,6 +73,25 @@ $(document).ready(function(){
 		} 
 		formObj.submit();
 	});
+	
+	$(".proimg").on("click",function(e){
+		$(".proimgFile").click();
+	})
+	
+	//업로드 이미지 미리보기
+	$(".proimgFile").change(function() {
+        readURL(this);
+    });
+	
+	function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('.proimg').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 });
 </script>
 <%@ include file="../includes/footer.jsp" %>

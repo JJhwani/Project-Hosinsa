@@ -13,7 +13,7 @@
 			<img class="event_img" src="${event.event_img}">
 			<input type="file" name="uploadFile" class="event_imgFile hidden">
 		</div>
-		<input type="text" name="event_img" value="${event.event_img}">
+		<input type="hidden" name="event_img" value="${event.event_img}">
 		<h4 class="miniTitle">Event Info <i>이벤트 정보</i></h4>
 		<table class="infoTable">
 			<tr>
