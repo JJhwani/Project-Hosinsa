@@ -57,14 +57,17 @@ public class CartContoller {
 	}
 
 
-	@ResponseBody
 	@GetMapping("/order")
-	public void order(String cartnum, HttpSession session,
+	public void order(@RequestParam(value = "valueArr[]") List<String> cartnum,
 	Model model, @ModelAttribute("member") MemberVO member) {
-		
-	log.info("order~~~~~~~~~~~~~~");
-	log.info(cartnum);
 	
+		log.info("order~~~~~~~~~~~~~~"); 
+		log.info(cartnum); 
+		
+		for (String i : cartnum) {
+			log.info(i);
+		}
+		
 	}
 	
 	

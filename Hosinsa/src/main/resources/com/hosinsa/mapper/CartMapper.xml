@@ -36,7 +36,7 @@
 
 <select id="getOrder" resultType="com.hosinsa.domain.CartVO">
  <![CDATA[
-  	select * from hosinsa_cart where CARTNUM = #{cartNum}
+  	select * from hosinsa_cart where CARTNUM = #{cartnum}
 	]]>
 </select>
 

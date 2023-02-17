@@ -62,9 +62,9 @@
 			</ul>
 		</div>
 
-		<form action="/cart/order" method="get" class="cartForm">
+		<!-- <form action="/cart/order" method="get" class="cartForm">
 			<input type="hidden" name="cartnum" value="">
-		</form>
+		</form> -->
 		
 		<!-- 수량 조정 form -->
 		<form action="/cart/plusQuantity" method="post" class="quantity_plus_form">
@@ -77,7 +77,7 @@
 					
 	</div>
 	<div>
-		<button type="button" class="order black">주문하기</button>
+		<button type="button" class="order black" id="order">주문하기</button>
 		<button class="move_main">계속 쇼핑하기</button>
 	</div>
 </div>
@@ -103,7 +103,7 @@
 						});
 
 						// 오더 목록
-						$(".order").on("click", function(e) {
+						$("#order").on("click", function(e) {
 							var text = $(
 									"tbody input[type='checkbox']:checked")
 									.parent().next().text();
@@ -113,16 +113,32 @@
 								if ($(this).is(":checked")) { //선택되어 있으면 배열에 값을 저장함
 									valueArr.push($(this).parent().next().text());
 								} else {
-								console.log($(this));
+									console.log($(this));
 										}
 								});
 							if (valueArr.length == 0) {
 								alert("선택된 상품이 없습니다.");
-							} else {
-								$(".cartForm input").val(valueArr);
-								$(".cartForm").submit();
-								}
-							});
+							} else { 
+								$.ajax({
+									url : "/cart/order", // 전송 URL
+									dataType : "json",
+									type : 'GET', // GET or POST 방식
+									async : false,
+									data : {
+										valueArr : valueArr
+									}
+								
+								});
+					}
+							}); 
+						
+						/* if (valueArr.length == 0) {
+							alert("선택된 상품이 없습니다.");
+						} else {
+							$(".cartForm input").val(valueArr);
+							$(".cartForm").submit();
+							}
+						});  */
 
 						// 카트 목록 전체선택
 						$(function() {
@@ -152,55 +168,45 @@
 						})
 
 						// 카트삭제 버튼
-						$(".del_Btn")
-								.on(
-										"click",
-										function(e) {
-											var text = $(
-													"tbody input[type='checkbox']:checked")
-													.parent().next().text();
-											var list = $("tbody input[type='checkbox']");
-											var valueArr = new Array();
+						$(".del_Btn").on("click",function(e) {
+							var text = $(
+									"tbody input[type='checkbox']:checked")
+									.parent().next().text();
+							var list = $("tbody input[type='checkbox']");
+							var valueArr = new Array();
 
-											$("tbody input[type='checkbox']")
-													.each(
-															function() {
-																if ($(this)
-																		.is(
-																				":checked")) { //선택되어 있으면 배열에 값을 저장함
-																	valueArr
-																			.push($(
-																					this)
-																					.parent()
-																					.next()
-																					.text());
-																} else {
-																	console
-																			.log($(this));
-																}
-															});
+							$("tbody input[type='checkbox']").each(function() {
+								if (
+										$(this).is(":checked")) { //선택되어 있으면 배열에 값을 저장함
+										valueArr.push($(this).parent()
+													.next()
+													.text());
+								} else {
+									console
+											.log($(this));
+								}
+							});
 
-											if (valueArr.length == 0) {
-												alert("선택된 글이 없습니다.");
-											} else {
+								if (valueArr.length == 0) {
+									alert("선택된 글이 없습니다.");
+								} else {
 
-												if (!confirm("정말 삭제하시겠습니까?")) {
-													alert("취소되었습니다.");
-												} else {
-													$
-															.ajax({
-																url : "/cart/deleteCart", // 전송 URL
-																dataType : "json",
-																type : 'POST', // GET or POST 방식
-																async : false,
-																data : {
-																	valueArr : valueArr
-																}
-															//보내고자 하는 data 변수 설정
-															});
-												}
-												location.reload();
+									if (!confirm("정말 삭제하시겠습니까?")) {
+										alert("취소되었습니다.");
+									} else {
+										$.ajax({
+											url : "/cart/deleteCart", // 전송 URL
+											dataType : "json",
+											type : 'POST', // GET or POST 방식
+											async : false,
+											data : {
+											valueArr : valueArr //보내고자 하는 data 변수 설정
 											}
+									
+										});
+								}
+							location.reload();
+						}
 
 										});
 					})

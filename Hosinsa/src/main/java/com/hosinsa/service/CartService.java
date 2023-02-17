@@ -10,7 +10,6 @@ public interface CartService {
 	public CartVO get(Long pronum);
 	
 	public List<CartVO> getList(String id); 
-	
 	public List<CartVO> getOrder(long cartnum); 
 	
 	//카트삭제
