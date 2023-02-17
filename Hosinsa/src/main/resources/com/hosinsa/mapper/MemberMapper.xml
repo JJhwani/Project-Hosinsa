@@ -40,6 +40,12 @@
 	#{phone}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point})
 </insert>
 
+<!-- Kakao 로그인 -->
+<insert id="kakaoInsert">
+	INSERT INTO HOSINSA_MEMBER (ID, PW, NAME, EMAIL, SNSID) VALUES
+    (#{id}, #{pw}, #{name}, #{email}, #{snsId})
+</insert>
+
 <!-- DELETE 문 -->
 <delete id="delete">
 	delete from hosinsa_member where id = #{id} and pw = #{pw}

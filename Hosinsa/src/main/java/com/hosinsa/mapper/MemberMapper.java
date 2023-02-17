@@ -21,4 +21,7 @@ public interface MemberMapper {
 	public int nickCheck(String memberNickname);
 	// Introducer 중복체크
 	public int introCheck(String memberIntroducer);
+	
+	/* 카카오 로그인 */
+	public void kakaoInsert(MemberVO member);
 }

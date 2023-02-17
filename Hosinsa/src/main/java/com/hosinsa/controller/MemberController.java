@@ -168,8 +168,8 @@ public class MemberController {
 			return "redirect:/";
 		} else {
 			model.addAttribute("msg", result);
-			log.info("나여기있음ㅋㅋ");
 			return "/member/remove";
 		}
 	}
+
 }
