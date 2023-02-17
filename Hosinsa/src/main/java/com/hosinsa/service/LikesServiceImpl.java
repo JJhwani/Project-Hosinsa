@@ -26,16 +26,16 @@ public class LikesServiceImpl implements LikesService {
 		
 		log.info("Likes=======>" + vo);
 		
-		return mapper.insert(vo);
+		return mapper.insertSelectKey(vo);
 		
 	}
 
 	@Override
-	public List<LikesVO> getBylnowithUser(Long lno) {
+	public Integer getBylnowithUser(LikesVO vo) {
 		
-		log.info("Likes=======>" + lno);
+		log.info("Likes=======>" + vo);
 		
-		return mapper.getBylnowithUser(lno);
+		return mapper.getBylnowithUser(vo);
 	}
 
 	@Override

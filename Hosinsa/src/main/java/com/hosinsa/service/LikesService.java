@@ -10,7 +10,7 @@ public interface LikesService {
 	public int remove (Long lno);
 	public List<LikesVO> getProList(int pronum);
 	public List<LikesVO> getMyList(LikesVO vo);
-	public List<LikesVO> getBylnowithUser(Long lno); //중복인지 체크 
+	public Integer getBylnowithUser(LikesVO vo); //중복인지 체크 
 
 
 }

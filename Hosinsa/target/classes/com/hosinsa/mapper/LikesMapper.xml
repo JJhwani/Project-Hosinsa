@@ -13,7 +13,7 @@
 		
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="lno" order="BEFORE" resultType="Long">
-			select max(id) + 1 FROM hosinsa_likes
+			select max(lno) + 1 FROM hosinsa_likes
 		</selectKey>
 			insert into hosinsa_likes (lno, pronum, id)
 			values(#{lno},#{pronum},#{id})
@@ -35,9 +35,9 @@
 	</delete>
 	
 	<!-- 하트중복체크 -->
-	<select id="getBylnowithUser" resultType="int">
+	<select id="getBylnowithUser" resultType="Integer">
 		<![CDATA[
-		select count(lno) from hosinsa_likes where lno = #{lno}
+		select count(*) from hosinsa_likes where id = #{id} and pronum = #{pronum} 
 		]]>
 	</select>
 	

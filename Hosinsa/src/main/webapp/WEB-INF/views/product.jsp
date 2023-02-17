@@ -168,8 +168,7 @@
 	
 	<!-- 찜하기 -->
 		<div class = "likes">
-			<button type="button" class="fa-solid fa-heart" id="likes"> 찜</button>
-			
+			<button type="button" class="fa-solid fa-heart" id="likesBtn"> 찜</button>
 		</div>
 	
 	<!-- 찜하기 -->
@@ -455,12 +454,103 @@ Kakao.Share.createDefaultButton({
   });
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	
-})
+<script>
 
+//상품상세페이지 찜하기
+/*$(document).ready (function() {
+
+	$("#likesBtn").click(function(event) {
+       
+		event.preventDefault();
+	
+	if("${member.id}" == "") {  //찜하기 전 회원 여부 체크
+	  if(confirm("로그인회원만 사용가능합니다.")) {
+		location.href="/member/login"; //이동페이지는 컨트롤러로 넘긴다
+	}else{ 
+		location.reload();
+	}
+	}else{
+		var id = "${member.id}"; //아이디값
+		var pronum = "${product.pronum}"; //프로넘
+
+		console.log("m_id" + id);
+		console.log("product.pronum" + pronum);
+
+		var form = {
+			id : id,
+			pronum : pronum
+
+		};
+		
+		console.log(form);
+	
+	$.ajax ({
+		type : 'POST',
+		url : '/likes/new',
+		data : JSON.stringify(form),
+		contentType : "application/json; charset=utf-8",
+		success : function(result) {
+			if(result == "success") {
+				console.log("찜성공!");
+			  if(confirm("해당 상품을 찜했습니다. 마이페이지로 이동하시겠습니까?"))
+			  location.href="/member/myPage";
+			}else{
+				location.reload(); 
+				
+				
+			}
+		 	}
+	  		})
+			}
+		})  
+ 	   });*/
 </script>
+	
+<script>
+	$(document).ready (function() {
+
+	$("#likesBtn").click(function(e) {
+		
+		
+
+		var id = "${member.id}"; //아이디값
+		var pronum = "${product.pronum}"; //프로넘
+		var form = {
+				id : id,
+				pronum : pronum
+			};
+		console.log(form);
+	$.ajax ({
+		type : 'POST',
+		url : '/likes/lno',
+		data :  JSON.stringify(form),
+		dataType : 'json',
+		contentType : "application/json; charset=utf-8",
+		success : function(result) {	
+			alert(result);
+		if (result == 0) { 
+			alert("진행");
+			// 0일 때 안겹침
+		}else{
+			if(confirm("이미 찜이 된 상품입니다. 마이페이지로 이동하시겠습니까?")) {
+				location.href="/member/myPage";
+			}else{
+				return false;
+			}
+		};
+			 
+		}
+		});	
+	});
+});
+</script>
+ 
+ 
+ 
+ 
+  <!--//if문으로 조건에 따라서 나눠지게 설계하기. ajax는 활용하면서..
+  css로 검정하트 색 변환 가능.. 찜하기 / 삭제 두개만 진행 -->
+  
 
 
 <script src="../../../resources/js/main.js"></script>

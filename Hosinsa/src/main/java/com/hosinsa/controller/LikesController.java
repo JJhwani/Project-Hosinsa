@@ -83,14 +83,14 @@ public class LikesController {
 			return new ResponseEntity<>(service.getProList(pronum), HttpStatus.OK);
 		}
 		
-		@GetMapping(value="/lno",
+		@PostMapping(value="/lno",
 				consumes = "application/json",
 				produces = { MediaType.TEXT_PLAIN_VALUE,
 							MediaType.APPLICATION_JSON_VALUE})
-		public ResponseEntity<List<LikesVO>> getBylnowithUser(@PathVariable("lno") Long lno) {
-			
-			log.info("중복체크===========" + lno);
-			return new ResponseEntity<>(service.getBylnowithUser(lno), HttpStatus.OK);
+		public ResponseEntity<Integer> getBylnowithUser(@RequestBody LikesVO vo) {
+
+			log.info("중복체크===========" + vo);
+			return new ResponseEntity<>(service.getBylnowithUser(vo), HttpStatus.OK);
 		}
 		
 	}

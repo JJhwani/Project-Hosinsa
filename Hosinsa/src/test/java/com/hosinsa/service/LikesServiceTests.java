@@ -64,9 +64,11 @@ public class LikesServiceTests {
 		@Test
 		public void testgetBylnowithUser() {
 			
-			long lno =1;
+			LikesVO vo = new LikesVO();
+			vo.setLno(1L);
 			
-			log.info("getProList=========" + service.getBylnowithUser(lno));
+			
+			log.info("getProList=========" + service.getBylnowithUser(vo));
 		}
 
 }
