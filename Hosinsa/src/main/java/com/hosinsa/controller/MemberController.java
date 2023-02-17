@@ -170,7 +170,7 @@ public class MemberController {
 			return "redirect:/";
 		} else {
 			model.addAttribute("msg", result);
-			return "/member/remove";
+			return "/member/myPage";
 		}
 	}
 

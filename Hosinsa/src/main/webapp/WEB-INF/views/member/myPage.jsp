@@ -20,7 +20,7 @@
 		<tr><th>연락처</th><td>${member.phone }</td></tr>
 	</table>
 	<button data-oper="modify" class="btn btn-default btn-info">회원정보 수정</button>
-	<button data-oper="remove" class="btn btn-default">탈퇴하기</button>
+	<button id="remove" class="btn btn-default">탈퇴하기</button>
 	
 	<form id="operForm" action="/member/modify" method="get">
 		<input type="hidden" id="id" name="id" value="${member.id}">
@@ -95,6 +95,35 @@
 	</form>
 </div><!-- //contentWrap -->
 
+<!-- Modal -->
+ <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 	<div class="modal-dialog">
+ 	  <div class="modal-content">
+ 		<div class="modal-header">
+ 		  <h4 class="modal-title" id="myModalLabel">회원 탈퇴</h4>
+ 		</div>
+ 		<div class="modal-body">
+ 			<p>정말 탈퇴 하시겠습니까?</p><br>
+			<c:if test="${msg == 0}">
+				비밀번호가 틀립니다.
+			</c:if>
+ 		  <div class="form-group">
+ 		  <form id="modalForm" action="/member/remove" method="post">
+ 		  		<input type="text" name="id" value="${member.id}" readonly="readonly">
+ 		  		<input type="password" class="form-control" id="pw" name="pw" placeholder="PASSWORD">
+ 		  </form>
+ 		  </div>
+ 		</div>
+ 		
+ 		<div class="modal-footer">
+ 			<button id="modalRegBtn" type="button" class="btn black">탈퇴</button>
+ 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">탈퇴 그만두기</button>
+ 		</div>	
+ 	  </div>
+ 	</div> 		  
+ </div>
+<!-- Modal 끝 -->
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".tabWrap .tab").on("click",function(){
@@ -113,14 +142,44 @@ $(document).ready(function(){
 $(document).ready(function(){
     var operForm = $("#operForm");
     var removeForm = $("#removeForm");
-
+    var modalForm = $("#modalForm");
+    
     $("button[data-oper='modify']").on("click",function(e){
 		operForm.attr("action","/member/modify").submit();
   	});
-
-    $("button[data-oper='remove']").on("click",function(e){
-     removeForm.attr("action", "/member/remove").submit();
-      });
+    
+    // 모달
+    var modal = $("#myModal");
+    var closeBtn = $("#modalCloseBtn");
+    
+    closeBtn.on("click",function(){
+		modal.find("input").val("");
+		modal.addClass("hidden");
+		$("body").removeClass("fix");
+	});   
+    
+    $("#remove").on("click", function() {
+    	modal.removeClass("hidden");
+		$("body").addClass("fix");
+    });
+    
+    $("#modalRegBtn").on("click", function() {
+    	if ($(".form-control").val() == "") {
+    		alert("비밀번호를 입력하세요");
+    		$(".form-control").focus();
+    		return false;
+    	}
+    	var check = confirm("정말 탈퇴하시겠습니까?");
+    	
+    	if(check) {
+			modalForm.submit();    	
+    	}
+    });
+	
+    if("${msg}"=="0"){
+    	modal.removeClass("hidden");
+		$("body").addClass("fix");
+    }
 });
 </script>
 
