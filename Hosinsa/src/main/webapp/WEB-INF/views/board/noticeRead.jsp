@@ -44,6 +44,9 @@
 			</c:if>
 			<button class="btn list">뒤로</button>
 		</div>
+		<input type="hidden" name="keyword" value="${pageMaker_b.cri.b_keyword}">
+		<input type="hidden" name="pageNum" value="${pageMaker_b.cri.b_pageNum}">
+		<input type="hidden" name="amount" value="${pageMaker_b.cri.b_amount}">
 	</form>
 </div>
 

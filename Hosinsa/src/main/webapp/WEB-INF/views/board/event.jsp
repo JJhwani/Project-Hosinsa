@@ -19,7 +19,7 @@
 				<c:forEach var="event" items="${event}">
 					<c:choose>
 						<c:when test="${event.start_date <= today and today <= event.end_date}">
-							<div class="event_box">
+							<div class="event_box proceed">
 								<div class="event_img">
 									<p>진행중 이벤트</p>
 									<a class="move" href="${event.event_no}">
@@ -37,7 +37,7 @@
 							</div>
 						</c:when>
 						<c:when test="${today <= event.start_date and today <= event.end_date}">
-							<div class="event_box">
+							<div class="event_box ready">
 								<c:if test="${member.grade eq 'S'}">
 									<div class="event_img">
 										<p>준비중 이벤트</p>
@@ -57,7 +57,7 @@
 							</div>
 						</c:when>
 						<c:when test="${event.start_date <= today and event.end_date <= today}">
-							<div class="event_box">
+							<div class="event_box complete">
 								<div class="event_img">
 									<p>완료된 이벤트</p>
 									<a class="move" href="${event.event_no}">

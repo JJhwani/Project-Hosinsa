@@ -41,78 +41,33 @@
 	</table>
 	
 	<div class="searchNotice">
-		<form class="search" action="board/notice/search" method="get">
-			<input type="text" name="keyword" value="${pageMaker.cri.keyword}">
-			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+		<form class="noticeSearch" action="/board/notice/search" method="get">
+			<input type="hidden" name="keyword" value="${pageMaker_b.cri.b_keyword}">
+			<input type="hidden" name="pageNum" value="${pageMaker_b.cri.b_pageNum}">
+			<input type="hidden" name="amount" value="${pageMaker_b.cri.b_amount}">
 			<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 		</form>
 	</div>
 	<!-- 페이지 처리 시작 -->
 	<ul class="pagination">
-		<c:if test="${pageMaker.prev}">
-			<li class="paginate_button previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
+		<c:if test="${pageMaker_b.prev}">
+			<li class="paginate_button previous"><a href="${pageMaker_b.startPage-1}">Previous</a></li>
 		</c:if>
-		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-			<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
+		<c:forEach var="num" begin="${pageMaker_b.startPage}" end="${pageMaker_b.endPage}">
+			<li class="paginate_button ${pageMaker_b.cri.pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
 		</c:forEach>
-		<c:if test="${pageMaker.next}">
-			<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
+		<c:if test="${pageMaker_b.next}">
+			<li class="paginate_button next"><a href="${pageMaker_b.endPage+1}">Next</a></li>
 		</c:if>
 	</ul>
 	<form class="paging" action="/board/notice/list" method="post">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-		<input type="hidden" name="type" value="${pageMaker.cri.type}">
-		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+		<input type="hidden" name="pageNum" value="${pageMaker_b.cri.b_pageNum}">
+		<input type="hidden" name="amount" value="${pageMaker_b.cri.b_amount}">
+		<input type="hidden" name="type" value="${pageMaker_b.cri.b_type}">
+		<input type="hidden" name="keyword" value="${pageMaker_b.cri.b_keyword}">
 	</form>	
 </div>
 
-<!-- Modal  추가 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-			</div>
-			<div class="modal-body">처리가 완료되었습니다.</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- /.modal -->
-
-<script type="text/javascript">
-	$(document).ready(function() {
-
-		var result = '<c:out value="${result}"/>';
-
-		checkModal(result);
-
-		history.replaceState({}, null, null);
-
-		function checkModal(result) {
-
-			if (result === '' || history.state) {
-				return;
-			}
-
-			if (parseInt(result) > 0) {
-				$(".modal-body").html(
-						"게시글 " + parseInt(result)
-								+ " 번이 등록되었습니다.");
-			}
-
-			$("#myModal").show();
-		}
-	});
-</script>
 <script src="../../../resources/js/board.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){

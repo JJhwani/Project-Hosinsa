@@ -21,7 +21,7 @@ import lombok.Data;
 	CREATE SEQUENCE SEQ_BOARD_NOTICE;*/
 
 @Data
-public class BoardNoticeVO {
+public class BoardNoticeVO extends BoardCriteria{
 	private Long nno;
 	private String title;
 	private String content;

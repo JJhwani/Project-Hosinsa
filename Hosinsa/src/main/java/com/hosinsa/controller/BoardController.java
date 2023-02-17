@@ -44,7 +44,7 @@ public class BoardController {
 		
 		model.addAttribute("event", service.getListEvent(cri));
 		model.addAttribute("today", today);
-		model.addAttribute("pageMaker", new BoardPageDTO(cri, total));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
 		
 		return "/board/event";
 	}
@@ -88,7 +88,7 @@ public class BoardController {
 		
 		model.addAttribute("event", service.getListEvent(cri));
 		model.addAttribute("today", today);
-		model.addAttribute("pageMaker", new BoardPageDTO(cri, total));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
 		
 		return "/board/event";
 	}
@@ -132,7 +132,7 @@ public class BoardController {
 		
 		model.addAttribute("event", service.getListEvent(cri));
 		model.addAttribute("today", today);
-		model.addAttribute("pageMaker", new BoardPageDTO(cri, total));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
 				
 		return "/board/event";
 	}
@@ -150,10 +150,9 @@ public class BoardController {
 	// 공지사항 게시판
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/notice/list")
 	public String noticeList(BoardCriteria cri, Model model) {
-		
-		int total = service.getTotalNotice(cri);		
+		int total = service.getTotalNotice(cri);
 		model.addAttribute("notice", service.getListNotice(cri));
-		model.addAttribute("pageMaker", new BoardPageDTO(cri, total));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
 		
 		return "/board/notice";
 	}
@@ -163,6 +162,8 @@ public class BoardController {
 	public String noticeRead(@RequestParam("nno") Long nno, @ModelAttribute("cri") BoardCriteria cri, Model model) {
 		model.addAttribute("notice", service.readNotice(nno));
 		service.readCountNotice(nno);
+		int total = service.getTotalNotice(cri);
+		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
 		
 		return "/board/noticeRead";
 	}
@@ -183,7 +184,7 @@ public class BoardController {
 		
 		int total = service.getTotalNotice(cri);
 		model.addAttribute("notice", service.getListNotice(cri));
-		model.addAttribute("pageMaker", new BoardPageDTO(cri, total));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
 		
 		return "/board/notice";
 	}
@@ -206,7 +207,7 @@ public class BoardController {
 		
 		int total = service.getTotalNotice(cri);
 		model.addAttribute("notice", service.getListNotice(cri));
-		model.addAttribute("pageMaker", new BoardPageDTO(cri, total));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
 				
 		return "/board/notice";
 	}
@@ -223,10 +224,11 @@ public class BoardController {
 	
 	// 공지사항 검색
 	@GetMapping("/notice/search")
-	public String searchProduct(String keyword, BoardNoticeVO bnvo, BoardCriteria cri, Model model) {
+	public String searchProduct(String bkeyword, BoardNoticeVO bnvo, BoardCriteria cri, Model model) {
 		
 		int total = service.getTotalCountSearch(cri);
-		model.addAttribute("pageMaker", new BoardPageDTO(cri, total));
+		model.addAttribute("notice", service.getSearchNotice(bnvo));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
 		
 		return "/board/notice";
 	}

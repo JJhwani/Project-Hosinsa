@@ -4,7 +4,7 @@ $(document).ready(function(){
 	var eventForm = $(".eventForm");
 	var eventRegister = $(".eventRegister");
 	var eventModify = $(".eventModify");
-	var search = $(".search");
+	var noticeSearch = $(".noticeSearch");
 	var noticeRead = $(".noticeRead")
 	var noticeModify = $(".noticeModify")
 
@@ -133,15 +133,15 @@ $(document).ready(function(){
 	});
 
 	// 공지사항 게시판에서 검색버튼 클릭시
-	$(".search button").on("click", function(e){
-		if(!search.find("input[name='keyword']").val()){
+	$(".noticeSearch button").on("click", function(e){
+		if(search.find("input[name='keyword']").val() === ""){
 			alert("키워드를 입력하세요.");
 			return false;
 		}		
-		search.find("input[name='pageNum']").val("1");
-		search.find("input[name='amount']").val("28");
 		e.preventDefault();
-		search.submit();
+		noticeSearch.find("input[name='pageNum']").val("1");
+		noticeSearch.find("input[name='amount']").val("15");
+		noticeSearch.submit();
 	});
 
 	// 개별 공지사항 페이지에서 공지사항 수정 페이지로 이동

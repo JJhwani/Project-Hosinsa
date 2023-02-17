@@ -134,5 +134,18 @@
 			WHERE (LOWER(TITLE) LIKE '%'||#{keyword}||'%' OR LOWER(CONTENT) LIKE '%'||#{keyword}||'%'
 				 OR LOWER(ID) LIKE '%'||#{keyword}||'%')
 	</select>
+	<!-- getSearchNotice -->
+	<select id="getSearchNotice" resultType="com.hosinsa.domain.BoardNoticeVO" parameterType="com.hosinsa.domain.BoardNoticeVO">
+		<![CDATA[
+    		SELECT NNO, TITLE, CONTENT, ID, REGDATE, UPDATE_DATE, READCOUNT
+			FROM
+				(SELECT	ROWNUM RN, NNO, TITLE, CONTENT, ID, REGDATE, UPDATE_DATE, READCOUNT
+					FROM
+						(SELECT * FROM HOSINSA_BOARD_NOTICE WHERE (LOWER(TITLE) LIKE '%'||#{keyword}||'%' OR LOWER(CONTENT) LIKE '%'||#{keyword}||'%'
+    						OR LOWER(ID) LIKE '%'||#{keyword}||'%'))
+				WHERE ROWNUM <= #{pageNum} * #{amount})
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+    	]]>
+	</select>
 	
 </mapper>

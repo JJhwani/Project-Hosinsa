@@ -6,10 +6,10 @@ import lombok.Data;
 
 @Data
 public class BoardCriteria {
-	private int pageNum;
-	private int amount;
-	private String type;
-	private String keyword;
+	private int b_pageNum;
+	private int b_amount;
+	private String b_type;
+	private String b_keyword;
 	//private String category;
 	
 	public BoardCriteria() {
@@ -17,20 +17,20 @@ public class BoardCriteria {
 	}
 	
 	public BoardCriteria(int pageNum, int amount) {
-		this.pageNum = pageNum;
-		this.amount = amount;
+		this.b_pageNum = pageNum;
+		this.b_amount = amount;
 	}
 	
 	public String[] getTypeArr() {
-		return type == null ? new String[] {} : type.split("");
+		return b_type == null ? new String[] {} : b_type.split("");
 	}
 	
 	public String getListLink() {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
-				.queryParam("pageNum", this.pageNum)
-				.queryParam("amount", this.getAmount())
-				.queryParam("type", this.getType())
-				.queryParam("keyword", this.getKeyword());
+				.queryParam("b_pageNum", this.b_pageNum)
+				.queryParam("b_amount", this.getB_amount())
+				.queryParam("b_type", this.getB_type())
+				.queryParam("b_keyword", this.getB_keyword());
 		
 		return builder.toUriString();
 	}

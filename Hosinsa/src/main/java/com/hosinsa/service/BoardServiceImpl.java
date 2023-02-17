@@ -101,6 +101,11 @@ public class BoardServiceImpl implements BoardService{
 	public int getTotalCountSearch(BoardCriteria cri) {
 		return mapper.getTotalCountSearch(cri);
 	}
+
+	@Override
+	public List<BoardNoticeVO> getSearchNotice(BoardNoticeVO bnvo) {
+		return mapper.getSearchNotice(bnvo);
+	}
 	
 	
 
