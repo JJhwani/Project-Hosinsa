@@ -2,6 +2,7 @@ package com.hosinsa.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -60,8 +61,9 @@ public class MemberController {
 		} else {
 			model.addAttribute("member", vo);
 			return "redirect:/";
-		}
-
+		} 
+		
+		
 	}
 
 	// 로그아웃

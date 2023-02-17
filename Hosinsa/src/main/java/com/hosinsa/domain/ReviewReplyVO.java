@@ -11,6 +11,7 @@ public class ReviewReplyVO {
 		
 		private String reply;
 		private String replyer;
+		private String id;
 		private Date replyDate;
 		private Date updateDate;
 }

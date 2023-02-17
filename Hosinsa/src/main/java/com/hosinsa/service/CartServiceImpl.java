@@ -27,18 +27,35 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public List<CartVO> getList() {
-		return mapper.getList();
-	}
-	
-	@Override
-	public List<CartVO> getOrder() {
-		return mapper.getList();
-	}
-	
-	@Override
 	public boolean deleteCart(long cartnum) {
 		return mapper.deleteCart(cartnum)==1? true : false;
 	}
+
+	@Override
+	public List<CartVO> getList(String id) {
+		return mapper.getList(id);
+	}
+	
+	@Override
+	public List<CartVO> getOrder(long cartnum) {
+		return mapper.getOrder(cartnum);
+	}
+
+	@Override
+	public boolean cartIn(CartVO vo) {
+		return mapper.cartIn(vo)==1?true:false;
+	}
+	
+	@Override
+	public boolean cartUpdate(CartVO vo) {
+		return mapper.cartUpdate(vo)==1?true:false;
+	}
+
+	@Override
+	public int checkCart(CartVO vo) {
+		return mapper.checkCart(vo);
+	}
+
+	
 }
 
