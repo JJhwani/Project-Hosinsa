@@ -67,7 +67,10 @@
 		</form> -->
 		
 		<!-- 수량 조정 form -->
-		<form action="/cart/updateQuantity" method="post" class="quantity_update_form">
+		<form action="/cart/plusQuantity" method="post" class="quantity_plus_form">
+			<input type="hidden" name="cartnum" value="">
+		</form>
+		<form action="/cart/minusQuantity" method="post" class="quantity_minus_form">
 			<input type="hidden" name="cartnum" value="">
 		</form>
 					
@@ -89,57 +92,39 @@
 						$(".quantity_btn_plus").on("click", function(e) {
 							var number = $(this).parent().siblings(".cartNum").text()
 							alert(number);
-							$(".quantity_update_form").find("input[name=cartnum]").val(number);
+							$(".quantity_plus_form").find("input[name=cartnum]").val(number);
 							
-							$(".quantity_update_form").submit();
+							$(".quantity_plus_form").submit();
 						});
-						$(".quantity_btn_minus").on(
-								"click",
-								function() {
-									let quantity = $(this).parent("div").find(
-											"input").val();
-									if (quantity > 1) {
-										$(this).parent("div").find("input")
-												.val(--quantity);
-									}
-								});
+						$(".quantity_btn_minus").on("click",function(e) {
+							var number = $(this).parent().siblings(".cartNum").text()
+							alert(number);
+							$(".quantity_minus_form").find("input[name=cartnum]").val(number);
+							
+							$(".quantity_minus_form").submit();
+						});
 
 						// 오더 목록
-						$(".order")
-								.on(
-										"click",
-										function(e) {
-											var text = $(
-													"tbody input[type='checkbox']:checked")
-													.parent().next().text();
-											var list = $("tbody input[type='checkbox']");
-											var valueArr = new Array();
-
-											$("tbody input[type='checkbox']")
-													.each(
-															function() {
-																if ($(this)
-																		.is(
-																				":checked")) { //선택되어 있으면 배열에 값을 저장함
-																	valueArr
-																			.push($(
-																					this)
-																					.parent()
-																					.next()
-																					.text());
-																} else {
-																	console
-																			.log($(this));
-																}
-															});
-											if (valueArr.length == 0) {
-												alert("선택된 상품이 없습니다.");
-											} else {
-												$(".cartForm input").val(
-														valueArr);
-												$(".cartForm").submit();
-											}
-										});
+						$(".order").on("click", function(e) {
+							var text = $(
+									"tbody input[type='checkbox']:checked")
+									.parent().next().text();
+							var list = $("tbody input[type='checkbox']");
+							var valueArr = new Array();
+							$("tbody input[type='checkbox']").each(function() {
+								if ($(this).is(":checked")) { //선택되어 있으면 배열에 값을 저장함
+									valueArr.push($(this).parent().next().text());
+								} else {
+								console.log($(this));
+										}
+								});
+							if (valueArr.length == 0) {
+								alert("선택된 상품이 없습니다.");
+							} else {
+								$(".cartForm input").val(valueArr);
+								$(".cartForm").submit();
+								}
+							});
 
 						// 카트 목록 전체선택
 						$(function() {

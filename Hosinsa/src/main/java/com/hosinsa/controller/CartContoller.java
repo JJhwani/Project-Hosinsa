@@ -104,10 +104,18 @@ public class CartContoller {
 	 * service.updateQuantity(vo); }
 	 */
 	
-	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/updateQuantity")
-	public String updateQuantity1(CartVO vo,RedirectAttributes rttr) {
-		log.info("업데이트 ~~~~~~~~~~~~~~");
-		service.updateQuantity(vo);
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/plusQuantity")
+	public String plusQuantity(CartVO vo,RedirectAttributes rttr) {
+		log.info("수량 + 버튼");
+		service.plusQuantity(vo);
 		return "redirect:/cart/list";
 	}
+	
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/minusQuantity")
+	public String minusQuantity(CartVO vo,RedirectAttributes rttr) {
+		log.info("수량 - 버튼");
+		service.minusQuantity(vo);
+		return "redirect:/cart/list";
+	}
+	
 }

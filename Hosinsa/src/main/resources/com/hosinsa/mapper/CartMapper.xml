@@ -13,10 +13,17 @@
 		(select proname from hosinsa_product where pronum = #{pronum}))
 </insert>
 
-<update id="updateQuantity">
+<update id="plusQuantity">
   	update hosinsa_cart
   	set  
   	quantity = quantity +1 
+  	where cartnum = #{cartnum}
+</update>
+
+<update id="minusQuantity">
+  	update hosinsa_cart
+  	set  
+  	quantity = quantity -1 
   	where cartnum = #{cartnum}
 </update>
 
