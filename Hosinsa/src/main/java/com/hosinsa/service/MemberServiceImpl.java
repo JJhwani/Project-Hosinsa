@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
+import com.hosinsa.domain.PreReviewVO;
 import com.hosinsa.mapper.MemberMapper;
 
 import lombok.AllArgsConstructor;
@@ -77,5 +78,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<OrderVO> getOrderList(String id) {
 		return memberMapper.getOrderList(id);
+	}
+
+	@Override
+	public List<PreReviewVO> getPreList(String id) {
+		return memberMapper.getPreList(id);
 	}
 }

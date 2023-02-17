@@ -2,26 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@include file="../includes/header.jsp" %>
 
-<h1>리뷰 작성</h1>
+<h1>리뷰 작성하기</h1>
 
 
 <form role="form" action="/review/register" method="post">
-	<div class="form-group">
-		
-	
-		<label>Title</label> <input class="form-control" name="title">
+	<input type="hidden" name="nickname" value="${member.nickname }">
+	<div class="form-group">	
+		<label>제목</label> <input class="form-control" name="title">
 	</div>
 	
 	<div class="form-group">
-		<label>Text area</label> 
+		<label>내용</label> 
 		<textarea class="form-control" rows="5" name="content"></textarea>
 	</div>
-	
-	<div class="form-group">
-		<label>Nickname</label> <input class="form-control" name="nickname">
-	</div>
-	
-	
 	<button type="submit">submit</button>
 	<button type="reset">reset</button>
 </form>

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.ReviewCriteria;
 import com.hosinsa.domain.ReviewPageDTO;
 import com.hosinsa.domain.ReviewVO;
@@ -20,13 +22,14 @@ import com.hosinsa.service.ReviewService;
 import lombok.extern.log4j.Log4j;
 
 @Controller
+@SessionAttributes("member")
 @RequestMapping("/review/*")
 @Log4j
 public class ReviewController {
 	
 	@Autowired
 	private ReviewService service;
-	
+		
 	@ResponseBody
 	@GetMapping("/list")
 	public List<ReviewVO> list(ReviewCriteria cri,Integer pronum,Model model) {
@@ -44,7 +47,6 @@ public class ReviewController {
 	@PostMapping("/register")
 	public String register(ReviewVO vo, RedirectAttributes rttr) {
 		
-		log.info("등록=========>" + vo);
 		service.regiseter(vo);
 		rttr.addFlashAttribute("result", vo.getBno());
 		
@@ -54,8 +56,6 @@ public class ReviewController {
 	
 	@GetMapping({"/get","/modify"})
 	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") ReviewCriteria cri, Model model) {
-		
-		log.info("bno값을 좀 더 명시적으로 처리하는 RequestParam을 사용한다");
 		
 		model.addAttribute("review", service.get(bno));
 	}
@@ -98,8 +98,11 @@ public class ReviewController {
 	
 	
 	@GetMapping("/register")
-	public void register() {
+	public void register(@RequestParam("pronum") int pronum,@RequestParam("ordernum") int ordernum,@ModelAttribute("member") MemberVO vo, Model model) {
 		
+		model.addAttribute("product",service.getProduct(pronum));
+		model.addAttribute("ordernum",ordernum);
+		model.addAttribute("member",vo);
 		
 	}
 	

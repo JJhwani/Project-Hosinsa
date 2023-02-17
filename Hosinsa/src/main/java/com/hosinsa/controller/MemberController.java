@@ -137,6 +137,7 @@ public class MemberController {
 	@GetMapping("/myPage")
 	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
 		
+		model.addAttribute("possible",memberService.getPreList(vo.getId()));
 		model.addAttribute("order",memberService.getOrderList(vo.getId()));
 		model.addAttribute("member", vo);
 	}
@@ -151,7 +152,7 @@ public class MemberController {
 	public String modifyPOST(MemberVO member,  MultipartFile uploadFile, RedirectAttributes rttr, Model model) {
 		
 		File saveFile = new File(
-				"C:\\Work3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\profile",
+				"C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\profile",
 				member.getId()+".jpg");
 
 		try {

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
+import com.hosinsa.domain.PreReviewVO;
 
 public interface MemberMapper {
 
@@ -36,5 +37,8 @@ public interface MemberMapper {
 	
 	// 주문내역 불러오기
 	public List<OrderVO> getOrderList(String id);
+	
+	//작성가능리뷰 불러오기
+	public List<PreReviewVO> getPreList(String id);
 
 }

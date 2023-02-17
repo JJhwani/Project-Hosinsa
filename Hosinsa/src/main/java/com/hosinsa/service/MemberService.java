@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
+import com.hosinsa.domain.PreReviewVO;
 
 public interface MemberService {
 
@@ -39,6 +40,6 @@ public interface MemberService {
 	public List<OrderVO> getOrderList(String id);
 	
 	//작성가능리뷰 불러오기
-	public List<>
+	public List<PreReviewVO> getPreList(String id);
 
 }
