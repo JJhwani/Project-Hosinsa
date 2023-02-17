@@ -185,9 +185,9 @@ float:left;
 .pagination li a:hover{background:rgb(245,245,245)}
 
 .notice{float:left;margin-bottom:50px;width:calc(40% - 20px);margin-right:20px;}
-.notice .title{margin-bottom:10px}
-.notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px}
-.notice>a,.event>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;}
+.notice .title{margin:5px 0 10px}
+.notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px;color:black}
+.notice form>a,.event form>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;color:black}
 .cs{width:calc(30% - 20px);margin-right:20px;float:left;}
 .cs a{display:block;padding:10px 0;margin:10px 0;width:100%;text-align:center;border:1px solid lightgray;cursor:pointer}
 .cs a:hover{cursor:pointer;background:rgb(245, 245, 245)}
@@ -307,20 +307,23 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
 
 /* board event - 이벤트 게시판 */
-.event_area .event_box{
-	float:left;
-	overflow:hidden;
-	height:300px;
-	text-align: center;
-	margin:3px;
-	padding-top:20px;
-	border:1px solid #ddd
-}
-.event_img img{
-	width:200px ;
-	height:200px;
-
-}
+.event_area{display:flex;flex-wrap:wrap;justify-content:center}
+.event_area .event_box{width:20%;position:relative;float:left;overflow:hidden;height:290px;text-align: center;margin:10px 3px;padding:20px 0;border:1px solid #ddd}
+.event_area .event_box a{color:black}
+.event_area .event_box p{padding-bottom:10px;letter-spacing:-1px}
+.event_area .event_box .event_img{margin-bottom:5px}
+.event_area .event_box .period{font-weight:bold;letter-spacing:-1px}
+.event_area .event_box .title{overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding:3px 10px;}
+.event_area .event_box .subtext{overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding-bottom:0}
+.event_area .event_box .event_area .event_box{padding:5px 0}
+.event_area .event_box.complete::after{position:absolute;top:0;left:0;content:'';display:block;background:rgba(0,0,0,0.5);width:100%;height:100%}
+.event_img img{width:200px;height:200px;}
+.eventRead{padding:10px 0;border-top:1px solid lightgray;border-bottom:1px solid lightgray;}
+.eventRead h2{font-weight:bold;padding-bottom:10px}
+.eventRead h5{border-bottom:1px solid lightgray;padding-bottom:10px}
+.eventRead h5+.modify{float:right;margin-top:-45px;margin-right:10px}
+.eventRead img{display:block;margin:0 auto}
+.eventRead+.list{margin-top:10px;float:right}
 
 /* 장바구니 */
 .cart table{border-top:1px solid lightgray;margin-top:30px}

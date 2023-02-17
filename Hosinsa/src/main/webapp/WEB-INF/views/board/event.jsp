@@ -7,43 +7,23 @@
 <link rel="stylesheet" href="../../../resources/css/hosinsa.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
-<div class="mainWrap">
-	<h2 class="bigTitle">이벤트 페이지
-		<c:if test="${member.grade eq 'S'}">
-			<a class="register" href="/board/event/register">이벤트 등록</a>
-		</c:if>
-	</h2>
+<div class="contentWrap">
+	<h2 class="bigTitle">MUSINSA EVENT
+	<c:if test="${member.grade eq 'S'}">
+		<a class="register" href="/board/event/register">이벤트 등록</a>
+	</c:if>
+	</h2><br>
 	<div class="eventView">
 		<section class="eventList">
 	 		<div class="event_area">
 				<c:forEach var="event" items="${event}">
 					<c:choose>
 						<c:when test="${event.start_date <= today and today <= event.end_date}">
-							<div class="event_box">
-								<div class="event_img">
-									<p>진행중 이벤트</p>
-									<a class="move" href="${event.event_no}">
-										<img src="${event.event_img}" width="250px" height="200px">
-									</a>
-								</div>
-								<div class="event_info">
-									<span class="period">
-										<fmt:formatDate pattern="yyyy-MM-dd" value="${event.start_date}"></fmt:formatDate>~
-										<fmt:formatDate pattern="yyyy-MM-dd" value="${event.end_date}"></fmt:formatDate>
-									</span>
-									<p class="title">${event.title}</p>
-									<p class="subtext">${event.subtext}</p>							
-								</div>
-							</div>
-						</c:when>
-						<c:when test="${today <= event.start_date and today <= event.end_date}">
-							<div class="event_box">
-								<c:if test="${member.grade eq 'S'}">
+							<div class="event_box proceed">
+								<a class="move" href="${event.event_no}">
 									<div class="event_img">
-										<p>준비중 이벤트</p>
-										<a class="move" href="${event.event_no}">
-											<img src="${event.event_img}" width="250px" height="200px">
-										</a>
+										<p>진행중 이벤트</p>
+										<img src="${event.event_img}" width="250px" height="200px">
 									</div>
 									<div class="event_info">
 										<span class="period">
@@ -53,25 +33,43 @@
 										<p class="title">${event.title}</p>
 										<p class="subtext">${event.subtext}</p>							
 									</div>
-								</c:if>
+								</a>
+							</div>
+						</c:when>						
+						<c:when test="${event.start_date <= today and event.end_date <= today}">
+							<div class="event_box complete">
+								<a class="move" href="${event.event_no}">
+									<div class="event_img">
+										<p>완료된 이벤트</p>									
+										<img src="${event.event_img}" width="250px" height="200px">									
+									</div>
+									<div class="event_info">
+										<span class="period">
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${event.start_date}"></fmt:formatDate>~
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${event.end_date}"></fmt:formatDate>
+										</span>
+										<p class="title">${event.title}</p>
+										<p class="subtext">${event.subtext}</p>							
+									</div>
+								</a>
 							</div>
 						</c:when>
-						<c:when test="${event.start_date <= today and event.end_date <= today}">
-							<div class="event_box">
-								<div class="event_img">
-									<p>완료된 이벤트</p>
-									<a class="move" href="${event.event_no}">
+						<c:when test="${today <= event.start_date and today <= event.end_date and member.grade eq 'S'}">
+							<div class="event_box ready">
+								<a class="move" href="${event.event_no}">
+									<div class="event_img">
+										<p>준비중 이벤트</p>
 										<img src="${event.event_img}" width="250px" height="200px">
-									</a>
-								</div>
-								<div class="event_info">
-									<span class="period">
-										<fmt:formatDate pattern="yyyy-MM-dd" value="${event.start_date}"></fmt:formatDate>~
-										<fmt:formatDate pattern="yyyy-MM-dd" value="${event.end_date}"></fmt:formatDate>
-									</span>
-									<p class="title">${event.title}</p>
-									<p class="subtext">${event.subtext}</p>							
-								</div>
+									</div>
+									<div class="event_info">
+										<span class="period">
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${event.start_date}"></fmt:formatDate>~
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${event.end_date}"></fmt:formatDate>
+										</span>
+										<p class="title">${event.title}</p>
+										<p class="subtext">${event.subtext}</p>							
+									</div>
+								</a>
 							</div>
 						</c:when>
 					</c:choose>
