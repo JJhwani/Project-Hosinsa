@@ -2,12 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+<!-- <script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <%@include file="../includes/header.jsp"%>
 
 <div class="container">
@@ -65,8 +64,7 @@
    <div class="col-lg-12">
       <div class="panel panel-default">
          <div class="panel-heading">
-           <i class="fa-solid fa-user-check"></i>
-            답변
+            <i class="fa-regular fa-comment-dots"></i> 답변
             <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>답변 작성하기</button>
          </div>
 
@@ -109,7 +107,7 @@
               </div>
               <div class="form-group">
                 <label>Reply Date</label> 
-                <input class="form-control" name='replyDate' value='2018-01-01 13:13'>
+                <input class="form-control" name='replyDate' value='2023-02-17 13:13'>
               </div>
       
             </div>

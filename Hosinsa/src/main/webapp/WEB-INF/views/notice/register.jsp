@@ -3,12 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <%@include file="../includes/header.jsp"%>
 
 
@@ -31,10 +25,10 @@
 			<label for="id">작성자</label> 
 			<input class="form-control" placeholder="ID를 입력하세요." name='id'>
 		</div>
-		<div style="display: inline-block; margin: 0 5px; float: right;">
+		
 			<button type="reset" class="btn btn-default">취소</button>
 			<button type="submit" class="btn">등록</button>
-		</div>
+		
 
 	</form>
 

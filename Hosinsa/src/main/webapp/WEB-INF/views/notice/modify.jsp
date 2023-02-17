@@ -2,12 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <%@include file="../includes/header.jsp"%> 
 
 <div class="container">
@@ -54,12 +49,10 @@
 				readonly="readonly">
 		</div>
 
-		<div style="display: inline-block; margin: 0 5px; float: right;">
 		<button type="submit" data-oper='modify' class="btn">수정</button>
 		<button type="submit" data-oper='list' class="btn btn-default">목록</button>
-<button type="submit" data-oper='remove' class="btn btn-danger">삭제</button>
-			
-		</div>
+		<button type="submit" data-oper='remove' class="btn btn-danger">삭제</button>
+
 	</form>
 
 
