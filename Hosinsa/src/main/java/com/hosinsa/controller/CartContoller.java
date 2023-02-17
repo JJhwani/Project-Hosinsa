@@ -58,11 +58,11 @@ public class CartContoller {
 
 
 	@ResponseBody
-	@GetMapping("/order") 
+	@GetMapping("/order")
 	public void order(String cartnum, HttpSession session,
 	Model model, @ModelAttribute("member") MemberVO member) {
 		
-	log.info("order~~~~~~~~~~~~~~"); 
+	log.info("order~~~~~~~~~~~~~~");
 	log.info(cartnum);
 	
 	}
