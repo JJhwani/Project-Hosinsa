@@ -115,6 +115,7 @@
 	<!-- 찜하기 -->
 		<div class = "likes">
 			<button type="button" class="fa-solid fa-heart" id="likes"> 찜</button>
+			
 		</div>
 	
 	<!-- 찜하기 -->
@@ -196,6 +197,12 @@ Kakao.Share.createDefaultButton({
   });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	
+})
+
+</script>
 
 
 <script src="../../../resources/js/main.js"></script>
