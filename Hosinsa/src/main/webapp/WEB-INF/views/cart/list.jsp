@@ -62,9 +62,9 @@
 			</ul>
 		</div>
 
-		<!-- <form action="/cart/order" method="get" class="cartForm">
+		<form action="/cart/order" method="get" class="cartForm">
 			<input type="hidden" name="cartnum" value="">
-		</form> -->
+		</form>
 		
 		<!-- 수량 조정 form -->
 		<form action="/cart/plusQuantity" method="post" class="quantity_plus_form">

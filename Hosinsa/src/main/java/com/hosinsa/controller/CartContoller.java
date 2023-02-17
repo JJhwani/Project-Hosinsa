@@ -57,32 +57,32 @@ public class CartContoller {
 	}
 
 
+	@ResponseBody
+	@GetMapping("/order") 
+	public void order(String cartnum, HttpSession session,
+	Model model, @ModelAttribute("member") MemberVO member) {
+		
+	log.info("order~~~~~~~~~~~~~~"); 
+	log.info(cartnum);
+	
+	}
+	
 	
 	@ResponseBody
 	@PostMapping(value = "/deleteCart")
 	public void deleteCart(HttpSession session,
 			@RequestParam(value = "valueArr[]") List<String> chArr ,RedirectAttributes rttr) {
 		log.info("delete Cart =============");
-
+		
 		long cartNum = 0;
 		log.info(chArr);
-
+		
 		for (String i : chArr) {
 			cartNum = Integer.parseInt(i);
 			service.deleteCart(cartNum);
 		}
 	}
-
-	@ResponseBody
-	@GetMapping("/order") 
-	public String order(String cartnum, HttpSession session,
-	Model model, @ModelAttribute("member") MemberVO member) {
-		
-	log.info("order~~~~~~~~~~~~~~"); 
-	log.info(cartnum);
 	
-	return "cart/order";
-	}
 	
 	@PostMapping("/cartIn")
 	public String cartIn(CartVO vo,RedirectAttributes rttr) {
@@ -98,11 +98,7 @@ public class CartContoller {
 	public int checkCart(CartVO vo, Model model) {
 		return 0;
 	}
-	/*
-	 * @PostMapping("/updateQuantity") public void updateQuantity(CartVO
-	 * vo,RedirectAttributes rttr) { log.info("업데이트 ~~~~~~~~~~~~~~");
-	 * service.updateQuantity(vo); }
-	 */
+	
 	
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/plusQuantity")
 	public String plusQuantity(CartVO vo,RedirectAttributes rttr) {
