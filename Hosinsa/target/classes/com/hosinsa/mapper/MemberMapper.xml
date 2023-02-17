@@ -9,6 +9,21 @@
 	select * from hosinsa_member
 </select>
 
+<!-- ID 중복체크 -->
+<select id="idCheck" resultType="int">
+	select count(*) from hosinsa_member where id = #{id}
+</select>
+
+<!-- NickName 중복체크 -->
+<select id="nickCheck" resultType="int">
+	select count(*) from hosinsa_member where nickname = #{nickname}
+</select>
+
+<!-- introducer 중복체크 -->
+<select id="introCheck" resultType="int">
+	select count(*) from hosinsa_member where id = #{id}
+</select>
+
 <select id="read" resultType="com.hosinsa.domain.MemberVO">
 	select * from hosinsa_member where id = #{id}
 </select>
@@ -22,7 +37,7 @@
 <insert id="insert">
 	insert into hosinsa_member values
 	(#{id}, #{pw}, #{name}, #{gender}, #{birthday}, #{email}, 
-	#{phone}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR})
+	#{phone}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point})
 </insert>
 
 <!-- DELETE 문 -->
@@ -33,17 +48,18 @@
 <!-- UPDATE 문 -->
 <update id="update">
 	update hosinsa_member set
-	pw = #{pw, jdbcType=VARCHAR},
-	name = #{name, jdbcType=VARCHAR},
-	gender = #{gender, jdbcType=VARCHAR},
-	birthday = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
-	email = #{email, jdbcType=VARCHAR},
-	phone = #{phone, jdbcType=CHAR},
-	nickname = #{nickname, jdbcType=VARCHAR},
-	profilimg = #{profilimg, jdbcType=VARCHAR},
-	grade = #{grade, jdbcType=CHAR},
-	introducer = #{introducer, jdbcType=VARCHAR}
-	where id = #{id}
+	PW = #{pw, jdbcType=VARCHAR},
+	NAME = #{name, jdbcType=VARCHAR},
+	GENDER = #{gender, jdbcType=VARCHAR},
+	BIRTHDAY = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
+	EMAIL = #{email, jdbcType=VARCHAR},
+	PHONE = #{phone, jdbcType=CHAR},
+	NICKNAME = #{nickname, jdbcType=VARCHAR},
+	PROFILIMG = #{profilimg, jdbcType=VARCHAR},
+	GRADE = #{grade, jdbcType=CHAR},
+	INTRODUCER = #{introducer, jdbcType=VARCHAR},
+	POINT = #{point, jdbcType=INTEGER}
+	WHERE ID = #{id}
 </update>
 
 </mapper>

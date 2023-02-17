@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hosinsa.domain.ReviewCriteria;
-import com.hosinsa.domain.ReviewReplyPageDTO;
 import com.hosinsa.domain.ReviewReplyVO;
 import com.hosinsa.service.ReviewReplyService;
 
@@ -37,12 +36,8 @@ public class ReviewReplyController {
 			produces = { MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> create(@RequestBody ReviewReplyVO vo) {
 		
-		log.info("ReviewReplyVO" + vo);
-		
 		int insertCount = service.register(vo);
-		
-		log.info("insertCount===========>" + insertCount);
-		
+				
 		return insertCount == 1
 		? new ResponseEntity<>("success", HttpStatus.OK)
 		: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -68,23 +63,27 @@ public class ReviewReplyController {
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		
 	}
+	
+	@ResponseBody
+	@GetMapping(value = "/{bno}",
+			produces= {
+					MediaType.APPLICATION_XML_VALUE,
+					MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<List<ReviewReplyVO>> getList(@PathVariable("bno") Long bno) {
+				
+		log.info("get Reply===================" + bno);
+				
+		return new ResponseEntity<>(service.getList(bno), HttpStatus.OK);
 		
-		@GetMapping(value = "/pages/{bno}/{page}",
-				produces= {
-						MediaType.APPLICATION_XML_VALUE,
-						MediaType.APPLICATION_JSON_VALUE })
-		public ResponseEntity<ReviewReplyPageDTO> getList(@PathVariable("page") 
-		int page, @PathVariable("bno") Long bno) {
-			
-			ReviewCriteria cri = new ReviewCriteria(page, 10);
-			
-			log.info("get Reply===================" + bno);
-			
-			log.info("cri==========" + cri);
-			
-			return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
-			
-		}
+	}
+	
+	@RequestMapping(method = {RequestMethod.DELETE} , value = "/{rno}")
+	public ResponseEntity<String> deleteReviewReply(@PathVariable("rno") Long rno) {
+		
+		return service.remove(rno) == 1
+				? new ResponseEntity<>("success", HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 	
 	
 }

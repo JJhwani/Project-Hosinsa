@@ -1,5 +1,7 @@
 package com.hosinsa.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.ReviewCriteria;
@@ -24,18 +27,17 @@ public class ReviewController {
 	@Autowired
 	private ReviewService service;
 	
+	@ResponseBody
 	@GetMapping("/list")
-	public void list(ReviewCriteria cri, Model model) {
-		
-		log.info("list" + cri);
-		
-		model.addAttribute("list", service.getList(cri));
+	public List<ReviewVO> list(ReviewCriteria cri,Integer pronum,Model model) {
+				
+		model.addAttribute("list", service.getList(pronum,cri));
 
 		int total = service.getTotal(cri);
 		
-		log.info("total" + total);
-		
 		model.addAttribute("pageMaker", new ReviewPageDTO(cri, total));
+		
+		return service.getList(pronum,cri);
 	}
 	
 
@@ -77,7 +79,7 @@ public class ReviewController {
 	
 	
 	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr) {
+	public String remove(@RequestParam("bno") Long bno, @RequestParam("pronum") int pronum, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr) {
 		
 		log.info("삭제삭제=========>" + bno);
 		
@@ -85,12 +87,13 @@ public class ReviewController {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
+		rttr.addAttribute("pronum",pronum);
 		rttr.addAttribute("pageNum", cri.getPageNum());
 		rttr.addAttribute("amount", cri.getAmount());
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
+		//rttr.addAttribute("type", cri.getType());
+		//rttr.addAttribute("keyword", cri.getKeyword());
 		
-		return "redirect:/review/list";
+		return "redirect:/product/{pronum}";
 	}
 	
 	

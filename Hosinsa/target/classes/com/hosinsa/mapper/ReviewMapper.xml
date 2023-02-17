@@ -63,27 +63,31 @@
 	 			where bno = #{bno}
 	 	</update>
 	 	
+	 	<update id="updateReplyCount">
+	 		update hosinsa_review set rereply = rereply + #{amount} where bno = #{bno}
+	 	</update>
+	 	
 	 
-	 	<select id="getListWithPaging" resultType="com.hosinsa.domain.ReviewVO">
+	 	<select id="getListWithPaging" resultType="com.hosinsa.domain.ReviewVO" parameterType="map">
 	 			
 		 <![CDATA[
 		   select
-		 	bno, title, content, nickname, uploaddate
+		 	bno, title, content, nickname, uploaddate, reReply
 		 	from
 		 		(
 		 		select /*+INDEX_DESC(HOSINSA_REVIEW PK_REVIEW) */
-		 		rownum rn, bno, title, content, nickname, uploaddate
+		 		rownum rn, bno, title, content, nickname, uploaddate, pronum, reReply
 		   		from
 		 			HOSINSA_REVIEW
-		 		where
+		 		where 
 		 ]]>
 		 			
-	 	<include refid="reviewCriteria"></include>		
+	 	  <!--  <include refid="reviewCriteria"></include> -->
 	 
 	 	<![CDATA[
-	 		rownum <= #{pageNum} * #{amount}
+	 		rownum <= #{cri.pageNum} * #{cri.amount}
 	 		)
-	 	where rn > (#{pageNum} -1) * #{amount}
+	 	where rn > (#{cri.pageNum} -1) * #{cri.amount} and pronum = #{pronum}
 	 	]]>		
 	 	</select> 
 	 	

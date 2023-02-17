@@ -4,13 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +16,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.context.request.RequestContextListener;
 
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.hosinsa.domain.BoardEventVO;
+import com.hosinsa.domain.BoardNoticeVO;
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
+import com.hosinsa.service.BoardService;
 import com.hosinsa.service.MainService;
 
 import lombok.extern.log4j.Log4j;
@@ -38,6 +36,9 @@ public class MainController {
 
 	@Autowired
 	MainService service;
+	
+	@Autowired
+	BoardService boardService;
 
 	@ModelAttribute("recentView")
 	public List<ProductVO> setEmptyRecentView() {
@@ -45,12 +46,15 @@ public class MainController {
 	}
 	
 	@GetMapping("/")
-	public String main(@ModelAttribute("recentView")List<ProductVO> recentView, ProductVO vo, String sort, Model model) {
+	public String main(@ModelAttribute("recentView")List<ProductVO> recentView, ProductVO vo, String sort, BoardEventVO bevo, BoardNoticeVO bnvo, Model model) {
 		model.addAttribute("viewList", service.getListProview(vo));
 		model.addAttribute("bestList", service.getListBest());
 		model.addAttribute("newList", service.getListNew());
 		model.addAttribute("category", "인기");
 		model.addAttribute("sort", "best");
+		model.addAttribute("eventList", boardService.getEventList(bevo));
+		model.addAttribute("event", boardService.getListMainEvent(bevo));
+		model.addAttribute("notice", boardService.getListMainNotice(bnvo));
 
 		int total = service.getTotalCountView(vo);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));	
@@ -59,7 +63,7 @@ public class MainController {
 	}
 	
 	@GetMapping(value="/main/sorting")
-	public String mainPage(String sort, String category, ProductVO vo, Model model) throws UnsupportedEncodingException {
+	public String mainPage(String sort, String category, ProductVO vo, BoardEventVO bevo, BoardNoticeVO bnvo, Model model) throws UnsupportedEncodingException {
 		int total = 0;
 		if(category.equals("인기")) {
 			model.addAttribute("bestList", service.getListBest());
@@ -84,6 +88,9 @@ public class MainController {
 			
 			model.addAttribute("category", category);
 			model.addAttribute("sort", sort);
+			model.addAttribute("eventList", boardService.getEventList(bevo));
+			model.addAttribute("event", boardService.getListMainEvent(bevo));
+			model.addAttribute("notice", boardService.getListMainNotice(bnvo));
 			model.addAttribute("pageMaker", new PageDTO(vo, total));
 			return "main";
 		}
@@ -99,7 +106,6 @@ public class MainController {
 	
 	@GetMapping(value="/category/sorting")
 	public String categoryPageSorting(String sort, String category, ProductVO vo, Model model) {
-		log.info("================================"+category);
 		int total = 0;
 		model.addAttribute("bestList", service.getListBestCategory(vo));
 		
@@ -156,22 +162,31 @@ public class MainController {
 	
 	@GetMapping("/product/{pronum}")
 	public String get(@PathVariable int pronum,@ModelAttribute("recentView")List<ProductVO> recentView,  Model model) {		
-		model.addAttribute("product", service.getProductByPronum(pronum));
+		
+		//조회수 up+1
+		service.updateView(pronum);		
+		model.addAttribute("product", service.getProductByPronum(pronum));	
 		
 		//최근 본 상품 기능
 		//pronum을 받아 최근 본 최근 본 상품으로 추가
 		ProductVO current = service.getProductByPronum(pronum);
+		//중복제거
+		int index = 0;
+		for(ProductVO item : recentView){
+			if(item.getPronum()==current.getPronum()) {
+				recentView.remove(index);
+				break;
+			}
+			index++;
+	    }
 		recentView.add(current);
-		Collections.reverse(recentView);
-		//과거 4개 중 중복 있으면 제거
-		recentView = recentView.stream().distinct().collect(Collectors.toList());
-		Collections.reverse(recentView);
+				
 		//최근 4개 자르기
 		if(recentView.size()>4) {
 			recentView = recentView.subList(1,5);
 		}
 		//세션에 저장
-		model.addAttribute("recentView",recentView);
+		model.addAttribute("recentView",recentView);	
 		
 		return "product";		
 	}

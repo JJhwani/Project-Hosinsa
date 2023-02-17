@@ -13,7 +13,7 @@ public interface ReviewService {
 	public ReviewVO get(Long bno);
 	public boolean modify(ReviewVO vo);
 	public boolean remove(Long bno);
-	public List<ReviewVO> getList(ReviewCriteria cri);
+	public List<ReviewVO> getList(Integer pronum,ReviewCriteria cri);
 	public int getTotal(ReviewCriteria cri);
 	
 

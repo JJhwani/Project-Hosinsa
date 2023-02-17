@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosinsa.mapper.BoardMapper">
+<!-- Event Board -->	
+	<!-- getListWithPagingEvent -->
+	<select id="getListWithPagingEvent" resultType="com.hosinsa.domain.BoardEventVO">
+		<![CDATA[
+			SELECT EVENT_NO, EVENT_IMG, TITLE, CONTENT, SUBTEXT, START_DATE, END_DATE, REGDATE, UPDATE_DATE, WRITER, EVENT_PW
+			FROM
+				(SELECT /*+ INDEX_DESC(HOSINSA_BOARD_EVENT PK_HOSINSA_BOARD_EVENT) */
+				ROWNUM RN, EVENT_NO, EVENT_IMG, TITLE, SUBTEXT, CONTENT, START_DATE, END_DATE, REGDATE, UPDATE_DATE, WRITER, EVENT_PW
+				FROM HOSINSA_BOARD_EVENT WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	<!-- readEvent -->
+	<select id="readEvent" resultType="com.hosinsa.domain.BoardEventVO">
+		SELECT * FROM HOSINSA_BOARD_EVENT WHERE EVENT_NO = #{event_no}
+	</select>
+	<!-- registerSelectKeyEvent -->
+	<insert id="registerSelectKeyEvent">
+		<selectKey keyProperty="event_no" order="BEFORE" resultType="Long">
+			SELECT SEQ_BOARD_EVENT.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO HOSINSA_BOARD_EVENT(EVENT_NO, EVENT_IMG, TITLE, SUBTEXT, CONTENT, START_DATE, END_DATE,
+			REGDATE, UPDATE_DATE, WRITER, EVENT_PW)
+			VALUES(#{event_no}, #{event_img}, #{title}, #{subtext}, #{content}, #{start_date}, #{end_date},
+				SYSDATE, SYSDATE, #{writer}, #{event_pw})
+	</insert>
+	<!-- modifyEvent -->
+	<update id="modifyEvent">
+		UPDATE HOSINSA_BOARD_EVENT SET
+			EVENT_IMG = #{event_img},
+			TITLE = #{title},
+			SUBTEXT = #{subtext},
+			CONTENT = #{content},
+			START_DATE = #{start_date},
+			END_DATE = #{end_date},
+			UPDATE_DATE = SYSDATE
+		WHERE EVENT_NO = #{event_no}
+	</update>
+	<!-- removeEvent -->
+	<delete id="removeEvent">
+		DELETE FROM HOSINSA_BOARD_EVENT WHERE EVENT_NO = #{event_no}
+	</delete>
+	<!-- getTotalCountEvent -->
+	<select id="getTotalCountEvent" resultType="int">
+		SELECT COUNT(*) FROM HOSINSA_BOARD_EVENT WHERE EVENT_NO > 0
+	</select>
+	
+	<!-- getEventList -->
+	<select id="getEventList" resultType="com.hosinsa.domain.BoardEventVO">
+		<![CDATA[
+			SELECT EVENT_NO, EVENT_IMG, TITLE, CONTENT, SUBTEXT, START_DATE, END_DATE, REGDATE, UPDATE_DATE, WRITER, EVENT_PW
+				FROM 
+				(SELECT * FROM
+					(SELECT * FROM HOSINSA_BOARD_EVENT ORDER BY END_DATE)
+			 	WHERE START_DATE <= SYSDATE AND SYSDATE <= END_DATE)
+			 WHERE ROWNUM <= 5
+		]]>
+	</select>
+	<!-- getListMainEvent -->
+	<select id="getListMainEvent" resultType="com.hosinsa.domain.BoardEventVO">
+		<![CDATA[
+			SELECT EVENT_NO, EVENT_IMG, TITLE, CONTENT, SUBTEXT, START_DATE, END_DATE, REGDATE, UPDATE_DATE, WRITER, EVENT_PW
+				FROM 
+				(SELECT * FROM HOSINSA_BOARD_EVENT WHERE START_DATE <= SYSDATE
+					 AND SYSDATE <= END_DATE)				
+			WHERE ROWNUM <= 3
+		]]>
+	</select>
+	
+<!-- Notice Board -->
+	<!-- getListWithPagingNotice -->
+	<select id="getListWithPagingNotice" resultType="com.hosinsa.domain.BoardNoticeVO">
+		<![CDATA[
+			SELECT NNO, TITLE, CONTENT, ID, REGDATE, UPDATE_DATE, READCOUNT
+				FROM
+				(SELECT	ROWNUM RN, NNO, TITLE, CONTENT, ID, REGDATE, UPDATE_DATE, READCOUNT
+					FROM
+					(SELECT * FROM HOSINSA_BOARD_NOTICE ORDER BY NNO DESC)
+				WHERE ROWNUM <= #{pageNum} * #{amount})				
+			WHERE RN > (#{pageNum} - 1) * #{amount}
+			
+		]]>
+	</select>
+	<!-- readNotice -->
+	<select id="readNotice" resultType="com.hosinsa.domain.BoardNoticeVO">
+		SELECT * FROM HOSINSA_BOARD_NOTICE WHERE NNO = #{nno}
+	</select>
+	<!-- registerSelectKeyNotice -->
+	<insert id="registerSelectKeyNotice">
+		<selectKey keyProperty="nno" order="BEFORE" resultType="Long">
+			SELECT SEQ_BOARD_NOTICE.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO HOSINSA_BOARD_NOTICE(NNO, TITLE, CONTENT, ID, REGDATE, UPDATE_DATE, READCOUNT)
+			VALUES(#{nno}, #{title}, #{content}, #{id}, SYSDATE, SYSDATE, #{readcount})
+	</insert>
+	<!-- modifyNotice -->
+	<update id="modifyNotice">
+		UPDATE HOSINSA_BOARD_NOTICE SET
+			TITLE = #{title},
+			CONTENT = #{content},
+			UPDATE_DATE = SYSDATE,
+			READCOUNT = #{readcount}
+		WHERE NNO = #{nno}
+	</update>
+	<!-- removeNotice -->
+	<delete id="removeNotice">
+		DELETE FROM HOSINSA_BOARD_NOTICE WHERE NNO = #{nno}
+	</delete>
+	<!-- getTotalCountNotice -->
+	<select id="getTotalCountNotice" resultType="int">
+		SELECT COUNT(*) FROM HOSINSA_BOARD_NOTICE WHERE NNO > 0
+	</select>
+	<!-- readCountNotice -->
+	<update id="readCountNotice">
+		UPDATE HOSINSA_BOARD_NOTICE SET
+	    READCOUNT = readcount +1
+	    WHERE NNO = #{nno}
+	</update>
+	<!-- getListMainNotice -->
+	<select id="getListMainNotice" resultType="com.hosinsa.domain.BoardNoticeVO">
+		<![CDATA[
+			SELECT NNO, TITLE, CONTENT, ID, REGDATE, UPDATE_DATE, READCOUNT
+				FROM
+				(SELECT * FROM HOSINSA_BOARD_NOTICE ORDER BY NNO DESC)
+			WHERE ROWNUM <= 3
+		]]>
+	</select>
+	<!-- getTotalCountSearch -->
+	<select id="getTotalCountSearch" resultType="int">
+		SELECT COUNT(*) FROM HOSINSA_BOARD_NOTICE
+			WHERE (LOWER(TITLE) LIKE '%'||#{keyword}||'%' OR LOWER(CONTENT) LIKE '%'||#{keyword}||'%'
+				 OR LOWER(ID) LIKE '%'||#{keyword}||'%')
+	</select>
+	
+</mapper>

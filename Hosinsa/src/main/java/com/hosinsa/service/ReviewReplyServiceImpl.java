@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.hosinsa.domain.ReviewCriteria;
-import com.hosinsa.domain.ReviewReplyPageDTO;
 import com.hosinsa.domain.ReviewReplyVO;
+import com.hosinsa.mapper.ReviewMapper;
 import com.hosinsa.mapper.ReviewReplyMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -18,12 +18,16 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 	
 	@Autowired
 	private ReviewReplyMapper mapper;
-
+	
+	@Autowired
+	private ReviewMapper reviewMapper;
+	
+	@Transactional
 	@Override
 	public int register(ReviewReplyVO vo) {
 		
-		log.info("레지스터=========>" + vo);
-		
+		log.info("레지스터=========>" + vo);	
+		reviewMapper.updateReplyCount(vo.getBno(), 1);
 		return mapper.insert(vo);
 	}
 
@@ -38,25 +42,19 @@ public class ReviewReplyServiceImpl implements ReviewReplyService {
 		log.info("modify=========>" + vo);
 		return mapper.update(vo);
 	}
-
+	
+	@Transactional
 	@Override
 	public int remove(Long rno) {
 		log.info("remove=========>" + rno);
+		reviewMapper.updateReplyCount(mapper.read(rno).getBno(),-1);
 		return mapper.delete(rno);
 	}
 
 	@Override
-	public List<ReviewReplyVO> getList(ReviewCriteria cri, Long bno) {
+	public List<ReviewReplyVO> getList(Long bno) {
 		log.info("댓글list of 게시판=========>" + bno);
-		return mapper.getListWithPaging(cri, bno);
-	}
-
-	@Override
-	public ReviewReplyPageDTO getListPage(ReviewCriteria cri, Long bno) {
-		return new ReviewReplyPageDTO (
-				mapper.getCountByBno(bno),
-				mapper.getListWithPaging(cri, bno));
-		
+		return mapper.getList(bno);
 	}
 
 }

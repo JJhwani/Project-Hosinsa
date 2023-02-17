@@ -2,7 +2,7 @@ console.log("Reply Module..........");
 
 var reviewreplyService  =  ( function(){
 
-   function add(reply, callback, error){
+   function add(reviewreply, callback, error){
         console.log("add reply.......");
 
         $.ajax({

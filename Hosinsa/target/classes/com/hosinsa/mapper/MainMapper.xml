@@ -318,4 +318,8 @@
 		SELECT * FROM HOSINSA_PRODUCT WHERE PRONUM = #{pronum}
 	</select>
 	
+	<update id="updateView">
+		UPDATE HOSINSA_PRODUCT SET PROVIEW=PROVIEW+1 WHERE PRONUM = #{pronum}
+	</update>
+	
 </mapper>

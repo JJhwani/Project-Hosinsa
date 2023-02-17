@@ -4,21 +4,11 @@
 <div class="mainWrap">
 	<div class="mainBanner">
 		<ul class="bannerView">
-			<li>
-				<a href="#"><img src="../../resources/images/event1.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event2.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event3.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event4.jpg"></a>
-			</li>
-			<li>
-				<a href="#"><img src="../../resources/images/event5.jpg"></a>
-			</li>
+			<c:forEach var="eventList" items="${eventList}">
+	 			<li>
+					<a href="${eventList.event_no}"><img src="${eventList.event_img}"></a>
+				</li>
+		 	</c:forEach>
 		</ul>
 		<div class="deem"></div>
 		<div class="arrow">
@@ -143,13 +133,15 @@
 	<!-- 페이지 처리 끝 -->
 
 	<div class="notice">
-		<h4 class="title">공지사항</h4>
-		<ul>
-			<li><a>공지사항 1</a></li>
-			<li><a>공지사항 2</a></li>
-			<li><a>공지사항 3</a></li>
-		</ul>
-		<a>전체보기</a>
+		<form class="noticeBoard" action="/board/notice/list" method="post">
+			<h4 class="title">공지사항</h4>
+			<ul>
+				<c:forEach var="notice" items="${notice}">
+					<li><a href="${notice.nno}">${notice.title}</a></li>
+				</c:forEach>
+			</ul>
+			<a href="">전체보기</a>
+		</form>
 	</div>
 	
 	<div class="cs">
@@ -159,13 +151,15 @@
 	</div>
 	
 	<div class="event">
-		<h4 class="title">이벤트</h4>
-		<ul>
-			<li><a>이벤트 1</a></li>
-			<li><a>이벤트 2</a></li>
-			<li><a>이벤트 3</a></li>
-		</ul>
-		<a>전체보기</a>
+		<form class="eventBoard" action="/board/event/list" method="post">
+			<h4 class="title">이벤트</h4>
+			<ul>
+				<c:forEach var="event" items="${event}">
+					<li><a href="${event.event_no}">${event.title}</a></li>
+				</c:forEach>
+			</ul>
+			<a href="">전체보기</a>
+		</form>
 	</div>
 	
 	<div class="recent">
@@ -174,7 +168,7 @@
 				<li><a href="/product/${recentView.pronum}"><img src="${recentView.proimg}"></a></li>
 			</c:forEach>			
 		</ul>
-		<a>TOP</a>
+		<a href="javascript:window.scrollTo({top:0,behavior: 'smooth'})">TOP</a>
 	</div>
 </div>
 <script src="../../../resources/js/main.js"></script>
