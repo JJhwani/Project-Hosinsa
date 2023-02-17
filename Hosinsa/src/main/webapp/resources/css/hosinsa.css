@@ -343,3 +343,20 @@ button.del_Btn{margin-top:10px}
 .modal-body{padding:30px 20px;}
 .modal-body input{border:1px solid lightgray;font-size:14px;width:100%;padding:5px;box-sizing:border-box}
 .modal-footer{padding:0 20px;text-align:center}
+/* board notice - 공지사항 게시판 */
+.noticeRead {width:540px; margin:0 auto}
+.noticeRead .infoTable{margin:10px 10px 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray}
+.noticeRead .miniTitle{width:520px;padding:10px 10px 10px 10px;font-size:20px;font-weight:bold;letter-spacing:-1px}
+.noticeRead .noticeBtn{text-align:center}
+.noticeRead .inputDetail{padding:10px;width:518px;margin:0 auto;}
+.noticeModify {width:540px; margin:0 auto}
+.noticeModify .infoTable{margin:10px 10px 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray}
+.noticeModify .miniTitle{width:520px;padding:10px 10px 10px 10px;font-size:20px;font-weight:bold;letter-spacing:-1px}
+.noticeModify .noticeBtn{text-align:center}
+.noticeModify .inputDetail{padding:10px;width:518px;margin:0 auto;}
+.noticeRegister {width:540px; margin:0 auto}
+.noticeRegister .infoTable{margin:10px 10px 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray}
+.noticeRegister .miniTitle{width:520px;padding:10px 10px 10px 10px;font-size:20px;font-weight:bold;letter-spacing:-1px}
+.noticeRegister .noticeBtn{text-align:center}
+.noticeRegister .inputDetail{padding:10px;width:518px;margin:0 auto;}
+.noticeBtn .btn{margin:20px 0 0 0}

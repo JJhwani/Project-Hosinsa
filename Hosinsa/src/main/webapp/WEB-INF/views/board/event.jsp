@@ -15,8 +15,8 @@
 	</h2>
 	<div class="eventView">
 		<section class="eventList">
-			<c:forEach var="event" items="${event}">
-	 			<div class="event_area">
+	 		<div class="event_area">
+				<c:forEach var="event" items="${event}">
 					<c:choose>
 						<c:when test="${event.start_date <= today and today <= event.end_date}">
 							<div class="event_box">
@@ -75,8 +75,8 @@
 							</div>
 						</c:when>
 					</c:choose>
-				</div>				
-	 		</c:forEach>
+	 			</c:forEach>
+			</div>				
 		</section>
 	</div>	
 
@@ -103,13 +103,13 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	if("${register}"==="success"){
-		alert("수정 요청이 성공적으로 처리되었습니다.");
+		alert("이벤트 등록이 성공적으로 처리되었습니다.");
 	}
 	if("${modify}"==="success"){
-		alert("수정 요청이 성공적으로 처리되었습니다.");
+		alert("이벤트 수정이 성공적으로 처리되었습니다.");
 	}
 	if("${remove}"==="success"){
-		alert("제품 삭제가 성공적으로 처리되었습니다.");
+		alert("이벤트 삭제가 성공적으로 처리되었습니다.");
 	}
 });
 </script>
