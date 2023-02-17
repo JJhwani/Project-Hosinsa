@@ -47,6 +47,7 @@ table {
 a{text-decoration:none;}
 
 .hidden{display:none}
+.fix{width:100%;height:100%;overflow:hidden;}
 .alert{color:red}
 .headerWrap{position:relative;background:black;color:white;z-index:5}
 .header{width:1400px;margin:0 auto;overflow:hidden;padding:20px 40px}
@@ -212,7 +213,7 @@ float:left;
 
 .btnWrap{float:right;padding:20px 20px 0 0}
 input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid lightgray;text-align:center;}
-.btnWrap button{border-radius:0;height:27px;vertical-align:top;background-color:white;border:1px solid lightgray;cursor:pointer}
+.btnWrap button{border-radius:0;height:27px;vertical-align:top;background-color:white;border:1px solid lightgray;cursor:pointer;padding:1px 6px}
 .btnWrap button:hover{background:rgb(245,245,245)}
 .btnWrap button.cart_in{background-color:black;color:white}
 .btnWrap.right{clear:both;padding-right:330px}
@@ -245,6 +246,12 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .reviewArea .reviewWrap2 .content{padding-top:20px}
 .reviewArea .reReply_register{float:right}
 
+/* 로그인 폼 */
+#loginForm{width:400px;margin:0 auto}
+#loginForm input, #loginForm button{width:100%;border-radius:0;padding:10px;margin-bottom:10px;font-size:16px;box-sizing:border-box;border:1px solid lightgray}
+#loginForm p.welcome{font-size:20px;margin-bottom:30px;font-weight:bold;text-align:center;letter-spacing:-1px}
+#loginForm #loginBtn,#loginForm #JoinBtn{cursor:pointer}
+
 /*admin - 제품관리 */
 h2 .register{float:right;background:black;color:white;border-radius:0;margin-top:5px;font-size:16px;padding:10px 15px;cursor:pointer;}
 .adminList{}
@@ -270,6 +277,33 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .productName input[name='proname']{width:calc(100% - 100px)}
 .inputDetail{padding:10px;margin-left:20px}
 
+/* admin - 회원관리 */
+.search_area .searchForm{text-align:right;margin-bottom:10px;margin-top:-20px}
+.search_area .searchForm input{padding:5px;border-radius:0;border:1px solid lightgray}
+.array_center{width:550px;margin:0 auto}
+.table3{padding:10px 0;margin-bottom:30px;border-bottom:1px solid lightgray;border-top:3px solid black}
+.table3 th{width:20%}
+.table3 td{width:80%;padding:10px}
+.table3 input{width:100%;padding:5px;border-radius:0;border:1px solid lightgray}
+.table3 input[type=radio]{width:auto;margin-right:0;vertical-align:top}
+.table3 input[type=button]{margin-top:5px;font-size:12px;cursor:pointer;box-sizing:content-box;}
+.table3 .grade{font-size:14px}
+.member_info{margin-top:10px}
+
+/* 탈퇴하기 */
+.remove header{padding:15px 20px;background:black;color:white;margin-bottom:15px}
+.remove input{width:200px;border:1px solid lightgray;padding:5px;margin-top:10px}
+.remove button{margin-top:15px}
+
+/* 회원가입 - 약관동의 */
+.checkbox_group{margin-top:20px}
+.checkbox_group .checkbox{margin-top:10px;letter-spacing:-1px}
+.checkbox_group textarea{margin-top:5px}
+.checkBtn{margin-top:30px}
+.checkBtn input{border:1px solid lightgray;padding:5px 10px;cursor:pointer;font-size:16px}
+
+.align_center{text-align:center}
+
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
 
 /* board event - 이벤트 게시판 */
@@ -288,6 +322,27 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 
 }
 
+/* 장바구니 */
+.cart table{border-top:1px solid lightgray;margin-top:30px}
+.cart table tr{border-bottom:1px solid lightgray}
+.cart table th,.cart table td{padding:10px;vertical-align:middle;text-align:center;}
+.cart table td a{color:black;}
+.cart table input[type=checkbox]{width:20px;height:20px;vertical-align:middle}
+.cart table img{max-width:100px;max-height:100px;}
+button{border-radius:0;background:white;border:1px solid lightgray;padding:5px 10px;cursor:pointer}
+button.order{float:right;font-size:24px;padding:10px 20px;margin-top:-195px;font-weight:bold}
+button.del_Btn{margin-top:10px}
+.cart_info{list-style: none;padding:10px}
+.cart_info li::before {content: "+ ";}
+.cart_info li{font-size:14px;color:gray;padding:2px}
+
+/* 모달 팝업 */
+.fade{overflow:hidden;position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(0,0,0,0.5)}
+.modal-content{position:absolute;top:50%;left:50%;width:600px;height:200px;margin:-100px 0 0 -300px;background:white;}
+.modal-header{background:black;color:white;padding:20px;}
+.modal-body{padding:30px 20px;}
+.modal-body input{border:1px solid lightgray;font-size:14px;width:100%;padding:5px;box-sizing:border-box}
+.modal-footer{padding:0 20px;text-align:center}
 /* board notice - 공지사항 게시판 */
 .Notice.table4{width:100%;margin:0 0 30px 0;border:1px solid lightgray}
 .Notice.table4 th{padding:10px;border:1px solid lightgray}

@@ -161,14 +161,13 @@
  		<div class="modal-body">
  		
  		  <div class="form-group">
- 		  <label>Reply</label>
- 		  <input class="form-control" name="reply">
+ 		  <input class="form-control" name="reply" placeholder="비속어를 포함한 내용은 예고 없이 제재될 수 있습니다.">
  		  </div>
  		</div>
  		
  		<div class="modal-footer">
- 			<button id="modalRegBtn" type="button" class="btn btn-warning">Register</button>
- 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+ 			<button id="modalRegBtn" type="button" class="btn black">작성하기</button>
+ 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
  		</div>	
  	  </div>
  	</div> 		  
@@ -177,13 +176,35 @@
 <script type="text/javascript" src="../../../resources/js/reviewreply.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
+				
 		var productForm = $(".productForm");
 		
+		//카트담기
 		$(".cart_in").on("click",function(){
+			if("${member}"==""){
+				alert("로그인이 필요한 서비스입니다.");
+				self.location="/member/login";
+				return false;
+			}
+			//기존 카트에 같은 상품이 있는지 중복체크
 			productForm.find("input[name='quantity']").val($(".cart_quan").val());
-			productForm.attr("method","post").submit();
+			productForm.attr({"action":"/cart/checkCart","method":"post"}).submit();			
 		});
+		
+		//체크 후
+		if("${check}"=="success"&&"${duplicate}"=="0"){
+			//중복이 없는 경우
+			productForm.find("input[name='quantity']").val(${quantity});
+			productForm.attr({"action":"/cart/cartIn","method":"post"}).submit();
+		}else if("${check}"=="success"&&"${duplicate}"!="0"){
+			//중복이 존재하는 경우
+			if(confirm("해당 상품이 장바구니에 이미 존재합니다. 더 담으시겠습니까?")){
+				productForm.find("input[name='quantity']").val(${quantity});
+				productForm.attr({"action":"/cart/cartUpdate","method":"post"}).submit();
+			}else{
+				return false;
+			}		
+		}
 		
 		
 		$(".tab_info").on("click",function(){
@@ -227,6 +248,7 @@
 							str += "<i>"+formatDate(time)+"</i></div>";
 							str += "<p class='reviewTitle'>" + list[i].title + "</p>";
 							str += "<p class='content'>" + list[i].content + "</p>";
+
 							str += "<p class='reReplyWrap'><button class='reReply'> 댓글 "+list[i].reReply +"개</button>";
 							if("${member}"!=""){
 								str+="<button class='reReply_register'>댓글 쓰기</button>";
@@ -320,11 +342,13 @@
 		closeBtn.on("click",function(){
 			modal.find("input").val("");
 			modal.addClass("hidden");
+			$("body").removeClass("fix");
 		})
 		
 		//대댓글 작성
 		$(document).on("click",".reReply_register",function(e){
 			modal.removeClass("hidden");
+			$("body").addClass("fix");
 			
 			replyNum = $(this).parent().siblings(".topper").find(".bno").text();			
 		});		
@@ -373,7 +397,7 @@
 				return false;
 			}
 		})
-		
+			
 		if("${cartIn}"=="success"){
 			if(confirm("장바구니에 상품이 담겼습니다. 지금 확인하시겠습니까?")){
 				location.href="/cart/list";

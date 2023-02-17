@@ -9,24 +9,20 @@
     <div class="slider">
         <div class="login">
             <form id="loginForm" method="post" action="/login">
-            <input type="hidden" name="grade" value="${member.grade}">
+	            <p class="welcome">* WELCOME TO MY HOSINSA *</p>
+	            <input type="hidden" name="grade" value="${member.grade}">
                 <div class="login_box">
                 	<div>
-                    	<span style="text-align: center;">ID</span>
-                    	<input type="text" name="id" id="id">
+                    	<input type="text" name="id" id="id" placeholder="ID">
                     </div>
-                    <br><br>
                     <div>
-                    	<span style="text-align: center;">PASSWORD</span>
-                    	<input id="pw" type="password" name="pw">
+                    	<input id="pw" type="password" name="pw" placeholder="PASSWORD">
                     </div>
-                    <br><br>
                     <c:if test="${result == 0}">
                     	<div class="login_warn">ID 또는 비밀번호를 잘못 입력하였습니다.</div>
                     </c:if>
                     <div>
-                    	<input type="button" value="LOG IN" class="input_login" id="loginBtn">
-                    	<br><br>
+                    	<input type="button" value="LOG IN" class="input_login black" id="loginBtn">
                     	<button id="JoinBtn" type="button">JOIN MEMBER</button>
                     </div>
                 </div>

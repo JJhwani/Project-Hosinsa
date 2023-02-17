@@ -10,7 +10,7 @@
 	
 	<p class="grade">나의 등급 : ${member.grade }</p>
 	<table class="table1 member_info">
-		<tr><th>프로필이미지</th><td>${member.profilimg }</td></tr>
+		<tr><th>프로필이미지</th><td><img src="${member.profilimg }"></td></tr>
 		<tr><th>이름</th><td>${member.name }</td></tr>
 		<tr><th>아이디</th><td>${member.id }</td></tr>
 		<tr><th>닉네임</th><td>${member.nickname }</td></tr>
@@ -20,18 +20,15 @@
 		<tr><th>연락처</th><td>${member.phone }</td></tr>
 	</table>
 	<button data-oper="modify" class="btn btn-default btn-info">회원정보 수정</button>
-	<button data-oper="delete" class="btn btn-default">탈퇴하기</button>
+	<button data-oper="remove" class="btn btn-default">탈퇴하기</button>
 	
 	<form id="operForm" action="/member/modify" method="get">
 		<input type="hidden" id="id" name="id" value="${member.id}">
 	</form>
 	
-	<h4 class="miniTitle">배송지 관리</h4>
-	<table class="table1">
-		<tr><th>번호</th><th>이름</th><th>수신인</th><th>전화번호</th><th>주소</th><th>관리</th></tr>
-		<tr><td>1</td><td>우리집</td><td>이상호</td><td>010-101-0101</td><td>서울시 권선구 평택로 231</td><td><button>수정</button><button>삭제</button></td></tr>
-	</table>
-	<button>배송지 추가</button>
+	<form id="removeForm" action="/member/remove" method="get">
+		<input type="hidden" id="id" name="id" value="${member.id}">
+	</form>
 	
 	<h4 class="miniTitle">주문내역</h4>	
 	<table class="table1">
@@ -79,20 +76,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="tabArea area2 reviewArea hidden">
-		<div class="reviewWrap">
-			<div class="topper">
-				<img class="proimg" src="../../resources/images/upload.jpg">
-				<span class="bno">2</span>
-				<a href="/product/{pronum}"><b>상품이름</b></a>
-				<button class="review_modify">수정</button>
-				<button class="review_delete">삭제</button>
-				<i>2023-02-13</i>
-			</div>
-			<p class="reviewTitle">집에가고싶다2</p>
-			<p class="content">기절하겠네</p>
-			<p class="reReply">댓글 0개</p>
-		</div>
+	<div class="tabArea area2 reviewArea hidden">		
 		<div class="reviewWrap">
 			<div class="topper">
 				<img class="proimg" src="../../resources/images/upload.jpg">
