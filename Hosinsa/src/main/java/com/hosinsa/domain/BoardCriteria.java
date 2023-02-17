@@ -13,7 +13,7 @@ public class BoardCriteria {
 	//private String category;
 	
 	public BoardCriteria() {
-		this(1,15);
+		this(1,12);
 	}
 	
 	public BoardCriteria(int b_pageNum, int b_amount) {

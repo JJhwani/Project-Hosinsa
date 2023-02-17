@@ -140,7 +140,7 @@ $(document).ready(function(){
 		}		
 		e.preventDefault();
 		noticeSearch.find("input[name='b_pageNum']").val("1");
-		noticeSearch.find("input[name='b_amount']").val("15");
+		noticeSearch.find("input[name='b_amount']").val("12");
 		noticeSearch.submit();
 	});
 

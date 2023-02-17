@@ -375,3 +375,5 @@ button.del_Btn{margin-top:10px}
 .noticeRegister .noticeBtn{text-align:center}
 .noticeRegister .inputDetail{padding:10px;width:518px;margin:0 auto;}
 .noticeBtn .btn{margin:20px 0 0 0}
+
+#kakao-talk-channel-chat-button{position:fixed;top:800px;right:10px;z-index:4;}
