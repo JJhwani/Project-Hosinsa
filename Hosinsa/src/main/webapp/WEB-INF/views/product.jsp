@@ -74,7 +74,7 @@
 	</div>	
 	<form class="productForm" action="/cart/cartIn" method="post">
 		<input type="hidden" name="pronum" value="${product.pronum}">
-		<input type="hidden" name="quantity" value="${product.quantity}">
+		<input type="hidden" name="quantity" value="">
 		<input type="hidden" name="id" value="${member.id }">
 	</form>
 	<div class="tabWrap tab2">
