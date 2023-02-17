@@ -164,7 +164,6 @@ public class BoardController {
 		service.readCountNotice(nno);
 		int total = service.getTotalNotice(cri);
 		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
-		
 		return "/board/noticeRead";
 	}
 	
@@ -224,8 +223,7 @@ public class BoardController {
 	
 	// 공지사항 검색
 	@GetMapping("/notice/search")
-	public String searchProduct(String bkeyword, BoardNoticeVO bnvo, BoardCriteria cri, Model model) {
-		
+	public String searchProduct(String b_keyword, BoardNoticeVO bnvo, BoardCriteria cri, Model model) {
 		int total = service.getTotalCountSearch(cri);
 		model.addAttribute("notice", service.getSearchNotice(bnvo));
 		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));

@@ -42,29 +42,29 @@
 	
 	<div class="searchNotice">
 		<form class="noticeSearch" action="/board/notice/search" method="get">
-			<input type="hidden" name="keyword" value="${pageMaker_b.cri.b_keyword}">
+			<input type="text" name="b_keyword" value="${pageMaker_b.cri.b_keyword}">
 			<input type="hidden" name="pageNum" value="${pageMaker_b.cri.b_pageNum}">
 			<input type="hidden" name="amount" value="${pageMaker_b.cri.b_amount}">
 			<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 		</form>
 	</div>
 	<!-- 페이지 처리 시작 -->
-	<ul class="pagination">
+	<ul class="pagination board">
 		<c:if test="${pageMaker_b.prev}">
-			<li class="paginate_button previous"><a href="${pageMaker_b.startPage-1}">Previous</a></li>
+			<li class="board_paginate_button previous"><a href="${pageMaker_b.startPage-1}">Previous</a></li>
 		</c:if>
 		<c:forEach var="num" begin="${pageMaker_b.startPage}" end="${pageMaker_b.endPage}">
-			<li class="paginate_button ${pageMaker_b.cri.pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
+			<li class="board_paginate_button ${pageMaker_b.cri.b_pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
 		</c:forEach>
 		<c:if test="${pageMaker_b.next}">
-			<li class="paginate_button next"><a href="${pageMaker_b.endPage+1}">Next</a></li>
+			<li class="board_paginate_button next"><a href="${pageMaker_b.endPage+1}">Next</a></li>
 		</c:if>
 	</ul>
-	<form class="paging" action="/board/notice/list" method="post">
-		<input type="hidden" name="pageNum" value="${pageMaker_b.cri.b_pageNum}">
-		<input type="hidden" name="amount" value="${pageMaker_b.cri.b_amount}">
-		<input type="hidden" name="type" value="${pageMaker_b.cri.b_type}">
-		<input type="hidden" name="keyword" value="${pageMaker_b.cri.b_keyword}">
+	<form class="paging board" action="/board/notice/list" method="post">
+		<input type="hidden" name="b_pageNum" value="${pageMaker_b.cri.b_pageNum}">
+		<input type="hidden" name="b_amount" value="${pageMaker_b.cri.b_amount}">
+		<input type="hidden" name="b_type" value="${pageMaker_b.cri.b_type}">
+		<input type="hidden" name="b_keyword" value="${pageMaker_b.cri.b_keyword}">
 	</form>	
 </div>
 

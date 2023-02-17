@@ -16,9 +16,9 @@ public class BoardCriteria {
 		this(1,15);
 	}
 	
-	public BoardCriteria(int pageNum, int amount) {
-		this.b_pageNum = pageNum;
-		this.b_amount = amount;
+	public BoardCriteria(int b_pageNum, int b_amount) {
+		this.b_pageNum = b_pageNum;
+		this.b_amount = b_amount;
 	}
 	
 	public String[] getTypeArr() {

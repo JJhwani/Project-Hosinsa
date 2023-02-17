@@ -1,6 +1,6 @@
 $(document).ready(function(){      
 	
-	var paging = $(".paging");
+	var paging = $(".paging.board");
 	var eventForm = $(".eventForm");
 	var eventRegister = $(".eventRegister");
 	var eventModify = $(".eventModify");
@@ -10,9 +10,9 @@ $(document).ready(function(){
 
 
 	//페이징처리
-	$(".paginate_button a").on("click", function(e) {
+	$(".board_paginate_button a").on("click", function(e) {
 		e.preventDefault();
-		paging.find("input[name='pageNum']").val($(this).attr("href"));
+		paging.find("input[name='b_pageNum']").val($(this).attr("href"));
 		paging.submit();
 	});
 
@@ -139,8 +139,8 @@ $(document).ready(function(){
 			return false;
 		}		
 		e.preventDefault();
-		noticeSearch.find("input[name='pageNum']").val("1");
-		noticeSearch.find("input[name='amount']").val("15");
+		noticeSearch.find("input[name='b_pageNum']").val("1");
+		noticeSearch.find("input[name='b_amount']").val("15");
 		noticeSearch.submit();
 	});
 
@@ -153,9 +153,16 @@ $(document).ready(function(){
 	
 	// 개별 공지사항 페이지에서 공지사항 게시판으로 이동
 	$(".noticeRead .btn.list").on("click",function(e){
-		noticeRead.find("input[name='event_no']").remove();
-		noticeRead.attr("action","/board/notice/list");
-		noticeRead.submit();
+		noticeRead.find("input[name='nno']").remove();
+		if(noticeRead.find("input[name='b_keyword']").val() !== ""){
+			noticeRead.attr("action","/board/notice/search");
+			noticeRead.attr("method","get")
+			noticeRead.submit();			
+		}
+		else {
+			noticeRead.attr("action","/board/notice/list");
+			noticeRead.submit();
+		}
 	})
 
 
