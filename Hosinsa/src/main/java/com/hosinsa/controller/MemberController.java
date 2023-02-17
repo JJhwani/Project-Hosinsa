@@ -1,5 +1,6 @@
 package com.hosinsa.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -134,6 +136,8 @@ public class MemberController {
 
 	@GetMapping("/myPage")
 	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
+		
+		model.addAttribute("order",memberService.getOrderList(vo.getId()));
 		model.addAttribute("member", vo);
 	}
 	
@@ -144,7 +148,20 @@ public class MemberController {
 	}
 	
 	@PostMapping("/modify")
-	public String modifyPOST(MemberVO member, RedirectAttributes rttr, Model model) {
+	public String modifyPOST(MemberVO member,  MultipartFile uploadFile, RedirectAttributes rttr, Model model) {
+		
+		File saveFile = new File(
+				"C:\\Work3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\profile",
+				member.getId()+".jpg");
+
+		try {
+			uploadFile.transferTo(saveFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		member.setProfilimg("../../resources/images/profile/"+member.getId()+".jpg");
+		
 		log.info("modify : " + member);
 		model.addAttribute("member", member);
 		

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
 
 public interface MemberService {
 
@@ -33,5 +34,11 @@ public interface MemberService {
 
 	// Introducer 중복체크
 	public int introCheck(String memberIntroducer);
+	
+	//주문내역 불러오기
+	public List<OrderVO> getOrderList(String id);
+	
+	//작성가능리뷰 불러오기
+	public List<>
 
 }
