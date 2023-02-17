@@ -40,6 +40,14 @@
 	]]>
 </select>
 
+<select id="checkCart" resultType="Integer">
+	select count(*) from hosinsa_cart where pronum = #{pronum} and id = #{id}
+</select>
+
+<update id="cartUpdate">
+	update hosinsa_cart set quantity = quantity + #{quantity} where pronum = #{pronum} and id = #{id}
+</update>
+
 <!-- 카트 삭제 -->
 <delete id="deleteCart">
  delete hosinsa_Cart

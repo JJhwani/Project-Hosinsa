@@ -86,17 +86,33 @@ public class CartContoller {
 	
 	@PostMapping("/cartIn")
 	public String cartIn(CartVO vo,RedirectAttributes rttr) {
+		
 		service.cartIn(vo);
 		rttr.addFlashAttribute("cartIn","success");	
 		rttr.addAttribute("pronum",vo.getPronum());
+		
+		return "redirect:/product/{pronum}";
+	}	
+	
+	@PostMapping("/checkCart")
+	public String checkCart(CartVO vo,RedirectAttributes rttr) {
+		
+		rttr.addFlashAttribute("check","success");
+		rttr.addFlashAttribute("duplicate",service.checkCart(vo));			
+		rttr.addFlashAttribute("quantity",vo.getQuantity());
+		rttr.addAttribute("pronum",vo.getPronum());
+		
 		return "redirect:/product/{pronum}";
 	}
 	
-	
-	@ResponseBody
-	@PostMapping("/checkCart")
-	public int checkCart(CartVO vo, Model model) {
-		return 0;
+	@PostMapping("/cartUpdate")
+	public String cartUpdate(CartVO vo,RedirectAttributes rttr) {
+		
+		service.cartUpdate(vo);
+		rttr.addFlashAttribute("cartIn","success");
+		rttr.addAttribute("pronum",vo.getPronum());
+		
+		return "redirect:/product/{pronum}";
 	}
 	
 	

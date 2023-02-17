@@ -15,7 +15,7 @@ public interface CartMapper {
 	
 	//카트삭제
 	public int deleteCart(long cartnum);
-	public int cartIn(CartVO cart);
-	public int plusQuantity(CartVO vo);
-	public int minusQuantity(CartVO vo);
+	public int cartIn(CartVO vo);
+	public int cartUpdate(CartVO vo);
+	public int checkCart(CartVO vo);
 }

@@ -16,6 +16,8 @@ public interface CartService {
 	//카트삭제
 	public boolean deleteCart(long cartnum);
 	public boolean cartIn(CartVO vo);
+	public boolean cartUpdate(CartVO vo);
+	public int checkCart(CartVO vo);
 	
 	public boolean plusQuantity(CartVO vo);
 	public boolean minusQuantity(CartVO vo);

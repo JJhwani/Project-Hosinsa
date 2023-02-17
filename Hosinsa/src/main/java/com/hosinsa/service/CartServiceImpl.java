@@ -55,5 +55,15 @@ public class CartServiceImpl implements CartService {
 	public boolean minusQuantity(CartVO vo) {
 		return mapper.minusQuantity(vo)==1?true:false;
 	}
+	public boolean cartUpdate(CartVO vo) {
+		return mapper.cartUpdate(vo)==1?true:false;
+	}
+
+	@Override
+	public int checkCart(CartVO vo) {
+		return mapper.checkCart(vo);
+	}
+
+	
 }
 
