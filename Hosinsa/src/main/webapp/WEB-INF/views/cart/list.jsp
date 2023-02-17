@@ -91,14 +91,12 @@
 						/* 수량버튼 */
 						$(".quantity_btn_plus").on("click", function(e) {
 							var number = $(this).parent().siblings(".cartNum").text()
-							alert(number);
 							$(".quantity_plus_form").find("input[name=cartnum]").val(number);
 							
 							$(".quantity_plus_form").submit();
 						});
 						$(".quantity_btn_minus").on("click",function(e) {
 							var number = $(this).parent().siblings(".cartNum").text()
-							alert(number);
 							$(".quantity_minus_form").find("input[name=cartnum]").val(number);
 							
 							$(".quantity_minus_form").submit();
