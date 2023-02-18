@@ -18,15 +18,6 @@ public class CartServiceImpl implements CartService {
 	public CartMapper mapper;
 	
 	@Override
-	public void register(CartVO cart) {
-	}
-	
-	@Override
-	public CartVO get(Long pronum) {
-		return null;
-	}
-
-	@Override
 	public boolean deleteCart(long cartnum) {
 		return mapper.deleteCart(cartnum)==1? true : false;
 	}
@@ -37,8 +28,9 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	@Override
-	public List<CartVO> getOrder(long cartnum) {
-		return mapper.getOrder(cartnum);
+	public List<CartVO> getOrder(List<Integer> chArr) {
+		System.out.println(chArr);
+		return mapper.getOrder(chArr);
 	}
 
 	@Override

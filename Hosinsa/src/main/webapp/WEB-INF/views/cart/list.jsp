@@ -119,26 +119,29 @@
 							if (valueArr.length == 0) {
 								alert("선택된 상품이 없습니다.");
 							} else { 
+								
 								$.ajax({
 									url : "/cart/order", // 전송 URL
-									dataType : "json",
-									type : 'GET', // GET or POST 방식
+									dataType : "text",
+									contentType : "application/json",
+									type : "get", // GET or POST 방식
 									async : false,
-									data : {
-										valueArr : valueArr
+									data : {valueArr:JSON.stringify(valueArr)},
+									success : function(data) {
+										location.href="/cart/order";
 									}
-								
-								});
-					}
-							}); 
+									});
+								}
+						});
 						
-						/* if (valueArr.length == 0) {
-							alert("선택된 상품이 없습니다.");
-						} else {
-							$(".cartForm input").val(valueArr);
-							$(".cartForm").submit();
-							}
-						});  */
+						/* 
+						if (valueArr.length == 0){
+				    	alert("선택된 상품이 없습니다.");
+				    }else{				
+						$(".cartForm input").val(valueArr);
+						$(".cartForm").submit();				
+					}
+						*/
 
 						// 카트 목록 전체선택
 						$(function() {

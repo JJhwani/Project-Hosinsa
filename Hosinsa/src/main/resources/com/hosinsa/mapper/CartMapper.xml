@@ -34,10 +34,11 @@
 	]]>
 </select>
 
-<select id="getOrder" resultType="com.hosinsa.domain.CartVO">
- <![CDATA[
-  	select * from hosinsa_cart where CARTNUM = #{cartnum}
-	]]>
+<select id="getOrder" resultType="com.hosinsa.domain.CartVO" parameterType="java.util.List">
+  	select * from hosinsa_cart where CARTNUM in 
+  	<foreach collection="list" item="cartnum" index="index" open="(" close=")" separator="," >
+	  	#{cartnum}
+	  </foreach>
 </select>
 
 <select id="checkCart" resultType="Integer">

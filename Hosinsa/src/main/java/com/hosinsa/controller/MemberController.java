@@ -134,12 +134,12 @@ public class MemberController {
 		}
 	}
 
-	@GetMapping("/myPage")
-	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
-		
-		model.addAttribute("order",memberService.getOrderList(vo.getId()));
-		model.addAttribute("member", vo);
-	}
+//	@GetMapping("/myPage")
+//	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
+//		
+//		model.addAttribute("order",memberService.getOrderList(vo.getId()));
+//		model.addAttribute("member", vo);
+//	}
 	
 	@GetMapping("/modify")
 	public void modifyGET(@ModelAttribute("member") MemberVO vo, Model model) {

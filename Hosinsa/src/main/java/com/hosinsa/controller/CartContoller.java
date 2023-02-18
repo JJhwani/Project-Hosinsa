@@ -1,6 +1,8 @@
 package com.hosinsa.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.CartVO;
-import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.CartService;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -38,6 +39,8 @@ public class CartContoller {
 
 	@Autowired
 	private CartService service;
+	
+	
 
 	@RequestMapping(value = "/favicon.ico", method = RequestMethod.GET)
 	public void favicon(HttpServletRequest request, HttpServletResponse reponse) {
@@ -55,19 +58,16 @@ public class CartContoller {
 		log.info("list.............2");
 		model.addAttribute("list", service.getList(id));
 	}
-
-
-	@GetMapping("/order")
-	public void order(@RequestParam(value = "valueArr[]") List<String> cartnum,
-	Model model, @ModelAttribute("member") MemberVO member) {
 	
+	@ResponseBody
+	@GetMapping(value = "/order")
+	public String order(HttpSession session, @RequestParam("valueArr") String valueArr,
+		Model model, @ModelAttribute("member") MemberVO member) {
 		log.info("order~~~~~~~~~~~~~~"); 
-		log.info(cartnum); 
+		log.info(valueArr); 
 		
-		for (String i : cartnum) {
-			log.info(i);
-		}
-		
+//		model.addAttribute("order",service.getOrder(valueArr));
+		return "success";
 	}
 	
 	
