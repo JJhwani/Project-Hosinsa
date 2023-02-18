@@ -4,17 +4,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.PreReviewVO;
 import com.hosinsa.domain.ReviewCriteria;
 import com.hosinsa.domain.ReviewPageDTO;
 import com.hosinsa.domain.ReviewVO;
@@ -43,57 +46,43 @@ public class ReviewController {
 		return service.getList(pronum,cri);
 	}
 	
-
+	@Transactional
 	@PostMapping("/register")
-	public String register(ReviewVO vo, RedirectAttributes rttr) {
+	public String register(ReviewVO review, PreReviewVO pre, RedirectAttributes rttr) {
 		
-		service.regiseter(vo);
-		rttr.addFlashAttribute("result", vo.getBno());
+		service.regiseter(review);
+		service.deletePre(pre);
+		rttr.addFlashAttribute("review", "success");
 		
-		return "redirect:/review/list";
+		return "redirect:/member/myPage";
 		
 	}
 	
 	@GetMapping({"/get","/modify"})
 	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") ReviewCriteria cri, Model model) {
-		
+		model.addAttribute("product",service.getProduct(service.get(bno).getPronum()));
 		model.addAttribute("review", service.get(bno));
 	}
 	
 	@PostMapping("/modify")
 	public String modify(ReviewVO vo, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr) {
-		log.info("수정============>" + vo);
 		
 		if (service.modify(vo)) {
-			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("modify", "success");
 		}
 		
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		rttr.addAttribute("type", cri.getType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-		
-		
-		return "redirect:/review/list";
+		return "redirect:/member/myPage";
 	}
 	
 	
-	@PostMapping("/remove")
-	public String remove(@RequestParam("bno") Long bno, @RequestParam("pronum") int pronum, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr) {
-		
-		log.info("삭제삭제=========>" + bno);
+	@RequestMapping(value="/remove", method= {RequestMethod.GET,RequestMethod.POST})
+	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
 		
 		if(service.remove(bno)) {
-			rttr.addFlashAttribute("result", "success");
+			rttr.addFlashAttribute("remove", "success");
 		}
 		
-		rttr.addAttribute("pronum",pronum);
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		//rttr.addAttribute("type", cri.getType());
-		//rttr.addAttribute("keyword", cri.getKeyword());
-		
-		return "redirect:/product/{pronum}";
+		return "redirect:/member/myPage";
 	}
 	
 	

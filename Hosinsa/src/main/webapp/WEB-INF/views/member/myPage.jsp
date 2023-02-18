@@ -63,7 +63,7 @@
 		</div>
 		<div class="tabArea area1 reviewArea">
 			<c:if test = "${empty possible}">		
-				<p class='no_review'>작성 가능 리뷰가 없습니다.<br>호신사에서 쇼핑하고 첫 리뷰를 작성해 보세요!</p>
+				<p class='no_review'>작성 가능 리뷰가 없습니다.<br>호신사에서 쇼핑하고 리뷰를 작성해 보세요!</p>
 			</c:if>
 			<c:forEach var="possible" items="${possible}">
 				<div class="reviewWrap">
@@ -99,8 +99,9 @@
 			</c:forEach>
 		</div>
 		<form class="reviewForm" action="/review/register" method="get">
-			<input type="text" name="pronum" value="">
-			<input type="text" name="ordernum" value="">
+			<input type="hidden" name="pronum" value="">
+			<input type="hidden" name="ordernum" value="">
+			<input type="hidden" name="bno" vanlu="">
 		</form>
 	</section>
 </div><!-- //contentWrap -->
@@ -122,8 +123,33 @@ $(document).ready(function(){
 	$(".review_register").on("click",function(){
 		reviewForm.find("input[name=pronum]").val($(this).siblings(".pronum").attr("data-pronum"));
 		reviewForm.find("input[name=ordernum]").val($(this).siblings(".ordernum").text());
+		reviewForm.attr("action","/review/register");
 		reviewForm.submit();
 	})
+	
+	$(".review_modify").on("click",function(){
+		reviewForm.find("input[name=bno]").val($(this).siblings(".bno").text());
+		reviewForm.attr("action","/review/modify");
+		reviewForm.submit();
+	})
+		
+	$(".review_delete").on("click",function(){
+		reviewForm.find("input[name=bno]").val($(this).siblings(".bno").text());
+		reviewForm.attr("action","/review/remove");
+		reviewForm.submit();
+	})
+	
+	if("${review}"=="success"){
+		alert("리뷰 작성이 완료되었습니다.");
+	}
+	
+	if("${modify}"=="success"){
+		alert("리뷰 수정이 완료되었습니다.");
+	}
+	
+	if("${remove}"=="success"){
+		alert("리뷰 삭제가 완료되었습니다.");
+	}
 })
 </script>
 

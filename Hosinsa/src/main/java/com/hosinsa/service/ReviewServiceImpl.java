@@ -7,10 +7,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.PreReviewVO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.domain.ReviewCriteria;
 import com.hosinsa.domain.ReviewVO;
 import com.hosinsa.mapper.MainMapper;
+import com.hosinsa.mapper.MemberMapper;
 import com.hosinsa.mapper.ReviewMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -26,10 +29,19 @@ public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	private MainMapper mainMapper;
 	
+	@Autowired
+	private MemberMapper memberMapper;
+	
 	@Override
 	public void regiseter(ReviewVO vo) { 
 		
-		log.info("등록==============>"+ vo);
+		MemberVO member = memberMapper.read(vo.getId());
+		vo.setNickname(member.getNickname());
+		vo.setProfilimg(member.getProfilimg());
+		
+		ProductVO product = mainMapper.getProductByPronum(vo.getPronum());
+		vo.setProname(product.getProname());
+		vo.setProimg(product.getProimg());
 		
 		mapper.insertSelectKey(vo); 
 		
@@ -75,6 +87,11 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public ProductVO getProduct(int pronum) {
 		return mainMapper.getProductByPronum(pronum);
+	}
+
+	@Override
+	public void deletePre(PreReviewVO vo) {
+		mapper.deletePre(vo);		
 	}
 
 

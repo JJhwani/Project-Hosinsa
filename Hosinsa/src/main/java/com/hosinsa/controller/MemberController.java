@@ -136,9 +136,10 @@ public class MemberController {
 
 	@GetMapping("/myPage")
 	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
-		
-		model.addAttribute("possible",memberService.getPreList(vo.getId()));
+				
 		model.addAttribute("order",memberService.getOrderList(vo.getId()));
+		model.addAttribute("possible",memberService.getPreList(vo.getId()));
+		model.addAttribute("already",memberService.getAlreadyList(vo.getId()));
 		model.addAttribute("member", vo);
 	}
 	
@@ -173,11 +174,6 @@ public class MemberController {
 	}
 	
 	@GetMapping("/remove")
-	public void removeGET(@ModelAttribute("member") MemberVO vo, Model model) {
-		model.addAttribute("member", vo);
-	}
-	
-	@PostMapping("/remove")
 	public String removePOST(@RequestParam("id") String id, RedirectAttributes rttr) {
 		log.info("remove----" + id);
 		
