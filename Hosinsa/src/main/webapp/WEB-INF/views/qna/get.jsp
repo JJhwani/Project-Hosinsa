@@ -20,19 +20,19 @@
 
 
 	<div class="form-group">
-		<label>카테고리</label> <input class="form-control" name='qcategory'
-			value='<c:out value="${qna.qcategory }"/>' readonly="readonly">
+		<label>카테고리</label> <input class="form-control" name='category'
+			value='<c:out value="${qna.category }"/>' readonly="readonly">
 	</div>
 	
 	<div class="form-group">
-		<label>제목</label> <input class="form-control" name='qtitle'
-			value='<c:out value="${qna.qtitle }"/>' readonly="readonly">
+		<label>제목</label> <input class="form-control" name='title'
+			value='<c:out value="${qna.title }"/>' readonly="readonly">
 	</div>
 
 	<div class="form-group">
 		<label>내용</label>
-		<textarea class="form-control" rows="10" name='qcontent'
-			readonly="readonly"><c:out value="${qna.qcontent}" /></textarea>
+		<textarea class="form-control" rows="10" name='content'
+			readonly="readonly"><c:out value="${qna.content}" /></textarea>
 	</div>
 
 	<div class="form-group">

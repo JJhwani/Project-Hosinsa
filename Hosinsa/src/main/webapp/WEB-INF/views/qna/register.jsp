@@ -13,9 +13,9 @@
 <form role="form" action="/qna/register" method="post">
 
 		<div>
-				<label for="qcategory">구분</label> 
+				<label for="category">구분</label> 
 			
-				<select name='qcategory'>
+				<select name='category'>
 
 					<option>상품문의</option>
 					<option>배송문의</option>
@@ -26,15 +26,15 @@
 
 	
 		<div class="form-group">
-			<label for="qtitle">제목</label> 
-			<input class="form-control" placeholder="제목을 입력하세요." name='qtitle'>
+			<label for="title">제목</label> 
+			<input class="form-control" placeholder="제목을 입력하세요." name='title'>
 		</div>
 
 
 		<div class="form-group">
-			<label for="qcontent">내용</label>
+			<label for="content">내용</label>
 			<textarea class="form-control" rows="10" placeholder="현재 문의량 증가와 코로나19 재확산 영향으로 답변이 일부 지연되고 있습니다.
-고객님들의 문의사항을 빠르게 답변하기 위해 최선을 다하고 있으니 너그러운 마음으로 양해 부탁드립니다." name='qcontent'></textarea>
+고객님들의 문의사항을 빠르게 답변하기 위해 최선을 다하고 있으니 너그러운 마음으로 양해 부탁드립니다." name='content'></textarea>
 		</div>
 
 		<div class="form-group">

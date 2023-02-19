@@ -30,9 +30,9 @@ public class QnaMapperTests {
 	@Test
 	public void testInsert() {
 		QnaVO qna = new QnaVO();
-		qna.setQcategory("이벤트문의1");
-		qna.setQtitle("새로 작성하는 글1");
-		qna.setQcontent("새로 작성하는 내용1");
+		qna.setCategory("이벤트문의1");
+		qna.setTitle("새로 작성하는 글1");
+		qna.setContent("새로 작성하는 내용1");
 		qna.setId("new1");
 
 		mapper.insert(qna);
@@ -43,9 +43,9 @@ public class QnaMapperTests {
 	public void testInsertSelectKey() {
 
 		QnaVO qna = new QnaVO();
-		qna.setQcategory("이벤트문의2");
-		qna.setQtitle("새로 작성하는 글2");
-		qna.setQcontent("새로 작성하는 내용2");
+		qna.setCategory("이벤트문의2");
+		qna.setTitle("새로 작성하는 글2");
+		qna.setContent("새로 작성하는 내용2");
 		qna.setId("new2");
 
 		mapper.insertSelectKey(qna);
@@ -66,9 +66,9 @@ public class QnaMapperTests {
 	@Test
 	public void testUpdate() {
 		QnaVO qna = new QnaVO();
-		qna.setQcategory("수정수정");
-		qna.setQtitle("수정한 제목");
-		qna.setQcontent("수정한 내용");
+		qna.setCategory("수정수정");
+		qna.setTitle("수정한 제목");
+		qna.setContent("수정한 내용");
 		qna.setQno(6L);
 		
 		int count = mapper.update(qna);

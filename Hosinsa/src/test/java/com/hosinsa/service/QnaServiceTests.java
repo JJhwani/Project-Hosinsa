@@ -32,9 +32,9 @@ public class QnaServiceTests {
 	@Test
 	public void testRegister() {
 		QnaVO qna = new QnaVO();
-		qna.setQcategory("배송문의");
-		qna.setQtitle("배송 문의합니다.");
-		qna.setQcontent("배송 언제되나요?");
+		qna.setCategory("배송문의");
+		qna.setTitle("배송 문의합니다.");
+		qna.setContent("배송 언제되나요?");
 		qna.setId("박선화");
 		
 		qnaService.register(qna);
@@ -55,9 +55,9 @@ public class QnaServiceTests {
 	public void testModify() {
 		QnaVO qna = new QnaVO();
 		qna.setQno(1L);
-		qna.setQcategory("기타문의");
-		qna.setQtitle("문의합니다.");
-		qna.setQcontent("비밀번호가 생각나지 않아요.");
+		qna.setCategory("기타문의");
+		qna.setTitle("문의합니다.");
+		qna.setContent("비밀번호가 생각나지 않아요.");
 		boolean bool = qnaService.modify(qna);
 		log.info("bool====>" + bool);
 	}

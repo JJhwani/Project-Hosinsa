@@ -25,16 +25,16 @@
 <c:forEach items="${list}" var="qna">
 			<tr>
 				<td><c:out value="${qna.qno}" /></td>				
-				<td><c:out value="${qna.qcategory }" /></td>
+				<td><c:out value="${qna.category }" /></td>
 				
 				<td>
 				<a class='move' href='<c:out value="${qna.qno}"/>'>
-				<c:out value="${qna.qtitle}" /> <b>[ <c:out
+				<c:out value="${qna.title}" /> <b>[ <c:out
 				value="${qna.replyCnt}" /> ]</b>
 				</a>
 				</td>
 				<td><c:out value="${qna.id}" /></td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${qna.qwritedate}" /></td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${qna.regdate}" /></td>
 			</tr>
 		</c:forEach>
 	</table>

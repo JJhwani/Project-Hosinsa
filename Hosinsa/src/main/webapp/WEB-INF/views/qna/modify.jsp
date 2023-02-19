@@ -24,20 +24,20 @@
 		</div>
 		
 		<div class="form-group">
-			<label>구분</label> <input class="form-control" name='qcategory'
-				value='<c:out value="${qna.qcategory }"/>' readonly="readonly">
+			<label>구분</label> <input class="form-control" name='category'
+				value='<c:out value="${qna.category }"/>' readonly="readonly">
 		</div>
 		
 		
 		<div class="form-group">
-			<label>제목</label> <input class="form-control" name='qtitle'
-				value='<c:out value="${qna.qtitle }"/>'>
+			<label>제목</label> <input class="form-control" name='title'
+				value='<c:out value="${qna.title }"/>'>
 		</div>
 
 		<div class="form-group">
 			<label>내용</label>
-			<textarea class="form-control" rows="10" name='qcontent'><c:out
-					value="${qna.qcontent}" /></textarea>
+			<textarea class="form-control" rows="10" name='content'><c:out
+					value="${qna.content}" /></textarea>
 		</div>
 
 		<div class="form-group">
@@ -46,8 +46,8 @@
 		</div>
 
 		<div class="form-group">
-			<label>작성일</label> <input class="form-control" name='nwritedate'
-				value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${qna.qwritedate}" />'
+			<label>작성일</label> <input class="form-control" name='regdate'
+				value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${qna.regdate}" />'
 				readonly="readonly">
 		</div>
 
