@@ -61,10 +61,10 @@ public class CartContoller {
 	
 	@ResponseBody
 	@GetMapping(value = "/order")
-	public String order(HttpSession session, @RequestParam("valueArr") String valueArr,
+	public String order(HttpSession session, @RequestParam(value = "valueArr[]") List<String> chArr ,
 		Model model, @ModelAttribute("member") MemberVO member) {
 		log.info("order~~~~~~~~~~~~~~"); 
-		log.info(valueArr); 
+		log.info(chArr); 
 		
 //		model.addAttribute("order",service.getOrder(valueArr));
 		return "success";

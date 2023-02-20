@@ -135,12 +135,13 @@
 						});
 						
 						/* 
+
 						if (valueArr.length == 0){
-				    	alert("선택된 상품이 없습니다.");
-				    }else{				
-						$(".cartForm input").val(valueArr);
-						$(".cartForm").submit();				
-					}
+					    	alert("선택된 상품이 없습니다.");
+					    }else{				
+							$(".cartForm input").val(valueArr);
+							$(".cartForm").submit();				
+						}
 						*/
 
 						// 카트 목록 전체선택
