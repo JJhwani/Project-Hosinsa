@@ -1,6 +1,8 @@
 package com.hosinsa.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.CartVO;
-import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.CartService;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -38,6 +39,8 @@ public class CartContoller {
 
 	@Autowired
 	private CartService service;
+	
+	
 
 	@RequestMapping(value = "/favicon.ico", method = RequestMethod.GET)
 	public void favicon(HttpServletRequest request, HttpServletResponse reponse) {
@@ -55,34 +58,34 @@ public class CartContoller {
 		log.info("list.............2");
 		model.addAttribute("list", service.getList(id));
 	}
-
-
+	
+	@ResponseBody
+	@GetMapping(value = "/order")
+	public String order(HttpSession session, @RequestParam("valueArr") String valueArr,
+		Model model, @ModelAttribute("member") MemberVO member) {
+		log.info("order~~~~~~~~~~~~~~"); 
+		log.info(valueArr); 
+		
+//		model.addAttribute("order",service.getOrder(valueArr));
+		return "success";
+	}
+	
 	
 	@ResponseBody
 	@PostMapping(value = "/deleteCart")
 	public void deleteCart(HttpSession session,
 			@RequestParam(value = "valueArr[]") List<String> chArr ,RedirectAttributes rttr) {
 		log.info("delete Cart =============");
-
+		
 		long cartNum = 0;
 		log.info(chArr);
-
+		
 		for (String i : chArr) {
 			cartNum = Integer.parseInt(i);
 			service.deleteCart(cartNum);
 		}
 	}
-
-	@ResponseBody
-	@GetMapping("/order") 
-	public String order(String cartnum, HttpSession session,
-	Model model, @ModelAttribute("member") MemberVO member) {
-		
-	log.info("order~~~~~~~~~~~~~~"); 
-	log.info(cartnum);
 	
-	return "cart/order";
-	}
 	
 	@PostMapping("/cartIn")
 	public String cartIn(CartVO vo,RedirectAttributes rttr) {
@@ -114,4 +117,20 @@ public class CartContoller {
 		
 		return "redirect:/product/{pronum}";
 	}
+	
+	
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/plusQuantity")
+	public String plusQuantity(CartVO vo,RedirectAttributes rttr) {
+		log.info("수량 + 버튼");
+		service.plusQuantity(vo);
+		return "redirect:/cart/list";
+	}
+	
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/minusQuantity")
+	public String minusQuantity(CartVO vo,RedirectAttributes rttr) {
+		log.info("수량 - 버튼");
+		service.minusQuantity(vo);
+		return "redirect:/cart/list";
+	}
+	
 }
