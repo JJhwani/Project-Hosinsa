@@ -59,15 +59,19 @@ public class CartContoller {
 		model.addAttribute("list", service.getList(id));
 	}
 	
-	@ResponseBody
-	@GetMapping(value = "/order")
-	public String order(HttpSession session, @RequestParam("valueArr") String valueArr,
+	@PostMapping("/order")
+	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
 		Model model, @ModelAttribute("member") MemberVO member) {
-		log.info("order~~~~~~~~~~~~~~"); 
 		log.info(valueArr); 
 		
-//		model.addAttribute("order",service.getOrder(valueArr));
-		return "success";
+		model.addAttribute("order",service.getOrder(valueArr));
+		
+		return "/cart/order";
+	}
+	
+	@GetMapping("/order")
+	public void orderPage(Model model) {
+		
 	}
 	
 	

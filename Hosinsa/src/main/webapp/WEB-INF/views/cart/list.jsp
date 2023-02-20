@@ -80,6 +80,9 @@
 		<button type="button" class="order black" id="order">주문하기</button>
 		<button class="move_main">계속 쇼핑하기</button>
 	</div>
+	<form action="/cart/order" method="post" class="orderForm">
+		<input type="hidden" name="valueArr" value="">
+	</form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -108,7 +111,7 @@
 									"tbody input[type='checkbox']:checked")
 									.parent().next().text();
 							var list = $("tbody input[type='checkbox']");
-							var valueArr = new Array();
+							var valueArr = [];
 							$("tbody input[type='checkbox']").each(function() {
 								if ($(this).is(":checked")) { //선택되어 있으면 배열에 값을 저장함
 									valueArr.push($(this).parent().next().text());
@@ -116,22 +119,23 @@
 									console.log($(this));
 										}
 								});
+														
 							if (valueArr.length == 0) {
 								alert("선택된 상품이 없습니다.");
 							} else { 
-								
-								$.ajax({
+								$(".orderForm").find("input").val(valueArr);
+								$(".orderForm").submit();
+								/*$.ajax({
 									url : "/cart/order", // 전송 URL
-									dataType : "text",
-									contentType : "application/json",
-									type : "get", // GET or POST 방식
-									async : false,
-									data : {valueArr:JSON.stringify(valueArr)},
-									success : function(data) {
+									contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+									type : "post", // GET or POST 방식
+									data : objParams,
+									success:function(result){
 										location.href="/cart/order";
 									}
 									});
-								}
+								}*/
+							}
 						});
 						
 						/* 
