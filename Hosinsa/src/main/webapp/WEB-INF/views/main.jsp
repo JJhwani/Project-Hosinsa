@@ -15,7 +15,7 @@
 			<button class="left"><i class="fa-solid fa-chevron-left"></i></button>
 			<button class="right"><i class="fa-solid fa-chevron-right"></i></button>
 		</div>
-	</div>
+	</div>	
 	
 	<ul class="category_menu">
 		<li><a class="category" href="인기">인기</a></li>
