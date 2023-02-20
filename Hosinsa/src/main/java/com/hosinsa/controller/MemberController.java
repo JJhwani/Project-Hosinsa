@@ -134,12 +134,14 @@ public class MemberController {
 		}
 	}
 
-//	@GetMapping("/myPage")
-//	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
-//		
-//		model.addAttribute("order",memberService.getOrderList(vo.getId()));
-//		model.addAttribute("member", vo);
-//	}
+	@GetMapping("/myPage")
+	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
+				
+		model.addAttribute("order",memberService.getOrderList(vo.getId()));
+		model.addAttribute("possible",memberService.getPreList(vo.getId()));
+		model.addAttribute("already",memberService.getAlreadyList(vo.getId()));
+		model.addAttribute("member", vo);
+	}
 	
 	@GetMapping("/modify")
 	public void modifyGET(@ModelAttribute("member") MemberVO vo, Model model) {
@@ -151,7 +153,7 @@ public class MemberController {
 	public String modifyPOST(MemberVO member,  MultipartFile uploadFile, RedirectAttributes rttr, Model model) {
 		
 		File saveFile = new File(
-				"C:\\Work3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\profile",
+				"C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\profile",
 				member.getId()+".jpg");
 
 		try {
@@ -172,11 +174,6 @@ public class MemberController {
 	}
 	
 	@GetMapping("/remove")
-	public void removeGET(@ModelAttribute("member") MemberVO vo, Model model) {
-		model.addAttribute("member", vo);
-	}
-	
-	@PostMapping("/remove")
 	public String removePOST(@RequestParam("id") String id, RedirectAttributes rttr) {
 		log.info("remove----" + id);
 		

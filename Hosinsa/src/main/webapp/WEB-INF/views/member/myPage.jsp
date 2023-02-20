@@ -63,7 +63,7 @@
 		</div>
 		<div class="tabArea area1 reviewArea">
 			<c:if test = "${empty possible}">		
-				<p class='no_review'>작성 가능 리뷰가 없습니다.<br>호신사에서 쇼핑하고 첫 리뷰를 작성해 보세요!</p>
+				<p class='no_review'>작성 가능 리뷰가 없습니다.<br>호신사에서 쇼핑하고 리뷰를 작성해 보세요!</p>
 			</c:if>
 			<c:forEach var="possible" items="${possible}">
 				<div class="reviewWrap">
@@ -71,15 +71,15 @@
 						<img class="proimg" src="${possible.proimg}">
 						<span class="ordernum">${possible.ordernum }</span>
 						<b class="brand">${possible.brand }</b>
-						<a href="/product/${possible.pronum }"><b>${possible.pronum }</b></a>
+						<a href="/product/${possible.pronum }" class="pronum" data-pronum="${possible.pronum }"><b>${possible.proname }</b></a>
 						<button class="review_register black">작성하기</button>
-						<i>~${possible.expiredate }</i>
+						<i>~<fmt:formatDate pattern="yyyy-MM-dd" value="${possible.expiredate }"></fmt:formatDate></i>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
 		<div class="tabArea area2 reviewArea hidden">
-			<c:if test = "${empty already}">		
+			<c:if test = "${empty already}">
 				<p class='no_review'>아직 리뷰가 없습니다.<br>호신사에서 쇼핑하고 첫 리뷰를 작성해 보세요!</p>
 			</c:if>
 			<c:forEach var="already" items="${already}">
@@ -90,7 +90,7 @@
 						<a href="/product/{pronum}"><b>${already.proname }</b></a>
 						<button class="review_modify">수정</button>
 						<button class="review_delete">삭제</button>
-						<i>${already.uploadDate }</i>
+						<i><fmt:formatDate pattern="yyyy-MM-dd" value="${already.uploadDate }"></fmt:formatDate></i>
 					</div>
 					<p class="reviewTitle">${already.title }</p>
 					<p class="content">${already.content }</p>
@@ -99,7 +99,9 @@
 			</c:forEach>
 		</div>
 		<form class="reviewForm" action="/review/register" method="get">
+			<input type="hidden" name="pronum" value="">
 			<input type="hidden" name="ordernum" value="">
+			<input type="hidden" name="bno" vanlu="">
 		</form>
 	</section>
 </div><!-- //contentWrap -->
@@ -115,6 +117,39 @@ $(document).ready(function(){
 			$(".area2").removeClass("hidden");
 		}
 	})
+	
+	var reviewForm = $(".reviewForm");
+	
+	$(".review_register").on("click",function(){
+		reviewForm.find("input[name=pronum]").val($(this).siblings(".pronum").attr("data-pronum"));
+		reviewForm.find("input[name=ordernum]").val($(this).siblings(".ordernum").text());
+		reviewForm.attr("action","/review/register");
+		reviewForm.submit();
+	})
+	
+	$(".review_modify").on("click",function(){
+		reviewForm.find("input[name=bno]").val($(this).siblings(".bno").text());
+		reviewForm.attr("action","/review/modify");
+		reviewForm.submit();
+	})
+		
+	$(".review_delete").on("click",function(){
+		reviewForm.find("input[name=bno]").val($(this).siblings(".bno").text());
+		reviewForm.attr("action","/review/remove");
+		reviewForm.submit();
+	})
+	
+	if("${review}"=="success"){
+		alert("리뷰 작성이 완료되었습니다.");
+	}
+	
+	if("${modify}"=="success"){
+		alert("리뷰 수정이 완료되었습니다.");
+	}
+	
+	if("${remove}"=="success"){
+		alert("리뷰 삭제가 완료되었습니다.");
+	}
 })
 </script>
 

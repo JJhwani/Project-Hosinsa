@@ -9,8 +9,8 @@
 			FROM
 				(SELECT /*+ INDEX_DESC(HOSINSA_BOARD_EVENT PK_HOSINSA_BOARD_EVENT) */
 				ROWNUM RN, EVENT_NO, EVENT_IMG, TITLE, SUBTEXT, CONTENT, START_DATE, END_DATE, REGDATE, UPDATE_DATE, WRITER, EVENT_PW
-				FROM HOSINSA_BOARD_EVENT WHERE ROWNUM <= #{pageNum} * #{amount})				
-			WHERE RN > (#{pageNum} - 1) * #{amount}
+				FROM HOSINSA_BOARD_EVENT WHERE ROWNUM <= #{b_pageNum} * #{b_amount})				
+			WHERE RN > (#{b_pageNum} - 1) * #{b_amount}
 		]]>
 	</select>
 	<!-- readEvent -->
@@ -79,8 +79,8 @@
 				(SELECT	ROWNUM RN, NNO, TITLE, CONTENT, ID, REGDATE, UPDATE_DATE, READCOUNT
 					FROM
 					(SELECT * FROM HOSINSA_BOARD_NOTICE ORDER BY NNO DESC)
-				WHERE ROWNUM <= #{pageNum} * #{amount})				
-			WHERE RN > (#{pageNum} - 1) * #{amount}
+				WHERE ROWNUM <= #{b_pageNum} * #{b_amount})				
+			WHERE RN > (#{b_pageNum} - 1) * #{b_amount}
 			
 		]]>
 	</select>
@@ -131,8 +131,21 @@
 	<!-- getTotalCountSearch -->
 	<select id="getTotalCountSearch" resultType="int">
 		SELECT COUNT(*) FROM HOSINSA_BOARD_NOTICE
-			WHERE (LOWER(TITLE) LIKE '%'||#{keyword}||'%' OR LOWER(CONTENT) LIKE '%'||#{keyword}||'%'
-				 OR LOWER(ID) LIKE '%'||#{keyword}||'%')
+			WHERE (LOWER(TITLE) LIKE '%'||#{b_keyword}||'%' OR LOWER(CONTENT) LIKE '%'||#{b_keyword}||'%'
+				 OR LOWER(ID) LIKE '%'||#{b_keyword}||'%')
+	</select>
+	<!-- getSearchNotice -->
+	<select id="getSearchNotice" resultType="com.hosinsa.domain.BoardNoticeVO" parameterType="com.hosinsa.domain.BoardNoticeVO">
+		<![CDATA[
+    		SELECT NNO, TITLE, CONTENT, ID, REGDATE, UPDATE_DATE, READCOUNT
+			FROM
+				(SELECT	ROWNUM RN, NNO, TITLE, CONTENT, ID, REGDATE, UPDATE_DATE, READCOUNT
+					FROM
+						(SELECT * FROM HOSINSA_BOARD_NOTICE WHERE (LOWER(TITLE) LIKE '%'||#{b_keyword}||'%' OR LOWER(CONTENT) LIKE '%'||#{b_keyword}||'%'
+    						OR LOWER(ID) LIKE '%'||#{b_keyword}||'%'))
+				WHERE ROWNUM <= #{b_pageNum} * #{b_amount})
+			WHERE RN > (#{b_pageNum} - 1) * #{b_amount}
+    	]]>
 	</select>
 	
 </mapper>

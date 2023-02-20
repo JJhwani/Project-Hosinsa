@@ -37,6 +37,14 @@
 	select * from hosinsa_order where id = #{id} order by order_date desc
 </select>
 
+<select id="getPreList" resultType="com.hosinsa.domain.PreReviewVO">
+	select * from hosinsa_p_review where id = #{id} order by expiredate asc
+</select>
+
+<select id="getAlreadyList" resultType="com.hosinsa.domain.ReviewVO">
+	select * from hosinsa_review where id=#{id} order by bno desc
+</select>
+
 <!-- INSERT 문 -->
 <insert id="insert">
 	insert into hosinsa_member values

@@ -79,20 +79,20 @@
 	</div>	
 
 	<!-- 페이지 처리 시작 -->
-	<ul class="pagination">
-		<c:if test="${pageMaker.prev}">
-			<li class="paginate_button previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
+	<ul class="pagination board">
+		<c:if test="${pageMaker_b.prev}">
+			<li class="board_paginate_button previous"><a href="${pageMaker_b.startPage-1}">Previous</a></li>
 		</c:if>
-		<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-			<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
+		<c:forEach var="num" begin="${pageMaker_b.startPage}" end="${pageMaker_b.endPage}">
+			<li class="board_paginate_button ${pageMaker_b.cri.b_pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
 		</c:forEach>
-		<c:if test="${pageMaker.next}">
-			<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
+		<c:if test="${pageMaker_b.next}">
+			<li class="board_paginate_button next"><a href="${pageMaker_b.endPage+1}">Next</a></li>
 		</c:if>
 	</ul>
-	<form class="paging" action="/board/event/list" method="post">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+	<form class="paging board" action="/board/event/list" method="post">
+		<input type="hidden" name="b_pageNum" value="${pageMaker_b.cri.b_pageNum}">
+		<input type="hidden" name="b_amount" value="${pageMaker_b.cri.b_amount}">
 	</form>	
 
 </div>

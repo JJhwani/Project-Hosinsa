@@ -29,7 +29,6 @@ public class CartServiceImpl implements CartService {
 	
 	@Override
 	public List<CartVO> getOrder(List<Integer> chArr) {
-		System.out.println(chArr);
 		return mapper.getOrder(chArr);
 	}
 

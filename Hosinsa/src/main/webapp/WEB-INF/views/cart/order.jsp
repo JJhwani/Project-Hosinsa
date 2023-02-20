@@ -5,13 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../includes/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<div class="contentWrap">
 	<h2>Order / Payment</h2>
 	
 	
@@ -69,16 +63,16 @@
 						</tr>
 					</div>
 					<div>
-						<c:forEach items="${order}" var="cart">
+						<c:forEach items="${order}" var="order">
 							<tr class="odd gradeX">
 								<td></td>
-								<td>${cart.cartnum}</td>
-								<td>${cart.proimg}</td>
-								<td>${cart.pronum}</td>
-								<td><a class="move" href='${cart.pronum}'>
-										${cart.proname} </a></td>
-								<td>${cart.id}</td>
-								<td>${cart.price}</td>
+								<td>${order.cartnum}</td>
+								<td>${order.proimg}</td>
+								<td>${order.pronum}</td>
+								<td><a class="move" href='${order.pronum}'>
+										${order.proname} </a></td>
+								<td>${order.id}</td>
+								<td>${order.price}</td>
 							</tr>
 						</c:forEach>
 					</div>
@@ -86,6 +80,6 @@
 	</div>
 
 
-</body>
+</div>
 <%@ include file="../includes/footer.jsp"%>
 </html>

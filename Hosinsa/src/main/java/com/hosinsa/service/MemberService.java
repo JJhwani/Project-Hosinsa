@@ -5,7 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.hosinsa.domain.MemberVO;
-
+import com.hosinsa.domain.OrderVO;
+import com.hosinsa.domain.PreReviewVO;
+import com.hosinsa.domain.ReviewVO;
 
 public interface MemberService {
 
@@ -36,9 +38,12 @@ public interface MemberService {
 	public int introCheck(String memberIntroducer);
 	
 	//주문내역 불러오기
-	//public List<OrderVO> getOrderList(String id);
+	public List<OrderVO> getOrderList(String id);
 	
 	//작성가능리뷰 불러오기
-	//public List<>
+	public List<PreReviewVO> getPreList(String id);
+	
+	//작성한 리뷰 불러오기
+	public List<ReviewVO> getAlreadyList(String id);
 
 }

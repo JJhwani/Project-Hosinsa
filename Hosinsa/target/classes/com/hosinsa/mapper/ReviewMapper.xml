@@ -40,8 +40,8 @@
 	 	 	<selectKey keyProperty="bno" order="BEFORE" resultType="Long">
 	 	 		select seq_review.nextval from dual
 	 	 	</selectKey>
-		 	 	insert into hosinsa_review(bno, nickname, title, content, uploadDate)
-		 	 	values(#{bno}, #{nickname}, #{title}, #{content}, sysdate)
+		 	 	insert into hosinsa_review(bno, id, nickname, title, content, uploadDate, pronum, profilimg, proname, proimg)
+		 	 	values(#{bno}, #{id}, #{nickname}, #{title}, #{content}, sysdate, #{pronum}, #{profilimg}, #{proname}, #{proimg})
 	 	 </insert>
 	 	 
 	 	 <select id="read" resultType="com.hosinsa.domain.ReviewVO">
@@ -58,7 +58,6 @@
 	 			update hosinsa_review
 	 			set title = #{title},
 	 			content = #{content},
-	 			nickname = #{nickname},
 	 			uploadDate = sysdate
 	 			where bno = #{bno}
 	 	</update>
@@ -72,11 +71,11 @@
 	 			
 		 <![CDATA[
 		   select
-		 	bno, title, content, nickname, uploaddate, reReply
+		 	bno, title, content, nickname, uploaddate, reReply, profilimg
 		 	from
 		 		(
 		 		select /*+INDEX_DESC(HOSINSA_REVIEW PK_REVIEW) */
-		 		rownum rn, bno, title, content, nickname, uploaddate, pronum, reReply
+		 		rownum rn, bno, title, content, nickname, uploaddate, pronum, reReply, profilimg
 		   		from
 		 			HOSINSA_REVIEW
 		 		where 
@@ -98,5 +97,9 @@
 	 		
 	 	bno > 0
 	 	</select>
+	 	
+	 	<delete id="deletePre">
+	 		delete from hosinsa_p_review where ordernum = #{ordernum} and pronum = #{pronum}
+	 	</delete>
 	 	
 </mapper>
