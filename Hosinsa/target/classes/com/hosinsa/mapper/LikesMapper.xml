@@ -13,7 +13,7 @@
 		
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="lno" order="BEFORE" resultType="Long">
-			select max(lno) + 1 FROM hosinsa_likes
+			select NVL(max(lno),0) + 1 FROM hosinsa_likes
 		</selectKey>
 			insert into hosinsa_likes (lno, pronum, id)
 			values(#{lno},#{pronum},#{id})
@@ -30,15 +30,12 @@
 	</select>
 	
 	<!-- 찜하기 취소 -->
-	<delete id="delete">
-	 	 delete from hosinsa_likes where lno = #{lno}
+	<delete id="delete" >
+	 	 delete from hosinsa_likes where id = #{id} and pronum = #{pronum}
 	</delete>
 	
-	<!-- 하트중복체크 -->
-	<select id="getBylnowithUser" resultType="Integer">
-		<![CDATA[
+	<select id="getLikesCheck" resultType="int" parameterType="Map"> 
 		select count(*) from hosinsa_likes where id = #{id} and pronum = #{pronum} 
-		]]>
 	</select>
 	
 	

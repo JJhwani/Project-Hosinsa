@@ -168,7 +168,7 @@
 	
 	<!-- 찜하기 -->
 		<div class = "likes">
-			<button type="button" class="fa-solid fa-heart" id="likesBtn"> 찜</button>
+			<button type="button" id="likesBtn"><span>♡</span> 찜</button>
 		</div>
 	
 	<!-- 찜하기 -->
@@ -176,6 +176,27 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		var check = {
+				id : "${member.id}",
+				pronum : "${product.pronum}"
+			};
+		
+		$.ajax({
+			type : 'GET',
+			url : '/likes/check',
+			data : check,
+			contentType : "application/json; charset=utf-8",
+			dataType:"json",
+			success : function(result) {
+				if(result==0){
+					
+				}else{
+					$(".likes span").addClass("on").text("♥");
+				}
+			}
+		});
+		
 				
 		var productForm = $(".productForm");
 		
@@ -406,9 +427,12 @@
 			}
 		}
 	})
+	
+	
 </script>
 
 <!-- 카카오톡 공유하기 -->
+
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
   integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
 <script>
@@ -452,71 +476,24 @@ Kakao.Share.createDefaultButton({
       },
     ],
   });
+
 </script>
+<!-- 카카오톡 공유하기 끝 -->
 
 
+
+<!-- 상품 찜하기 -->
 <script>
-/*
+
 $(document).ready (function() {
-	
-	var form ="";
 
 	$("#likesBtn").click(function(event) {
-	
 
 		event.preventDefault();
 	
 		var id = "${member.id}"; //아이디값
-		var pronum = "${product.pronum}"; //프로넘
-		var form = {
-			id : id,
-			pronum : pronum
-		};
+		var pronum = "${product.pronum}"; //상품번호
 
-		if("${member.id}" == "") {
-			 if(confirm("로그인회원만 사용가능합니다.")){
-			location.href="/member/login"; //이동페이지는 컨트롤러로 넘긴다
-			}
-		}else if("${member.id}" == id) {
-			$.ajax ({
-				type : 'POST',
-				url : '/likes/new',
-				data : JSON.stringify(form),
-				contentType : "application/json; charset=utf-8",
-				success : function(result) {
-					if(result == "success") {
-						console.log("찜성공!");
-					if(confirm("해당 상품을 찜했습니다. 마이페이지로 이동하시겠습니까?"))
-					location.href="/member/myPage";
-					}
-				}
-			})
-		}else if("${member.id}" == id && "${product.pronum}" == pronum) {
-			$.ajax ({
-				type : 'DELETE',  
-				url : '/likes/lno',
-				data :  JSON.stringify(form),
-				contentType : "application/json; charset=utf-8",
-				success : function(result) {
-					alert("success 완료 시 하트색깔 변경 부탁드립니다.");
-				}
-			})
-		}
-	})
-});
-*/
-
-
-/*$(document).ready (function() {
-
-	$("#likesBtn").click(function(event) {
-		
-		var form ="";
-
-		event.preventDefault();
-	
-		var id = "${member.id}"; //아이디값
-		var pronum = "${product.pronum}"; //프로넘
 		var form = {
 			id : id,
 			pronum : pronum
@@ -527,9 +504,20 @@ $(document).ready (function() {
 		location.href="/member/login"; //이동페이지는 컨트롤러로 넘긴다
 		}
 		};
-
-		function add(form) {
-
+		if("${member.id}" == id && $(".likes span").hasClass("on")) {
+			$.ajax ({
+				type : 'DELETE',  
+				url : '/likes/delete',
+				dataType : "text",
+				data :  JSON.stringify(form),
+				contentType : "application/json; charset=utf-8",
+				success : function(result) {
+					$(".likes span").removeClass("on").text("♡");
+				}
+			})
+			return false;
+		}
+		
 		if("${member.id}" == id) {
 			$.ajax ({
 				type : 'POST',
@@ -537,44 +525,22 @@ $(document).ready (function() {
 				data : JSON.stringify(form),
 				contentType : "application/json; charset=utf-8",
 				success : function(result) {
-					if(result == "success") {
+				if(result == "success") 
 						console.log("찜성공!");
-					if(confirm("해당 상품을 찜했습니다. 마이페이지로 이동하시겠습니까?"))
-					location.href="/member/myPage";
-					}
-				}
-			})
-		}
-	}
-},
-		function remove(form) {
-
-		if("${member.id}" == id && "${product.pronum}" == pronum) {
-			$.ajax ({
-				type : 'DELETE',  
-				url : '/likes/'+lno,
-				data :  JSON.stringify(form),
-				contentType : "application/json; charset=utf-8",
-				success : function(result) {
-					alert("success 완료 시 하트색깔 변경 부탁드립니다.");
+				if(confirm("해당 상품을 찜했습니다. 마이페이지로 이동하시겠습니까?")){
+						location.href="/member/myPage";
+					}else{
+						$(".likes span").addClass("on").text("♥");
+					}	
 				}
 			})
 		}
 	})
-	return {
-	add : add,
-	remove : remove
-};
-}); */
+});
 
 </script>
- 
- 
- 
- 
-  <!--//if문으로 조건에 따라서 나눠지게 설계하기. ajax는 활용하면서..
-  css로 검정하트 색 변환 가능.. 찜하기 / 삭제 두개만 진행 -->
-  
+<!-- 상품 찜하기 끝-->
+
 
 
 <script src="../../../resources/js/main.js"></script>

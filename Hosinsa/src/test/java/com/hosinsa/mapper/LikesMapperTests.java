@@ -32,13 +32,4 @@ public class LikesMapperTests {
 		mapper.insert(vo);
 
 	}
-	
-	@Test
-	public void testDelete() {
-		log.info("삭제삭제삭제!=========>" + mapper.delete(3L));
-	
-	
-	}
-	
-
 }

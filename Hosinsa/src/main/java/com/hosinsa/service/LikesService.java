@@ -7,10 +7,10 @@ import com.hosinsa.domain.LikesVO;
 public interface LikesService {
 	
 	public int register(LikesVO vo);
-	public int remove (Long lno);
+	public int remove (LikesVO vo);
 	public List<LikesVO> getProList(int pronum);
 	public List<LikesVO> getMyList(LikesVO vo);
-	public Integer getBylnowithUser(LikesVO vo); //중복인지 체크 
+	public int likesCheck(String id, int pronum);
 
 
 }

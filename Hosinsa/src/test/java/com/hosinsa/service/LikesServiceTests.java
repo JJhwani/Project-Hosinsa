@@ -38,11 +38,11 @@ public class LikesServiceTests {
 			
 		}
 		
-		@Test
-		public void testDelete() {
-			
-			log.info("삭제=================>" + service.remove(3L));
-		}
+//		@Test
+//		public void testDelete() {
+//			
+//			log.info("삭제=================>" + service.remove(3L));
+//		}
 	
 		@Test
 		public void testgetProList() {
@@ -56,19 +56,9 @@ public class LikesServiceTests {
 		@Test
 		public void testgetMyList() {
 			
+			
 			LikesVO vo = new LikesVO();
 			vo.setId("admin");
 			log.info("getMyList=========" + service.getMyList(vo));
-		}
-		
-		@Test
-		public void testgetBylnowithUser() {
-			
-			LikesVO vo = new LikesVO();
-			vo.setLno(1L);
-			
-			
-			log.info("getProList=========" + service.getBylnowithUser(vo));
-		}
-
+		}	
 }

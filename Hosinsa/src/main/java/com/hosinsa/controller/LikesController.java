@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hosinsa.domain.LikesVO;
@@ -32,6 +33,7 @@ public class LikesController {
 		
 		
 		//찜하기 추가
+		@ResponseBody
 		@PostMapping(value="/new",
 				consumes = "application/json",
 				produces = { MediaType.TEXT_PLAIN_VALUE,
@@ -50,14 +52,16 @@ public class LikesController {
 		}
 		
 		//찜하기 삭제
-		@DeleteMapping(value="/{lno}",
+		@ResponseBody
+		@DeleteMapping(value="/delete",
 				consumes = "application/json",
-				produces = { MediaType.TEXT_PLAIN_VALUE})
-		public ResponseEntity<String> remove(@PathVariable("lno") Long lno) {
+				produces = { MediaType.TEXT_PLAIN_VALUE,
+						MediaType.APPLICATION_JSON_VALUE})
+		public ResponseEntity<String> remove(@RequestBody LikesVO vo) {
 			
-			log.info("remove========" + lno);
+			log.info("remove========" + vo.getLno());
 			
-			return service.remove(lno) == 1
+			return service.remove(vo) == 1
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			
@@ -83,16 +87,12 @@ public class LikesController {
 			return new ResponseEntity<>(service.getProList(pronum), HttpStatus.OK);
 		}
 		
-		@PostMapping(value="/lno",
-				consumes = "application/json",
-				produces = { MediaType.TEXT_PLAIN_VALUE,
-							MediaType.APPLICATION_JSON_VALUE})
-		public ResponseEntity<Integer> getBylnowithUser(@RequestBody LikesVO vo) {
-
-			log.info("중복체크===========" + vo);
-			return new ResponseEntity<>(service.getBylnowithUser(vo), HttpStatus.OK);
+		@ResponseBody
+		@GetMapping("/check")
+		public int likesCheck(String id,int pronum) {			
+			return service.likesCheck(id, pronum);
 		}
-		
+				
 	}
 		
 

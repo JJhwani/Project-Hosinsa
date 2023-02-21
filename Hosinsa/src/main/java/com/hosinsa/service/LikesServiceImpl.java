@@ -31,19 +31,11 @@ public class LikesServiceImpl implements LikesService {
 	}
 
 	@Override
-	public Integer getBylnowithUser(LikesVO vo) {
+	public int remove(LikesVO vo) {
 		
-		log.info("Likes=======>" + vo);
+		log.info("prolist=======>" + vo);
 		
-		return mapper.getBylnowithUser(vo);
-	}
-
-	@Override
-	public int remove(Long lno) {
-		
-		log.info("prolist=======>" + lno);
-		
-		return mapper.delete(lno);
+		return mapper.delete(vo);
 	}
 
 
@@ -60,4 +52,11 @@ public class LikesServiceImpl implements LikesService {
 		log.info("prolist=======>" + vo);
 		return mapper.getMyList(vo);
 	}
+
+	@Override
+	public int likesCheck(String id, int pronum) {
+		//1이면 true 0이면 false
+		return mapper.getLikesCheck(id, pronum);
+	}
+
 }	
