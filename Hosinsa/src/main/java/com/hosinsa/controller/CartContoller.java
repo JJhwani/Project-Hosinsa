@@ -59,22 +59,6 @@ public class CartContoller {
 		model.addAttribute("list", service.getList(id));
 	}
 	
-	@PostMapping("/order")
-	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
-		Model model, @ModelAttribute("member") MemberVO member) {
-		log.info(valueArr); 
-		
-		model.addAttribute("order",service.getOrder(valueArr));
-		
-		return "/cart/order";
-	}
-	
-	@GetMapping("/order")
-	public void orderPage(Model model) {
-		
-	}
-	
-	
 	@ResponseBody
 	@PostMapping(value = "/deleteCart")
 	public void deleteCart(HttpSession session,

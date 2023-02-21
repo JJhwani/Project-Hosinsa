@@ -80,7 +80,7 @@
 		<button type="button" class="order black" id="order">주문하기</button>
 		<button class="move_main">계속 쇼핑하기</button>
 	</div>
-	<form action="/cart/order" method="post" class="orderForm">
+	<form action="/order/order_form" method="post" class="orderForm">
 		<input type="hidden" name="valueArr" value="">
 	</form>
 </div>

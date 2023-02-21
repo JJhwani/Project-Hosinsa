@@ -28,11 +28,6 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	@Override
-	public List<CartVO> getOrder(List<Integer> chArr) {
-		return mapper.getOrder(chArr);
-	}
-
-	@Override
 	public boolean cartIn(CartVO vo) {
 		return mapper.cartIn(vo)==1?true:false;
 	}

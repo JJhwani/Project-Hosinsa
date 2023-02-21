@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosinsa.mapper.OrderMapper">
+
+<select id="getOrder" resultType="com.hosinsa.domain.CartVO" parameterType="java.util.List">
+  	select * from hosinsa_cart where CARTNUM in 
+  	<foreach collection="list" item="cartnum" index="index" open="(" close=")" separator="," >
+	  	#{cartnum}
+	  </foreach>
+</select>
+
+</mapper>
