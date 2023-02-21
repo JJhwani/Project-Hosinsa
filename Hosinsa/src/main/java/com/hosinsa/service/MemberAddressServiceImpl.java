@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.mapper.MemberAddressMapper;
 
@@ -18,28 +19,38 @@ public class MemberAddressServiceImpl implements MemberAddressService{
 	private MemberAddressMapper mapper;
 
 	@Override
-	public List<MemberAddressVO> getList(MemberAddressVO address) {
-		return mapper.getList(address);
+	public List<MemberAddressVO> getListWithPaging(BoardCriteria cri) {
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
-	public boolean register(MemberAddressVO address) {
-		return mapper.register(address) == 1 ? true : false;
+	public boolean registerSelectKey(MemberAddressVO vo) {
+		return mapper.registerSelectKey(vo);
 	}
 
 	@Override
-	public MemberAddressVO read(MemberAddressVO address) {
-		return mapper.read(address);
+	public MemberAddressVO read(MemberAddressVO vo) {
+		return mapper.read(vo);
 	}
 
 	@Override
-	public boolean modify(MemberAddressVO address) {
-		return mapper.modify(address) == 1 ? true : false;
+	public boolean modifyBasic(MemberAddressVO vo) {
+		return mapper.modifyBasic(vo) == 1 ? true : false;
 	}
 
 	@Override
-	public boolean remove(MemberAddressVO address) {
-		return mapper.remove(address) == 1 ? true : false;
+	public boolean modify(MemberAddressVO vo) {
+		return mapper.modify(vo) == 1 ? true : false;
+	}
+
+	@Override
+	public boolean remove(Long address_no) {
+		return mapper.remove(address_no) == 1 ? true : false;
+	}
+
+	@Override
+	public int getTotalCountAddress(BoardCriteria cri) {
+		return 0;
 	}
 
 }
