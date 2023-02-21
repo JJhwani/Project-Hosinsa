@@ -1,9 +1,11 @@
-package com.hosinsa.service;
+package com.hosinsa.mapper;
 
 import java.util.List;
 
+
 import com.hosinsa.domain.CartVO;
 
-public interface OrderService {
+public interface OrderMapper {
+	
 	public List<CartVO> getOrder(List<Integer> chArr);
 }
