@@ -1,5 +1,7 @@
 package com.hosinsa.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 /*CREATE TABLE HOSINSA_CART(
@@ -26,4 +28,5 @@ public class CartVO {
 	private Long quantity;
 	private Long price;
 	private String proname;
+	private List<Integer> chArr;
 }

@@ -13,16 +13,32 @@
 		(select proname from hosinsa_product where pronum = #{pronum}))
 </insert>
 
+<update id="plusQuantity">
+  	update hosinsa_cart
+  	set  
+  	quantity = quantity +1 
+  	where cartnum = #{cartnum}
+</update>
+
+<update id="minusQuantity">
+  	update hosinsa_cart
+  	set  
+  	quantity = quantity -1 
+  	where cartnum = #{cartnum}
+</update>
+
+
 <select id="getList" resultType="com.hosinsa.domain.CartVO">
  <![CDATA[
   	select * from hosinsa_cart where id = #{id}
 	]]>
 </select>
 
-<select id="getOrder" resultType="com.hosinsa.domain.CartVO">
- <![CDATA[
-  	select * from hosinsa_cart where CARTNUM = #{cartNum}
-	]]>
+<select id="getOrder" resultType="com.hosinsa.domain.CartVO" parameterType="java.util.List">
+  	select * from hosinsa_cart where CARTNUM in 
+  	<foreach collection="list" item="cartnum" index="index" open="(" close=")" separator="," >
+	  	#{cartnum}
+	  </foreach>
 </select>
 
 <select id="checkCart" resultType="Integer">
