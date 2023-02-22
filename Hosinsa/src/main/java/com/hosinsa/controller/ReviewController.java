@@ -1,5 +1,7 @@
 package com.hosinsa.controller;
 
+import java.io.Console;
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.MemberVO;
@@ -48,15 +51,35 @@ public class ReviewController {
 	
 	@Transactional
 	@PostMapping("/register")
-	public String register(ReviewVO review, PreReviewVO pre, RedirectAttributes rttr) {
+	public String register(ReviewVO review, PreReviewVO pre, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model ) {
+		
+		String uploadFolder = "C:\\upload"; //호신사 프로젝트로 경로 수정 예정
+		
+		for (MultipartFile multipartFile : photoUpload) {
+			
+		log.info("===============");
+		log.info("Upload File Name: " + multipartFile.getOriginalFilename());
+		log.info("Upload File Size: " + multipartFile.getSize()); 
+		
+		File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
+		
+		try {
+			multipartFile.transferTo(saveFile);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}//end catch
+		
 		
 		service.regiseter(review);
 		service.deletePre(pre);
 		rttr.addFlashAttribute("review", "success");
 		
+		}
+	
+	
 		return "redirect:/member/myPage";
-		
 	}
+	
 	
 	@GetMapping({"/get","/modify"})
 	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") ReviewCriteria cri, Model model) {
@@ -94,7 +117,6 @@ public class ReviewController {
 		model.addAttribute("member",vo);
 		
 	}
-	
 }
 	
 

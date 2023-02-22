@@ -23,5 +23,5 @@ public class ReviewVO {
 	private Date uploadDate; // 작성날짜
 	private int pronum; //품번
 	private int rereply; //리리플 수
-
+	
 }
