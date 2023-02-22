@@ -18,7 +18,6 @@
 			value='<c:out value="${qna.qno }"/>' readonly="readonly">
 	</div>
 
-
 	<div class="form-group">
 		<label>카테고리</label> <input class="form-control" name='category'
 			value='<c:out value="${qna.category }"/>' readonly="readonly">
@@ -40,15 +39,13 @@
 			value='<c:out value="${qna.id }"/>' readonly="readonly">
 	</div>
 
-
-	<div style="display: inline-block; margin: 0 5px; float: right;">
 		<button data-oper='list' class="btn btn-default"
 			onclick="location.href='/qna/list'">목록</button>
 		<button data-oper='modify' class="btn"
 			onclick="location.href='/qna/modify?qno=<c:out value="${qna.qno}"/>'">수정
 		</button>
-	</div>
 
+<!-- 검색 처리 -->
 	<form id='operForm' action="/qna/modify" method="get">
 		<input type='hidden' id='qno' name='qno' value='<c:out value="${qna.qno}"/>'> 
 		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'> 
@@ -59,7 +56,7 @@
 
 </div>
 
-<!-- p414 댓글처리 -->
+<!-- 댓글 처리-->
 <div class="row">
    <div class="col-lg-12">
       <div class="panel panel-default">
@@ -127,6 +124,8 @@
 
 <script>
 
+
+
 $(document).ready(function () {
   
   var qnoValue = '<c:out value="${qna.qno}"/>';
@@ -151,6 +150,7 @@ $(document).ready(function () {
         } 
           
          var str="";
+         
          if(list == null || list.length == 0){
            return;
          }         
@@ -176,6 +176,7 @@ $(document).ready(function () {
     var pageNum = 1;
     var replyPageFooter = $(".panel-footer");
     
+    //댓글 페이지 번호 출력
     function showReplyPage(replyCnt){
       
        var endNum = Math.ceil(pageNum / 10.0) * 10;  
@@ -215,7 +216,8 @@ $(document).ready(function () {
                
       replyPageFooter.html(str);
    }
-    
+   
+    //페이지 번호 클릭시 새로운 댓글 가져오기
     replyPageFooter.on("click","li a", function(e){
         e.preventDefault();
         console.log("page click");
@@ -229,7 +231,7 @@ $(document).ready(function () {
        showList(pageNum);
    }); 
     
-    
+  //댓글 추가시 버튼 이벤트 처리
     var modal = $(".modal");
     var modalInputReply = modal.find("input[name='reply']");
     var modalInputReplyer = modal.find("input[name='replyer']");
@@ -300,6 +302,7 @@ $(document).ready(function () {
         });
       });
     
+    //댓글 수정후 댓글 목록 갱신
      modalModBtn.on("click", function(e){
       
       var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
@@ -308,12 +311,13 @@ $(document).ready(function () {
             
         alert(result);
         modal.modal("hide");
-        showList(pageNum);
+        showList(pageNum); //현재 보고 있는 댓글 페이지 번호 호출
         
       });
       
     });
 
+    //댓글 삭제후 댓글 목록 갱신
     modalRemoveBtn.on("click", function (e){
     	  
   	  var rno = modal.data("rno");
@@ -330,43 +334,6 @@ $(document).ready(function () {
   	
 });   
 
-/* 	replyService.add({
-		reply : "JS Test",
-		replyer : "tester",
-		qno : qnoValue
-	}, function(result) {
-		alert("RESULT: " + result);
-	});
-
-	replyService.getList({
-		qno : qnoValue,
-		page : 1
-	}, function(list) {
-		for (var i = 0, len = list.length || 0; i < len; i++) {
-			console.log(list[i]);
-		}
-	});
-
-	replyService.remove(42, function(count) {
-		console.log(count);
-		if (count === "success") {
-			alert("REMOVED");
-		}
-	}, function(err) {
-		alert('ERROR...');
-	});
-
-	replyService.update({
-		rno : 25,
-		qno : qnoValue,
-		reply : "Modified Reply...."
-	}, function(result) {
-		alert("수정완료!!");
-	});
-
-	replyService.get(10, function(data) {
-		console.log(data);
-	}); */
 </script>
 
 <script type="text/javascript">

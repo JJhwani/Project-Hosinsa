@@ -10,8 +10,8 @@
 <div class="container">
 	<h2>문의사항 수정</h2>
 
+<!-- 검색 처리 -->
 	<form role="form" action="/qna/modify" method="post">
-
 		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'> 
 		<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
  		<input type='hidden' name='type' value='<c:out value="${cri.type }"/>'>
