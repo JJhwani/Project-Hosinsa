@@ -1,7 +1,10 @@
 package com.hosinsa.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.ProductVO;
+import com.hosinsa.service.KakaoService;
 import com.hosinsa.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +39,7 @@ import lombok.extern.log4j.Log4j;
 public class MemberController {
 
 	private MemberService memberService;
+	private KakaoService kakaoService;
 
 	@GetMapping("/agree")
 	public void agreeGET() {
@@ -173,5 +178,38 @@ public class MemberController {
 			return "/member/myPage";
 		}
 	}
-
+	
+	// 카카오 로그인
+	@GetMapping("/kakaologin_page")
+	public String kakaoLogin_page(@RequestParam(value = "code", required = false) String code) {
+		StringBuffer loginUrl = new StringBuffer();
+        loginUrl.append("https://kauth.kakao.com/oauth/authorize?client_id=");
+        loginUrl.append("a8bea3904686bd773a43da6230b82b92"); 
+        loginUrl.append("&redirect_uri=");
+        loginUrl.append("http://localhost:8081/member/kakaologin"); 
+        loginUrl.append("&response_type=code");
+        
+        return "redirect:"+loginUrl.toString();
+	}
+	
+	@GetMapping("/kakaologin")
+	public String redirectKakao(MemberVO member, @RequestParam String code, Model model) {
+		log.info("code : " + code);
+		
+		// 접속 토큰 GET
+		String kakaoToken = kakaoService.getAccessToken(code);
+		log.info("안나오는거야? " + kakaoToken);
+		
+		// 접속자 정보 GET
+		Map<String,Object> result = kakaoService.getUserInfo(kakaoToken);
+		log.info(result.get("nickname"));
+		log.info(result.get("profile_image"));
+		
+		member.setName((String)result.get("nickname"));
+		member.setProfilimg((String)result.get("profile_image"));
+		
+		model.addAttribute("member", member);
+		
+		return "redirect:/";
+	}
 }

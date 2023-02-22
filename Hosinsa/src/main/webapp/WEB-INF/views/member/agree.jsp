@@ -223,46 +223,17 @@ HOSINSA 에서는 기본적인 회원 서비스 제공을 위한 필수정보로
 			</div>
 	
 			<div class="checkbox">
-				<input type="checkbox" id="check_2" class="normal"> <label
-					for="check_2">개인정보 수집/이용 동의 &nbsp;<span style="color: red;">(필수)</span></label>
-				<div>
-					<textarea rows="5" cols="40">
-	  				
-	  				</textarea>
-				</div>
-			</div>
-	
-			<div class="checkbox">
-				<input type="checkbox" id="check_3" class="normal"> <label
-					for="check_3">위치정보 이용약관 동의 &nbsp;<span>(선택)</span></label>
-			</div>
-	
-			<div class="checkbox">
 				<input type="checkbox" id="check_4" class="normal"> <label
-					for="check_4">이벤트 등 프로모션 알림 메일 수신 &nbsp;<span>(선택)</span></label>
+					for="check_4">이벤트 등 프로모션 알림(메일, 문자) 수신 &nbsp;<span>(선택)</span></label>
 			</div>
 	
 			<div class="checkBtn align_center">
-				<input type="button" value="취소"> <input type="button" class="black" value="동의">
+				<input id="cancleBtn" type="button" value="취소">
+				<input id="agreeBtn" type="button" class="black" value="동의">
 			</div>
-	
-		</div>
-		<div class="checkbox">
-			<input type="checkbox" id="check_3" class="normal"> <label
-				for="check_4">이벤트 등 프로모션 알림 메일 수신 &nbsp;<span>(선택)</span></label>
-		</div>
-
-		<div class="checkbox">
-			<input type="checkbox" id="check_4" class="normal"> <label
-				for="check_4">이벤트 등 프로모션 알림 문자 수신 &nbsp;<span>(선택)</span></label>
-		</div>
 	</div>
 
 
-	<div class="checkBtn">
-		<input id="cancleBtn" type="button" value="취소">
-		<input id="agreeBtn" type="button" value="동의">
-	</div>
 
 </body>
 

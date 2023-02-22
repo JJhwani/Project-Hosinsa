@@ -1,13 +1,22 @@
 package com.hosinsa.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.mapper.MemberMapper;
 
@@ -72,5 +81,4 @@ public class MemberServiceImpl implements MemberService {
 	public int introCheck(String memberIntroducer) {
 		return memberMapper.introCheck(memberIntroducer);
 	}
-
 }

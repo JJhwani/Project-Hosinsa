@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="../../../resources/css/HosinsaLogin.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <body>
 	<br>
 	<br>
@@ -32,7 +33,10 @@
 						<button id="JoinBtn" type="button">JOIN MEMBER</button>
 					</div>
 					<div>
-						<img alt="카카오로그인" src="${pageContext.request.contextPath}/resources/images/kakao_login_medium_narrow.png" onclick="loginWithKakao()">
+						<a id="kakao-login-btn"	href="/member/kakaologin_page">
+							<img src="../../../resources/images/kakao_login_medium_narrow.png"
+							width="222" alt="카카오 로그인 버튼" />
+						</a>
 					</div>
 				</div>
 			</form>
@@ -41,9 +45,8 @@
 
 	<footer></footer>
 </body>
-<script src="../../../../resources/js/kakao.js"></script>
-<!-- 카카오 로그인 -->              
-<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
+
+<!-- 카카오 로그인 -->
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -55,7 +58,6 @@
 			$("#loginForm").attr("action", "/member/login");
 			$("#loginForm").submit();
 		});
-
 	});
 </script>
 </html>

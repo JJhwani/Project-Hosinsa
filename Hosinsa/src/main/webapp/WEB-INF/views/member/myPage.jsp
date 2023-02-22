@@ -134,8 +134,8 @@ $(document).ready(function(){
 			$(".area1").addClass("hidden");
 			$(".area2").removeClass("hidden");
 		}
-	})
-})
+	});
+});
 </script>
 
 <script type="text/javascript">

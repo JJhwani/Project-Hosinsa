@@ -53,23 +53,23 @@
 				<th>이메일 *</th>
 				<td><input type="text" name="email" id="email"></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<th>휴대전화 *</th>
 				<td><input type="text" name="phone" id="phone"></td>
-			</tr>
-			<%-- <tr>
+			</tr> -->
+			<tr>
    				<th>휴대전화 * </th>
    				<td>
-   					<select name="phone_first">
+   					<select id="phone1" name="phone1">
    						<option>선택</option>
    						<c:forTokens var="phone" items="010,011,016,017,018,019" delims=",">
 								<option>${phone}</option>
 						</c:forTokens>
    					</select> - 
-   					<input type="text" name="phone_center" size="3"> - 
-					<input type="text" name="phone_last" size="3">    					
+   					<input id="phone2" type="text" name="phone2" size="3"> - 
+					<input id="phone3" type="text" name="phone3" size="3">    					
    				</td>
-   			</tr> --%>
+   			</tr>
 			<tr>
 				<th>닉네임 *</th>
 				<td>
@@ -106,6 +106,15 @@
 $(document).ready(function(){
 	$("#closeBtn").on("click", function() {
 		self.location = "/";
+	});
+	
+	$("#joinBtn").on("click", function() {
+		var phone1 = $("#phone1").val();
+		var phone2 = $("#phone2").val();
+		var phone3 = $("#phone3").val();
+		var phone = phone1 + phone2 + phone3;
+		alert(phone);
+		
 	});
 	
 });
