@@ -1,6 +1,6 @@
 console.log("Reply Module..........");
 
-var replyService  =  ( function(){
+var reviewreplyService  =  ( function(){
 
    function add(reviewreply, callback, error){
         console.log("add reply.......");

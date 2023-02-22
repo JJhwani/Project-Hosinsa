@@ -70,6 +70,7 @@
 		</div>
 		<!-- 새로운 댓글등록 버튼종료 -->
 		
+		
 		<!-- Modal -->
 		  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  	<div class="modal-dialog">
@@ -148,7 +149,7 @@ $(document).ready(function() {
 					str += "<div>";
 					str += "<div class='header'>";
 					str += "<strong class='primary-font'>" + list[i].replyer + "</strong>";
-					str += "<small class='pull-right text-muted'>" + replyService.displayTime(list[i].replyDate)  + "</small>";
+					str += "<small class='pull-right text-muted'>" + reviewreplyService.displayTime(list[i].replyDate)  + "</small>";
 					str += "</div>";
 					str += "<p>"+ list[i].reply +"</p>";
 					str += "</div></li>";

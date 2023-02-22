@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosinsa.mapper.LikesMapper">
+
+
+	<!-- 상품 찜하기 -->
+	<insert id="insert">
+		insert into hosinsa_likes (lno, pronum, id)
+		values(#{lno},#{pronum},#{id})
+	</insert>
+		
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="lno" order="BEFORE" resultType="Long">
+			select NVL(max(lno),0) + 1 FROM hosinsa_likes
+		</selectKey>
+			insert into hosinsa_likes (lno, pronum, id)
+			values(#{lno},#{pronum},#{id})
+		</insert>
+	
+	<!-- 마이페이지 기준 -->
+	<select id="getMyList" resultType="com.hosinsa.domain.LikesVO">
+		select * from hosinsa_likes where id = #{id}
+	</select>
+	
+	<!-- 상품페이지 기준 -->
+	<select id="getProList" resultType="com.hosinsa.domain.LikesVO">
+		select * from hosinsa_likes where pronum = #{pronum}
+	</select>
+	
+	<!-- 찜하기 취소 -->
+	<delete id="delete" >
+	 	 delete from hosinsa_likes where id = #{id} and pronum = #{pronum}
+	</delete>
+	
+	<select id="getLikesCheck" resultType="int" parameterType="Map"> 
+		select count(*) from hosinsa_likes where id = #{id} and pronum = #{pronum} 
+	</select>
+	
+	
+
+</mapper>
