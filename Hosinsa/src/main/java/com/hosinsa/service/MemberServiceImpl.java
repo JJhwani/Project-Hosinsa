@@ -2,15 +2,15 @@ package com.hosinsa.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
+import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.PreReviewVO;
+import com.hosinsa.domain.ProductVO;
 import com.hosinsa.domain.ReviewVO;
 import com.hosinsa.mapper.MemberMapper;
 
@@ -89,5 +89,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<ReviewVO> getAlreadyList(String id) {
 		return memberMapper.getAlreadyList(id);
+	}
+
+	@Override
+	public List<ProductVO> getLikesList(String id) {
+		return memberMapper.getLikesList(id);
 	}
 }

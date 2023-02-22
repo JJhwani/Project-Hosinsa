@@ -17,6 +17,6 @@ public interface LikesMapper {
 	public int getBylnowithUser(LikesVO vo); //이미 찜한 게시물인지 확인
 	public List<LikesVO> getProList(int pronum); //상품페이지 찜목록
 	public List<LikesVO> getMyList(LikesVO vo); //마이페이지 찜목록
-	
+	public int getLikesTotal(String id); //찜 총 갯수 세기
 
 }

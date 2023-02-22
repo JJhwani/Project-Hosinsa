@@ -1,12 +1,6 @@
 package com.hosinsa.controller;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
-import com.hosinsa.domain.ProductVO;
+import com.hosinsa.domain.PageDTO;
+import com.hosinsa.service.LikesService;
 import com.hosinsa.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -37,6 +32,8 @@ import lombok.extern.log4j.Log4j;
 public class MemberController {
 
 	private MemberService memberService;
+	
+	private LikesService likesService;
 
 	@GetMapping("/agree")
 	public void agreeGET() {
@@ -136,7 +133,9 @@ public class MemberController {
 
 	@GetMapping("/myPage")
 	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
-				
+		int total = likesService.getLikesTotal(vo.getId());
+		model.addAttribute("pageMaker", new PageDTO(new Criteria(1,14), total));
+		model.addAttribute("LikesList",memberService.getLikesList(vo.getId()));
 		model.addAttribute("order",memberService.getOrderList(vo.getId()));
 		model.addAttribute("possible",memberService.getPreList(vo.getId()));
 		model.addAttribute("already",memberService.getAlreadyList(vo.getId()));

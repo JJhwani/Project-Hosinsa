@@ -2,11 +2,11 @@ package com.hosinsa.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
+import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.PreReviewVO;
+import com.hosinsa.domain.ProductVO;
 import com.hosinsa.domain.ReviewVO;
 
 public interface MemberService {
@@ -45,5 +45,8 @@ public interface MemberService {
 	
 	//작성한 리뷰 불러오기
 	public List<ReviewVO> getAlreadyList(String id);
+	
+	//찜 목록 불러오기
+	public List<ProductVO> getLikesList(String id);
 
 }

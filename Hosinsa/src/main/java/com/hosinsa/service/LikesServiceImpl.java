@@ -59,4 +59,9 @@ public class LikesServiceImpl implements LikesService {
 		return mapper.getLikesCheck(id, pronum);
 	}
 
+	@Override
+	public int getLikesTotal(String id) {
+		return mapper.getLikesTotal(id);
+	}
+
 }	

@@ -188,7 +188,26 @@
 <script type="text/javascript" src="../../../resources/js/reviewreply.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-				
+		 var check = {
+	            id : "${member.id}",
+	            pronum : "${product.pronum}"
+	         };
+	      
+	      $.ajax({
+	         type : 'GET',
+	         url : '/likes/check',
+	         data : check,
+	         contentType : "application/json; charset=utf-8",
+	         dataType:"json",
+	         success : function(result) {
+	            if(result==0){
+	               
+	            }else{
+	               $(".likes span").addClass("on").text("♥");
+	            }
+	         }
+	      });
+		      
 		var productForm = $(".productForm");
 		
 		//카트담기
@@ -477,55 +496,55 @@ Kakao.Share.createDefaultButton({
 
 $(document).ready (function() {
 
-	$("#likesBtn").click(function(event) {
+   $("#likesBtn").click(function(event) {
 
-		event.preventDefault();
-	
-		var id = "${member.id}"; //아이디값
-		var pronum = "${product.pronum}"; //상품번호
+      event.preventDefault();
+   
+      var id = "${member.id}"; //아이디값
+      var pronum = "${product.pronum}"; //상품번호
 
-		var form = {
-			id : id,
-			pronum : pronum
-		};
+      var form = {
+         id : id,
+         pronum : pronum
+      };
 
-		if("${member.id}" == "") {
-		 if(confirm("로그인회원만 사용가능합니다.")){
-		location.href="/member/login"; //이동페이지는 컨트롤러로 넘긴다
-		}
-		};
-		if("${member.id}" == id && $(".likes span").hasClass("on")) {
-			$.ajax ({
-				type : 'DELETE',  
-				url : '/likes/delete',
-				dataType : "text",
-				data :  JSON.stringify(form),
-				contentType : "application/json; charset=utf-8",
-				success : function(result) {
-					$(".likes span").removeClass("on").text("♡");
-				}
-			})
-			return false;
-		}
-		
-		if("${member.id}" == id) {
-			$.ajax ({
-				type : 'POST',
-				url : '/likes/new',
-				data : JSON.stringify(form),
-				contentType : "application/json; charset=utf-8",
-				success : function(result) {
-				if(result == "success") 
-						console.log("찜성공!");
-				if(confirm("해당 상품을 찜했습니다. 마이페이지로 이동하시겠습니까?")){
-						location.href="/member/myPage";
-					}else{
-						$(".likes span").addClass("on").text("♥");
-					}	
-				}
-			})
-		}
-	})
+      if("${member.id}" == "") {
+       if(confirm("로그인회원만 사용가능합니다.")){
+      location.href="/member/login"; //이동페이지는 컨트롤러로 넘긴다
+      }
+      };
+      if("${member.id}" == id && $(".likes span").hasClass("on")) {
+         $.ajax ({
+            type : 'DELETE',  
+            url : '/likes/delete',
+            dataType : "text",
+            data :  JSON.stringify(form),
+            contentType : "application/json; charset=utf-8",
+            success : function(result) {
+               $(".likes span").removeClass("on").text("♡");
+            }
+         })
+         return false;
+      }
+      
+      if("${member.id}" == id) {
+         $.ajax ({
+            type : 'POST',
+            url : '/likes/new',
+            data : JSON.stringify(form),
+            contentType : "application/json; charset=utf-8",
+            success : function(result) {
+            if(result == "success") 
+                  console.log("찜성공!");
+            if(confirm("해당 상품을 찜했습니다. 마이페이지로 이동하시겠습니까?")){
+                  location.href="/member/myPage";
+               }else{
+                  $(".likes span").addClass("on").text("♥");
+               }   
+            }
+         })
+      }
+   })
 });
 
 </script>
