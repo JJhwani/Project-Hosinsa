@@ -5,50 +5,97 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../includes/header.jsp"%>
-<div class="contentWrap">
+<div class="orderWrap">
 	<h2>Order / Payment</h2>
-
-
-	<div class="orderInfo" style="border: 1px solid;">
-		<div class="titleArea">
-			<h1>배송지 입력</h1>
-		</div>
-		<form action="/order/" method="post" class="quantity_plus_form">
-		<div class="order_add">
-			<div class="inputArea">
-				<label for="ordername">수령인</label> 
-				<input type="text" name="orderRec"
-					id="orderRec" required="required" value="${member.id}" /><br>
-				<label for="orderPhone">수령인 연락처</label>
-				<input type="text"
-					name="orderPhon" id="orderPhon" required="required"
-					value="${member.phone}" /><br>
-				<label for="zipcode">우편번호</label>
-				<input type="text" id="sample6_postcode" placeholder="우편번호">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<label for="address">주소</label>
-				<input type="text" id="sample6_address" placeholder="주소"><br>
-				<label for="address_detail">상세주소</label>
-				<input type="text" id="sample6_detailAddress" placeholder="상세주소">
+	<div class="shippingInfo">
+		<h3>배송정보</h3>
+		<form class="order_form" action="/order/" method="post" >
+			<div class="order_address">
+				<ul class="address_shipping">
+					<li>배송지</li>
+					<li>
+						<c:forEach var="shipping" items="${shipping}" varStatus="status">
+							<c:choose>
+								<c:when test="${status.index == 0}">
+									<div>
+										<input type=radio class="check" name="shipping" checked="checked">${shipping.shipping}</label>
+										<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
+							 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
+							 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
+							 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
+							 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
+							 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
+							 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
+							 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
+									</div>
+								</c:when>
+								<c:when test="${status.index == 1}">
+									<div>
+										<input type=radio class="check" name="shipping"><label>${shipping.shipping}</label>
+										<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
+							 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
+							 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
+							 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
+							 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
+							 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
+							 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
+							 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
+									</div>
+								</c:when>
+								<c:when test="${status.index == 2}">
+									<div>
+										<input type=radio class="check" name="shipping"><label>${shipping.shipping}</label>
+										<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
+							 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
+							 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
+							 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
+							 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
+							 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
+							 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
+							 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
+									</div>
+								</c:when>
+							</c:choose>								
+					 	</c:forEach>
+					 </li>
+					 <li>
+					 	<c:choose>
+					 		<c:when test="${total == 0}">
+					 			<button type="button" class="address_register">배송지 등록</button>
+					 		</c:when>
+					 		<c:otherwise>
+					 			<button type="button" class="address_modify">배송지 변경</button>
+					 		</c:otherwise>
+					 	</c:choose>
+					</li>
+				</ul>
+				<ul class="address_info1">
+					<li>이름 / 연락처</li>
+					<li><p class="recipient">${address.recipient}</p></li>
+					<li><p class="phone">${address.phone}</p></li>
+					<li><p class="tel">${address.tel}</p></li>
+					<li></li>
+				</ul>
+				<ul class="address_info2">		
+					<li>주소</li>
+					<li><p class="address">(${address.zipcode})&nbsp;${address.address}</p>
+					<li></li>
+				</ul>
+				<div class="inputArea">
+					<button type="submit" class="order_btn">주문</button>
+					<button type="button" class="cancel_btn">취소</button>
+				</div>
+				
 			</div>
-
-			<div class="inputArea">
-				<button type="submit" class="order_btn">주문</button>
-				<button type="button" class="cancel_btn">취소</button>
-			</div>
-		</div>
+		</form>
 	</div>
-	<br> <br>
-	<div class="orderInfo" style="border: 1px solid;">
-		<div class="titleArea">
-			<h1>상품정보</h1>
-		</div>
+	<div class="orderInfo">
+		<h2>상품정보</h2>
 		<table width="100%">
 			<div class="order_">
 				<tr>
-					<th></th>
-					<th>주문 번호</th>
-					<th></th>
+					<th>상품정보</th>
+					<th>수량</th>
 					<th>제품 번호</th>
 					<th>제품 이름</th>
 					<th>아이디</th>
@@ -122,6 +169,6 @@
     }
 </script>
 
-
+<script src="../../../resources/js/order.js"></script>
 <%@ include file="../includes/footer.jsp"%>
 </html>

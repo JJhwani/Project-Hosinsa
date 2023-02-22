@@ -11,13 +11,23 @@ import com.hosinsa.mapper.MemberAddressMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@Log4j
 @Service
 @AllArgsConstructor
+@Log4j
 public class MemberAddressServiceImpl implements MemberAddressService{
 
 	private MemberAddressMapper mapper;
-
+	
+	@Override
+	public List<MemberAddressVO> getListOrder(MemberAddressVO vo) {
+		return mapper.getListOrder(vo);
+	}
+	
+	@Override
+	public MemberAddressVO readBasic(MemberAddressVO vo) {
+		return mapper.readBasic(vo);
+	}
+	
 	@Override
 	public List<MemberAddressVO> getListWithPaging(BoardCriteria cri) {
 		return mapper.getListWithPaging(cri);
@@ -49,8 +59,9 @@ public class MemberAddressServiceImpl implements MemberAddressService{
 	}
 
 	@Override
-	public int getTotalCountAddress(BoardCriteria cri) {
-		return 0;
+	public int getTotalCountAddress(MemberAddressVO vo) {
+		return mapper.getTotalCountAddress(vo);
 	}
+
 
 }

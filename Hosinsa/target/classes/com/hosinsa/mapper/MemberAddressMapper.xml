@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hosinsa.mapper.MemberAddressMapper">
+	<!-- getListOrder -->
+	<select id="getListOrder" resultType="com.hosinsa.domain.MemberAddressVO">
+		<![CDATA[
+			SELECT * FROM HOSINSA_MEMBER_ADDRESS WHERE BASIC = 'O' AND ID = #{id} UNION
+			SELECT ADDRESS_NO, ID, RECIPIENT, SHIPPING, PHONE, TEL, ZIPCODE, ADDRESS, BASIC
+				FROM
+				(SELECT * FROM HOSINSA_MEMBER_ADDRESS ORDER BY ADDRESS_NO DESC)
+			WHERE ROWNUM <= 2 AND ID = #{id}
+		]]>
+	</select>
+	<!-- readBasic -->
+	<select id="readBasic" resultType="com.hosinsa.domain.MemberAddressVO">
+		SELECT * FROM HOSINSA_MEMBER_ADDRESS WHERE BASIC = 'O' AND ID = #{id}
+	</select>
 	<!-- getListWithPaging -->
 	<select id="getListWithPaging" resultType="com.hosinsa.domain.MemberAddressVO">
 		<![CDATA[
@@ -22,7 +36,7 @@
 	<!-- read -->
 	<select id="read" resultType="com.hosinsa.domain.MemberAddressVO">
 		SELECT * FROM HOSINSA_MEMBER_ADDRESS WHERE ADDRESS_NO = #{address_no}
-	</select>	
+	</select>
 	<!-- modifyBasic -->
 	<update id="modifyBasic">
 		UPDATE HOSINSA_MEMBER_ADDRESS SET
@@ -45,5 +59,9 @@
 	<delete id="remove">
 		DELETE FROM HOSINSA_MEMBER_ADDRESS WHERE ADDRESS_NO = #{address_no}
 	</delete>
+	<!-- getTotalCountAddress -->
+	<select id="getTotalCountAddress" resultType="int">
+		SELECT COUNT(*) FROM HOSINSA_MEMBER_ADDRESS WHERE ID = #{id}
+	</select>
 
 </mapper>

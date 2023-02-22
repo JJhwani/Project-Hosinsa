@@ -82,6 +82,7 @@
 	</div>
 	<form action="/order/order_form" method="post" class="orderForm">
 		<input type="hidden" name="valueArr" value="">
+		<input type="hidden" name="id" value="${member.id}">
 	</form>
 </div>
 
@@ -123,7 +124,7 @@
 							if (valueArr.length == 0) {
 								alert("선택된 상품이 없습니다.");
 							} else { 
-								$(".orderForm").find("input").val(valueArr);
+								$(".orderForm").find("input[name=valueArr]").val(valueArr);
 								$(".orderForm").submit();
 								/*$.ajax({
 									url : "/cart/order", // 전송 URL

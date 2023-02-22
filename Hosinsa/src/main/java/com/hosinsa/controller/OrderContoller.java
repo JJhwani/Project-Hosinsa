@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.BoardCriteria;
+import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.service.MemberAddressService;
 import com.hosinsa.service.OrderService;
 
 import lombok.AllArgsConstructor;
@@ -33,13 +37,20 @@ public class OrderContoller {
 	@Autowired
 	private OrderService service;
 	
+	@Autowired
+	MemberAddressService addService;
+	
 	@PostMapping("/order_form")
 	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
-		Model model, @ModelAttribute("member") MemberVO member) {
+			MemberAddressVO address, Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
 		log.info("order________________"); 
 		log.info(valueArr); 
-		
 		model.addAttribute("order",service.getOrder(valueArr));
+
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("total", total);
+		model.addAttribute("shipping", addService.getListOrder(address));
+		model.addAttribute("address", addService.readBasic(address));
 		
 		return "/order/order_form";
 	}
@@ -47,5 +58,17 @@ public class OrderContoller {
 	@GetMapping("/order_form")
 	public void orderPage(Model model) {
 		
+	}
+	
+	@GetMapping("/address/registerForm")
+	public String addressRegisterForm(HttpSession session, MemberAddressVO addres, Model model) {
+		return "/order/addressRegister";
+	}
+	
+	@PostMapping("/address/modifyForm")
+	public String addressModifyForm(HttpSession session, MemberAddressVO addres, Model model) {
+		
+		
+		return "/order/addressModify";
 	}
 }
