@@ -244,6 +244,7 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .reviewArea .reReplyWrap{margin:0 20px 20px;}
 .reviewArea .reviewWrap2{margin-top:10px;border:1px solid lightgray;}
 .reviewArea .reviewWrap2 .content{padding-top:20px}
+.reviewArea .reviewWrap2 .topper i{margin-top:5px}
 .reviewArea .reReply_register{float:right}
 
 #kakaotalk-sharing-btn{width:40px;height:40px;position:absolute;top:60px;right:40px}
@@ -314,7 +315,7 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .info3{clear:both;padding-top:60px}
 .info3 .tabWrap {padding:10px 0}
 .info3 .reviewWrap{margin-top:10px}
-.info3 .reviewWrap .topper{border-bottom:0}
+.myInfo .info3 .reviewWrap .topper{border-bottom:0}
 
 /* 리뷰쓰기 */
 .reviewForm{width:550px}

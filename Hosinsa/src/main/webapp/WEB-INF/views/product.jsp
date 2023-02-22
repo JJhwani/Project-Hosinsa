@@ -261,7 +261,7 @@
 							str += "<p class='reviewTitle'>" + list[i].title + "</p>";
 							str += "<p class='content'>" + list[i].content + "</p>";
 
-							str += "<p class='reReplyWrap'><button class='reReply'> 댓글 "+list[i].reReply +"개</button>";
+							str += "<p class='reReplyWrap'><button class='reReply'> 댓글 "+list[i].rereply +"개</button>";
 							if("${member}"!=""){
 								str+="<button class='reReply_register'>댓글 쓰기</button>";
 							}
