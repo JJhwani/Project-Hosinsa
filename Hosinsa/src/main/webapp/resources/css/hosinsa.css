@@ -1,4 +1,4 @@
-@charset "UTF-8";
+ @charset "UTF-8";
 
 /*CSS reset*/
 html, body, div, span, applet, object, iframe,
@@ -309,6 +309,14 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .info3 .tabWrap {padding:10px 0}
 .info3 .reviewWrap{margin-top:10px}
 .info3 .reviewWrap .topper{border-bottom:0}
+
+/* 리뷰쓰기 */
+.reviewForm{width:550px}
+.reviewForm .proimg{box-sizing:border-box;float:left;width:100px;margin-top:9px;border:1px solid lightgray;}
+.reviewForm .infoTable{width:440px;box-sizing:border-box;padding-left:10px}
+.reviewForm .infoTable td{display:block;width:auto;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.reviewForm form{clear:both}
+.reviewForm input[name=title]{margin-left:20px;width:530px;box-sizing:border-box;padding:5px}
 
 /* 탈퇴하기 */
 .remove header{padding:15px 20px;background:black;color:white;margin-bottom:15px}

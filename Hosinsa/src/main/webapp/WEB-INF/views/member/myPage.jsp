@@ -134,9 +134,13 @@ $(document).ready(function(){
 	})
 		
 	$(".review_delete").on("click",function(){
-		reviewForm.find("input[name=bno]").val($(this).siblings(".bno").text());
-		reviewForm.attr("action","/review/remove");
-		reviewForm.submit();
+		if(confirm("정말로 리뷰를 삭제하시겠습니까?")){
+			reviewForm.find("input[name=bno]").val($(this).siblings(".bno").text());
+			reviewForm.attr("action","/review/remove");
+			reviewForm.submit();
+		}else{
+			return false;
+		}
 	})
 	
 	if("${review}"=="success"){
