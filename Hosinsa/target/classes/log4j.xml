@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.ezen.hosinsa">
+	<logger name="com.hosinsa.controller">
 		<level value="info" />
 	</logger>
 	

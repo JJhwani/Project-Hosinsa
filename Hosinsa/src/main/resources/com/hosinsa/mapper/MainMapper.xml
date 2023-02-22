@@ -297,8 +297,6 @@
 	</select>	
 	<!-- getSearchProduct -->
 	<select id="getSearchProduct" resultType="com.hosinsa.domain.ProductVO" parameterType="com.hosinsa.domain.ProductVO">
-		<!-- SELECT * FROM HOSINSA_PRODUCT WHERE
-    		(LOWER(PRONAME) LIKE '%#{keyword}%' OR LOWER(BRAND) LIKE '%#{keyword}%' OR PRONUM LIKE '%#{keyword}%') -->
 		<![CDATA[
     		SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 			FROM

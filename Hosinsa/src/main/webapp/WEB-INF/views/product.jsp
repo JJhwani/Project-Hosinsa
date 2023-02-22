@@ -262,7 +262,7 @@
 							
 							var time = new Date(list[i].uploadDate);
 							
-							str += "<div class='reviewWrap' data-bno='"+list[i].bno+"'><div class='topper'><img class='proimg' src='../../resources/images/upload.jpg'><span class='bno'>"+list[i].bno+"</span><b>"+list[i].nickname+"</b>";
+							str += "<div class='reviewWrap' data-bno='"+list[i].bno+"'><div class='topper'><img class='proimg' src='"+list[i].profilimg+"'><span class='bno'>"+list[i].bno+"</span><b>"+list[i].nickname+"</b>";
 							if("${member.grade}"=="S"){
 								str+="<button class='review_delete'>삭제</button>"
 							}							
@@ -341,7 +341,7 @@
 					for(var i=0, len=list.length; i<len ; i++){
 						
 						var time = new Date(list[i].replyDate);
-						str += "<div class='reviewWrap2'><div class='topper'><img class='proimg' src='../../resources/images/upload.jpg'><span class='bno'>"+list[i].rno+"</span><b>"+list[i].replyer+"</b>";
+						str += "<div class='reviewWrap2'><div class='topper'><span class='bno'>"+list[i].rno+"</span><b>"+list[i].replyer+"</b>";
 						if(list[i].id == "${member.id}"){
 							str+= "<button class='reReply_delete'>삭제</button>";
 						}
