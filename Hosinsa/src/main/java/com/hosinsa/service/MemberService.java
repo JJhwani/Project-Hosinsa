@@ -47,6 +47,6 @@ public interface MemberService {
 	public List<ReviewVO> getAlreadyList(String id);
 	
 	//찜 목록 불러오기
-	public List<ProductVO> getLikesList(String id);
+	public List<ProductVO> getLikesListWithPaging(String id,int page);
 
 }

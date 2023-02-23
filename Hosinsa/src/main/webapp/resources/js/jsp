@@ -254,41 +254,24 @@ $(document).ready(function(){
 	})
 		
 	//찜목록 페이징 처리
-	$(".pagination li a").on("click",function(e){
-		e.preventDefault();
+	$(".pagination li a").on("click",funtion(event){
+		event.preventDefault();
 		var page = $(this).attr("href");
 		
 		var form = {
-				id : "${member.id}",
-				page : page
+				"id" : ${member.id},
+				"page" : page
 		}
 		
 		$.ajax({
-			type : 'Post',
-            url : '/member/likes',
+			type : 'POST',
+            url : '/likes/'+page,
             data : form,
-            dataType : 'json',
-            success : function(list) {
-            	var str=""
-            	for(i=0;i<list.length;i++){
-            		str+='<div class="list_box">';
-            		str+='<a href="/product/'+list[i].pronum+'">';
-            		str+='<div class="list_img">';
-            		str+='<img src="'+list[i].proimg+'">';
-            		str+='</div>';
-            		str+='<div class="article_info">';
-            		str+='<p class="pbrand">'+list[i].brand+'</p>';
-            		str+='<p class="pname">'+list[i].pname+'</p>';
-            		str+='<p class="price">'+list[i].price+'</p>';
-            		str+='<p class="view"><i class="fa-solid fa-eye"></i> '+list[i].proview+'</p>';
-            		str+='</div></a></div>';
-            	}
-            	$(".productList").html(str);
+            contentType : "application/json; charset=utf-8",
+            success : function(data) {
+            	alert(data);
             }
 		})
-		
-		$(".paginate_button").removeClass("active");
-		$(this).parent().addClass("active");
 	})
 })
 </script>
