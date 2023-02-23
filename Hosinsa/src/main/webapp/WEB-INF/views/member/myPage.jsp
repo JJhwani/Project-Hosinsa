@@ -14,7 +14,20 @@
 		<tr><th>이름</th><td>${member.name }</td></tr>
 		<tr><th>아이디</th><td>${member.id }</td></tr>
 		<tr><th>닉네임</th><td>${member.nickname }</td></tr>
-		<tr><th>성별</th><td>${member.gender }</td></tr>
+		<tr>
+			<th>성별</th>
+			<c:choose>
+				<c:when test="${member.gender eq 'male'}">
+					<td>남자</td>
+				</c:when>
+				<c:when test="${member.gender eq 'female'}">
+					<td>여자</td>
+				</c:when>
+				<c:otherwise>
+					<td>${member.gender}</td>
+				</c:otherwise>
+			</c:choose>
+		</tr>
 		<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/> </td></tr>
 		<tr><th>이메일</th><td>${member.email }</td></tr>
 		<tr><th>연락처</th><td>${member.phone }</td></tr>

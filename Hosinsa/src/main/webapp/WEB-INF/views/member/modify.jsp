@@ -29,7 +29,9 @@
 				</tr>
 				<tr>
 					<th>성별</th>
-					<td><input name="gender" type="text" value="${member.gender }"> </td>
+					<td>
+					<input name="gender" type="text" value="${member.gender}" readonly="readonly">
+					</td>
 				</tr>
 				<tr>
 					<th>생일</th>

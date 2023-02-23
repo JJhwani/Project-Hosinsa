@@ -1,6 +1,9 @@
 package com.hosinsa.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -193,7 +196,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/kakaologin")
-	public String redirectKakao(MemberVO member, @RequestParam String code, Model model) {
+	public String redirectKakao(MemberVO member, @RequestParam String code, Model model) throws Exception {
 		log.info("code : " + code);
 		
 		// 접속 토큰 GET
@@ -204,9 +207,15 @@ public class MemberController {
 		Map<String,Object> result = kakaoService.getUserInfo(kakaoToken);
 		log.info(result.get("nickname"));
 		log.info(result.get("profile_image"));
+		log.info(result.get("email"));
+		log.info(result.get("gender"));
 		
 		member.setName((String)result.get("nickname"));
 		member.setProfilimg((String)result.get("profile_image"));
+		member.setId((String)result.get("email"));
+		member.setEmail((String)result.get("email"));
+		member.setGender((String)result.get("gender"));
+		member.setGrade("C");
 		
 		model.addAttribute("member", member);
 		

@@ -6,6 +6,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!-- 네아로 SDK -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <body>
 	<br>
 	<br>
@@ -32,7 +34,8 @@
 							id="loginBtn"> <br> <br>
 						<button id="JoinBtn" type="button">JOIN MEMBER</button>
 					</div>
-					<div>
+					<br>
+					<div align="center">
 						<a id="kakao-login-btn"	href="/member/kakaologin_page">
 							<img src="../../../resources/images/kakao_login_medium_narrow.png"
 							width="222" alt="카카오 로그인 버튼" />
@@ -59,5 +62,19 @@
 			$("#loginForm").submit();
 		});
 	});
+</script>
+<script type="text/javascript">
+	var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "fdRP3NakqhfzrLjSpibY",
+  			// 본인의 Client ID로 수정, 띄어쓰기는 사용하지 마세요.
+			callbackUrl: "http://localhost:8081/member/naverLogin",
+  			// 본인의 callBack url로 수정하세요.
+			isPopup: true,
+			loginButton: {color: "green", type: 3, height: 60}
+  			// 네이버 로그인버튼 디자인 설정. 한번 바꿔보세요:D
+		}
+	);
+	naverLogin.init();
 </script>
 </html>
