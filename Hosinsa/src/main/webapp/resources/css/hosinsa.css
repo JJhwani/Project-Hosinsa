@@ -1,4 +1,4 @@
-@charset "UTF-8";
+ @charset "UTF-8";
 
 /*CSS reset*/
 html, body, div, span, applet, object, iframe,
@@ -47,6 +47,7 @@ table {
 a{text-decoration:none;}
 
 .hidden{display:none}
+.fix{width:100%;height:100%;overflow:hidden;}
 .alert{color:red}
 .headerWrap{position:relative;background:black;color:white;z-index:5}
 .header{width:1400px;margin:0 auto;overflow:hidden;padding:20px 40px}
@@ -184,9 +185,9 @@ float:left;
 .pagination li a:hover{background:rgb(245,245,245)}
 
 .notice{float:left;margin-bottom:50px;width:calc(40% - 20px);margin-right:20px;}
-.notice .title{margin-bottom:10px}
-.notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px}
-.notice>a,.event>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;}
+.notice .title{margin:5px 0 10px}
+.notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px;color:black}
+.notice form>a,.event form>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;color:black}
 .cs{width:calc(30% - 20px);margin-right:20px;float:left;}
 .cs a{display:block;padding:10px 0;margin:10px 0;width:100%;text-align:center;border:1px solid lightgray;cursor:pointer}
 .cs a:hover{cursor:pointer;background:rgb(245, 245, 245)}
@@ -199,7 +200,7 @@ float:left;
 .recent img{height:100%}
 .recent>a{display:block;width:100px;height:40px;text-align:center;color:white;margin-top:10px;background:black;font-weight:bold;line-height:40px;cursor:pointer}
 
-.contentWrap{overflow:hidden;width:1400px;margin:50px auto;}
+.contentWrap{position:relative;overflow:hidden;width:1400px;margin:50px auto;}
 .contentWrap .productName{float:left;background:black;width:1120px;padding:12px 5px;color:white;}
 .contentWrap .imgWrap{width:500px;min-height:500px;float:left;margin-top:10px;padding:20px 10px 15px;border:1px solid lightgray}
 .contentWrap .imgWrap img{width:500px;cursor:pointer}
@@ -212,30 +213,51 @@ float:left;
 
 .btnWrap{float:right;padding:20px 20px 0 0}
 input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid lightgray;text-align:center;}
-.btnWrap button{border-radius:0;height:27px;vertical-align:top;background-color:white;border:1px solid lightgray;cursor:pointer}
+.btnWrap button{border-radius:0;height:27px;vertical-align:top;background-color:white;border:1px solid lightgray;cursor:pointer;padding:1px 6px}
 .btnWrap button:hover{background:rgb(245,245,245)}
 .btnWrap button.cart_in{background-color:black;color:white}
 .btnWrap.right{clear:both;padding-right:330px}
 .btnWrap .register{background:black;color:white;border:none}
 .btnWrap .register:hover{background:black;}
+.black{background:black!important;border:none;color:white!important}
 
 .tabWrap{overflow:hidden;clear:both;text-align:center;padding:50px 0 20px;}
-.tabWrap .tab{display:block;float:left;border-radius:0;border:1px solid lightgray;box-sizing:border-box;background:white;font-size:24px;letter-spading:-1px;padding:10px 0;margin-right:-1px}
+.tabWrap .tab{display:block;float:left;border-radius:0;border:1px solid lightgray;box-sizing:border-box;background:white;font-size:24px;letter-spacing:-1px;padding:10px 0;margin-right:-1px}
 .tabWrap .tab:hover{cursor:pointer;background:rgb(245,245,245)}
 .tabWrap.tab2 .tab{width:50%;}
 
 .detailView{overflow:hidden;clear:both;text-align:center}
 .reviewArea .reviewWrap{margin-top:20px;border:1px solid lightgray;}
-.reviewArea .reviewWrap button{border-radius:0;background:white;border:1px solid lightgray;cursor:pointer}
-.reviewArea .reviewWrap .topper{border-bottom:1px solid lightgray;padding:10px}
-.reviewArea .reviewWrap .topper *{vertical-align:middle;margin-right:5px}
+.reviewArea .reviewWrap button{border-radius:0;background:white;border:1px solid lightgray;cursor:pointer;padding:5px 10px;cursor:pointer;font-size:12px;color:gray}
+.reviewArea .reviewWrap .topper{position:relative;border-bottom:1px solid lightgray;padding:10px}
+.reviewArea .reviewWrap .topper *{vertical-align:middle}
+.reviewArea .reviewWrap .topper a{margin-left:-5px;color:black;}
+.reviewArea .reviewWrap .topper b{font-weight:bolder;margin-right:5px}
+.reviewArea .reviewWrap .topper b.brand{position:absolute;top:12px;left:72px;color:gray;font-size:12px}
 .reviewArea .reviewWrap .topper i{float:right;margin-top:20px}
-.reviewArea .proimg{width:50px;height:50px;}
+.reviewArea .proimg{width:50px;height:50px;margin-right:5px}
 .reviewArea .reviewTitle{font-weight:bold;font-size:20px;padding:20px}
 .reviewArea .content{padding:0 20px 20px}
 .reviewArea span{font-size:0}
 .reviewArea .no_review{text-align:center;font-size:20px;padding:50px 0;line-height:30px;font-weight:bold;letter-spacing:-2px;}
 .reviewArea #searchForm>i{border:1px solid lightgray}
+.reviewArea .reReplyWrap{margin:0 20px 20px;}
+.reviewArea .reviewWrap2{margin-top:10px;border:1px solid lightgray;}
+.reviewArea .reviewWrap2 .content{padding-top:20px}
+.reviewArea .reviewWrap2 .topper i{margin-top:5px}
+.reviewArea .reReply_register{float:right}
+
+#kakaotalk-sharing-btn{width:40px;height:40px;position:absolute;top:60px;right:40px}
+#kakaotalk-sharing-btn img{width:100%}
+.likes{position:absolute;top:50px;right:80px}
+.likes button{border:none;}
+.likes button span{font-size:30px;font-family:sans-serif;color:red;letter-spacing:-5px}
+
+/* 로그인 폼 */
+#loginForm{width:400px;margin:0 auto}
+#loginForm input, #loginForm button{width:100%;border-radius:0;padding:10px;margin-bottom:10px;font-size:16px;box-sizing:border-box;border:1px solid lightgray}
+#loginForm p.welcome{font-size:20px;margin-bottom:30px;font-weight:bold;text-align:center;letter-spacing:-1px}
+#loginForm #loginBtn,#loginForm #JoinBtn{cursor:pointer}
 
 /*admin - 제품관리 */
 h2 .register{float:right;background:black;color:white;border-radius:0;margin-top:5px;font-size:16px;padding:10px 15px;cursor:pointer;}
@@ -262,4 +284,131 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .productName input[name='proname']{width:calc(100% - 100px)}
 .inputDetail{padding:10px;margin-left:20px}
 
+/* admin - 회원관리 */
+.search_area .searchForm{text-align:right;margin-bottom:10px;margin-top:-20px}
+.search_area .searchForm input{padding:5px;border-radius:0;border:1px solid lightgray}
+.array_center{width:550px;margin:0 auto}
+.table3{padding:10px 0;margin-bottom:30px;border-bottom:1px solid lightgray;border-top:3px solid black}
+.table3 img{width:100px;height:100px}
+.table3 th{width:20%;vertical-align:middle}
+.table3 td{width:80%;padding:10px}
+.table3 input{width:100%;padding:5px;border-radius:0;border:1px solid lightgray}
+.table3 input[type=radio]{width:auto;margin-right:0;vertical-align:top}
+.table3 input[type=button]{margin-top:5px;font-size:12px;cursor:pointer;box-sizing:content-box;}
+.table3 .grade{font-size:14px}
+.member_info{margin-top:10px}
+.table3 .proimg{cursor:pointer}
+
+/* 나의 정보 */
+.myInfo .title{padding:20px 0;}
+.info0 .pagination{margin-bottom:50px}
+.info1{width:50%;float:left;padding-right:50px;box-sizing:border-box;}
+.info1 table{width:100%;margin:0 0 20px}
+.info2{width:50%;max-height:528px;overflow-y:scroll;float:left;padding-right:20px;box-sizing:border-box;}
+.info2 table tr{border-bottom:1px solid lightgray}
+.info2 table th,.info2 table td{padding:10px;text-align:center;vertical-align:middle}
+.info2 table th:nth-child(1),.info2 table td:nth-child(1){width:14%}
+.info2 table th:nth-child(2),.info2 table td:nth-child(2){width:20%}
+.info2 table th:nth-child(3),.info2 table td:nth-child(3){width:35%}
+.info2 table th:nth-child(4),.info2 table td:nth-child(4){width:15%}
+.info2 table th:nth-child(5),.info2 table td:nth-child(5){width:16%}
+.info2 table a{color:black}
+.info3{clear:both;padding-top:60px}
+.info3 .tabWrap {padding:10px 0}
+.info3 .reviewWrap{margin-top:10px}
+
+/* 리뷰쓰기 */
+.reviewForm{width:550px}
+.reviewForm .proimg{box-sizing:border-box;float:left;width:100px;margin-top:9px;border:1px solid lightgray;}
+.reviewForm .infoTable{width:440px;box-sizing:border-box;padding-left:10px}
+.reviewForm .infoTable td{display:block;width:auto;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.reviewForm form{clear:both}
+.reviewForm input[name=title]{margin-left:20px;width:530px;box-sizing:border-box;padding:5px}
+
+/* 탈퇴하기 */
+.remove header{padding:15px 20px;background:black;color:white;margin-bottom:15px}
+.remove input{width:200px;border:1px solid lightgray;padding:5px;margin-top:10px}
+.remove button{margin-top:15px}
+
+/* 회원가입 - 약관동의 */
+.checkbox_group{margin-top:20px}
+.checkbox_group .checkbox{margin-top:10px;letter-spacing:-1px}
+.checkbox_group textarea{margin-top:5px}
+.checkBtn{margin-top:30px}
+.checkBtn input{border:1px solid lightgray;padding:5px 10px;cursor:pointer;font-size:16px}
+
+.align_center{text-align:center}
+
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
+
+/* board event - 이벤트 게시판 */
+.event_area{display:flex;flex-wrap:wrap;justify-content:center}
+.event_area .event_box{width:20%;position:relative;float:left;overflow:hidden;height:290px;text-align: center;margin:10px 3px;padding:20px 0;border:1px solid #ddd}
+.event_area .event_box a{color:black}
+.event_area .event_box p{padding-bottom:10px;letter-spacing:-1px}
+.event_area .event_box .event_img{margin-bottom:5px}
+.event_area .event_box .period{font-weight:bold;letter-spacing:-1px}
+.event_area .event_box .title{overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding:3px 10px;}
+.event_area .event_box .subtext{overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding-bottom:0}
+.event_area .event_box .event_area .event_box{padding:5px 0}
+.event_area .event_box.complete::after{position:absolute;top:0;left:0;content:'';display:block;background:rgba(0,0,0,0.5);width:100%;height:100%}
+.event_img img{width:200px;height:200px;}
+.eventRead{padding:10px 0;border-top:1px solid lightgray;border-bottom:1px solid lightgray;}
+.eventRead h2{font-weight:bold;padding-bottom:10px}
+.eventRead h5{border-bottom:1px solid lightgray;padding-bottom:10px}
+.eventRead h5+.modify{float:right;margin-top:-45px;margin-right:10px}
+.eventRead img{display:block;margin:0 auto}
+.eventRead+.list{margin-top:10px;float:right}
+
+/* 장바구니 */
+.cart table{border-top:1px solid lightgray;margin-top:30px}
+.cart table tr{border-bottom:1px solid lightgray}
+.cart table th,.cart table td{padding:10px;vertical-align:middle;text-align:center;}
+.cart table td a{color:black;}
+.cart table input[type=checkbox]{width:20px;height:20px;vertical-align:middle}
+.cart table img{max-width:100px;max-height:100px;}
+button{border-radius:0;background:white;border:1px solid lightgray;padding:5px 10px;cursor:pointer}
+button.order{float:right;font-size:24px;padding:10px 20px;margin-top:-195px;font-weight:bold}
+button.del_Btn{margin-top:10px}
+.cart_info{list-style: none;padding:10px}
+.cart_info li::before {content: "+ ";}
+.cart_info li{font-size:14px;color:gray;padding:2px}
+
+/* 모달 팝업 */
+.fade{overflow:hidden;position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(0,0,0,0.5)}
+.modal-content{position:absolute;top:50%;left:50%;width:600px;height:200px;margin:-100px 0 0 -300px;background:white;}
+.modal-header{background:black;color:white;padding:20px;}
+.modal-body{padding:30px 20px;}
+.modal-body input{border:1px solid lightgray;font-size:14px;width:100%;padding:5px;box-sizing:border-box}
+.modal-footer{padding:0 20px;text-align:center}
+/* board notice - 공지사항 게시판 */
+.Notice.table4{width:100%;margin:0 0 30px 0;border:1px solid lightgray}
+.Notice.table4 th{padding:10px;border:1px solid lightgray}
+.Notice.table4 th:nth-child(1){width:5%}
+.Notice.table4 th:nth-child(2){width:65%}
+.Notice.table4 th:nth-child(3){width:10%}
+.Notice.table4 th:nth-child(4){width:10%}
+.Notice.table4 th:nth-child(5){width:10%}
+.Notice.table4 td{text-align:center;padding:10px;border:1px solid lightgray}
+.Notice.table4 a{text-decoration:none;color:#333}
+.searchNotice {float:right;width:400px;}
+.searchNotice input{width:350px;height:20px;border:1px solid lightgray;border-radius:0}
+.searchNotice button{height:24px;border:1px solid lightgray;border-radius:0}
+.noticeRead {width:540px; margin:0 auto}
+.noticeRead .infoTable{margin:10px 10px 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray}
+.noticeRead .miniTitle{width:520px;padding:10px 10px 10px 10px;font-size:20px;font-weight:bold;letter-spacing:-1px}
+.noticeRead .noticeBtn{text-align:center}
+.noticeRead .inputDetail{padding:10px;width:518px;margin:0 auto;}
+.noticeModify {width:540px; margin:0 auto}
+.noticeModify .infoTable{margin:10px 10px 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray}
+.noticeModify .miniTitle{width:520px;padding:10px 10px 10px 10px;font-size:20px;font-weight:bold;letter-spacing:-1px}
+.noticeModify .noticeBtn{text-align:center}
+.noticeModify .inputDetail{padding:10px;width:518px;margin:0 auto;}
+.noticeRegister {width:540px; margin:0 auto}
+.noticeRegister .infoTable{margin:10px 10px 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray}
+.noticeRegister .miniTitle{width:520px;padding:10px 10px 10px 10px;font-size:20px;font-weight:bold;letter-spacing:-1px}
+.noticeRegister .noticeBtn{text-align:center}
+.noticeRegister .inputDetail{padding:10px;width:518px;margin:0 auto;}
+.noticeBtn .btn{margin:20px 0 0 0}
+
+#kakao-talk-channel-chat-button{position:fixed;top:800px;right:10px;z-index:4;}

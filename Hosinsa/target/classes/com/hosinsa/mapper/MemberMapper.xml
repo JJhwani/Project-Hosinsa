@@ -33,11 +33,38 @@
 	select * from hosinsa_member where id = #{id} and pw = #{pw}
 </select>
 
+<select id="getOrderList" resultType="com.hosinsa.domain.OrderVO">
+	select * from hosinsa_order where id = #{id} order by order_date desc
+</select>
+
+<select id="getPreList" resultType="com.hosinsa.domain.PreReviewVO">
+	select * from hosinsa_p_review where id = #{id} order by expiredate asc
+</select>
+
+<select id="getAlreadyList" resultType="com.hosinsa.domain.ReviewVO">
+	select * from hosinsa_review where id=#{id} order by bno desc
+</select>
+
+<select id="getLikesListWithPaging" resultType="com.hosinsa.domain.ProductVO" parameterType="Map">
+	<![CDATA[
+		select * from 
+			(select rownum rn, p.* from hosinsa_product p, hosinsa_likes l 
+			where p.pronum=l.pronum and l.id=#{id} and rownum <= 14*#{page})
+		where rn > 14*(#{page}-1)
+	]]>
+</select>
+
 <!-- INSERT 문 -->
 <insert id="insert">
 	insert into hosinsa_member values
 	(#{id}, #{pw}, #{name}, #{gender}, #{birthday}, #{email}, 
 	#{phone}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point})
+</insert>
+
+<!-- Kakao 로그인 -->
+<insert id="kakaoInsert">
+	INSERT INTO HOSINSA_MEMBER (ID, PW, NAME, EMAIL, SNSID) VALUES
+    (#{id}, #{pw}, #{name}, #{email}, #{snsId})
 </insert>
 
 <!-- DELETE 문 -->

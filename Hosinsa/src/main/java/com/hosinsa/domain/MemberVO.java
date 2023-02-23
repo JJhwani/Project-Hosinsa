@@ -42,4 +42,6 @@ public class MemberVO {
 	private String grade;
 	private String introducer;
 	private int point;
+	
+	private String snsId;
 }

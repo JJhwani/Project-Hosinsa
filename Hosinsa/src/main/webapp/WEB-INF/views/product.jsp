@@ -67,15 +67,28 @@
 			<button class="btn modify">제품 수정</button>
 			<button class="btn delete">제품 삭제</button>
 		</c:if>      
-		<input type="number" name="quantity" class="cart_quan" min="1" value="1">
+		<input type="number" class="cart_quan" min="1" value="1">
 		<button type="button" name="cart" class="cart_in">addToCart</button>
 		
 		<button class="btn list" onclick="javascript:history.go(-1);">뒤로</button>
 	</div>	
-	<form class="productForm" action="" method="get">
+	<form class="productForm" action="/cart/cartIn" method="post">
 		<input type="hidden" name="pronum" value="${product.pronum}">
 		<input type="hidden" name="quantity" value="">
+		<input type="hidden" name="id" value="${member.id }">
 	</form>
+
+	<!-- 카카오톡 공유하기 -->
+	<a id="kakaotalk-sharing-btn" href="javascript:;">
+		<img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+		alt="카카오톡 공유 보내기 버튼" />
+	</a>
+	<!-- //카카오톡 공유하기 -->
+	<!-- 찜하기 -->
+	<div class = "likes">
+		<button type="button" id="likesBtn"><span>♡</span> 찜</button>
+	</div>	
+	<!-- //찜하기 -->
 	<div class="tabWrap tab2">
 		<button class="tab tab_info">Info</button>
 		<button class="tab tab_review">Review</button>
@@ -150,8 +163,80 @@
 	<a href="javascript:window.scrollTo({top:0,behavior: 'smooth'})">TOP</a>
 </div>
 
+<!-- Modal -->
+ <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 	<div class="modal-dialog">
+ 	  <div class="modal-content">
+ 		<div class="modal-header">
+ 		  <h4 class="modal-title" id="myModalLabel">댓글 작성</h4>
+ 		</div>
+ 		<div class="modal-body">
+ 		
+ 		  <div class="form-group">
+ 		  <input class="form-control" name="reply" placeholder="비속어를 포함한 내용은 예고 없이 제재될 수 있습니다.">
+ 		  </div>
+ 		</div>
+ 		
+ 		<div class="modal-footer">
+ 			<button id="modalRegBtn" type="button" class="btn black">작성하기</button>
+ 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+ 		</div>	
+ 	  </div>
+ 	</div> 		  
+ </div>
+<!-- Modal 끝 -->
+<script type="text/javascript" src="../../../resources/js/reviewreply.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		 var check = {
+	            id : "${member.id}",
+	            pronum : "${product.pronum}"
+	         };
+	      
+	      $.ajax({
+	         type : 'GET',
+	         url : '/likes/check',
+	         data : check,
+	         contentType : "application/json; charset=utf-8",
+	         dataType:"json",
+	         success : function(result) {
+	            if(result==0){
+	               
+	            }else{
+	               $(".likes span").addClass("on").text("♥");
+	            }
+	         }
+	      });
+		      
+		var productForm = $(".productForm");
+		
+		//카트담기
+		$(".cart_in").on("click",function(){
+			if("${member}"==""){
+				alert("로그인이 필요한 서비스입니다.");
+				self.location="/member/login";
+				return false;
+			}
+			//기존 카트에 같은 상품이 있는지 중복체크
+			productForm.find("input[name='quantity']").val($(".cart_quan").val());
+			productForm.attr({"action":"/cart/checkCart","method":"post"}).submit();			
+		});
+		
+		//체크 후
+		if("${check}"=="success"&&"${duplicate}"=="0"){
+			//중복이 없는 경우
+			productForm.find("input[name='quantity']").val(${quantity});
+			productForm.attr({"action":"/cart/cartIn","method":"post"}).submit();
+		}else if("${check}"=="success"&&"${duplicate}"!="0"){
+			//중복이 존재하는 경우
+			if(confirm("해당 상품이 장바구니에 이미 존재합니다. 더 담으시겠습니까?")){
+				productForm.find("input[name='quantity']").val(${quantity});
+				productForm.attr({"action":"/cart/cartUpdate","method":"post"}).submit();
+			}else{
+				return false;
+			}		
+		}
+		
 		
 		$(".tab_info").on("click",function(){
 			$(".detailView").removeClass("hidden");
@@ -187,13 +272,19 @@
 							
 							var time = new Date(list[i].uploadDate);
 							
-							str += "<div class='reviewWrap'><div class='topper'><img class='proimg' src='../../resources/images/upload.jpg'><span class='bno'>"+list[i].bno+"</span><b>"+list[i].nickname+"</b>";
+							str += "<div class='reviewWrap' data-bno='"+list[i].bno+"'><div class='topper'><img class='proimg' src='"+list[i].profilimg+"'><span class='bno'>"+list[i].bno+"</span><b>"+list[i].nickname+"</b>";
 							if("${member.grade}"=="S"){
 								str+="<button class='review_delete'>삭제</button>"
 							}							
 							str += "<i>"+formatDate(time)+"</i></div>";
 							str += "<p class='reviewTitle'>" + list[i].title + "</p>";
-							str += "<p class='content'>" + list[i].content + "</p></div>";
+							str += "<p class='content'>" + list[i].content + "</p>";
+
+							str += "<p class='reReplyWrap'><button class='reReply'> 댓글 "+list[i].rereply +"개</button>";
+							if("${member}"!=""){
+								str+="<button class='reReply_register'>댓글 쓰기</button>";
+							}
+							str += "</p></div>";
 						}
 					}
 					reviewArea.html(str);
@@ -215,17 +306,17 @@
 		    
 		    return [year, month, day].join('-');
 		    
-	    }
+	    }	
 		
-		var productForm = $(".productForm");
 		
+		//댓글 삭제
 		$(".modify").on("click",function(){
-			productForm.attr("action","/admin/modify").submit();
+			productForm.attr("action","/admin/modify").attr("method","get").submit();
 		});
 		
 		$(".delete").on("click",function(){
 			if(confirm("제품번호 "+${product.pronum}+" : 정말로 삭제하시겠습니까?")){				
-				productForm.attr("action","/admin/delete").submit();
+				productForm.attr("action","/admin/delete").attr("method","get").submit();
 			}else{
 				return false;
 			}			
@@ -245,8 +336,218 @@
 			
 		})
 		
+		//대댓글 표시
+		$(document).on("click",".reReply",function(e){
+			var replyNum = $(this).parent().siblings(".topper").find(".bno").text();
+			var reviewWrap = $(this).parent(".reReplyWrap");
+			var button = $(this);
+			$(this).attr("disabled","disabled");		
+			$.ajax({
+				type:'get',
+				url:'/replies/'+replyNum,
+				dataType:'json',
+				success:function(list){	
+					var str="";
+					for(var i=0, len=list.length; i<len ; i++){
+						
+						var time = new Date(list[i].replyDate);
+						str += "<div class='reviewWrap2'><div class='topper'><span class='bno'>"+list[i].rno+"</span><b>"+list[i].replyer+"</b>";
+						if(list[i].id == "${member.id}"){
+							str+= "<button class='reReply_delete'>삭제</button>";
+						}
+						str += "<i>"+formatDate(time)+"</i></div>";
+						str += "<p class='content'>" + list[i].reply + "</p></div>";
+					}					
+					reviewWrap.append(str);
+					button.html("댓글 "+list.length+"개");
+				}
+			})
+			
+		})//대댓글 표시 끝
+		
+		var modal = $("#myModal");
+		var closeBtn = $("#modalCloseBtn");
+		
+		var replyNum = 0;
+		
+		closeBtn.on("click",function(){
+			modal.find("input").val("");
+			modal.addClass("hidden");
+			$("body").removeClass("fix");
+		})
+		
+		//대댓글 작성
+		$(document).on("click",".reReply_register",function(e){
+			modal.removeClass("hidden");
+			$("body").addClass("fix");
+			
+			replyNum = $(this).parent().siblings(".topper").find(".bno").text();			
+		});		
+		
+		$("#modalRegBtn").on("click",function(){
+			if ($("input[name='reply']").val()==""){
+				alert("댓글 내용을 입력하세요");
+				$("input[name='reply']").focus();
+				return false;
+			}
+			
+			var reviewreply = {
+					reply : $("input[name='reply']").val(),
+					replyer : "${member.nickname}",
+					bno : replyNum,
+					id : "${member.id}"
+			};
+			replyService.add(reviewreply, function(result) {
+				
+				alert("댓글이 등록되었습니다.");
+				
+				var selectDiv = $(".reviewWrap[data-bno="+replyNum+"]");
+				selectDiv.find(".reviewWrap2").remove();
+				
+				selectDiv.find(".reReply").removeAttr("disabled").trigger("click").attr("disabled","disabled");
+				
+				modal.find("input").val("");
+				modal.addClass("hidden");
+				
+			});
+		})
+		
+		//대댓글 삭제
+		$(document).on("click",".reReply_delete",function(e){
+			var rno = $(this).siblings(".bno").text();
+			var selectDiv = $(this).parents(".reReplyWrap")
+			
+			
+			if(confirm("댓글을 삭제하시겠습니까?")){
+				replyService.remove(rno,function(){
+					alert("삭제되었습니다.");
+					selectDiv.find(".reviewWrap2").remove();
+					selectDiv.find(".reReply").removeAttr("disabled").trigger("click").attr("disabled","disabled");
+				});
+			}else{
+				return false;
+			}
+		})
+			
+		if("${cartIn}"=="success"){
+			if(confirm("장바구니에 상품이 담겼습니다. 지금 확인하시겠습니까?")){
+				location.href="/cart/list";
+			}else{
+				return false;
+			}
+		}
 	})
 </script>
 
-<script src="../../../resources/js/main.js"></script>
+
+<!-- 카카오톡 공유하기 -->
+
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
+  integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('7bd2d13525d6c910e9ea9b4979c6439b'); // 사용하려는 앱의 JavaScript 키 입력
+</script>
+
+<script>
+Kakao.Share.createDefaultButton({
+    container: '#kakaotalk-sharing-btn',
+    objectType: 'feed',
+    content: {
+      title: '${product.proname}',
+      description: '',
+      imageUrl:
+    	  'https://www.venturesquare.net/wp-content/uploads/2021/02/%EB%AC%B4%EC%8B%A0%EC%82%AC_%EC%82%AC%EC%A7%84%EC%9E%90%EB%A3%8C-%EB%AC%B4%EC%8B%A0%EC%82%AC-CI-%EB%A1%9C%EA%B3%A0.jpg',
+      link: {
+        // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+        mobileWebUrl: 'http://localhost:8081/product/${product.pronum}',
+        webUrl: 'http://localhost:8081/product/${product.pronum}',
+      },
+    },
+    social: {
+      likeCount: 286, //찜
+      commentCount: 45,
+      sharedCount: 845,
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: 'http://localhost:8081/product/${product.pronum}',
+          webUrl: 'http://localhost:8081/product/${product.pronum}',
+        },
+      },
+      {
+        title: '앱으로 보기',
+        link: {
+          mobileWebUrl: 'http://localhost:8081/product/${product.pronum}',
+          webUrl: 'http://localhost:8081/product/${product.pronum}',
+        },
+      },
+    ],
+  });
+
+</script>
+<!-- 카카오톡 공유하기 끝 -->
+
+
+
+<!-- 상품 찜하기 -->
+<script>
+
+$(document).ready (function() {
+
+   $("#likesBtn").click(function(event) {
+
+      event.preventDefault();
+   
+      var id = "${member.id}"; //아이디값
+      var pronum = "${product.pronum}"; //상품번호
+
+      var form = {
+         id : id,
+         pronum : pronum
+      };
+
+      if("${member.id}" == "") {
+       if(confirm("로그인회원만 사용가능합니다.")){
+      location.href="/member/login"; //이동페이지는 컨트롤러로 넘긴다
+      }
+      };
+      if("${member.id}" == id && $(".likes span").hasClass("on")) {
+         $.ajax ({
+            type : 'DELETE',  
+            url : '/likes/delete',
+            dataType : "text",
+            data :  JSON.stringify(form),
+            contentType : "application/json; charset=utf-8",
+            success : function(result) {
+               $(".likes span").removeClass("on").text("♡");
+            }
+         })
+         return false;
+      }
+      
+      if("${member.id}" == id) {
+         $.ajax ({
+            type : 'POST',
+            url : '/likes/new',
+            data : JSON.stringify(form),
+            contentType : "application/json; charset=utf-8",
+            success : function(result) {
+            if(result == "success") 
+                  console.log("찜성공!");
+            if(confirm("해당 상품을 찜했습니다. 마이페이지로 이동하시겠습니까?")){
+                  location.href="/member/myPage";
+               }else{
+                  $(".likes span").addClass("on").text("♥");
+               }   
+            }
+         })
+      }
+   })
+});
+
+</script>
+<!-- 상품 찜하기 끝-->
+<script src="../../resources/js/main.js"></script>
 <%@ include file="includes/footer.jsp" %>

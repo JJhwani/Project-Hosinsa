@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.BoardEventVO;
-import com.hosinsa.domain.Criteria;
+import com.hosinsa.domain.BoardNoticeVO;
 import com.hosinsa.mapper.BoardMapper;
 
 @Service
@@ -16,7 +17,7 @@ public class BoardServiceImpl implements BoardService{
 	BoardMapper mapper;
 
 	@Override
-	public List<BoardEventVO> getListEvent(Criteria cri) {
+	public List<BoardEventVO> getListEvent(BoardCriteria cri) {
 		return mapper.getListWithPagingEvent(cri);
 	}
 
@@ -26,14 +27,14 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void registerEvent(BoardEventVO vo) {
-		mapper.registerSelectKeyEvent(vo);
+	public boolean registerEvent(BoardEventVO bevo) {
+		return mapper.registerSelectKeyEvent(bevo);
 		
 	}
 
 	@Override
-	public boolean modifyEvent(BoardEventVO vo) {
-		return mapper.modifyEvent(vo) == 1 ? true : false;
+	public boolean modifyEvent(BoardEventVO bevo) {
+		return mapper.modifyEvent(bevo) == 1 ? true : false;
 	}
 
 	@Override
@@ -42,13 +43,70 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int getTotalEvent(Criteria cri) {
-		return mapper.getTotalCountEvent(cri);	}
+	public int getTotalEvent(BoardCriteria cri) {
+		return mapper.getTotalCountEvent(cri);
+	}
+	
+	@Override
+	public List<BoardEventVO> getEventList(BoardEventVO bevo) {
+		return mapper.getEventList(bevo);
+	} 
+	
+	@Override
+	public List<BoardEventVO> getListMainEvent(BoardEventVO bevo) {
+		return mapper.getListMainEvent(bevo);
+	}
 
 	@Override
-	public List<BoardEventVO> getListMainEvent(BoardEventVO vo) {
-		return mapper.getListMainEvent(vo);
-	} 
+	public List<BoardNoticeVO> getListNotice(BoardCriteria cri) {
+		return mapper.getListWithPagingNotice(cri);
+	}
+
+	@Override
+	public BoardNoticeVO readNotice(Long nno) {
+		return mapper.readNotice(nno);
+	}
+
+	@Override
+	public boolean registerNotice(BoardNoticeVO bnvo) {
+		return mapper.registerSelectKeyNotice(bnvo);
+	}
+
+	@Override
+	public boolean modifyNotice(BoardNoticeVO bnvo) {
+		return mapper.modifyNotice(bnvo) == 1 ? true : false;
+	}
+
+	@Override
+	public boolean removeNotice(Long nno) {
+		return mapper.removeNotice(nno) == 1 ? true : false;
+	}
+
+	@Override
+	public int getTotalNotice(BoardCriteria cri) {
+		return mapper.getTotalCountNotice(cri);
+	}
+
+	@Override
+	public List<BoardNoticeVO> getListMainNotice(BoardNoticeVO bnvo) {
+		return mapper.getListMainNotice(bnvo);
+	}
+
+	@Override
+	public int readCountNotice(Long nno) {
+		return mapper.readCountNotice(nno);
+	}
+
+	@Override
+	public int getTotalCountSearch(BoardCriteria cri) {
+		return mapper.getTotalCountSearch(cri);
+	}
+
+	@Override
+	public List<BoardNoticeVO> getSearchNotice(BoardNoticeVO bnvo) {
+		return mapper.getSearchNotice(bnvo);
+	}
+	
 	
 
 

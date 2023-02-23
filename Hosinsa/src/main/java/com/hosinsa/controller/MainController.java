@@ -20,10 +20,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.hosinsa.domain.BoardEventVO;
+import com.hosinsa.domain.BoardNoticeVO;
 import com.hosinsa.domain.Criteria;
+import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.BoardService;
+import com.hosinsa.service.LikesService;
 import com.hosinsa.service.MainService;
 
 import lombok.extern.log4j.Log4j;
@@ -38,20 +41,22 @@ public class MainController {
 	
 	@Autowired
 	BoardService boardService;
-
+	
 	@ModelAttribute("recentView")
 	public List<ProductVO> setEmptyRecentView() {
 	    return new ArrayList<ProductVO>();
 	}
 	
 	@GetMapping("/")
-	public String main(@ModelAttribute("recentView")List<ProductVO> recentView, ProductVO vo, String sort, BoardEventVO bevo, Model model) {
+	public String main(@ModelAttribute("recentView")List<ProductVO> recentView, ProductVO vo, String sort, BoardEventVO bevo, BoardNoticeVO bnvo, Model model) {
 		model.addAttribute("viewList", service.getListProview(vo));
 		model.addAttribute("bestList", service.getListBest());
 		model.addAttribute("newList", service.getListNew());
 		model.addAttribute("category", "인기");
 		model.addAttribute("sort", "best");
+		model.addAttribute("eventList", boardService.getEventList(bevo));
 		model.addAttribute("event", boardService.getListMainEvent(bevo));
+		model.addAttribute("notice", boardService.getListMainNotice(bnvo));
 
 		int total = service.getTotalCountView(vo);
 		model.addAttribute("pageMaker", new PageDTO(vo, total));	
@@ -60,7 +65,7 @@ public class MainController {
 	}
 	
 	@GetMapping(value="/main/sorting")
-	public String mainPage(String sort, String category, ProductVO vo, BoardEventVO bevo, Model model) throws UnsupportedEncodingException {
+	public String mainPage(String sort, String category, ProductVO vo, BoardEventVO bevo, BoardNoticeVO bnvo, Model model) throws UnsupportedEncodingException {
 		int total = 0;
 		if(category.equals("인기")) {
 			model.addAttribute("bestList", service.getListBest());
@@ -85,7 +90,9 @@ public class MainController {
 			
 			model.addAttribute("category", category);
 			model.addAttribute("sort", sort);
+			model.addAttribute("eventList", boardService.getEventList(bevo));
 			model.addAttribute("event", boardService.getListMainEvent(bevo));
+			model.addAttribute("notice", boardService.getListMainNotice(bnvo));
 			model.addAttribute("pageMaker", new PageDTO(vo, total));
 			return "main";
 		}
@@ -101,7 +108,6 @@ public class MainController {
 	
 	@GetMapping(value="/category/sorting")
 	public String categoryPageSorting(String sort, String category, ProductVO vo, Model model) {
-		log.info("================================"+category);
 		int total = 0;
 		model.addAttribute("bestList", service.getListBestCategory(vo));
 		
@@ -157,7 +163,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/product/{pronum}")
-	public String get(@PathVariable int pronum,@ModelAttribute("recentView")List<ProductVO> recentView,  Model model) {		
+	public String get(@PathVariable int pronum,@ModelAttribute("recentView")List<ProductVO> recentView, Model model) {		
 		
 		//조회수 up+1
 		service.updateView(pronum);		
@@ -183,7 +189,8 @@ public class MainController {
 		}
 		//세션에 저장
 		model.addAttribute("recentView",recentView);	
-		
+				
 		return "product";		
 	}
+	
 }

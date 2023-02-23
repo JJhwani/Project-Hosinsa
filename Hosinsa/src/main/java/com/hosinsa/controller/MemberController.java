@@ -1,26 +1,40 @@
 package com.hosinsa.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
+import com.hosinsa.service.KakaoService;
+import com.hosinsa.service.LikesService;
 import com.hosinsa.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -34,6 +48,8 @@ import lombok.extern.log4j.Log4j;
 public class MemberController {
 
 	private MemberService memberService;
+	private KakaoService kakaoService;
+	private LikesService likesService;
 
 	@GetMapping("/agree")
 	public void agreeGET() {
@@ -60,8 +76,9 @@ public class MemberController {
 		} else {
 			model.addAttribute("member", vo);
 			return "redirect:/";
-		}
-
+		} 
+		
+		
 	}
 
 	// 로그아웃
@@ -131,7 +148,13 @@ public class MemberController {
 	}
 
 	@GetMapping("/myPage")
-	public void myPage(@ModelAttribute("member") MemberVO vo, Model model) {
+	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
+		int total = likesService.getLikesTotal(vo.getId());
+		model.addAttribute("pageMaker", new PageDTO(new Criteria(1,14), total));
+		model.addAttribute("LikesList",memberService.getLikesListWithPaging(vo.getId(),1));
+		model.addAttribute("order",memberService.getOrderList(vo.getId()));
+		model.addAttribute("possible",memberService.getPreList(vo.getId()));
+		model.addAttribute("already",memberService.getAlreadyList(vo.getId()));
 		model.addAttribute("member", vo);
 	}
 
@@ -142,7 +165,20 @@ public class MemberController {
 	}
 
 	@PostMapping("/modify")
-	public String modifyPOST(MemberVO member, RedirectAttributes rttr, Model model) {
+	public String modifyPOST(MemberVO member,  MultipartFile uploadFile, RedirectAttributes rttr, Model model) {
+		
+		File saveFile = new File(
+				"C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\profile",
+				member.getId()+".jpg");
+
+		try {
+			uploadFile.transferTo(saveFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		member.setProfilimg("../../resources/images/profile/"+member.getId()+".jpg");
+		
 		log.info("modify : " + member);
 		model.addAttribute("member", member);
 
@@ -168,8 +204,54 @@ public class MemberController {
 			return "redirect:/";
 		} else {
 			model.addAttribute("msg", result);
-			log.info("나여기있음ㅋㅋ");
-			return "/member/remove";
+			return "/member/myPage";
 		}
+	}
+	
+	// 카카오 로그인
+	@GetMapping("/kakaologin_page")
+	public String kakaoLogin_page(@RequestParam(value = "code", required = false) String code) {
+		StringBuffer loginUrl = new StringBuffer();
+        loginUrl.append("https://kauth.kakao.com/oauth/authorize?client_id=");
+        loginUrl.append("a8bea3904686bd773a43da6230b82b92"); 
+        loginUrl.append("&redirect_uri=");
+        loginUrl.append("http://localhost:8081/member/kakaologin"); 
+        loginUrl.append("&response_type=code");
+        
+        return "redirect:"+loginUrl.toString();
+	}
+	
+	@GetMapping("/kakaologin")
+	public String redirectKakao(MemberVO member, @RequestParam String code, Model model) throws Exception {
+		log.info("code : " + code);
+		
+		// 접속 토큰 GET
+		String kakaoToken = kakaoService.getAccessToken(code);
+		log.info("안나오는거야? " + kakaoToken);
+		
+		// 접속자 정보 GET
+		Map<String,Object> result = kakaoService.getUserInfo(kakaoToken);
+		log.info(result.get("nickname"));
+		log.info(result.get("profile_image"));
+		log.info(result.get("email"));
+		log.info(result.get("gender"));
+		
+		member.setId((String)result.get("email"));
+		member.setName((String)result.get("nickname"));
+		member.setNickname((String)result.get("nickname"));
+		member.setProfilimg((String)result.get("profile_image"));
+		member.setEmail((String)result.get("email"));
+		member.setGender((String)result.get("gender"));
+		member.setGrade("C");
+		
+		model.addAttribute("member", member);
+		
+		return "redirect:/";
+	}
+	
+	@ResponseBody
+	@PostMapping("/likes")
+	public List<ProductVO> getLikesWithPaging(String id,Integer page) {
+		return memberService.getLikesListWithPaging(id,page);
 	}
 }
