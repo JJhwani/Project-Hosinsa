@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.hosinsa.domain.PreReviewVO;
 import com.hosinsa.domain.ReviewCriteria;
 import com.hosinsa.domain.ReviewReplyVO;
 import com.hosinsa.domain.ReviewVO;
@@ -24,6 +25,7 @@ public interface ReviewMapper {
 			public int getTotalCount(ReviewCriteria cri);
 			public int getCountByBno(Long bno);
 			public void updateReplyCount(@Param("bno") Long bno,@Param("amount") Integer amount);
-			
+			public void deletePre(PreReviewVO vo);
+			public void updateReviewCount(@Param("pronum") Integer pronum,@Param("amount") Integer amount);
 
 }

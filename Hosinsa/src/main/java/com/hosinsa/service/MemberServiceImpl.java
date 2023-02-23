@@ -18,6 +18,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
+import com.hosinsa.domain.PageDTO;
+import com.hosinsa.domain.PreReviewVO;
+import com.hosinsa.domain.ProductVO;
+import com.hosinsa.domain.ReviewVO;
 import com.hosinsa.mapper.MemberMapper;
 
 import lombok.AllArgsConstructor;
@@ -80,5 +85,25 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int introCheck(String memberIntroducer) {
 		return memberMapper.introCheck(memberIntroducer);
+	}
+
+	@Override
+	public List<OrderVO> getOrderList(String id) {
+		return memberMapper.getOrderList(id);
+	}
+
+	@Override
+	public List<PreReviewVO> getPreList(String id) {
+		return memberMapper.getPreList(id);
+	}
+
+	@Override
+	public List<ReviewVO> getAlreadyList(String id) {
+		return memberMapper.getAlreadyList(id);
+	}
+
+	@Override
+	public List<ProductVO> getLikesListWithPaging(String id,int page) {
+		return memberMapper.getLikesListWithPaging(id,page);
 	}
 }

@@ -5,15 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../includes/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<div class="contentWrap">
 	<h2>Order / Payment</h2>
-	<%-- <div class="orderInfo"  style="border: 1px solid;">
+	
+	
+	<div class="orderInfo"  style="border: 1px solid;">
 		<div class="titleArea">
 			<h1>배송지 입력</h1>
 		</div>
@@ -25,7 +21,7 @@
 
 			<div class="inputArea">
 				<label for="orderPhon">수령인 연락처</label> <input type="text"
-					name="orderPhon" id="orderPhon" required="required" value=""/>
+					name="orderPhon" id="orderPhon" required="required" value="${member.phone}"/>
 			</div>
 
 			<div class="inputArea">
@@ -55,10 +51,9 @@
 			<h1>상품정보</h1>
 		</div>
 		<table width="100%">
-					<thead>
+					<div class="order_">
 						<tr>
-							<th>선택 <br>
-							 <input type="checkbox" name="Chk_SelectAll"></th>
+							<th></th>
 							<th>주문 번호</th>
 							<th></th>
 							<th>제품 번호</th>
@@ -66,25 +61,25 @@
 							<th>아이디</th>
 							<th>가격</th>
 						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${order}" var="cart">
+					</div>
+					<div>
+						<c:forEach items="${order}" var="order">
 							<tr class="odd gradeX">
-								<td><input type="checkbox" name="Chk_List" id="Chk_List"></td>
-								<td>${cart.cartnum}</td>
-								<td>${cart.proimg}</td>
-								<td>${cart.pronum}</td>
-								<td><a class="move" href='${cart.pronum}'>
-										${cart.proname} </a></td>
-								<td>${cart.id}</td>
-								<td>${cart.price}</td>
+								<td></td>
+								<td>${order.cartnum}</td>
+								<td>${order.proimg}</td>
+								<td>${order.pronum}</td>
+								<td><a class="move" href='${order.pronum}'>
+										${order.proname} </a></td>
+								<td>${order.id}</td>
+								<td>${order.price}</td>
 							</tr>
 						</c:forEach>
-					</tbody>
+					</div>
 				</table>
-	</div> --%>
+	</div>
 
 
-</body>
+</div>
 <%@ include file="../includes/footer.jsp"%>
 </html>

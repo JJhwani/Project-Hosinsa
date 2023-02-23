@@ -1,4 +1,4 @@
-@charset "UTF-8";
+ @charset "UTF-8";
 
 /*CSS reset*/
 html, body, div, span, applet, object, iframe,
@@ -200,7 +200,7 @@ float:left;
 .recent img{height:100%}
 .recent>a{display:block;width:100px;height:40px;text-align:center;color:white;margin-top:10px;background:black;font-weight:bold;line-height:40px;cursor:pointer}
 
-.contentWrap{overflow:hidden;width:1400px;margin:50px auto;}
+.contentWrap{position:relative;overflow:hidden;width:1400px;margin:50px auto;}
 .contentWrap .productName{float:left;background:black;width:1120px;padding:12px 5px;color:white;}
 .contentWrap .imgWrap{width:500px;min-height:500px;float:left;margin-top:10px;padding:20px 10px 15px;border:1px solid lightgray}
 .contentWrap .imgWrap img{width:500px;cursor:pointer}
@@ -244,7 +244,14 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .reviewArea .reReplyWrap{margin:0 20px 20px;}
 .reviewArea .reviewWrap2{margin-top:10px;border:1px solid lightgray;}
 .reviewArea .reviewWrap2 .content{padding-top:20px}
+.reviewArea .reviewWrap2 .topper i{margin-top:5px}
 .reviewArea .reReply_register{float:right}
+
+#kakaotalk-sharing-btn{width:40px;height:40px;position:absolute;top:60px;right:40px}
+#kakaotalk-sharing-btn img{width:100%}
+.likes{position:absolute;top:50px;right:80px}
+.likes button{border:none;}
+.likes button span{font-size:30px;font-family:sans-serif;color:red;letter-spacing:-5px}
 
 /* 로그인 폼 */
 #loginForm{width:400px;margin:0 auto}
@@ -282,13 +289,41 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .search_area .searchForm input{padding:5px;border-radius:0;border:1px solid lightgray}
 .array_center{width:550px;margin:0 auto}
 .table3{padding:10px 0;margin-bottom:30px;border-bottom:1px solid lightgray;border-top:3px solid black}
-.table3 th{width:20%}
+.table3 img{width:100px;height:100px}
+.table3 th{width:20%;vertical-align:middle}
 .table3 td{width:80%;padding:10px}
 .table3 input{width:100%;padding:5px;border-radius:0;border:1px solid lightgray}
 .table3 input[type=radio]{width:auto;margin-right:0;vertical-align:top}
 .table3 input[type=button]{margin-top:5px;font-size:12px;cursor:pointer;box-sizing:content-box;}
 .table3 .grade{font-size:14px}
 .member_info{margin-top:10px}
+.table3 .proimg{cursor:pointer}
+
+/* 나의 정보 */
+.myInfo .title{padding:20px 0;}
+.info0 .pagination{margin-bottom:50px}
+.info1{width:50%;float:left;padding-right:50px;box-sizing:border-box;}
+.info1 table{width:100%;margin:0 0 20px}
+.info2{width:50%;max-height:528px;overflow-y:scroll;float:left;padding-right:20px;box-sizing:border-box;}
+.info2 table tr{border-bottom:1px solid lightgray}
+.info2 table th,.info2 table td{padding:10px;text-align:center;vertical-align:middle}
+.info2 table th:nth-child(1),.info2 table td:nth-child(1){width:14%}
+.info2 table th:nth-child(2),.info2 table td:nth-child(2){width:20%}
+.info2 table th:nth-child(3),.info2 table td:nth-child(3){width:35%}
+.info2 table th:nth-child(4),.info2 table td:nth-child(4){width:15%}
+.info2 table th:nth-child(5),.info2 table td:nth-child(5){width:16%}
+.info2 table a{color:black}
+.info3{clear:both;padding-top:60px}
+.info3 .tabWrap {padding:10px 0}
+.info3 .reviewWrap{margin-top:10px}
+
+/* 리뷰쓰기 */
+.reviewForm{width:550px}
+.reviewForm .proimg{box-sizing:border-box;float:left;width:100px;margin-top:9px;border:1px solid lightgray;}
+.reviewForm .infoTable{width:440px;box-sizing:border-box;padding-left:10px}
+.reviewForm .infoTable td{display:block;width:auto;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.reviewForm form{clear:both}
+.reviewForm input[name=title]{margin-left:20px;width:530px;box-sizing:border-box;padding:5px}
 
 /* 탈퇴하기 */
 .remove header{padding:15px 20px;background:black;color:white;margin-bottom:15px}
@@ -347,6 +382,18 @@ button.del_Btn{margin-top:10px}
 .modal-body input{border:1px solid lightgray;font-size:14px;width:100%;padding:5px;box-sizing:border-box}
 .modal-footer{padding:0 20px;text-align:center}
 /* board notice - 공지사항 게시판 */
+.Notice.table4{width:100%;margin:0 0 30px 0;border:1px solid lightgray}
+.Notice.table4 th{padding:10px;border:1px solid lightgray}
+.Notice.table4 th:nth-child(1){width:5%}
+.Notice.table4 th:nth-child(2){width:65%}
+.Notice.table4 th:nth-child(3){width:10%}
+.Notice.table4 th:nth-child(4){width:10%}
+.Notice.table4 th:nth-child(5){width:10%}
+.Notice.table4 td{text-align:center;padding:10px;border:1px solid lightgray}
+.Notice.table4 a{text-decoration:none;color:#333}
+.searchNotice {float:right;width:400px;}
+.searchNotice input{width:350px;height:20px;border:1px solid lightgray;border-radius:0}
+.searchNotice button{height:24px;border:1px solid lightgray;border-radius:0}
 .noticeRead {width:540px; margin:0 auto}
 .noticeRead .infoTable{margin:10px 10px 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray}
 .noticeRead .miniTitle{width:520px;padding:10px 10px 10px 10px;font-size:20px;font-weight:bold;letter-spacing:-1px}
@@ -363,3 +410,5 @@ button.del_Btn{margin-top:10px}
 .noticeRegister .noticeBtn{text-align:center}
 .noticeRegister .inputDetail{padding:10px;width:518px;margin:0 auto;}
 .noticeBtn .btn{margin:20px 0 0 0}
+
+#kakao-talk-channel-chat-button{position:fixed;top:800px;right:10px;z-index:4;}

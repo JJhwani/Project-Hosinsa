@@ -12,21 +12,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.KakaoService;
 import com.hosinsa.service.MemberService;
@@ -141,7 +146,13 @@ public class MemberController {
 	}
 
 	@GetMapping("/myPage")
-	public void myPage(@ModelAttribute("member") MemberVO vo, Model model) {
+	public void myPage(@ModelAttribute("member")MemberVO vo, Model model) {
+		int total = likesService.getLikesTotal(vo.getId());
+		model.addAttribute("pageMaker", new PageDTO(new Criteria(1,14), total));
+		model.addAttribute("LikesList",memberService.getLikesListWithPaging(vo.getId(),1));
+		model.addAttribute("order",memberService.getOrderList(vo.getId()));
+		model.addAttribute("possible",memberService.getPreList(vo.getId()));
+		model.addAttribute("already",memberService.getAlreadyList(vo.getId()));
 		model.addAttribute("member", vo);
 	}
 
@@ -152,7 +163,20 @@ public class MemberController {
 	}
 
 	@PostMapping("/modify")
-	public String modifyPOST(MemberVO member, RedirectAttributes rttr, Model model) {
+	public String modifyPOST(MemberVO member,  MultipartFile uploadFile, RedirectAttributes rttr, Model model) {
+		
+		File saveFile = new File(
+				"C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\profile",
+				member.getId()+".jpg");
+
+		try {
+			uploadFile.transferTo(saveFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		member.setProfilimg("../../resources/images/profile/"+member.getId()+".jpg");
+		
 		log.info("modify : " + member);
 		model.addAttribute("member", member);
 
@@ -220,5 +244,11 @@ public class MemberController {
 		model.addAttribute("member", member);
 		
 		return "redirect:/";
+	}
+	
+	@ResponseBody
+	@PostMapping("/likes")
+	public List<ProductVO> getLikesWithPaging(String id,Integer page) {
+		return memberService.getLikesListWithPaging(id,page);
 	}
 }
