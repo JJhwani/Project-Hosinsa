@@ -2,8 +2,9 @@ $(document).ready(function(){
 	
 	var paging = $(".paging.board");
 	var order_form = $(".order_form");
-	var address_shipping = $(".address_shipping")
-
+	var address_shipping = $(".address_shipping");
+	var popupForm = $(".popupForm");
+	var address_searchForm = $(".address_searchForm");
 
 	//페이징처리
 	$(".board_paginate_button a").on("click", function(e) {
@@ -46,33 +47,64 @@ $(document).ready(function(){
 	// 오더 페이지에서 배송지 등록 버튼 클릭시
 	$(".address_shipping .address_register").on("click", function(e) {
 		e.preventDefault();
-		order_form.attr("action", "/order/address/registerForm");
-		order_form.attr("method", "get");
-		order_form.submit();
+		//order_form.attr("action", "/order/address/registerForm");
+		//order_form.attr("method", "get");
+		//order_form.submit();
+
+		registerPopup();
+
 	});
 
 	// 오더 페이지에서 배송지 변경 버튼 클릭시
 	$(".address_shipping .address_modify").on("click", function(e) {
 		e.preventDefault();
-		order_form.attr("action", "/order/address/modify");
-		order_form.attr("method", "get");
-		order_form.submit();
+		//order_form.attr("action", "/order/address/modify");
+		//order_form.attr("method", "get");
+		//order_form.submit();
 	});
 	
-	function addressPopup(){
-		// 주소검색을 수행할 팝업 페이지를 호출합니다.
-		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-		var pop = window.open("order/addressAPI.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-		
-		// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-		//var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes");
-	 }
-	 
-	 function addressCallBack(roadFullAddr,zipNo){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		document.address_registerForm.zipcode.value = zipNo;
-		document.address_registerForm.address.value = roadFullAddr;
-	 }
 
+	function registerPopup(){
+		var popOption = "width=600px, height=650px"
+		window.open("/order/address/registerForm","register", popOption);
+		
+		popupForm.action="/order/address/registerForm";
+		popupForm.target="pop";
+		popupForm.submit();
+	}
+
+	$(".registerTable .btn.search").on("click", function(e) {
+		//var popOption = "width=570px, height=420px left=600px, scrollbars=yes, resizable=yes"
+		//window.open("/order/address/searchForm","juso", popOption);
+		
+		//address_searchForm.action="/order/address/searchForm";
+		//address_searchForm.target="_blank";
+		//address_searchForm.submit();
+
+
+	});
+
+	$(".address_registerForm .btn.register").on("click", function(e) {
+		e.preventDefault();
+		var tel = address_registerForm.find("input[name='phone']").val();
+		var address = address_registerForm.find("input[name='address1']").val()+
+					address_registerForm.find("input[name='address2']").val();
+
+		address_registerForm.find("input[name='address']").val(address);
+
+		if($("input[name='basicCheck']:checkbox").is(":checked")){
+			address_registerForm.find("input[name='basic']").val("O");
+		}
+		else {
+			address_registerForm.find("input[name='basic']").val("X");
+		}
+
+		if($("input[name='telCheck']:checkbox").is(":checked")){
+			$("input[name='tel']").val(tel);
+		}
+
+
+	});
+	
 
 });

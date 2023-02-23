@@ -9,7 +9,7 @@
 	<h2>Order / Payment</h2>
 	<div class="shippingInfo">
 		<h3>배송정보</h3>
-		<form class="order_form" action="/order/" method="post" >
+		<form class="order_form" action="/order" method="post" >
 			<div class="order_address">
 				<ul class="address_shipping">
 					<li>배송지</li>
@@ -18,7 +18,7 @@
 							<c:choose>
 								<c:when test="${status.index == 0}">
 									<div>
-										<input type=radio class="check" name="shipping" checked="checked">${shipping.shipping}</label>
+										<label><input type=radio class="check" name="shipping" checked="checked">${shipping.shipping}</label>
 										<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
 							 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
 							 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
@@ -29,22 +29,9 @@
 							 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
 									</div>
 								</c:when>
-								<c:when test="${status.index == 1}">
+								<c:when test="${status.index != 0}">
 									<div>
-										<input type=radio class="check" name="shipping"><label>${shipping.shipping}</label>
-										<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
-							 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
-							 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
-							 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
-							 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
-							 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
-							 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
-							 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
-									</div>
-								</c:when>
-								<c:when test="${status.index == 2}">
-									<div>
-										<input type=radio class="check" name="shipping"><label>${shipping.shipping}</label>
+										<label><input type=radio class="check" name="shipping">${shipping.shipping}</label>
 										<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
 							 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
 							 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
@@ -87,6 +74,8 @@
 				</div>
 				
 			</div>
+		</form>
+		<form class="popupForm" action="/order/order_form" method="post" onsubmit="return false;">
 		</form>
 	</div>
 	<div class="orderInfo">

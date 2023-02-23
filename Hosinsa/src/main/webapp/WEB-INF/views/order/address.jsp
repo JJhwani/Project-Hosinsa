@@ -6,52 +6,40 @@
 <link rel="stylesheet" href="../../../resources/css/hosinsa.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 <div class="addressWrap">
-	<h2>신규 배송지</h2>
-	<form class="address_registerForm" action="/order/address/register" method="post" >
-		<table class="registerTable">
-			<tr>
-				<th> 이름 </th>
-				<td><input type="text" name="recipient" value="" placeholder="수령인"></td>
-			</tr>
-			<tr>
-				<th> 배송지명(선택) </th>
-				<td><input type="text" name="shipping" value="" placeholder="배송지명"></td>
-			</tr>
-			<tr>
-				<th> 휴대전화 </th>
-				<td><input type="text" name="phone" value=""></td>
-			</tr>
-			<tr>
-				<th> 전화번호 </th>
-				<td><input type="text" name="tel" value=""></td>
-				<td><label class="telLabel"><input type="checkbox" name="telCheck">없음</label></td>
-			</tr>
-			<tr>
-				<th> 배송지주소 </th>
-				<td><input type="text" id="zipcode" name="zipcode" value="" readonly></td>
-				<td><button type="button" class="btn search">주소검색</button></td>
-			</tr>
-			<tr>
-				<th></th>
-				<td><input type="text" id="address1" name="address1" value="" readonly></td>
-			</tr>
-			<tr>
-				<th></th>
-				<td><input type="text" id="address2" name="address2" value=""></td>
-			</tr>
-			<tr>
-				<th></th>
-				<td><label class="basicLabel"><input type="checkbox" name="basicCheck">기본 배송지 설정</label></td>
-			</tr>
-		</table>
-		<input type="hidden" name="address" value="">
-		<input type="hidden" name="basic" value="">
-		<div class="registerBtn">
-			<button type="reset" class="btn cancle">취소</button>
-			<button type="button" class="btn register">등록</button>
-		</div>	
+	<h2>배송지 변경</h2>
+	<form class="address_Form" action="/order/address" method="post" >
+		<c:forEach var="shipping" items="${shipping}" varStatus="status">
+			<c:choose>
+				<c:when test="${status.index == 0}">
+					<div>
+						<input type=radio class="check" name="shipping" checked="checked">${shipping.shipping}</label>
+						<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
+			 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
+			 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
+			 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
+			 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
+			 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
+			 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
+			 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
+					</div>
+				</c:when>
+				<c:when test="${status.index != 0}">
+					<div>
+						<input type=radio class="check" name="shipping"><label>${shipping.shipping}</label>
+						<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
+			 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
+			 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
+			 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
+			 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
+			 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
+			 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
+			 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
+					</div>
+				</c:when>
+			</c:choose>								
+	 	</c:forEach>
 	</form>
-	<form class="address_searchForm" action="/order/address/register" method="post" onsubmit="return false;">
+	<form class="address_modifyForm" action="/order/address/modify" method="post" onsubmit="return false;">
 	</form>
 </div>
 

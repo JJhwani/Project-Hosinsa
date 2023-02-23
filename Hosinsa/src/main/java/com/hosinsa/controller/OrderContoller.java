@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.BoardCriteria;
+import com.hosinsa.domain.BoardPageDTO;
 import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.service.MemberAddressService;
@@ -60,13 +62,40 @@ public class OrderContoller {
 		
 	}
 	
-	@GetMapping("/address/registerForm")
-	public String addressRegisterForm(HttpSession session, MemberAddressVO addres, Model model) {
+	@PostMapping("/address")
+	public String address(HttpSession session, MemberAddressVO address, BoardCriteria cri,Model model) {
+		if(addService.registerSelectKey(address)) {
+			model.addAttribute("register","success");
+		}		
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("shipping", addService.getListOrder(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
+		
+		return "/order/address";
+	}
+	
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/registerForm")
+	public String addressRegisterForm(HttpSession session, MemberAddressVO address, Model model) {
 		return "/order/addressRegister";
 	}
 	
+	@PostMapping("/address/register")
+	public String addressRegister(HttpSession session, MemberAddressVO address, BoardCriteria cri, Model model) {
+		if(addService.registerSelectKey(address)) {
+			model.addAttribute("register","success");
+		}		
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("shipping", addService.getListOrder(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
+		
+		return "/order/address";
+	}
+	
+	
 	@PostMapping("/address/modifyForm")
-	public String addressModifyForm(HttpSession session, MemberAddressVO addres, Model model) {
+	public String addressModifyForm(HttpSession session, MemberAddressVO address, Model model) {
 		
 		
 		return "/order/addressModify";
