@@ -12,7 +12,7 @@
 			<c:choose>
 				<c:when test="${status.index == 0}">
 					<div>
-						<input type=radio class="check" name="shipping" checked="checked">${shipping.shipping}</label>
+						<label><input type=radio class="check" name="shipping" checked="checked">${shipping.shipping}</label>
 						<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
 			 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
 			 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
@@ -25,7 +25,7 @@
 				</c:when>
 				<c:when test="${status.index != 0}">
 					<div>
-						<input type=radio class="check" name="shipping"><label>${shipping.shipping}</label>
+						<label><input type=radio class="check" name="shipping">${shipping.shipping}</label>
 						<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
 			 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
 			 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">

@@ -3,8 +3,6 @@ package com.hosinsa.controller;
 import java.io.File;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +22,10 @@ import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.AdminService;
 import com.hosinsa.service.MainService;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
+@Log4j
 @RequestMapping("/admin/*")
 public class AdminController {
 
@@ -209,6 +210,12 @@ public class AdminController {
 	@GetMapping("/register/checkPronum")
 	public int checkPronum(@RequestParam("pronum") int pronum) {
 		return adminService.checkPronum(pronum);
+	}
+	
+	@GetMapping("/sales")
+	public void adminSalesList(Model model) {
+		log.info(adminService.getOrderList());
+		model.addAttribute("orderList",adminService.getOrderList());
 	}
 
 }

@@ -2,6 +2,8 @@ package com.hosinsa.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
 import com.hosinsa.domain.PreReviewVO;
@@ -45,6 +47,6 @@ public interface MemberMapper {
 	public List<ReviewVO> getAlreadyList(String id);
 	
 	//찜한 목록 불러오기
-	public List<ProductVO> getLikesList(String id);
+	public List<ProductVO> getLikesListWithPaging(@Param("id") String id,@Param("page") int page);
 
 }

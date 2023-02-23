@@ -301,6 +301,7 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 
 /* 나의 정보 */
 .myInfo .title{padding:20px 0;}
+.info0 .pagination{margin-bottom:50px}
 .info1{width:50%;float:left;padding-right:50px;box-sizing:border-box;}
 .info1 table{width:100%;margin:0 0 20px}
 .info2{width:50%;max-height:528px;overflow-y:scroll;float:left;padding-right:20px;box-sizing:border-box;}
@@ -315,7 +316,6 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .info3{clear:both;padding-top:60px}
 .info3 .tabWrap {padding:10px 0}
 .info3 .reviewWrap{margin-top:10px}
-.myInfo .info3 .reviewWrap .topper{border-bottom:0}
 
 /* 리뷰쓰기 */
 .reviewForm{width:550px}

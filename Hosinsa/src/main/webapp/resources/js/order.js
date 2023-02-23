@@ -41,7 +41,7 @@ $(document).ready(function(){
 		$(".address_info2 li").find(".address").text("("+zipcode+")"+address);
 
 	}
-	$(".address_shipping .check").on("change", check);
+	$(".address_shipping label").on("click", check);
 
 
 	// 오더 페이지에서 배송지 등록 버튼 클릭시

@@ -56,6 +56,7 @@
 			<c:if test="${member.grade eq 'S'}">
 				<li><a href="/admin/product">상품관리</a></li>
 				<li><a href="/admin/member">회원관리</a></li>
+				<li><a href="/admin/sales">판매관리</a></li>
 			</c:if>
 			<c:if test="${not empty member}">
 				<li><a href="/member/logout">로그아웃</a></li>

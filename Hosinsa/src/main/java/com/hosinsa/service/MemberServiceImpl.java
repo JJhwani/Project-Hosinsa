@@ -92,7 +92,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<ProductVO> getLikesList(String id) {
-		return memberMapper.getLikesList(id);
+	public List<ProductVO> getLikesListWithPaging(String id,int page) {
+		return memberMapper.getLikesListWithPaging(id,page);
 	}
 }
