@@ -427,11 +427,10 @@
 			}
 		}
 	})
-	
-	
-</script>
 
+	
 <!-- 카카오톡 공유하기 -->
+</script>
 
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.1.0/kakao.min.js"
   integrity="sha384-dpu02ieKC6NUeKFoGMOKz6102CLEWi9+5RQjWSV0ikYSFFd8M3Wp2reIcquJOemx" crossorigin="anonymous"></script>
@@ -529,15 +528,14 @@ $(document).ready (function() {
 						console.log("찜성공!");
 				if(confirm("해당 상품을 찜했습니다. 마이페이지로 이동하시겠습니까?")){
 						location.href="/member/myPage";
-					}else{
+				}else{
 						$(".likes span").addClass("on").text("♥");
-					}	
+				}	
 				}
-			})
-		}
-	})
+				})
+			}
+		})
 });
-
 </script>
 <!-- 상품 찜하기 끝-->
 

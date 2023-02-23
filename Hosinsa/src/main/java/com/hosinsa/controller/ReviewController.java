@@ -53,31 +53,48 @@ public class ReviewController {
 	@PostMapping("/register")
 	public String register(ReviewVO review, PreReviewVO pre, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model ) {
 		
-		String uploadFolder = "C:\\upload"; //호신사 프로젝트로 경로 수정 예정
+		 String uploadFolder = // "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\PhotoReview" + ?
+				 "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\PhotoReview"; //호신사 프로젝트로 경로 수정 예정
+		
+		int index = 1;
+		review.setPhoto1("");
+		review.setPhoto2("");
+		review.setPhoto3("");
 		
 		for (MultipartFile multipartFile : photoUpload) {
 			
-		log.info("===============");
-		log.info("Upload File Name: " + multipartFile.getOriginalFilename());
-		log.info("Upload File Size: " + multipartFile.getSize()); 
+			log.info("===============");
+			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
+			log.info("Upload File Size: " + multipartFile.getSize()); 
 		
-		File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
+
+			File saveFile = new File(uploadFolder,review.getId()+multipartFile.getOriginalFilename());
+				
+			if(index==1) {
+				review.setPhoto1("../../resources/PhotoReview"+review.getId()+multipartFile.getOriginalFilename());
+			}else if(index==2){
+				review.setPhoto2("../../resources/PhotoReview"+review.getId()+multipartFile.getOriginalFilename());
+			}else if(index==3) {
+				review.setPhoto3 ("../../resources/PhotoReview"+review.getId()+multipartFile.getOriginalFilename());
+			}
+			index++;
 		
-		try {
-			multipartFile.transferTo(saveFile);
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}//end catch
+			try {
+				multipartFile.transferTo(saveFile);
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}//end catch
+		
+		}
 		
 		
 		service.regiseter(review);
 		service.deletePre(pre);
 		rttr.addFlashAttribute("review", "success");
 		
-		}
-	
-	
+		
 		return "redirect:/member/myPage";
+
 	}
 	
 	

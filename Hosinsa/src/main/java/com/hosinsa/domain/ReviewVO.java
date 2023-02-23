@@ -23,5 +23,7 @@ public class ReviewVO {
 	private Date uploadDate; // 작성날짜
 	private int pronum; //품번
 	private int rereply; //리리플 수
-	
+	private String photo1; //리뷰사진1
+	private String photo2; //리뷰사진2
+	private String photo3; //리뷰사진3
 }

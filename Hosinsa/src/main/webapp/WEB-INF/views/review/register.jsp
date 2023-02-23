@@ -14,7 +14,8 @@
 	<div>${product.price }</div>
 </div>
 
-<form role="form" action="/review/register" method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data 사진 업로드 추가 -->
+
+<form role="form" action="/review/register" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="id" value="${member.id}">
 	<input type="hidden" name="pronum" value="${product.pronum }">
 	<input type="hidden" name="ordernum" value="${ordernum }">
@@ -26,34 +27,30 @@
 		<textarea class="form-control" rows="5" name="content"></textarea>
 	</div>
 	
-	<input type='file' name ='photoUpload' id="photoUpload" multiple>
+		<!-- accept="image/*" 업로드에 이미지만 허용함 파일 업로드할떼 이미지 이외에 선택 불가-->
+	<input type='file' name ='photoUpload' id="photoUpload" accept="image/*" multiple> 
 	
-	<button type="submit">submit</button>
+	<button type="submit" id="submit">submit</button>
 	<button type="reset">reset</button>
 </form>
 
-<script>
 
-	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-	var maxSize = 5242880; //5MB
-	
-		function(fileSize >= maxSize) {
-			alert("파일 사이즈 초과");
-			return false;
+
+<!-- 포토리뷰 작성시 이미지 3장 이상 업로드 불가 스크립트 -->
+<script>
+//리뷰랑 디비에 연결.. 
+$(document).ready(function(){
+	$("#submit").on("click",function(){
+
+		const photo = $("#photoUpload") 
+		if(photo[0].files.length > 3) {
+			alert("이미지는 3장 이상 업로드 불가합니다.");
+			return false;		
+		}else{
+			confirm("업로드 성공");
 		}
-		
-		if(regex.test(fileName)) {
-			alert("해당 종류의 파일은 업로드 할 수 없습니다.");
-			return false;
-		}
-		return true;
-	}
-	
-	$("#photoUpload").on("click", function(e) {
-		
-	})
-  
-  
+	});
+});
 </script>
 
 
