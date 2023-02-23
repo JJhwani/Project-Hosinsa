@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.hosinsa.domain.BoardEventVO;
 import com.hosinsa.domain.BoardNoticeVO;
 import com.hosinsa.domain.Criteria;
+import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.BoardService;
+import com.hosinsa.service.LikesService;
 import com.hosinsa.service.MainService;
 
 import lombok.extern.log4j.Log4j;
@@ -39,7 +41,7 @@ public class MainController {
 	
 	@Autowired
 	BoardService boardService;
-
+	
 	@ModelAttribute("recentView")
 	public List<ProductVO> setEmptyRecentView() {
 	    return new ArrayList<ProductVO>();
@@ -161,7 +163,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/product/{pronum}")
-	public String get(@PathVariable int pronum,@ModelAttribute("recentView")List<ProductVO> recentView,  Model model) {		
+	public String get(@PathVariable int pronum,@ModelAttribute("recentView")List<ProductVO> recentView, Model model) {		
 		
 		//조회수 up+1
 		service.updateView(pronum);		
@@ -187,7 +189,8 @@ public class MainController {
 		}
 		//세션에 저장
 		model.addAttribute("recentView",recentView);	
-		
+				
 		return "product";		
 	}
+	
 }

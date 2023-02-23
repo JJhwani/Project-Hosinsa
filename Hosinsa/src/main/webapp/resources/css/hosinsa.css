@@ -1,4 +1,4 @@
-@charset "UTF-8";
+ @charset "UTF-8";
 
 /*CSS reset*/
 html, body, div, span, applet, object, iframe,
@@ -200,7 +200,7 @@ float:left;
 .recent img{height:100%}
 .recent>a{display:block;width:100px;height:40px;text-align:center;color:white;margin-top:10px;background:black;font-weight:bold;line-height:40px;cursor:pointer}
 
-.contentWrap{overflow:hidden;width:1400px;margin:50px auto;}
+.contentWrap{position:relative;overflow:hidden;width:1400px;margin:50px auto;}
 .contentWrap .productName{float:left;background:black;width:1120px;padding:12px 5px;color:white;}
 .contentWrap .imgWrap{width:500px;min-height:500px;float:left;margin-top:10px;padding:20px 10px 15px;border:1px solid lightgray}
 .contentWrap .imgWrap img{width:500px;cursor:pointer}
@@ -244,7 +244,14 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .reviewArea .reReplyWrap{margin:0 20px 20px;}
 .reviewArea .reviewWrap2{margin-top:10px;border:1px solid lightgray;}
 .reviewArea .reviewWrap2 .content{padding-top:20px}
+.reviewArea .reviewWrap2 .topper i{margin-top:5px}
 .reviewArea .reReply_register{float:right}
+
+#kakaotalk-sharing-btn{width:40px;height:40px;position:absolute;top:60px;right:40px}
+#kakaotalk-sharing-btn img{width:100%}
+.likes{position:absolute;top:50px;right:80px}
+.likes button{border:none;}
+.likes button span{font-size:30px;font-family:sans-serif;color:red;letter-spacing:-5px}
 
 /* 로그인 폼 */
 #loginForm{width:400px;margin:0 auto}
@@ -308,7 +315,15 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .info3{clear:both;padding-top:60px}
 .info3 .tabWrap {padding:10px 0}
 .info3 .reviewWrap{margin-top:10px}
-.info3 .reviewWrap .topper{border-bottom:0}
+.myInfo .info3 .reviewWrap .topper{border-bottom:0}
+
+/* 리뷰쓰기 */
+.reviewForm{width:550px}
+.reviewForm .proimg{box-sizing:border-box;float:left;width:100px;margin-top:9px;border:1px solid lightgray;}
+.reviewForm .infoTable{width:440px;box-sizing:border-box;padding-left:10px}
+.reviewForm .infoTable td{display:block;width:auto;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.reviewForm form{clear:both}
+.reviewForm input[name=title]{margin-left:20px;width:530px;box-sizing:border-box;padding:5px}
 
 /* 탈퇴하기 */
 .remove header{padding:15px 20px;background:black;color:white;margin-bottom:15px}

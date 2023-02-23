@@ -55,6 +55,40 @@
 			</c:choose>		
 		</table>
 	</section>
+	<section class="myInfo info4">
+		<h4 class="title align_center"><i class="fa-solid fa-heart"></i> 내 찜 목록 <i class="fa-solid fa-heart"></i></h4>
+		<section class="productList">
+			<c:if test = "${empty LikesList}">		
+				<p class='no_review'><i class="fa-sharp fa-solid fa-heart-circle-xmark"></i> 아직 찜한 아이템이 없습니다.</p>
+			</c:if>
+			<c:forEach var="LikesList" items="${LikesList}">
+	 			<div class="list_box">
+	 				<a href="/product/${LikesList.pronum }">
+						<div class="list_img">
+							<img src="${LikesList.proimg}">
+						</div>
+						<div class="article_info">
+							<p class="pbrand">${LikesList.brand}</p>
+							<p class="pname">${LikesList.proname}</p>
+							<p class="price">${LikesList.price}</p>
+							<p class="view"><i class="fa-solid fa-eye"></i> ${LikesList.proview}</p>
+						</div>
+					</a>
+				</div>
+	 		</c:forEach>
+		</section>
+		<ul class="pagination">
+			<c:if test="${pageMaker.prev}">
+				<li class="paginate_button previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
+			</c:if>
+			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+				<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
+			</c:forEach>
+			<c:if test="${pageMaker.next}">
+				<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
+			</c:if>
+		</ul>
+	</section>
 	<section class="myInfo info3">
 		<h4 class="title">내 리뷰 관리</h4>
 		<div class="tabWrap tab2">
@@ -134,9 +168,13 @@ $(document).ready(function(){
 	})
 		
 	$(".review_delete").on("click",function(){
-		reviewForm.find("input[name=bno]").val($(this).siblings(".bno").text());
-		reviewForm.attr("action","/review/remove");
-		reviewForm.submit();
+		if(confirm("정말로 리뷰를 삭제하시겠습니까?")){
+			reviewForm.find("input[name=bno]").val($(this).siblings(".bno").text());
+			reviewForm.attr("action","/review/remove");
+			reviewForm.submit();
+		}else{
+			return false;
+		}
 	})
 	
 	if("${review}"=="success"){
