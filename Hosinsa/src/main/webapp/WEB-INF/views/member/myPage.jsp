@@ -5,53 +5,6 @@
 
 <div class="contentWrap">
 	
-	<h4 class="miniTitle">나의 정보</h4>
-	
-	<p class="grade">나의 등급 : ${member.grade }</p>
-	<table class="table1 member_info">
-		<tr><th>프로필이미지</th><td><img src="${member.profilimg }"></td></tr>
-		<tr><th>이름</th><td>${member.name }</td></tr>
-		<tr><th>아이디</th><td>${member.id }</td></tr>
-		<tr><th>닉네임</th><td>${member.nickname }</td></tr>
-		<tr>
-			<th>성별</th>
-			<c:choose>
-				<c:when test="${member.gender eq 'male'}">
-					<td>남자</td>
-				</c:when>
-				<c:when test="${member.gender eq 'female'}">
-					<td>여자</td>
-				</c:when>
-				<c:otherwise>
-					<td>${member.gender}</td>
-				</c:otherwise>
-			</c:choose>
-		</tr>
-		<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/> </td></tr>
-		<tr><th>이메일</th><td>${member.email }</td></tr>
-		<tr><th>연락처</th><td>${member.phone }</td></tr>
-	</table>
-	<button data-oper="modify" class="btn btn-default btn-info">회원정보 수정</button>
-	<button id="remove" class="btn btn-default">탈퇴하기</button>
-	
-	<form id="operForm" action="/member/modify" method="get">
-		<input type="hidden" id="id" name="id" value="${member.id}">
-	</form>
-	<form id="removeForm" action="/member/remove" method="get">
-		<input type="hidden" id="id" name="id" value="${member.id}">
-	</form>
-	
-	<h4 class="miniTitle">주문내역</h4>	
-	<table class="table1">
-		<c:choose>
-			<c:when test="${empty orderList}">
-				<tr><td>주문 내역이 없습니다.</td><tr>
-			</c:when>
-			<c:otherwise>
-				<tr>
-					<th>주문번호</th><th>주문날짜</th><th>주문상품</th><th>주문금액</th><th>진행상태</th>
-				</tr>
-				<c:forEach var="orderList" items="${orderList}">
 	<h2 class="bigTitle">마이페이지</h2>
 	<section class="myInfo info0">
 		<h4 class="title align_center"><i class="fa-solid fa-heart"></i> 내 찜 목록 <i class="fa-solid fa-heart"></i></h4>
@@ -95,7 +48,20 @@
 			<tr><th>이름</th><td>${member.name }</td></tr>
 			<tr><th>아이디</th><td>${member.id }</td></tr>
 			<tr><th>닉네임</th><td>${member.nickname }</td></tr>
-			<tr><th>성별</th><td>${member.gender }</td></tr>
+			<tr>
+				<th>성별</th>
+				<c:choose>
+					<c:when test="${member.gender eq 'male'}">
+						<td>남자</td>
+					</c:when>
+					<c:when test="${member.gender eq 'female'}">
+						<td>여자</td>
+					</c:when>
+					<c:otherwise>
+						<td>${member.gender}</td>
+					</c:otherwise>
+				</c:choose>
+			</tr>
 			<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/> </td></tr>
 			<tr><th>이메일</th><td>${member.email }</td></tr>
 			<tr><th>연락처</th><td>${member.phone }</td></tr>
@@ -184,39 +150,10 @@
 		<form class="reviewForm" action="/review/register" method="get">
 			<input type="hidden" name="pronum" value="">
 			<input type="hidden" name="ordernum" value="">
-			<input type="hidden" name="bno" vanlu="">
+			<input type="hidden" name="bno" value="">
 		</form>
 	</section>
 </div><!-- //contentWrap -->
-
-<!-- Modal -->
- <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
- 	<div class="modal-dialog">
- 	  <div class="modal-content">
- 		<div class="modal-header">
- 		  <h4 class="modal-title" id="myModalLabel">회원 탈퇴</h4>
- 		</div>
- 		<div class="modal-body">
- 			<p>정말 탈퇴 하시겠습니까?</p><br>
-			<c:if test="${msg == 0}">
-				비밀번호가 틀립니다.
-			</c:if>
- 		  <div class="form-group">
- 		  <form id="modalForm" action="/member/remove" method="post">
- 		  		<input type="text" name="id" value="${member.id}" readonly="readonly">
- 		  		<input type="password" class="form-control" id="pw" name="pw" placeholder="PASSWORD">
- 		  </form>
- 		  </div>
- 		</div>
- 		
- 		<div class="modal-footer">
- 			<button id="modalRegBtn" type="button" class="btn black">탈퇴</button>
- 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">탈퇴 그만두기</button>
- 		</div>	
- 	  </div>
- 	</div> 		  
- </div>
-<!-- Modal 끝 -->
 
 <script type="text/javascript">
 $(document).ready(function(){

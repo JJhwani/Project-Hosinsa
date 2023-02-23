@@ -34,6 +34,7 @@ import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.KakaoService;
+import com.hosinsa.service.LikesService;
 import com.hosinsa.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -48,6 +49,7 @@ public class MemberController {
 
 	private MemberService memberService;
 	private KakaoService kakaoService;
+	private LikesService likesService;
 
 	@GetMapping("/agree")
 	public void agreeGET() {
@@ -234,9 +236,10 @@ public class MemberController {
 		log.info(result.get("email"));
 		log.info(result.get("gender"));
 		
-		member.setName((String)result.get("nickname"));
-		member.setProfilimg((String)result.get("profile_image"));
 		member.setId((String)result.get("email"));
+		member.setName((String)result.get("nickname"));
+		member.setNickname((String)result.get("nickname"));
+		member.setProfilimg((String)result.get("profile_image"));
 		member.setEmail((String)result.get("email"));
 		member.setGender((String)result.get("gender"));
 		member.setGrade("C");

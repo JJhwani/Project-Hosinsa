@@ -13,7 +13,7 @@ import com.hosinsa.domain.ReviewVO;
 public interface MemberMapper {
 
 	public List<MemberVO> getList();
-	public void insert(MemberVO member);
+	public int insert(MemberVO member);
 	public MemberVO read(String id);
 	public int delete(MemberVO member);
 	public int update(MemberVO member);
