@@ -8,7 +8,6 @@ import com.hosinsa.domain.CartVO;
 public interface CartMapper {
 	
 	public List<CartVO> getList(String id);
-	public List<CartVO> getOrder(List<Integer> chArr);
 	
 	//카트삭제
 	public int deleteCart(long cartnum);

@@ -6,7 +6,6 @@ import com.hosinsa.domain.CartVO;
 
 public interface CartService {
 	public List<CartVO> getList(String id); 
-	public List<CartVO> getOrder(List<Integer> chArr); 
 	
 	//카트삭제
 	public boolean deleteCart(long cartnum);
