@@ -23,7 +23,7 @@
 		</tr>
 	</table>
 	<form role="form" action="/review/modify" method="post" enctype="multipart/form-data"> 
-		<input type="text" name="bno" value="${review.bno }">
+		<input type="hidden" name="bno" value="${review.bno }">
 		<input type="hidden" name="id" value="${review.id }"> <!-- 리뷰수정시 id를 첨부파일 앞에 붙여주는 히든값 -->
 		<h4 class="miniTitle">제목</h4>
 		<input type="text" name="title" value="${review.title }">
