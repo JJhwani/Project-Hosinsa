@@ -31,9 +31,9 @@
 	 	 </select>
 	 	 
 	 	 <insert id="insert">
-	 	 		insert into hosinsa_review (bno,title,content,nickname, uploadDate, pronum, photo1, photo2, photo3 )
+	 	 		insert into hosinsa_review (bno,title,content,nickname, uploadDate, pronum, photo1, photo2, photo3)
 	 	 		values(seq_review.nextval, #{title}, #{content}, #{nickname}, sysdate, #{pronum}, #{photo1}, #{photo2}, #{photo3})
-	 	 </insert>
+	 	 </insert> 
 	 	 	
 	 	 
 	 	 <insert id="insertSelectKey">
@@ -58,6 +58,9 @@
 	 			update hosinsa_review
 	 			set title = #{title},
 	 			content = #{content},
+	 			photo1 = #{photo1},
+	 			photo2 = #{photo2},
+	 			photo3 = #{photo3},
 	 			uploadDate = sysdate
 	 			where bno = #{bno}
 	 	</update>
@@ -71,11 +74,11 @@
 	 			
 		 <![CDATA[
 		   select
-		 	bno, title, content, nickname, uploaddate, reReply, profilimg
+		 	bno, title, content, nickname, uploaddate, reReply, profilimg, photo1, photo2, photo3
 		 	from
 		 		(
 		 		select /*+INDEX_DESC(HOSINSA_REVIEW PK_REVIEW) */
-		 		rownum rn, bno, title, content, nickname, uploaddate, pronum, reReply, profilimg
+		 		rownum rn, bno, title, content, nickname, uploaddate, pronum, reReply, profilimg, photo1, photo2, photo3
 		   		from
 		 			HOSINSA_REVIEW
 		 		where 

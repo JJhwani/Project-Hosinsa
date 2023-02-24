@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,8 +54,8 @@ public class ReviewController {
 	@PostMapping("/register")
 	public String register(ReviewVO review, PreReviewVO pre, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model ) {
 		
-		 String uploadFolder = // "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\PhotoReview" + ?
-				 "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\PhotoReview"; //호신사 프로젝트로 경로 수정 예정
+		 String uploadFolder = // "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"
+				 "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
 		
 		int index = 1;
 		review.setPhoto1("");
@@ -71,11 +72,11 @@ public class ReviewController {
 			File saveFile = new File(uploadFolder,review.getId()+multipartFile.getOriginalFilename());
 				
 			if(index==1) {
-				review.setPhoto1("../../resources/PhotoReview"+review.getId()+multipartFile.getOriginalFilename());
+				review.setPhoto1("../../resources/photoUpload/"+review.getId()+multipartFile.getOriginalFilename());
 			}else if(index==2){
-				review.setPhoto2("../../resources/PhotoReview"+review.getId()+multipartFile.getOriginalFilename());
+				review.setPhoto2("../../resources/photoUpload/"+review.getId()+multipartFile.getOriginalFilename());
 			}else if(index==3) {
-				review.setPhoto3 ("../../resources/PhotoReview"+review.getId()+multipartFile.getOriginalFilename());
+				review.setPhoto3 ("../../resources/photoUpload/"+review.getId()+multipartFile.getOriginalFilename());
 			}
 			index++;
 		
@@ -104,8 +105,43 @@ public class ReviewController {
 		model.addAttribute("review", service.get(bno));
 	}
 	
+	
 	@PostMapping("/modify")
-	public String modify(ReviewVO vo, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr) {
+	public String modify(ReviewVO vo, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model) {
+		
+		 String uploadFolder = // "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"
+				 "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
+	
+		 int index = 1;
+		 vo.setPhoto1("");
+		 vo.setPhoto2("");
+		 vo.setPhoto3("");
+			
+			for (MultipartFile multipartFile : photoUpload) {
+				
+				log.info("===============");
+				log.info("Upload File Name: " + multipartFile.getOriginalFilename());
+				log.info("Upload File Size: " + multipartFile.getSize()); 
+			
+
+				File saveFile = new File(uploadFolder,vo.getId()+multipartFile.getOriginalFilename());
+					
+				if(index==1) {
+					vo.setPhoto1("../../resources/photoUpload/"+vo.getId()+multipartFile.getOriginalFilename());
+				}else if(index==2){
+					vo.setPhoto2("../../resources/photoUpload/"+vo.getId()+multipartFile.getOriginalFilename());
+				}else if(index==3) {
+					vo.setPhoto3 ("../../resources/photoUpload/"+vo.getId()+multipartFile.getOriginalFilename());
+				}
+				index++;
+			
+				try {
+					multipartFile.transferTo(saveFile);
+				} catch (Exception e) {
+					log.error(e.getMessage());
+				}//end catch
+			
+			}
 		
 		if (service.modify(vo)) {
 			rttr.addFlashAttribute("modify", "success");

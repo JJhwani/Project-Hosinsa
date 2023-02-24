@@ -36,22 +36,21 @@
 
 
 
-<!-- 포토리뷰 작성시 이미지 3장 이상 업로드 불가 스크립트 -->
-<script>
-//리뷰랑 디비에 연결.. 
-$(document).ready(function(){
-	$("#submit").on("click",function(){
-
+	<!-- 포토리뷰 작성시 이미지 3장 이상 업로드 불가 스크립트 -->
+	<script>
+	$(document).ready(function(){
+		$("#submit").on("click",function(){
+	
 		const photo = $("#photoUpload") 
 		if(photo[0].files.length > 3) {
 			alert("이미지는 3장 이상 업로드 불가합니다.");
 			return false;		
-		}else{
+			}else{
 			confirm("업로드 성공");
-		}
+			}
+		});
 	});
-});
-</script>
+	</script>
 
 
 

@@ -22,18 +22,25 @@
 			<td>${product.price }</td>
 		</tr>
 	</table>
-	<form role="form" action="/review/modify" method="post">
-		<input type="hidden" name="bno" value="${review.bno }">
+	<form role="form" action="/review/modify" method="post" enctype="multipart/form-data"> 
+		<input type="text" name="bno" value="${review.bno }">
+		<input type="hidden" name="id" value="${review.id }"> <!-- 리뷰수정시 id를 첨부파일 앞에 붙여주는 히든값 -->
 		<h4 class="miniTitle">제목</h4>
 		<input type="text" name="title" value="${review.title }">
 		<h4 class="miniTitle">내용</h4>
 		<textarea class="inputDetail" name="content" cols="70" rows="16">${review.content}</textarea>
 		<div class="btnWrap">
+		
+			<!-- accept="image/*" 업로드에 이미지만 허용함 파일 업로드할떼 이미지 이외에 선택 불가-->
+			<input type='file' name ='photoUpload' id="photoUpload" accept="image/*" multiple> 
 			<button data-oper="modify" class="btn modify">리뷰 수정</button>
 			<button data-oper="remove" class="btn remove">리뷰 삭제</button>
 			<button data-oper="list" class="btn list">뒤로</button>
+			
 		</div>	
 	</form>
+	
+	
 	<script type="text/javascript">
 	
 		$(document).ready(function() {
@@ -64,6 +71,24 @@
 	});
 	
 	</script>
+	
+	<script>
+	$(document).ready(function(){
+		
+		$(".modify").on("click",function(){
+	
+		const photo = $("#photoUpload") 
+		if(photo[0].files.length > 3) {
+			alert("이미지는 3장 이상 업로드 불가합니다.");
+			location.reload();
+			}else{
+			confirm("업로드 성공");
+			}
+		});
+	});
+	</script>
+	
+	
 </div>
 <%@include file="../includes/footer.jsp" %>
 
