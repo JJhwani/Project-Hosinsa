@@ -87,8 +87,7 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
+	$(document).ready(
 					function() {
 
 						/* 수량버튼 */

@@ -58,6 +58,35 @@ public class OrderContoller {
 		
 	}
 	
+	@PostMapping("/complete")
+	public String complete() {
+		log.info("complete________________");
+//		39log.info(valueArr); 
+		
+//		model.addAttribute("complete",service.getOrder(valueArr));
+		
+		return "/order/complete";
+	}
+	
+	@GetMapping("/complete")
+	public void completePage(Model model) {
+		
+	}
+	
+	// 주문 취소시 화면 전환
+	@GetMapping("/cancel")
+	public void cancelPage() {
+		
+	}
+
+	// 주문 실패시 화면 전환
+	@GetMapping("/fail")
+	public void failPage() {
+		
+	}
+	
+	
+	// 카카오페이 결제
 	@RequestMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(Integer total) {
@@ -75,9 +104,9 @@ public class OrderContoller {
 			String parm = "cid=TC0ONETIME&partner_order_id=partner_order_id"
 					+ "&partner_user_id=partner_user_id&item_name=호신사"
 					+ "&quantity=1&total_amount="+total+"&vat_amount=200&tax_free_amount=0"
-					+ "&approval_url=http://localhost:8081/order/kakaopay"
-					+ "&fail_url=http://localhost:8081/cart/list"
-					+ "&cancel_url=http://localhost:8081/cart/list";
+					+ "&approval_url=http://localhost:8081/order/complete"
+					+ "&fail_url=http://localhost:8081/order/fail"
+					+ "&cancel_url=http://localhost:8081/order/cancel";
 			
 			OutputStream os = link.getOutputStream();
 			DataOutputStream dos = new DataOutputStream(os);

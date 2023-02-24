@@ -19,4 +19,9 @@ public class OrderServiceImpl implements OrderService{
 	public List<CartVO> getOrder(List<Integer> chArr) {
 		return mapper.getOrder(chArr);
 	}
+	
+	@Override
+	public List<CartVO> getComplete(List<Integer> chArr) {
+		return mapper.getComplete(chArr);
+	}
 }

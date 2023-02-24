@@ -11,4 +11,11 @@
 	  </foreach>
 </select>
 
+<delete id="getComplete" parameterType="java.util.List">
+	delete * from hosinsa_cart where CARTNUM in
+		<foreach collection="list" item="cartnum" index="index" open="(" close=")" separator="," >
+	  	#{cartnum}
+	  </foreach>
+</delete>
+
 </mapper>
