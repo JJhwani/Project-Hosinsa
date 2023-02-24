@@ -130,6 +130,12 @@
 					</div>
 					<p class="reviewTitle">${already.title }</p>
 					<p class="content">${already.content }</p>
+					  <!-- 마이페이지 포토리뷰 -->
+					  <p class="photoreview">
+						<img src="${already.photo1 }" onerror="this.remove ? this.remove() : this.removeNode();">
+						<img src="${already.photo2 }" onerror="this.remove ? this.remove() : this.removeNode();" >
+						<img src="${already.photo3 }" onerror="this.remove ? this.remove() : this.removeNode();"> 
+					  </p> 
 					<p class="reReplyWrap"><button class="reReply">댓글 ${already.rereply }개</button></p>
 				</div>
 			</c:forEach>
@@ -228,6 +234,9 @@ $(document).ready(function(){
 					}
 					str += "<i>"+formatDate(time)+"</i></div>";
 					str += "<p class='content'>" + list[i].reply + "</p></div>";
+
+					
+					
 				}					
 				reviewWrap.append(str);
 				button.html("댓글 "+list.length+"개");
