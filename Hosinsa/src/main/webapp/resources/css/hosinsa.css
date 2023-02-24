@@ -299,6 +299,9 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .member_info{margin-top:10px}
 .table3 .proimg{cursor:pointer}
 
+/* admin - 판매관리 */
+.table6{width:100%}
+
 /* 나의 정보 */
 .myInfo .title{padding:20px 0;}
 .info0 .pagination{margin-bottom:50px}

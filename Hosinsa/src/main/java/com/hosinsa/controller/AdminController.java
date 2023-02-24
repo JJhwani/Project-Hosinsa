@@ -214,8 +214,18 @@ public class AdminController {
 	
 	@GetMapping("/sales")
 	public void adminSalesList(Model model) {
-		log.info(adminService.getOrderList());
 		model.addAttribute("orderList",adminService.getOrderList());
+	}
+	
+	@PostMapping("/sales")
+	public void SalesUpdate(Model model) {
+		
+	}
+	
+	@GetMapping("/order/{orderNum}")
+	public String getOrderDetail(Model model) {
+		
+		return "/admin/order";
 	}
 
 }
