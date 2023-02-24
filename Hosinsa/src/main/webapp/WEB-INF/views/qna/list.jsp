@@ -154,6 +154,10 @@
 						
 						//문의하기 버튼 처리
 						$("#regBtn").on("click", function() {
+							if("${member}"==""){
+								alert("로그인 후 작성 가능합니다.");
+								return false;
+							}
 
 							self.location = "/qna/register";
 
