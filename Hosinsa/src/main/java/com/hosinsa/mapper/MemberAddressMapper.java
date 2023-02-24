@@ -6,9 +6,9 @@ import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.MemberAddressVO;
 
 public interface MemberAddressMapper {
+	public MemberAddressVO getListBasic(MemberAddressVO vo);			// 오더 페이지에 기본배송지 출력
 	public List<MemberAddressVO> getListOrder(MemberAddressVO vo);		// 오더 페이지에 배송지명 출력
-	public MemberAddressVO readBasic(MemberAddressVO vo);				// 오더 페이지에 기본배송지 출력
-	public List<MemberAddressVO> getListWithPaging(BoardCriteria cri);	// 주소 리스트 출력
+	public List<MemberAddressVO> getListWithPaging(MemberAddressVO vo);	// 주소 리스트 출력
 	public boolean registerSelectKey(MemberAddressVO vo);				// 주소 등록
 	public MemberAddressVO read(MemberAddressVO vo);					// 주소 읽기
 	public int modifyBasic(MemberAddressVO vo);							// 기본배송지 수정

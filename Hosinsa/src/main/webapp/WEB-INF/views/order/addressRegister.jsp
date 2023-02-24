@@ -59,16 +59,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	if("${register}"==="success"){
-		alert("주소 등록이 성공적으로 처리되었습니다.");
-	}
-	if("${modify}"==="success"){
-		alert("주소 수정이 성공적으로 처리되었습니다.");
-	}
-	if("${remove}"==="success"){
-		alert("주소 삭제가 성공적으로 처리되었습니다.");
-	}
-	
+
 	$(".telLabel").on("click",function(e) {
 		if($("input[name='telCheck']:checkbox").is(":checked")){
 			$("input[name='tel']").attr("disabled", "disabled");

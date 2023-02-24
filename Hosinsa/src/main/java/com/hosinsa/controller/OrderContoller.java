@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,6 +23,7 @@ import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.BoardPageDTO;
 import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.mapper.MemberAddressMapper;
 import com.hosinsa.service.MemberAddressService;
 import com.hosinsa.service.OrderService;
 
@@ -46,31 +48,31 @@ public class OrderContoller {
 	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
 			MemberAddressVO address, Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
 		log.info("order________________"); 
-		log.info(valueArr); 
+		log.info(valueArr);
 		model.addAttribute("order",service.getOrder(valueArr));
-
 		int total = addService.getTotalCountAddress(address);
 		model.addAttribute("total", total);
+		model.addAttribute("address", addService.getListBasic(address));
 		model.addAttribute("shipping", addService.getListOrder(address));
-		model.addAttribute("address", addService.readBasic(address));
 		
 		return "/order/order_form";
 	}
 	
-	@GetMapping("/order_form")
-	public void orderPage(Model model) {
-		
+	@ResponseBody
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/listForm")
+	public String addressListForm(HttpSession session, MemberAddressVO address, @RequestParam("id") String id, Model model) {
+		log.info("======================="+id);
+		model.addAttribute("id",id);
+		return "/order/address/list";
 	}
 	
-	@PostMapping("/address")
-	public String address(HttpSession session, MemberAddressVO address, BoardCriteria cri,Model model) {
-		if(addService.registerSelectKey(address)) {
-			model.addAttribute("register","success");
-		}		
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/list")
+	public String addressList(HttpSession session, MemberAddressVO address,  String id, Model model) {
+		log.info("------------------------"+id);
 		
 		int total = addService.getTotalCountAddress(address);
-		model.addAttribute("shipping", addService.getListOrder(address));
-		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
+		model.addAttribute("address", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
 		
 		return "/order/address";
 	}
@@ -81,14 +83,14 @@ public class OrderContoller {
 	}
 	
 	@PostMapping("/address/register")
-	public String addressRegister(HttpSession session, MemberAddressVO address, BoardCriteria cri, Model model) {
+	public String addressRegister(HttpSession session, MemberAddressVO address, Model model) {
 		if(addService.registerSelectKey(address)) {
 			model.addAttribute("register","success");
-		}		
+		}
 		
 		int total = addService.getTotalCountAddress(address);
-		model.addAttribute("shipping", addService.getListOrder(address));
-		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
 		
 		return "/order/address";
 	}

@@ -53,7 +53,6 @@ public class CartContoller {
 	
 	@GetMapping("/list")
 	public void list(Model model, @ModelAttribute("member") MemberVO vo) {
-
 		String id = vo.getId();
 		log.info("list.............2");
 		model.addAttribute("list", service.getList(id));

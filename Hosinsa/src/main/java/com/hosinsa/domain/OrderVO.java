@@ -6,6 +6,32 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
+/*
+CREATE TABLE HOSINSA_ORDER(
+    O_NO          NUMBER(20),   
+    ORDERNUM      NUMBER(20), 
+    PRONUM        NUMBER(8),
+    QUANTITY      NUMBER(8),
+    PRICE         NUMBER(8),
+    PRONAME       VARCHAR2(200),
+    SALE          VARCHAR2(50),
+    NAME          VARCHAR2(15),
+    ADDRESS       VARCHAR2(100),
+    REQUESTS      VARCHAR2(100),
+    PHONE         CHAR(13),
+    ID            VARCHAR2(30),
+    ORDER_DATE    DATE DEFAULT SYSDATE,
+    DELIVERY      VARCHAR2(100),
+    TRACKINGNUM   VARCHAR(50),
+    REASON        VARCHAR2(100),
+    PRIMARY KEY(O_NO),
+    CONSTRAINT FK_ORDER_ID FOREIGN KEY(ID) REFERENCES HOSINSA_MEMBER(ID) ON DELETE SET NULL,
+    CONSTRAINT FK_ORDER_PRONUM FOREIGN KEY(PRONUM) REFERENCES HOSINSA_PRODUCT(PRONUM) ON DELETE SET NULL    
+);
+
+CREATE SEQUENCE SEQ_ORDER;
+ */
+
 @Data
 public class OrderVO {
 	private int o_no; //고유번호

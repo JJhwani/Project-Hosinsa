@@ -88,137 +88,104 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
+$(document).ready(function() {
+	/* 수량버튼 */
+	$(".quantity_btn_plus").on("click", function(e) {
+		var number = $(this).parent().siblings(".cartNum").text()
+		$(".quantity_plus_form").find("input[name=cartnum]").val(number);
+		$(".quantity_plus_form").submit();
+	});
+	
+	$(".quantity_btn_minus").on("click",function(e) {
+		var number = $(this).parent().siblings(".cartNum").text()
+		$(".quantity_minus_form").find("input[name=cartnum]").val(number);
+		$(".quantity_minus_form").submit();
+	});
 
-						/* 수량버튼 */
-						$(".quantity_btn_plus").on("click", function(e) {
-							var number = $(this).parent().siblings(".cartNum").text()
-							$(".quantity_plus_form").find("input[name=cartnum]").val(number);
-							
-							$(".quantity_plus_form").submit();
-						});
-						$(".quantity_btn_minus").on("click",function(e) {
-							var number = $(this).parent().siblings(".cartNum").text()
-							$(".quantity_minus_form").find("input[name=cartnum]").val(number);
-							
-							$(".quantity_minus_form").submit();
-						});
+	// 오더 목록
+	$("#order").on("click", function(e) {
+		var text = $("tbody input[type='checkbox']:checked").parent().next().text();
+		var list = $("tbody input[type='checkbox']");
+		var valueArr = [];
+		
+		$("tbody input[type='checkbox']").each(function() {
+			if ($(this).is(":checked")) { //선택되어 있으면 배열에 값을 저장함
+				valueArr.push($(this).parent().next().text());
+			} else {
+				console.log($(this));
+			}
+		});
+                                   
+		if (valueArr.length == 0) {
+			alert("선택된 상품이 없습니다.");
+		} else { 
+			$(".orderForm").find("input[name=valueArr]").val(valueArr);
+			$(".orderForm").submit();
+		}
+	});
+	
+	// 카트 목록 전체선택
+	$(function() {
+		var chkObj = document.getElementsByName("Chk_List");
+		var rowCnt = chkObj.length;
+		
+		$("input[name='Chk_SelectAll']").click(function() {
+			var chk_listArr = $("input[name='Chk_List']");
+			
+			for (var i = 0; i < chk_listArr.length; i++) {
+				chk_listArr[i].checked = this.checked;
+			}
+		});
+		
+		$("input[name='Chk_List']").click(function() {
+			if ($("input[name='Chk_List']:checked").length == rowCnt) {
+				$("input[name='Chk_SelectAll']")[0].checked = true;
+			} else {
+				$("input[name='Chk_SelectAll']")[0].checked = false;
+			}
+		});
+	});
 
-						// 오더 목록
-						$("#order").on("click", function(e) {
-							var text = $(
-									"tbody input[type='checkbox']:checked")
-									.parent().next().text();
-							var list = $("tbody input[type='checkbox']");
-							var valueArr = [];
-							$("tbody input[type='checkbox']").each(function() {
-								if ($(this).is(":checked")) { //선택되어 있으면 배열에 값을 저장함
-									valueArr.push($(this).parent().next().text());
-								} else {
-									console.log($(this));
-										}
-								});
-														
-							if (valueArr.length == 0) {
-								alert("선택된 상품이 없습니다.");
-							} else { 
-								$(".orderForm").find("input[name=valueArr]").val(valueArr);
-								$(".orderForm").submit();
-								/*$.ajax({
-									url : "/cart/order", // 전송 URL
-									contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-									type : "post", // GET or POST 방식
-									data : objParams,
-									success:function(result){
-										location.href="/cart/order";
-									}
-									});
-								}*/
-							}
-						});
-						
-						/* 
+	// 계속 쇼핑하기 버튼
+	$(".move_main").on("click", function(e) {
+		self.location = "../";
+	})
+	
+	// 카트삭제 버튼
+	$(".del_Btn").on("click",function(e) {
+		var text = $("tbody input[type='checkbox']:checked").parent().next().text();
+		var list = $("tbody input[type='checkbox']");
+		var valueArr = new Array();
+		
+		$("tbody input[type='checkbox']").each(function() {
+			if ($(this).is(":checked")) { //선택되어 있으면 배열에 값을 저장함
+				valueArr.push($(this).parent().next().text());
+			} else {
+				console.log($(this));
+			}
+		});
+		
+		if (valueArr.length == 0) {
+			alert("선택된 글이 없습니다.");
+		} else {
+			if (!confirm("정말 삭제하시겠습니까?")) {
+				alert("취소되었습니다.");
+			} else {
+				$.ajax({
+					url : "/cart/deleteCart", // 전송 URL
+					dataType : "json",
+					type : 'POST', // GET or POST 방식
+					async : false,
+					data : {
+						valueArr : valueArr //보내고자 하는 data 변수 설정
+					}                    
+				});
+			}
+			location.reload();
+		}
+	});
+});
 
-						if (valueArr.length == 0){
-					    	alert("선택된 상품이 없습니다.");
-					    }else{				
-							$(".cartForm input").val(valueArr);
-							$(".cartForm").submit();				
-						}
-						*/
-
-						// 카트 목록 전체선택
-						$(function() {
-							var chkObj = document.getElementsByName("Chk_List");
-							var rowCnt = chkObj.length;
-
-							$("input[name='Chk_SelectAll']").click(function() {
-								var chk_listArr = $("input[name='Chk_List']");
-								for (var i = 0; i < chk_listArr.length; i++) {
-									chk_listArr[i].checked = this.checked;
-								}
-							});
-							$("input[name='Chk_List']")
-									.click(
-											function() {
-												if ($("input[name='Chk_List']:checked").length == rowCnt) {
-													$("input[name='Chk_SelectAll']")[0].checked = true;
-												} else {
-													$("input[name='Chk_SelectAll']")[0].checked = false;
-												}
-											});
-						});
-
-						// 계속 쇼핑하기 버튼
-						$(".move_main").on("click", function(e) {
-							self.location = "../";
-						})
-
-						// 카트삭제 버튼
-						$(".del_Btn").on("click",function(e) {
-							var text = $(
-									"tbody input[type='checkbox']:checked")
-									.parent().next().text();
-							var list = $("tbody input[type='checkbox']");
-							var valueArr = new Array();
-
-							$("tbody input[type='checkbox']").each(function() {
-								if (
-										$(this).is(":checked")) { //선택되어 있으면 배열에 값을 저장함
-										valueArr.push($(this).parent()
-													.next()
-													.text());
-								} else {
-									console
-											.log($(this));
-								}
-							});
-
-								if (valueArr.length == 0) {
-									alert("선택된 글이 없습니다.");
-								} else {
-
-									if (!confirm("정말 삭제하시겠습니까?")) {
-										alert("취소되었습니다.");
-									} else {
-										$.ajax({
-											url : "/cart/deleteCart", // 전송 URL
-											dataType : "json",
-											type : 'POST', // GET or POST 방식
-											async : false,
-											data : {
-											valueArr : valueArr //보내고자 하는 data 변수 설정
-											}
-									
-										});
-								}
-							location.reload();
-						}
-
-										});
-					})
 </script>
 
 <%@ include file="../includes/footer.jsp"%>

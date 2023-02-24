@@ -18,19 +18,19 @@ public class MemberAddressServiceImpl implements MemberAddressService{
 
 	private MemberAddressMapper mapper;
 	
+	
+	@Override
+	public MemberAddressVO getListBasic(MemberAddressVO vo) {
+		return mapper.getListBasic(vo);
+	}
+	
 	@Override
 	public List<MemberAddressVO> getListOrder(MemberAddressVO vo) {
 		return mapper.getListOrder(vo);
 	}
-	
 	@Override
-	public MemberAddressVO readBasic(MemberAddressVO vo) {
-		return mapper.readBasic(vo);
-	}
-	
-	@Override
-	public List<MemberAddressVO> getListWithPaging(BoardCriteria cri) {
-		return mapper.getListWithPaging(cri);
+	public List<MemberAddressVO> getListWithPaging(MemberAddressVO vo) {
+		return mapper.getListWithPaging(vo);
 	}
 
 	@Override

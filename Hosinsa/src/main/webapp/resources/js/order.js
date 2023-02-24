@@ -47,10 +47,6 @@ $(document).ready(function(){
 	// 오더 페이지에서 배송지 등록 버튼 클릭시
 	$(".address_shipping .address_register").on("click", function(e) {
 		e.preventDefault();
-		//order_form.attr("action", "/order/address/registerForm");
-		//order_form.attr("method", "get");
-		//order_form.submit();
-
 		registerPopup();
 
 	});
@@ -58,9 +54,7 @@ $(document).ready(function(){
 	// 오더 페이지에서 배송지 변경 버튼 클릭시
 	$(".address_shipping .address_modify").on("click", function(e) {
 		e.preventDefault();
-		//order_form.attr("action", "/order/address/modify");
-		//order_form.attr("method", "get");
-		//order_form.submit();
+		listPopup();
 	});
 	
 
@@ -73,16 +67,27 @@ $(document).ready(function(){
 		popupForm.submit();
 	}
 
-	$(".registerTable .btn.search").on("click", function(e) {
-		//var popOption = "width=570px, height=420px left=600px, scrollbars=yes, resizable=yes"
-		//window.open("/order/address/searchForm","juso", popOption);
-		
-		//address_searchForm.action="/order/address/searchForm";
-		//address_searchForm.target="_blank";
-		//address_searchForm.submit();
+	function listPopup(){
+		var popOption = "width=500px, height=950px"
+		var userid = $(".shippingInfo .popupForm").find("input[name=userid]").val();
+		var popup = window.open("about:_blank","list", popOption);
 
+		$.ajax({
+			url : "/order/address/listForm",
+			data : {id : userid},
+			type : "POST",
+			target : "pop",
+			success : function(data){
+				popup.location.href = "/order/address/list";
+				id = userid;
+			}
+		});
 
-	});
+		//popupForm.action="/order/address";
+		//popupForm.target="pop";
+		//popupForm.submit();
+	}
+	
 
 	$(".address_registerForm .btn.register").on("click", function(e) {
 		e.preventDefault();

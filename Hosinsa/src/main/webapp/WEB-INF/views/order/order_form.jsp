@@ -14,35 +14,31 @@
 				<ul class="address_shipping">
 					<li>배송지</li>
 					<li>
-						<c:forEach var="shipping" items="${shipping}" varStatus="status">
-							<c:choose>
-								<c:when test="${status.index == 0}">
-									<div>
-										<label><input type=radio class="check" name="shipping" checked="checked">${shipping.shipping}</label>
-										<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
-							 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
-							 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
-							 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
-							 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
-							 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
-							 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
-							 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
-									</div>
-								</c:when>
-								<c:when test="${status.index != 0}">
-									<div>
-										<label><input type=radio class="check" name="shipping">${shipping.shipping}</label>
-										<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
-							 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
-							 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
-							 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
-							 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
-							 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
-							 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
-							 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
-									</div>
-								</c:when>
-							</c:choose>								
+						<div>
+							<label><input type=radio class="check" name="shipping" checked="checked">${address.shipping}</label>
+							<input type="hidden" class="hidden" name="address_no" value="${address.address_no}">
+							<input type="hidden" class="hidden" name="id" value="${address.id}">
+				 			<input type="hidden" class="hidden" name="recipient" value="${address.recipient}">
+				 			<input type="hidden" class="hidden" name="shipping" value="${address.shipping}">
+				 			<input type="hidden" class="hidden" name="phone" value="${address.phone}">
+				 			<input type="hidden" class="hidden" name="tel" value="${address.tel}">
+				 			<input type="hidden" class="hidden" name="zipcode" value="${address.zipcode}">
+				 			<input type="hidden" class="hidden" name="address" value="${address.address}">
+				 			<input type="hidden" class="hidden" name="basic" value="${address.basic}">
+						</div>
+						<c:forEach var="shipping" items="${shipping}" varStatus="status">									
+							<div>
+								<label><input type=radio class="check" name="shipping">${shipping.shipping}</label>
+								<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
+								<input type="hidden" class="hidden" name="id" value="${shipping.id}">
+					 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
+					 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
+					 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
+					 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
+					 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
+					 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
+					 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
+							</div>
 					 	</c:forEach>
 					 </li>
 					 <li>
@@ -52,7 +48,7 @@
 					 		</c:when>
 					 		<c:otherwise>
 					 			<button type="button" class="address_modify">배송지 변경</button>
-					 		</c:otherwise>
+					 		</c:otherwise>					 		
 					 	</c:choose>
 					</li>
 				</ul>
@@ -75,7 +71,8 @@
 				
 			</div>
 		</form>
-		<form class="popupForm" action="/order/order_form" method="post" onsubmit="return false;">
+		<form class="popupForm" name="popupForm" action="/order/order_form" method="post" onsubmit="return false">
+			<input type="hidden" name="userid" value="${member.id}">
 		</form>
 	</div>
 	<div class="orderInfo">
@@ -109,54 +106,7 @@
 	</div>
 </div>
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                
-                } else {
-                    document.getElementById("sample6_extraAddress").value = '';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("sample6_detailAddress").focus();
-            }
-        }).open();
-    }
-</script>
 
 <script src="../../../resources/js/order.js"></script>
 <%@ include file="../includes/footer.jsp"%>
