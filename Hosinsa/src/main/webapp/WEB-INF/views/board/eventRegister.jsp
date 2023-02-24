@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
 <div class="contentWrap">
-	<form class="eventRegister"role="form" action="/board/event/register" enctype="multipart/form-data" method="post">
+	<form class="eventRegister" role="form" action="/board/event/register" enctype="multipart/form-data" method="post">
 		<div class="imgWrap">
 			<img class="event_img" src="/resources/images/eventBanner/upload.jpg">
 			<input type="file" name="uploadFile" class="event_imgFile hidden">

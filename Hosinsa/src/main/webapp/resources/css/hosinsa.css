@@ -387,15 +387,16 @@ button.del_Btn{margin-top:10px}
 .modal-content.medium-modal .modal-body input{margin-bottom:15px}
 .modal-footer{padding:0 20px;text-align:center}
 /* board notice - 공지사항 게시판 */
-.Notice.table4{width:100%;margin:0 0 30px 0;border:1px solid lightgray}
-.Notice.table4 th{padding:10px;border:1px solid lightgray}
-.Notice.table4 th:nth-child(1){width:5%}
-.Notice.table4 th:nth-child(2){width:65%}
-.Notice.table4 th:nth-child(3){width:10%}
-.Notice.table4 th:nth-child(4){width:10%}
-.Notice.table4 th:nth-child(5){width:10%}
-.Notice.table4 td{text-align:center;padding:10px;border:1px solid lightgray}
-.Notice.table4 a{text-decoration:none;color:#333}
+.table4{width:100%;margin:0 0 30px 0;border:1px solid lightgray}
+.table4 th{padding:10px;border:1px solid lightgray}
+.table4 th:nth-child(1){width:5%}
+.table4 th:nth-child(2){width:65%}
+.table4 th:nth-child(3){width:10%}
+.table4 th:nth-child(4){width:10%}
+.table4 th:nth-child(5){width:10%}
+.table4 td{text-align:center;padding:10px;border:1px solid lightgray}
+.table4 td:nth-child(2){text-align:left}
+.table4 a{text-decoration:none;color:#333}
 .searchNotice {float:right;width:400px;}
 .searchNotice input{width:350px;height:20px;border:1px solid lightgray;border-radius:0}
 .searchNotice button{height:24px;border:1px solid lightgray;border-radius:0}
@@ -415,5 +416,23 @@ button.del_Btn{margin-top:10px}
 .noticeRegister .noticeBtn{text-align:center}
 .noticeRegister .inputDetail{padding:10px;width:518px;margin:0 auto;}
 .noticeBtn .btn{margin:20px 0 0 0}
+
+/* qna 게시판 */
+.qnaWrap #regBtn{float:right;margin-bottom:10px}
+.qna th:nth-child(1),.qna td:nth-child(1) {width:5%}
+.qna th:nth-child(2),.qna td:nth-child(2) {width:10%;text-align:center}
+.qna th:nth-child(3),.qna td:nth-child(3) {width:65%}
+.qna td:nth-child(3){text-align:left}
+.qna th:nth-child(4),.qna td:nth-child(4) {width:10%}
+.qna th:nth-child(5),.qna td:nth-child(5) {width:10%}
+.qnaWrap #searchForm select,.qnaWrap #searchForm input{border-raduius:0;padding:5px;border:1px solid lightgray}
+.qnaWrap #searchForm input{padding:6px}
+.qnaTable{clear:both}
+.panel{margin-top:20px;border:1px solid gray;padding:10px}
+.panel .chat{border:1px solid lightgray;padding:5px;margin-top:5px}
+.panel .chat strong{font-weight:bold;}
+.panel .chat small{float:right;font-size:12px}
+.panel .chat p{padding-top:5px}
+.infoTable~.align_center{margin-top:20px}
 
 #kakao-talk-channel-chat-button{position:fixed;top:800px;right:10px;z-index:4;}
