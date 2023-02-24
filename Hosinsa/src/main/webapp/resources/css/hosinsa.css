@@ -290,7 +290,7 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .array_center{width:550px;margin:0 auto}
 .table3{padding:10px 0;margin-bottom:30px;border-bottom:1px solid lightgray;border-top:3px solid black}
 .table3 img{width:100px;height:100px}
-.table3 th{width:20%;vertical-align:middle}
+.table3 th{width:20%;vertical-align:middle;padding:10px 0}
 .table3 td{width:80%;padding:10px}
 .table3 input{width:100%;padding:5px;border-radius:0;border:1px solid lightgray}
 .table3 input[type=radio]{width:auto;margin-right:0;vertical-align:top}
@@ -380,9 +380,11 @@ button.del_Btn{margin-top:10px}
 /* 모달 팝업 */
 .fade{overflow:hidden;position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(0,0,0,0.5)}
 .modal-content{position:absolute;top:50%;left:50%;width:600px;height:200px;margin:-100px 0 0 -300px;background:white;}
+.modal-content.medium-modal{height:300px;margin-top:-150px}
 .modal-header{background:black;color:white;padding:20px;}
 .modal-body{padding:30px 20px;}
 .modal-body input{border:1px solid lightgray;font-size:14px;width:100%;padding:5px;box-sizing:border-box}
+.modal-content.medium-modal .modal-body input{margin-bottom:15px}
 .modal-footer{padding:0 20px;text-align:center}
 /* board notice - 공지사항 게시판 */
 .Notice.table4{width:100%;margin:0 0 30px 0;border:1px solid lightgray}

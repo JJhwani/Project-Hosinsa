@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.AdminService;
@@ -218,13 +220,16 @@ public class AdminController {
 	}
 	
 	@PostMapping("/sales")
-	public void SalesUpdate(Model model) {
-		
+	public String SalesUpdate(RedirectAttributes rttr, OrderVO vo) {
+		if(adminService.updateProcess(vo)) {
+			rttr.addFlashAttribute("result","success");
+		}
+		return "redirect:/admin/sales";
 	}
 	
 	@GetMapping("/order/{orderNum}")
-	public String getOrderDetail(Model model) {
-		
+	public String getOrderDetail(@PathVariable int orderNum,Model model) {
+		model.addAttribute("order",adminService.getOrder(orderNum));
 		return "/admin/order";
 	}
 

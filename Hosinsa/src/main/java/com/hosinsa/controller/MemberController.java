@@ -190,4 +190,10 @@ public class MemberController {
 	public List<ProductVO> getLikesWithPaging(String id,Integer page) {
 		return memberService.getLikesListWithPaging(id,page);
 	}
+	
+	@GetMapping("/order/{ordernum}")
+	public String getOrder(@PathVariable int ordernum,Model model) {
+		model.addAttribute("order",memberService.getOrder(ordernum));
+		return "/member/order";
+	}
 }

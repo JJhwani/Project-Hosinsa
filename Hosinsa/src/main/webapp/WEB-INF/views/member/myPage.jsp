@@ -83,7 +83,7 @@
 							<td><fmt:formatDate pattern="yyyy-MM-dd hh:MM:ss" value="${order.order_date}"></fmt:formatDate></td>
 							<td><a href="/product/${order.pronum}">${order.proname}</a></td>
 							<td>${order.price}</td>
-							<td>${order.process}</td>
+							<td><a href="/member/order/${order.ordernum }">${order.process}</a></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>		
