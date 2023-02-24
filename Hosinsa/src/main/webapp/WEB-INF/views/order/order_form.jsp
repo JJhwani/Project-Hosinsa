@@ -10,34 +10,83 @@
 %>
 
 <%@ include file="../includes/header.jsp"%>
-<div class="contentWrap">
+<div class="orderWrap">
 	<h2>Order / Payment</h2>
-
-
-	<div class="orderInfo" style="border: 1px solid;"> <!-- 배송지 정보 -->
-		<div class="titleArea">
-			<h1>배송지 입력</h1>
-		</div>
-		<form action="/order/" method="post" class="quantity_plus_form">
-		<div class="order_add">
-			<div class="inputArea">
-				<c:if test="sl">
+	<div class="shippingInfo">
+		<h3>배송정보</h3>
+		<form class="order_form" action="/order" method="post" >
+			<div class="order_address">
+				<ul class="address_shipping">
+					<li>배송지</li>
+					<li>
+						<div>
+							<label><input type=radio class="check" name="shipping" checked="checked">${address.shipping}</label>
+							<input type="hidden" class="hidden" name="address_no" value="${address.address_no}">
+							<input type="hidden" class="hidden" name="id" value="${address.id}">
+				 			<input type="hidden" class="hidden" name="recipient" value="${address.recipient}">
+				 			<input type="hidden" class="hidden" name="shipping" value="${address.shipping}">
+				 			<input type="hidden" class="hidden" name="phone" value="${address.phone}">
+				 			<input type="hidden" class="hidden" name="tel" value="${address.tel}">
+				 			<input type="hidden" class="hidden" name="zipcode" value="${address.zipcode}">
+				 			<input type="hidden" class="hidden" name="address" value="${address.address}">
+				 			<input type="hidden" class="hidden" name="basic" value="${address.basic}">
+						</div>
+						<c:forEach var="shipping" items="${shipping}" varStatus="status">									
+							<div>
+								<label><input type=radio class="check" name="shipping">${shipping.shipping}</label>
+								<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
+								<input type="hidden" class="hidden" name="id" value="${shipping.id}">
+					 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
+					 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
+					 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
+					 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
+					 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
+					 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
+					 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
+							</div>
+					 	</c:forEach>
+					 </li>
+					 <li>
+					 	<c:choose>
+					 		<c:when test="${total == 0}">
+					 			<button type="button" class="address_register">배송지 등록</button>
+					 		</c:when>
+					 		<c:otherwise>
+					 			<button type="button" class="address_modify">배송지 변경</button>
+					 		</c:otherwise>					 		
+					 	</c:choose>
+					</li>
+				</ul>
+				<ul class="address_info1">
+					<li>이름 / 연락처</li>
+					<li><p class="recipient">${address.recipient}</p></li>
+					<li><p class="phone">${address.phone}</p></li>
+					<li><p class="tel">${address.tel}</p></li>
+					<li></li>
+				</ul>
+				<ul class="address_info2">		
+					<li>주소</li>
+					<li><p class="address">(${address.zipcode})&nbsp;${address.address}</p>
+					<li></li>
+				</ul>
+				<div class="inputArea">
+					<button type="submit" class="order_btn">주문</button>
+					<button type="button" class="cancel_btn">취소</button>
+				</div>
 				
-				</c:if>
 			</div>
-		</div>
+		</form>
+		<form class="popupForm" name="popupForm" action="/order/order_form" method="post" onsubmit="return false">
+			<input type="hidden" name="userid" value="${member.id}">
+		</form>
 	</div>
-	<br> <br>
-	<div class="orderInfo_pro" style="border: 1px solid;"> <!-- 결제 상품정보 -->
-		<div class="titleArea">
-			<h1>상품정보</h1>
-		</div>
+	<div class="orderInfo">
+		<h2>상품정보</h2>
 		<table width="100%">
 			<div class="order_">
 				<tr>
-					<th></th>
-					<th>주문 번호</th>
-					<th></th>
+					<th>상품정보</th>
+					<th>수량</th>
 					<th>제품 번호</th>
 					<th>제품 이름</th>
 					<th>수량</th>
@@ -166,5 +215,6 @@ $(function() {
 
 
 
+<script src="../../../resources/js/order.js"></script>
 <%@ include file="../includes/footer.jsp"%>
 </html>

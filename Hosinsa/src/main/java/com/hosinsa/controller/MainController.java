@@ -59,7 +59,7 @@ public class MainController {
 		model.addAttribute("notice", boardService.getListMainNotice(bnvo));
 
 		int total = service.getTotalCountView(vo);
-		model.addAttribute("pageMaker", new PageDTO(vo, total));	
+		model.addAttribute("pageMaker", new PageDTO(vo, total));
 
 		return "main";
 	}
