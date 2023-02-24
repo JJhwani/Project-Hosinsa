@@ -38,6 +38,8 @@
 		select count(*) from hosinsa_likes where id = #{id} and pronum = #{pronum} 
 	</select>
 	
-	
+	<select id="getLikesTotal" resultType="int">
+		select count(*) from hosinsa_likes where id = #{id}
+	</select>
 
 </mapper>

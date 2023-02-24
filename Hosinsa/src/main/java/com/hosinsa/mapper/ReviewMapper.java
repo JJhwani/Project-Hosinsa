@@ -26,5 +26,6 @@ public interface ReviewMapper {
 			public int getCountByBno(Long bno);
 			public void updateReplyCount(@Param("bno") Long bno,@Param("amount") Integer amount);
 			public void deletePre(PreReviewVO vo);
+			public void updateReviewCount(@Param("pronum") Integer pronum,@Param("amount") Integer amount);
 
 }

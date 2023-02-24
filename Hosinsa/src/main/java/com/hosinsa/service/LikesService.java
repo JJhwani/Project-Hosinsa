@@ -11,6 +11,6 @@ public interface LikesService {
 	public List<LikesVO> getProList(int pronum);
 	public List<LikesVO> getMyList(LikesVO vo);
 	public int likesCheck(String id, int pronum);
-
+	public int getLikesTotal(String id);
 
 }

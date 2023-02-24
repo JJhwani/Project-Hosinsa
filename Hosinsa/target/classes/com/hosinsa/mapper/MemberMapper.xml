@@ -45,6 +45,15 @@
 	select * from hosinsa_review where id=#{id} order by bno desc
 </select>
 
+<select id="getLikesListWithPaging" resultType="com.hosinsa.domain.ProductVO" parameterType="Map">
+	<![CDATA[
+		select * from 
+			(select rownum rn, p.* from hosinsa_product p, hosinsa_likes l 
+			where p.pronum=l.pronum and l.id=#{id} and rownum <= 14*#{page})
+		where rn > 14*(#{page}-1)
+	]]>
+</select>
+
 <!-- INSERT 문 -->
 <insert id="insert">
 	insert into hosinsa_member values

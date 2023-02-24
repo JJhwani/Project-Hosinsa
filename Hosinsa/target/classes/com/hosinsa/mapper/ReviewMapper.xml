@@ -102,4 +102,8 @@
 	 		delete from hosinsa_p_review where ordernum = #{ordernum} and pronum = #{pronum}
 	 	</delete>
 	 	
+	 	<update id="updateReviewCount" parameterType="map">
+	 		update hosinsa_product set review = review + #{amount} where pronum = ${pronum}
+	 	</update>
+	 	
 </mapper>
