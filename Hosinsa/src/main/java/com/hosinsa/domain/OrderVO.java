@@ -49,4 +49,7 @@ public class OrderVO {
 	private String process; //배송상태
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date order_date; //주문날짜
+	private String delivery; //택배사
+	private String trackingNum; //운송장번호
+	private String reason; //주문취소사유
 }

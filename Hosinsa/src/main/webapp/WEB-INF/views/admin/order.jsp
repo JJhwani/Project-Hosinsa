@@ -1,45 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="../includes/header.jsp" %>
-
-<div class="contentWrap">
-	<h2 class="bigTitle">판매관리</h2>
-	<table class="adminList table6">
-		<thead>
+	pageEncoding="UTF-8"%>
+<%@ include file="../includes/header.jsp"%>
+	<div class="contentWrap">
+		<h2 class="bigTitle">주문 정보</h2>
+		<table class="table array_center table3">
 			<tr>
-				<th>관리번호</th>
-				<th>주문번호</th>
-				<th>제품번호</th>
-				<th>제품명</th>
-				<th>수량</th>
-				<th>가격</th>
-				<th>이름</th>
-				<th>연락처</th>
-				<th>아이디</th>				
-				<th>주문일</th>
-				<th>주문상태</th>
-				<th>배송관리</th>
-			</tr>
-		</thead>
-		<c:forEach var="order" items="${orderList }">
-			<tr>
+				<th><label>관리번호</label></th>
 				<td>${order.o_no }</td>
-				<td class="ordernum"><a href="/admin/order/${order.ordernum}">${order.ordernum }</a></td>
-				<td>${order.pronum }</td>
-				<td><a href="/product/${order.pronum}">${order.proname }</a></td>
-				<td>${order.quantity }</td>
-				<td>${order.price }</td>
-				<td>${order.name }</td>
-				<td>${order.phone}</td>
-				<td>${order.id }</td>	
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${order.order_date }"></fmt:formatDate></td>
-				<td>${order.process }</td>
-				<td><button class="modify">배송</button> <button class="delete">취소</button></td>		
 			</tr>
-		</c:forEach>
-	</table>
-</div>
-<!-- Modal -->
+			<tr>
+				<th><label>주문번호</label></th>
+				<td>${order.ordernum }</td>
+			</tr>
+			<tr>
+				<th><label>제품번호</label></th>
+				<td>${order.pronum }</td>
+			</tr>
+			<tr>
+				<th><label>제품명</label></th>
+				<td><a href="/product/${order.pronum}">${order.proname }</a></td>
+			</tr>
+			<tr>
+				<th><label>수량</label></th>
+				<td>${order.quantity }</td>
+			</tr>
+			<tr>
+				<th><label>가격</label></th>
+				<td>${order.price }</td>
+			</tr>
+			<tr>
+				<th><label>할인</label></th>
+				<td>${order.sale }</td>
+			</tr>
+			<tr>
+				<th><label>이름</label></th>
+				<td>${order.name }</td>
+			</tr>
+			<tr>
+				<th><label>주소</label></th>
+				<td>${order.address }</td>
+			</tr>
+			<tr>
+				<th><label>요청사항</label></th>
+				<td>${order.request }</td>
+			</tr>
+			<tr>
+				<th><label>연락처</label></th>
+				<td>${order.phone }</td>
+			</tr>
+			<tr>
+				<th><label>아이디</label></th>
+				<td>${order.id }</td>
+			</tr>
+			<tr>
+				<th><label>주문일</label></th>
+				<td><fmt:formatDate pattern="yyyy-MM-dd hh:MM:ss" value="${order.order_date }"></fmt:formatDate></td>
+			</tr>
+			<tr>
+				<th><label>주문상태</label></th>
+				<td class="process">${order.process}</td>
+			</tr>
+			<tr>
+				<th><label>택배사</label></th>
+				<td>${order.delivery}</td>
+			</tr>
+			<tr>
+				<th><label>운송장번호</label></th>
+				<td>${order.trackingNum}</td>
+			</tr>
+			<tr class="hidden">
+				<th><label>주문취소사유</label></th>
+				<td>${order.reason}</td>
+			</tr>
+		</table>
+		<div class="array_center align_center">
+			<button class="modify">배송</button> <button class="delete">취소</button> <a href="/admin/sales">목록</a>
+		</div>
+	</div>
+	
+	<!-- Modal -->
  <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
  	<div class="modal-dialog">
  	  <div class="modal-content medium-modal">
@@ -51,7 +90,7 @@
  		  <label class="delivery">택배사 <input name="delivery"></label>
  		  <label class="trackingNum">운송장 번호 <input name="trackingNum"></label>
  		  <label class="reason">주문 취소 사유 <input name="reason"></label>
- 		  <input type="hidden" name="ordernum">
+ 		  <input type="hidden" name="ordernum" value="${order.ordernum}">
  		  <input type="hidden" name="process">
  		 </form>
  		</div> 		
@@ -63,6 +102,7 @@
  	</div> 		  
  </div>
 <!-- Modal 끝 -->
+
 <script type="text/javascript">
 $(document).ready(function(){
 	var modal = $("#myModal");
@@ -74,9 +114,7 @@ $(document).ready(function(){
 		$("body").removeClass("fix");
 	})
 	
-	$(".adminList button").on("click",function(e){
-		var ordernum = $(this).parent().siblings(".ordernum").text();
-		$("input[name=ordernum]").val(ordernum)
+	$(".array_center button").on("click",function(e){
 		
 		if($(this).hasClass("modify")){
 			$(".reason").addClass("hidden");
@@ -88,9 +126,7 @@ $(document).ready(function(){
 			$(".delivery").addClass("hidden");
 			$(".trackingNum").addClass("hidden");
 			$("input[name=process]").val("주문 취소");
-		}
-		
-		
+		}		
 		modal.removeClass("hidden");
 		$("body").addClass("fix");				
 	});	
@@ -98,11 +134,7 @@ $(document).ready(function(){
 	$("#modalRegBtn").on("click",function(){
 		$(".salesForm").submit();
 	})
-	
-	if("${result}"=="success"){
-		alert("정상적으로 처리되었습니다.");
-	}
 })
 </script>
 
-<%@ include file="../includes/footer.jsp" %>
+<%@ include file="../includes/footer.jsp"%>

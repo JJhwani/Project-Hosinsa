@@ -54,6 +54,10 @@
 	]]>
 </select>
 
+<select id="getOrder" resultType="com.hosinsa.domain.OrderVO">
+	select * from hosinsa_order where ordernum = #{ordernum}
+</select>
+
 <!-- INSERT 문 -->
 <insert id="insert">
 	insert into hosinsa_member values

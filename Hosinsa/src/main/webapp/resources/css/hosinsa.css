@@ -290,7 +290,7 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .array_center{width:550px;margin:0 auto}
 .table3{padding:10px 0;margin-bottom:30px;border-bottom:1px solid lightgray;border-top:3px solid black}
 .table3 img{width:100px;height:100px}
-.table3 th{width:20%;vertical-align:middle}
+.table3 th{width:20%;vertical-align:middle;padding:10px 0}
 .table3 td{width:80%;padding:10px}
 .table3 input{width:100%;padding:5px;border-radius:0;border:1px solid lightgray}
 .table3 input[type=radio]{width:auto;margin-right:0;vertical-align:top}
@@ -298,6 +298,9 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .table3 .grade{font-size:14px}
 .member_info{margin-top:10px}
 .table3 .proimg{cursor:pointer}
+
+/* admin - 판매관리 */
+.table6{width:100%}
 
 /* 나의 정보 */
 .myInfo .title{padding:20px 0;}
@@ -407,20 +410,23 @@ button.del_Btn{margin-top:10px}
 /* 모달 팝업 */
 .fade{overflow:hidden;position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(0,0,0,0.5)}
 .modal-content{position:absolute;top:50%;left:50%;width:600px;height:200px;margin:-100px 0 0 -300px;background:white;}
+.modal-content.medium-modal{height:300px;margin-top:-150px}
 .modal-header{background:black;color:white;padding:20px;}
 .modal-body{padding:30px 20px;}
 .modal-body input{border:1px solid lightgray;font-size:14px;width:100%;padding:5px;box-sizing:border-box}
+.modal-content.medium-modal .modal-body input{margin-bottom:15px}
 .modal-footer{padding:0 20px;text-align:center}
 /* board notice - 공지사항 게시판 */
-.Notice.table4{width:100%;margin:0 0 30px 0;border:1px solid lightgray}
-.Notice.table4 th{padding:10px;border:1px solid lightgray}
-.Notice.table4 th:nth-child(1){width:5%}
-.Notice.table4 th:nth-child(2){width:65%}
-.Notice.table4 th:nth-child(3){width:10%}
-.Notice.table4 th:nth-child(4){width:10%}
-.Notice.table4 th:nth-child(5){width:10%}
-.Notice.table4 td{text-align:center;padding:10px;border:1px solid lightgray}
-.Notice.table4 a{text-decoration:none;color:#333}
+.table4{width:100%;margin:0 0 30px 0;border:1px solid lightgray}
+.table4 th{padding:10px;border:1px solid lightgray}
+.table4 th:nth-child(1){width:5%}
+.table4 th:nth-child(2){width:65%}
+.table4 th:nth-child(3){width:10%}
+.table4 th:nth-child(4){width:10%}
+.table4 th:nth-child(5){width:10%}
+.table4 td{text-align:center;padding:10px;border:1px solid lightgray}
+.table4 td:nth-child(2){text-align:left}
+.table4 a{text-decoration:none;color:#333}
 .searchNotice {float:right;width:400px;}
 .searchNotice input{width:350px;height:20px;border:1px solid lightgray;border-radius:0}
 .searchNotice button{height:24px;border:1px solid lightgray;border-radius:0}
@@ -440,5 +446,23 @@ button.del_Btn{margin-top:10px}
 .noticeRegister .noticeBtn{text-align:center}
 .noticeRegister .inputDetail{padding:10px;width:518px;margin:0 auto;}
 .noticeBtn .btn{margin:20px 0 0 0}
+
+/* qna 게시판 */
+.qnaWrap #regBtn{float:right;margin-bottom:10px}
+.qna th:nth-child(1),.qna td:nth-child(1) {width:5%}
+.qna th:nth-child(2),.qna td:nth-child(2) {width:10%;text-align:center}
+.qna th:nth-child(3),.qna td:nth-child(3) {width:65%}
+.qna td:nth-child(3){text-align:left}
+.qna th:nth-child(4),.qna td:nth-child(4) {width:10%}
+.qna th:nth-child(5),.qna td:nth-child(5) {width:10%}
+.qnaWrap #searchForm select,.qnaWrap #searchForm input{border-raduius:0;padding:5px;border:1px solid lightgray}
+.qnaWrap #searchForm input{padding:6px}
+.qnaTable{clear:both}
+.panel{margin-top:20px;border:1px solid gray;padding:10px}
+.panel .chat{border:1px solid lightgray;padding:5px;margin-top:5px}
+.panel .chat strong{font-weight:bold;}
+.panel .chat small{float:right;font-size:12px}
+.panel .chat p{padding-top:5px}
+.infoTable~.align_center{margin-top:20px}
 
 #kakao-talk-channel-chat-button{position:fixed;top:800px;right:10px;z-index:4;}

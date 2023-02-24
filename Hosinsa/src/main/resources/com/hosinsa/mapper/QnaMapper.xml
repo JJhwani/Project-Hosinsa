@@ -10,10 +10,10 @@
 				<trim prefix="OR">
 					<choose>
 						<when test="type == 'T'.toString()">
-							qtitle like '%'||#{keyword}||'%'
+							title like '%'||#{keyword}||'%'
 						</when>
 						<when test="type == 'C'.toString()">
-							qcontent like '%'||#{keyword}||'%'
+							content like '%'||#{keyword}||'%'
 						</when>
 						<when test="type == 'W'.toString()">
 							id like '%'||#{keyword}||'%'
@@ -32,11 +32,11 @@
 		resultType="com.hosinsa.domain.QnaVO">
   <![CDATA[
    select 
-     qno, qcategory, qtitle, qcontent, id, qwritedate, replycnt
+     qno, category, title, content, id, regdate, replycnt
    from 
        (
        select /*+INDEX_DESC(hosinsa_qna pk_qna) */
-         rownum rn, qno, qcategory, qtitle, qcontent, id, qwritedate, replycnt
+         rownum rn, qno, category, title, content, id, regdate, replycnt
        from 
          hosinsa_qna
       where
@@ -53,8 +53,8 @@
 	
 	
 	<insert id="insert">
-		insert into hosinsa_qna(qno, qcategory, qtitle, qcontent, id)
-		values(seq_qna.nextval, #{qcategory}, #{qtitle}, #{qcontent}, #{id})
+		insert into hosinsa_qna(qno, category, title, content, id)
+		values(seq_qna.nextval, #{category}, #{title}, #{content}, #{id})
 	</insert>
 
 
@@ -63,8 +63,8 @@
 			resultType="long">
 			select seq_qna.nextval from dual
 		</selectKey>
-		insert into hosinsa_qna(qno, qcategory, qtitle, qcontent, id)
-		values(#{qno}, #{qcategory}, #{qtitle}, #{qcontent}, #{id})
+		insert into hosinsa_qna(qno, category, title, content, id)
+		values(#{qno}, #{category}, #{title}, #{content}, #{id})
 	</insert>
 	
 	
@@ -79,9 +79,9 @@
 		<update id="update">
 		update hosinsa_qna
 		set
-		qcategory = #{qcategory},
-		qtitle= #{qtitle},
-		qcontent= #{qcontent}
+		category = #{category},
+		title= #{title},
+		content= #{content}
 		where qno = #{qno}
 	</update>
 	

@@ -14,8 +14,7 @@
 
 	<select id="read" resultType="com.hosinsa.domain.ReplyVO">
 
-		select * from hosinsa_reply where
-		rno = #{rno}
+		select * from hosinsa_reply where rno = #{rno}
 
 	</select>
 
@@ -28,8 +27,7 @@
 	<update id="update">
 
 		update hosinsa_reply set reply = #{reply}, updatedate
-		= sysdate where rno =
-		#{rno}
+		= sysdate where rno = #{rno}
 
 	</update>
 

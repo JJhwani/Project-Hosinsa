@@ -70,6 +70,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<OrderVO> getOrderList() {
 		return mapper.getOrderList();
+	}
+
+	@Override
+	public OrderVO getOrder(int orderNum) {		
+		return mapper.getOrder(orderNum);
+	}
+
+	@Override
+	public boolean updateProcess(OrderVO vo) {
+		return mapper.updateProcess(vo)==1?true:false;
 	}	
 
 }
