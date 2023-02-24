@@ -77,7 +77,7 @@
 			</div>
 		</form>
 		<form class="popupForm" name="popupForm" action="/order/order_form" method="post" onsubmit="return false">
-			<input type="hidden" name="userid" value="${member.id}">
+			<input type="hidden" id="userid" name="userid" value="${member.id}">
 		</form>
 	</div>
 	<div class="orderInfo">
