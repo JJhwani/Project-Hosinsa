@@ -5,45 +5,41 @@
 
 <%@include file="../includes/header.jsp"%>
 
-<link rel="stylesheet" href="../../../resources/css/hosinsa.css">
-
 <div class="container">
-	<h2>Q&A</h2>
+	<h2>Notice</h2>
 
-	<button id='regBtn' type="button" class="btn pull-right">문의하기</button>
+	<button id='regBtn' type="button" class="btn pull-right">공지사항 등록</button>
 
 	<table class="table">
 		<thead>
 			<tr>
 				<th>번호</th>
-				<th>구분</th>
 				<th>제목</th>
 				<th>작성자</th>
 				<th>작성일</th>
+				<th>조회</th> <!-- 추가 -->
 			</tr>
 		</thead>
 
-<c:forEach items="${list}" var="qna">
+		<c:forEach items="${list}" var="notice">
 			<tr>
-				<td><c:out value="${qna.qno}" /></td>				
-				<td><c:out value="${qna.category }" /></td>
-				
-				<td>
-				<a class='move' href='<c:out value="${qna.qno}"/>'>
-				<c:out value="${qna.title}" /> 
-				<b>[ <c:out value="${qna.replyCnt}" /> ]</b></a></td>
-				<td><c:out value="${qna.id}" /></td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${qna.regdate}" /></td>
+				<td><c:out value="${notice.nno}" /></td>
+				<td><a class='move' href='<c:out value="${notice.nno}"/>'>
+									<c:out value="${notice.ntitle}" /></a></td>
+				<td><c:out value="${notice.id}" /></td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd"
+						value="${notice.nwritedate}" /></td>
+						<td><c:out value="${notice.readcount}" /></td> <!-- 추가 -->
 			</tr>
 		</c:forEach>
 	</table>
 	
 	<div class='row'>
 		<div class="col-lg-12">
-			<!-- 검색 처리 -->
-			<form id='searchForm' action="/qna/list" method='get'>
+
+			<form id='searchForm' action="/notice/list" method='get'>
 				<select name='type'>
-<%-- 					<option value=""
+<%-- 				<option value=""
 						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>-검색 종류 선택-</option> --%>
 					<option value="T"
 						<c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
@@ -69,7 +65,7 @@
 		</div>
 	</div>
 
-<!-- 페이지 처리 -->
+
 	<div class='pull-right'>
 		<ul class="pagination">
 
@@ -96,7 +92,7 @@
 	<!--  end Pagination -->
 </div>
 
-<form id='actionForm' action="/qna/list" method='get'>
+<form id='actionForm' action="/notice/list" method='get'>
 	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 	<input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'> 
@@ -135,7 +131,6 @@
 
 						checkModal(result);
 
-						//뒤로가기 문제
 						history.replaceState({}, null, null);
 
 						function checkModal(result) {
@@ -150,20 +145,15 @@
 												+ " 번이 등록되었습니다.");
 							}
 
-						$("#myModal").modal("show"); //모달창 보여주기
-
-							
+							$("#myModal").show();
 						}
-						
-						//문의하기 버튼 처리
+
 						$("#regBtn").on("click", function() {
 
-							self.location = "/qna/register";
+							self.location = "/notice/register";
 
-						}); 
-						
-						//페이지 번호 클릭시 처리
-						
+						});
+
 						var actionForm = $("#actionForm");
 
 						$(".paginate_button a").on("click", function(e) {
@@ -176,16 +166,14 @@
 									actionForm.submit();
 								});
 
-						//게시물의 제목 클릭시 이동
 						$(".move").on("click",function(e) {
 
 											e.preventDefault();
-											actionForm.append("<input type='hidden' name='qno' value='"+ $(this).attr("href")+ "'>");
-											actionForm.attr("action", "/qna/get");
+											actionForm.append("<input type='hidden' name='nno' value='"+ $(this).attr("href")+ "'>");
+											actionForm.attr("action", "/notice/get");
 											actionForm.submit();
 										});
 
-						//검색 버튼 이벤트 처리
 						var searchForm = $("#searchForm");
 
 						$("#searchForm button").on("click",function(e) {
