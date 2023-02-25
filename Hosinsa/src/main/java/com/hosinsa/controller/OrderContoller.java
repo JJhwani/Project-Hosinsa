@@ -24,8 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.CartVO;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
 import com.hosinsa.service.OrderService;
 
 import lombok.AllArgsConstructor;
@@ -46,7 +49,6 @@ public class OrderContoller {
 	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
 		Model model, @ModelAttribute("member") MemberVO member) {
 		log.info("order________________"); 
-		log.info(valueArr); 
 		
 		model.addAttribute("order",service.getOrder(valueArr));
 		
@@ -58,19 +60,9 @@ public class OrderContoller {
 		
 	}
 	
-	@PostMapping("/complete")
-	public String complete() {
-		log.info("complete________________");
-//		39log.info(valueArr); 
-		
-//		model.addAttribute("complete",service.getOrder(valueArr));
-		
-		return "/order/complete";
-	}
-	
-	@GetMapping("/complete")
-	public void completePage(Model model) {
-		
+	@GetMapping("/success")
+	public void success() {
+				
 	}
 	
 	// 주문 취소시 화면 전환
@@ -84,14 +76,30 @@ public class OrderContoller {
 	public void failPage() {
 		
 	}
+
+	// 주문 처리
+	@PostMapping("/complete")
+	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo) {
+		
+		vo.setOrdernum((System.currentTimeMillis()));
+		log.info(vo.getOrdernum());
+		service.getOrderIn(vo, cartnum);
+		
+		
+		service.getOrder_del(cartnum);
+	}
 	
+	@GetMapping("/complete")
+	public void complete() {
+		
+	}
 	
 	// 카카오페이 결제
 	@RequestMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(Integer total) {
 		log.info("kakaopay________________");
-		log.info(total);
+		
 		try {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
 			HttpURLConnection link = (HttpURLConnection) address.openConnection();
@@ -104,7 +112,7 @@ public class OrderContoller {
 			String parm = "cid=TC0ONETIME&partner_order_id=partner_order_id"
 					+ "&partner_user_id=partner_user_id&item_name=호신사"
 					+ "&quantity=1&total_amount="+total+"&vat_amount=200&tax_free_amount=0"
-					+ "&approval_url=http://localhost:8081/order/complete"
+					+ "&approval_url=http://localhost:8081/order/success"
 					+ "&fail_url=http://localhost:8081/order/fail"
 					+ "&cancel_url=http://localhost:8081/order/cancel";
 			

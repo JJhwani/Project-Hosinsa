@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class OrderVO {
 	private int o_no; //고유번호
-	private int ordernum; //주문번호
+	private long ordernum; //주문번호
 	private int pronum; //상품번호
 	private int quantity; //상품개수
 	private int price; //가격

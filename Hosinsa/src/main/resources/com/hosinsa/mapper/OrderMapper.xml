@@ -11,11 +11,39 @@
 	  </foreach>
 </select>
 
-<delete id="getComplete" parameterType="java.util.List">
-	delete * from hosinsa_cart where CARTNUM in
+<delete id="getOrder_del" parameterType="java.util.List">
+	delete hosinsa_cart where CARTNUM in
 		<foreach collection="list" item="cartnum" index="index" open="(" close=")" separator="," >
 	  	#{cartnum}
 	  </foreach>
 </delete>
+
+<update id="getOrderIn" parameterType="map">
+	<foreach collection="cartnum" item="cartnum" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+                 INTO hosinsa_order  (
+                       ordernum, 
+                       PRONUM, 
+                       QUANTITY, 
+                       PRICE,
+                       PRONAME,  
+					   NAME,
+					   ADDRESS,
+					   REQUEST,
+					   PHONE,
+					   ID,
+					   ORDER_DATE
+                ) VALUES(
+                     #{vo.ordernum},
+			(select pronum from hosinsa_cart where cartnum = #{cartnum}),
+    		(select QUANTITY from hosinsa_cart where cartnum = #{cartnum}),
+    		(select price from hosinsa_cart where cartnum = #{cartnum}),
+	    	(select PRONAME from hosinsa_cart where cartnum = #{cartnum}),
+	    	#{vo.name},#{vo.address},#{vo.request},#{vo.phone},#{vo.id},sysdate
+                )
+	</foreach>
+</update>
+
+
+
 
 </mapper>

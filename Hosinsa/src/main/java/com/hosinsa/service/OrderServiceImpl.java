@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hosinsa.domain.CartVO;
+import com.hosinsa.domain.OrderVO;
 import com.hosinsa.mapper.CartMapper;
 import com.hosinsa.mapper.OrderMapper;
 
@@ -21,7 +22,13 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	@Override
-	public List<CartVO> getComplete(List<Integer> chArr) {
-		return mapper.getComplete(chArr);
+	public void getOrder_del(List<Integer> chArr) {
+		mapper.getOrder_del(chArr);
+	}
+	
+	@Override
+	public void getOrderIn(OrderVO vo, List<Integer> cartnum) {
+		mapper.getOrderIn(vo, cartnum);
+		
 	}
 }
