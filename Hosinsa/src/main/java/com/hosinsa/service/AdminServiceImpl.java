@@ -73,7 +73,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public OrderVO getOrder(int orderNum) {		
+	public OrderVO getOrder(long orderNum) {		
 		return mapper.getOrder(orderNum);
 	}
 

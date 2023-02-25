@@ -108,7 +108,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public OrderVO getOrder(int ordernum) {
+	public OrderVO getOrder(long ordernum) {
 		return memberMapper.getOrder(ordernum);
 	}
 }

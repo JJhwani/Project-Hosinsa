@@ -9,7 +9,19 @@
 	<h2>Order / Payment</h2>
 	<div class="shippingInfo">
 		<h3>배송정보</h3>
+		<form action="/order/complete" method="post" id="orderForm">
+	      <div class="titleArea">
+	         <h1>배송지 입력</h1>
+	         <input type="hidden" name="name" value="sangho">
+	         <input type="hidden" name="address" value="sangho">
+	         <input type="hidden" name="request" value="sangho">
+	         <input type="hidden" name="phone" value="sangho">
+	         <input type="hidden" name="id" value="admin">
+	      </div>
+	         <input type="hidden" name="cartnum" value="">
+	   </form>
 		<form class="order_form" action="/order" method="post" >
+		
 			<div class="order_address">
 				<ul class="address_shipping">
 					<li>배송지</li>

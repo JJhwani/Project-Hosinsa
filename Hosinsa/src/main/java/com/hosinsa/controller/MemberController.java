@@ -268,7 +268,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/order/{ordernum}")
-	public String getOrder(@PathVariable int ordernum,Model model) {
+	public String getOrder(@PathVariable long ordernum,Model model) {
 		model.addAttribute("order",memberService.getOrder(ordernum));
 		return "/member/order";
 	}

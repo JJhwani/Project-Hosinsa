@@ -13,7 +13,7 @@
 	<table class="adminList table6">
 		<thead>
 			<tr>
-				<th>관리번호</th>
+				
 				<th>주문번호</th>
 				<th>제품번호</th>
 				<th>제품명</th>
@@ -29,7 +29,7 @@
 		</thead>
 		<c:forEach var="order" items="${orderList }">
 			<tr>
-				<td>${order.o_no }</td>
+				
 				<td class="ordernum"><a href="/admin/order/${order.ordernum}">${order.ordernum }</a></td>
 				<td>${order.pronum }</td>
 				<td><a href="/product/${order.pronum}">${order.proname }</a></td>

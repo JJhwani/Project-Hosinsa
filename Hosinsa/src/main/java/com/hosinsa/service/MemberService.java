@@ -39,6 +39,6 @@ public interface MemberService {
 	public List<ProductVO> getLikesListWithPaging(String id,int page);
 	
 	//주문 정보 불러오기
-	public OrderVO getOrder(int ordernum);
+	public OrderVO getOrder(long ordernum);
 
 }

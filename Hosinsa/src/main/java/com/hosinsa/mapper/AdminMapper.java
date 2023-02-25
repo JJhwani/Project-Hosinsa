@@ -20,6 +20,6 @@ public interface AdminMapper {
 	public List<MemberVO> searchMember(Criteria cri);
 	public int searchTotal(Criteria cri);
 	public List<OrderVO> getOrderList(String process);
-	public OrderVO getOrder(int orderNum);
+	public OrderVO getOrder(long orderNum);
 	public int updateProcess(OrderVO vo);
 }
