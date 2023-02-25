@@ -279,12 +279,12 @@
 							str += "<i>"+formatDate(time)+"</i></div>";
 							str += "<p class='reviewTitle'>" + list[i].title + "</p>";
 							str += "<p class='content'>" + list[i].content + "</p>";
-							
+							str += "<p class='photoreview'>";
 							//"'onerror='this.remove ? this.remove() : this.removeNode()'/>" -> 사진이 없을 경우 엑박이 안나옴
 							str += "<img src='"+list[i].photo1 + "'onerror='this.remove ? this.remove() : this.removeNode()'/>";
 							str += "<img src='"+list[i].photo2 + "'onerror='this.remove ? this.remove() : this.removeNode()'/>";
 							str += "<img src='"+list[i].photo3 + "'onerror='this.remove ? this.remove() : this.removeNode()'/>";
-							
+							str += "</p>";
 
 							str += "<p class='reReplyWrap'><button class='reReply'> 댓글 "+list[i].rereply +"개</button>";
 							if("${member}"!=""){

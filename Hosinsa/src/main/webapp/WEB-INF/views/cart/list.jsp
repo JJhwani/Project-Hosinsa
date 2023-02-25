@@ -31,7 +31,7 @@
 						<td>${cart.pronum}</td>
 						<td><a class="move" href='/product/${cart.pronum}'>${cart.proname}</a></td>
 						<td>
-							<button class="quantity_btn_minus">-</button> ${cart.quantity}
+							<button class="quantity_btn_minus">-</button> <span class="quantity">${cart.quantity}</span>
 							<button class="quantity_btn_plus">+</button>
 						</td>
 						<td>${cart.id}</td>
@@ -184,6 +184,14 @@ $(document).ready(function() {
 			location.reload();
 		}
 	});
+	
+	//수량 마이너스 막기
+	$(".quantity").each(function(){
+		if($(this).text()=="1"){
+			$(this).prev(".quantity_btn_minus").attr("disabled","disabled");
+		}
+	})
+	
 });
 
 </script>

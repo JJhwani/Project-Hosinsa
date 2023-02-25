@@ -110,7 +110,6 @@ public class OrderContoller {
 		
 		return "/order/addressModify";
 	}
-}
 	@RequestMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(Integer total) {
