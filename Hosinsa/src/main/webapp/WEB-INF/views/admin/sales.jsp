@@ -4,6 +4,12 @@
 
 <div class="contentWrap">
 	<h2 class="bigTitle">판매관리</h2>
+	<ul class="category_menu horizental tab4">
+		<li><a class="category" href="결제완료">결제완료</a></li>
+		<li><a class="category" href="배송중">배송중</a></li>
+		<li><a class="category" href="배송완료">배송완료</a></li>
+		<li><a class="category" href="주문취소">주문취소</a></li>
+	</ul>
 	<table class="adminList table6">
 		<thead>
 			<tr>
@@ -39,6 +45,9 @@
 		</c:forEach>
 	</table>
 </div>
+<form class="categoryForm" action="/admin/sales" method="get">
+	<input type="hidden" name="process" value="">
+</form>
 <!-- Modal -->
  <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
  	<div class="modal-dialog">
@@ -87,7 +96,7 @@ $(document).ready(function(){
 			$(".reason").removeClass("hidden");
 			$(".delivery").addClass("hidden");
 			$(".trackingNum").addClass("hidden");
-			$("input[name=process]").val("주문 취소");
+			$("input[name=process]").val("주문취소");
 		}
 		
 		
@@ -102,6 +111,14 @@ $(document).ready(function(){
 	if("${result}"=="success"){
 		alert("정상적으로 처리되었습니다.");
 	}
+	
+	var categoryForm = $(".categoryForm");
+	
+	$(".category").on("click",function(e){
+		e.preventDefault();
+		categoryForm.find("input[name='process']").val($(this).attr("href"));
+		categoryForm.submit();
+	});
 })
 </script>
 

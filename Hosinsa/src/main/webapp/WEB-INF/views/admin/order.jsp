@@ -125,7 +125,7 @@ $(document).ready(function(){
 			$(".reason").removeClass("hidden");
 			$(".delivery").addClass("hidden");
 			$(".trackingNum").addClass("hidden");
-			$("input[name=process]").val("주문 취소");
+			$("input[name=process]").val("주문취소");
 		}		
 		modal.removeClass("hidden");
 		$("body").addClass("fix");				

@@ -178,35 +178,30 @@
 								});
 
 						//게시물의 제목 클릭시 이동
-						$(".move").on("click",function(e) {
-
-											e.preventDefault();
-											actionForm.append("<input type='hidden' name='qno' value='"+ $(this).attr("href")+ "'>");
-											actionForm.attr("action", "/qna/get");
-											actionForm.submit();
-										});
+						$(".move").on("click",function(e) {						
+							e.preventDefault();
+							actionForm.append("<input type='hidden' name='qno' value='"+ $(this).attr("href")+ "'>");
+							actionForm.attr("action", "/qna/get");
+							actionForm.submit();
+						});
 
 						//검색 버튼 이벤트 처리
 						var searchForm = $("#searchForm");
 
 						$("#searchForm button").on("click",function(e) {
 
-									if (!searchForm.find("option:selected").val()) {
-										alert("검색 종류를 선택하세요");
-										return false;
-									}
-
-									if (!searchForm.find("input[name='keyword']").val()) {
-										alert("키워드를 입력하세요");
-										return false;
-									}
-
-									searchForm.find("input[name='pageNum']").val("1");
-									e.preventDefault();
-
-									searchForm.submit();
-
-								});
+								if (!searchForm.find("option:selected").val()) {
+									alert("검색 종류를 선택하세요");
+									return false;
+								}
+								if (!searchForm.find("input[name='keyword']").val()) {
+									alert("키워드를 입력하세요");
+									return false;
+								}
+								searchForm.find("input[name='pageNum']").val("1");
+								e.preventDefault();
+								searchForm.submit();
+							});
 					});
 </script>
 

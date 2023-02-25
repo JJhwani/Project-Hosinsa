@@ -215,8 +215,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/sales")
-	public void adminSalesList(Model model) {
-		model.addAttribute("orderList",adminService.getOrderList());
+	public void adminSalesList(Model model,String process) {
+		model.addAttribute("orderList",adminService.getOrderList(process));
 	}
 	
 	@PostMapping("/sales")
