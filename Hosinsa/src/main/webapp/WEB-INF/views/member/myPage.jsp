@@ -62,7 +62,7 @@
 					</c:otherwise>
 				</c:choose>
 			</tr>
-			<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/> </td></tr>
+			<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/></td></tr>
 			<tr><th>이메일</th><td>${member.email }</td></tr>
 			<tr><th>연락처</th><td>${member.phone }</td></tr>
 		</table>
