@@ -12,40 +12,27 @@ import com.hosinsa.domain.ReviewVO;
 
 public interface MemberMapper {
 
-//	@Select("select * from hosinsa_member")
 	public List<MemberVO> getList();
-
-	public void insert(MemberVO member);
-
-//	public void insertSelectKey(MemberVO member);
-
+	public int insert(MemberVO member);
 	public MemberVO read(String id);
-
-	public int delete(String id);
-
+	public int delete(MemberVO member);
 	public int update(MemberVO member);
-
 	// 로그인
 	public MemberVO memberLogin(MemberVO member);
-
 	// ID 중복체크
 	public int idCheck(String memberId);
-
 	// Nickname 중복체크
 	public int nickCheck(String memberNickname);
-
 	// Introducer 중복체크
 	public int introCheck(String memberIntroducer);
-	
+	// 카카오 로그인 
+	public void kakaoInsert(MemberVO member);
 	// 주문내역 불러오기
 	public List<OrderVO> getOrderList(String id);
-	
 	//작성가능리뷰 불러오기
 	public List<PreReviewVO> getPreList(String id);
-	
 	//작성한 리뷰 불러오기
 	public List<ReviewVO> getAlreadyList(String id);
-	
 	//찜한 목록 불러오기
 	public List<ProductVO> getLikesListWithPaging(@Param("id") String id,@Param("page") int page);
 	
