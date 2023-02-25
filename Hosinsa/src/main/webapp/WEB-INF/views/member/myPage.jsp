@@ -44,7 +44,7 @@
 		<h4 class="title">나의 정보</h4>
 		<table class="table3 member_info">
 			<tr><th>나의 등급</th><td>${member.grade }</td></tr>
-			<tr><th>프로필이미지</th><td><img src="../${member.profilimg }"></td></tr>
+			<tr><th>프로필이미지</th><td><img src="../${member.profilimg}"></td></tr>
 			<tr><th>이름</th><td>${member.name }</td></tr>
 			<tr><th>아이디</th><td>${member.id }</td></tr>
 			<tr><th>닉네임</th><td>${member.nickname }</td></tr>
