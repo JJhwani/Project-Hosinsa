@@ -1,34 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hosinsa.mapper.MemberAddressMapper">
-	<!-- getList -->
-	<select id="getList" resultType="com.hosinsa.domain.MemberAddressVO">
-		SELECT * FROM HOSINSA_MEMBER_ADDRESS
-		select * from member_address where address_no > 0
+	<!-- getListBasic -->
+	<select id="getListBasic" resultType="com.hosinsa.domain.MemberAddressVO">
+		SELECT * FROM HOSINSA_MEMBER_ADDRESS WHERE BASIC = 'O' AND ID = #{id}
 	</select>
-	<insert id="register">
-		IN
-		insert into member_address values
-		(address_seq.nextval,#{id}, #{address}, #{zipcode})
+	<!-- getListOrder -->
+	<select id="getListOrder" resultType="com.hosinsa.domain.MemberAddressVO">
+		<![CDATA[
+			SELECT ADDRESS_NO, ID, RECIPIENT, SHIPPING, PHONE, TEL, ZIPCODE, ADDRESS, BASIC, REGDATE, UPDATE_DATE
+				FROM
+				(SELECT * FROM HOSINSA_MEMBER_ADDRESS ORDER BY UPDATE_DATE DESC)
+			WHERE ROWNUM <= 2 AND ID = #{id} AND BASIC = 'X'
+		]]>
+	</select>
+	<!-- getListWithPaging -->
+	<select id="getListWithPaging" resultType="com.hosinsa.domain.MemberAddressVO">
+		<![CDATA[
+			SELECT ADDRESS_NO, ID, RECIPIENT, SHIPPING, PHONE, TEL, ZIPCODE, ADDRESS, BASIC, REGDATE, UPDATE_DATE
+			FROM
+				(SELECT ROWNUM RN, ADDRESS_NO, ID, RECIPIENT, SHIPPING, PHONE, TEL, ZIPCODE, ADDRESS, BASIC, REGDATE, UPDATE_DATE
+				FROM HOSINSA_MEMBER_ADDRESS WHERE ROWNUM <= #{b_pageNum} * #{b_amount})				
+			WHERE RN > (#{b_pageNum} - 1) * #{b_amount} AND ID = #{id}
+		]]>
+	</select>
+	<!-- registerSelectKey -->
+	<insert id="registerSelectKey">
+		<selectKey keyProperty="address_no" order="BEFORE" resultType="Long">
+			SELECT SEQ_MEMBER_ADDRESS.NEXTVAL FROM DUAL
+		</selectKey>
+			INSERT INTO INTO HOSINSA_MEMBER_ADDRESS(ADDRESS_NO, ID, RECIPIENT, SHIPPING, PHONE, TEL, ZIPCODE, ADDRESS, BASIC, REGDATE, UPDATE_DATE)
+			VALUES(SEQ_MEMBER_ADDRESS.NEXTVAL, #{id}, #{recipient}, #{shipping}, #{phone}, #{tel}, #{zipcode}, #{address}, #{basic}, SYSDATE, SYSDATE)
 	</insert>
-	<!-- getList -->
+	<!-- read -->
 	<select id="read" resultType="com.hosinsa.domain.MemberAddressVO">
-		select * from member_address where address_no = #{address_no}
+		SELECT * FROM HOSINSA_MEMBER_ADDRESS WHERE ADDRESS_NO = #{address_no}
 	</select>
-	
-	<!-- register -->
-	<!-- DELETE 문 -->
-	<delete id="delete">
-		delete from member_address where address_no = #{address_no}
-	</delete>
-	
-	<!-- UPDATE 문 -->
-	<update id="update">
-		update member_address set
-		id = #{id},
-		address = #{address},
-		zipcode = #{zipcode}
-		where address_no = #{address_no}
+	<!-- modifyBasic -->
+	<update id="modifyBasic">
+		UPDATE HOSINSA_MEMBER_ADDRESS SET
+		BASIC = 'X'
+		WHERE ADDRESS_NO = (SELECT ADDRESS_NO FROM HOSINSA_MEMBER_ADDRESS WHERE BASIC='O')
 	</update>
+	<!-- modify -->
+	<update id="modify">
+		UPDATE HOSINSA_MEMBER_ADDRESS SET
+		RECIPIENT = #{recipient},
+		SHIPPING = #{shipping},
+		PHONE = #{phone},
+		TEL = #{tel},
+		ZIPCODE = #{zipcode},
+		ADDRESS = #{address},
+		BASIC = #{basic}
+		UPDATE_DATE = SYSDATE,
+		WHERE ADDRESS_NO = #{address_no}
+	</update>
+	<!-- remove -->
+	<delete id="remove">
+		DELETE FROM HOSINSA_MEMBER_ADDRESS WHERE ADDRESS_NO = #{address_no}
+	</delete>
+	<!-- getTotalCountAddress -->
+	<select id="getTotalCountAddress" resultType="int" >
+		SELECT COUNT(*) FROM HOSINSA_MEMBER_ADDRESS WHERE ID = #{id}
+	</select>
 
 </mapper>

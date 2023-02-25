@@ -1,16 +1,27 @@
 package com.hosinsa.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
+import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.PreReviewVO;
+import com.hosinsa.domain.ProductVO;
 import com.hosinsa.domain.ReviewVO;
 import com.hosinsa.mapper.MemberMapper;
 
@@ -45,9 +56,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean remove(String id) {
-		log.info("remove...." + id);
-		return memberMapper.delete(id) == 1;
+	public int remove(MemberVO member) {
+		log.info("remove...." + member);
+		return memberMapper.delete(member);
 	}
 
 	@Override
@@ -89,5 +100,15 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<ReviewVO> getAlreadyList(String id) {
 		return memberMapper.getAlreadyList(id);
+	}
+
+	@Override
+	public List<ProductVO> getLikesListWithPaging(String id,int page) {
+		return memberMapper.getLikesListWithPaging(id,page);
+	}
+
+	@Override
+	public OrderVO getOrder(int ordernum) {
+		return memberMapper.getOrder(ordernum);
 	}
 }

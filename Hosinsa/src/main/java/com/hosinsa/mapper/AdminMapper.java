@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
 import com.hosinsa.domain.ProductVO;
 
 public interface AdminMapper {
@@ -18,4 +19,7 @@ public interface AdminMapper {
 	public List<MemberVO> getListWithPaging(Criteria cri);
 	public List<MemberVO> searchMember(Criteria cri);
 	public int searchTotal(Criteria cri);
+	public List<OrderVO> getOrderList(String process);
+	public OrderVO getOrder(int orderNum);
+	public int updateProcess(OrderVO vo);
 }

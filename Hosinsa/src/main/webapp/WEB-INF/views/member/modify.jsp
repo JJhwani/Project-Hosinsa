@@ -14,7 +14,7 @@
 				<tr>
 					<th>프로필이미지</th>
 					<td><img src = "../${member.profilimg }" class="proimg">
-					<input type="file" name="uploadFile" class="proimgFile hidden">
+					<input type="file" name="uploadFile" class="proimgFile hidden" accept="image/*">
 					<input name="profilimg" type="hidden" value="${member.profilimg }">
 					</td>
 				</tr>
@@ -32,7 +32,9 @@
 				</tr>
 				<tr>
 					<th>성별</th>
-					<td><input name="gender" type="text" value="${member.gender }"> </td>
+					<td>
+					<input name="gender" type="text" value="${member.gender}" readonly="readonly">
+					</td>
 				</tr>
 				<tr>
 					<th>생일</th>

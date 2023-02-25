@@ -74,4 +74,17 @@ SELECT ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE, NICKNAME, PROFILIMG, GRADE,
 	WHERE ID = #{id}
 </update>
 
+<select id="getOrderList" resultType="com.hosinsa.domain.OrderVO">
+	SELECT * FROM HOSINSA_ORDER WHERE PROCESS = #{PROCESS} ORDER BY ORDER_DATE DESC
+</select>
+
+<select id="getOrder" resultType="com.hosinsa.domain.OrderVO">
+	SELECT * FROM HOSINSA_ORDER WHERE ORDERNUM = #{orderNum}
+</select>
+
+<update id="updateProcess">
+	UPDATE HOSINSA_ORDER SET PROCESS=#{process}, DELIVERY=#{delivery}, TRACKINGNUM=#{trackingNum}, REASON=#{reason}
+	WHERE ORDERNUM=#{ordernum}
+</update>
+
 </mapper>

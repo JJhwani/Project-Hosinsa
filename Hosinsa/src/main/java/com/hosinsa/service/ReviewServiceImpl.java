@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.hosinsa.domain.MemberVO;
@@ -32,6 +33,7 @@ public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	private MemberMapper memberMapper;
 	
+	@Transactional
 	@Override
 	public void regiseter(ReviewVO vo) { 
 		
@@ -42,6 +44,8 @@ public class ReviewServiceImpl implements ReviewService{
 		ProductVO product = mainMapper.getProductByPronum(vo.getPronum());
 		vo.setProname(product.getProname());
 		vo.setProimg(product.getProimg());
+		
+		mapper.updateReviewCount(vo.getPronum(),1);
 		
 		mapper.insertSelectKey(vo); 
 		
@@ -63,11 +67,14 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		return mapper.update(vo) == 1;
 	}
-
+	
+	@Transactional
 	@Override
 	public boolean remove(Long bno) {
 		
 		log.info("삭제===============>" + bno);
+		ReviewVO vo = mapper.read(bno);
+		mapper.updateReviewCount(vo.getPronum(),-1);
 		
 		return mapper.delete(bno) == 1;
 	}
@@ -93,6 +100,5 @@ public class ReviewServiceImpl implements ReviewService{
 	public void deletePre(PreReviewVO vo) {
 		mapper.deletePre(vo);		
 	}
-
 
 }

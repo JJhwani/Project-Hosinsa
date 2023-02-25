@@ -42,11 +42,11 @@
 			<c:if test="${member.grade eq 'S'}">
 				<button class="btn modify">공지사항 수정</button>
 			</c:if>
-			<button class="btn list">뒤로</button>
+			<button class="btn list">목록</button>
 		</div>
-		<input type="text" name="b_keyword" value="${pageMaker_b.cri.b_keyword}">
-		<input type="text" name="b_pageNum" value="${pageMaker_b.cri.b_pageNum}">
-		<input type="text" name="b_amount" value="${pageMaker_b.cri.b_amount}">
+		<input type="hidden" name="b_keyword" value="${pageMaker_b.cri.b_keyword}">
+		<input type="hidden" name="b_pageNum" value="${pageMaker_b.cri.b_pageNum}">
+		<input type="hidden" name="b_amount" value="${pageMaker_b.cri.b_amount}">
 	</form>
 </div>
 

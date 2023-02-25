@@ -31,17 +31,17 @@
 	 	 </select>
 	 	 
 	 	 <insert id="insert">
-	 	 		insert into hosinsa_review (bno,title,content,nickname, uploadDate)
-	 	 		values(seq_review.nextval, #{title}, #{content}, #{nickname}, sysdate)
-	 	 </insert>
+	 	 		insert into hosinsa_review (bno,title,content,nickname, uploadDate, pronum, photo1, photo2, photo3)
+	 	 		values(seq_review.nextval, #{title}, #{content}, #{nickname}, sysdate, #{pronum}, #{photo1}, #{photo2}, #{photo3})
+	 	 </insert> 
 	 	 	
 	 	 
 	 	 <insert id="insertSelectKey">
 	 	 	<selectKey keyProperty="bno" order="BEFORE" resultType="Long">
 	 	 		select seq_review.nextval from dual
 	 	 	</selectKey>
-		 	 	insert into hosinsa_review(bno, id, nickname, title, content, uploadDate, pronum, profilimg, proname, proimg)
-		 	 	values(#{bno}, #{id}, #{nickname}, #{title}, #{content}, sysdate, #{pronum}, #{profilimg}, #{proname}, #{proimg})
+		 	 	insert into hosinsa_review(bno, id, nickname, title, content, uploadDate, pronum, profilimg, proname, proimg, photo1, photo2, photo3)
+		 	 	values(#{bno}, #{id}, #{nickname}, #{title}, #{content}, sysdate, #{pronum}, #{profilimg}, #{proname}, #{proimg}, #{photo1}, #{photo2}, #{photo3})
 	 	 </insert>
 	 	 
 	 	 <select id="read" resultType="com.hosinsa.domain.ReviewVO">
@@ -58,6 +58,9 @@
 	 			update hosinsa_review
 	 			set title = #{title},
 	 			content = #{content},
+	 			photo1 = #{photo1},
+	 			photo2 = #{photo2},
+	 			photo3 = #{photo3},
 	 			uploadDate = sysdate
 	 			where bno = #{bno}
 	 	</update>
@@ -71,11 +74,11 @@
 	 			
 		 <![CDATA[
 		   select
-		 	bno, title, content, nickname, uploaddate, reReply, profilimg
+		 	bno, title, content, nickname, uploaddate, reReply, profilimg, photo1, photo2, photo3
 		 	from
 		 		(
 		 		select /*+INDEX_DESC(HOSINSA_REVIEW PK_REVIEW) */
-		 		rownum rn, bno, title, content, nickname, uploaddate, pronum, reReply, profilimg
+		 		rownum rn, bno, title, content, nickname, uploaddate, pronum, reReply, profilimg, photo1, photo2, photo3
 		   		from
 		 			HOSINSA_REVIEW
 		 		where 
@@ -101,5 +104,9 @@
 	 	<delete id="deletePre">
 	 		delete from hosinsa_p_review where ordernum = #{ordernum} and pronum = #{pronum}
 	 	</delete>
+	 	
+	 	<update id="updateReviewCount" parameterType="map">
+	 		update hosinsa_product set review = review + #{amount} where pronum = ${pronum}
+	 	</update>
 	 	
 </mapper>
