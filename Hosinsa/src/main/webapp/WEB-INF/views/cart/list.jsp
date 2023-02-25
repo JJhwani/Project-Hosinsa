@@ -24,6 +24,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${list}" var="cart">
+				<c:set var = "sum" value="${sum + (cart.price * cart.quantity)}"/>
 					<tr class="odd gradeX">
 						<td><input type="checkbox" name="Chk_List" id="Chk_List"></td>
 						<td class="cartNum">${cart.cartnum}</td>
@@ -35,7 +36,8 @@
 							<button class="quantity_btn_plus">+</button>
 						</td>
 						<td>${cart.id}</td>
-						<td>${cart.price}</td>
+						<td>${sum}</td>
+				<c:set var = "sum" value="${0}"/>
 					</tr>
 				</c:forEach>
 				

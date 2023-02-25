@@ -33,6 +33,9 @@ import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.mapper.MemberAddressMapper;
 import com.hosinsa.service.MemberAddressService;
+import com.hosinsa.domain.CartVO;
+import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
 import com.hosinsa.service.OrderService;
 
 import lombok.AllArgsConstructor;
@@ -56,7 +59,7 @@ public class OrderContoller {
 	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
 			MemberAddressVO address, Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
 		log.info("order________________"); 
-		log.info(valueArr);
+		
 		model.addAttribute("order",service.getOrder(valueArr));
 		int total = addService.getTotalCountAddress(address);
 		model.addAttribute("total", total);
@@ -110,11 +113,46 @@ public class OrderContoller {
 		
 		return "/order/addressModify";
 	}
+	@GetMapping("/success")
+	public void success() {
+				
+	}
+	
+	// 주문 취소시 화면 전환
+	@GetMapping("/cancel")
+	public void cancelPage() {
+		
+	}
+
+	// 주문 실패시 화면 전환
+	@GetMapping("/fail")
+	public void failPage() {
+		
+	}
+
+	// 주문 처리
+	@PostMapping("/complete")
+	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo) {
+		
+		vo.setOrdernum((System.currentTimeMillis()));
+		log.info(vo.getOrdernum());
+		service.getOrderIn(vo, cartnum);
+		
+		
+		service.getOrder_del(cartnum);
+	}
+	
+	@GetMapping("/complete")
+	public void complete() {
+		
+	}
+	
+	// 카카오페이 결제
 	@RequestMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(Integer total) {
 		log.info("kakaopay________________");
-		log.info(total);
+		
 		try {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
 			HttpURLConnection link = (HttpURLConnection) address.openConnection();
@@ -127,9 +165,9 @@ public class OrderContoller {
 			String parm = "cid=TC0ONETIME&partner_order_id=partner_order_id"
 					+ "&partner_user_id=partner_user_id&item_name=호신사"
 					+ "&quantity=1&total_amount="+total+"&vat_amount=200&tax_free_amount=0"
-					+ "&approval_url=http://localhost:8081/order/kakaopay"
-					+ "&fail_url=http://localhost:8081/cart/list"
-					+ "&cancel_url=http://localhost:8081/cart/list";
+					+ "&approval_url=http://localhost:8081/order/success"
+					+ "&fail_url=http://localhost:8081/order/fail"
+					+ "&cancel_url=http://localhost:8081/order/cancel";
 			
 			OutputStream os = link.getOutputStream();
 			DataOutputStream dos = new DataOutputStream(os);
