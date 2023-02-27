@@ -1,51 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
-<!-- <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
-<!-- <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <%@include file="../includes/header.jsp"%>
 
-<div class="container">
-	<h2>문의사항 조회</h2>
-
-	<div class="form-group">
-		<label>번호</label> 
-		<input class="form-control" name='qno'
-			value='<c:out value="${qna.qno }"/>' readonly="readonly">
+<div class="contentWrap">
+	<div class="noticeRead">
+		<h4 class="miniTitle">Q&amp;A</h4>
+		<table class="infoTable">
+			<tr>
+				<th> 번호 </th>
+				<td><input type="text" name="qno" value="${qna.qno }" style="width:327px" readonly></td>
+			</tr>
+			<tr>
+				<th> 카테고리 </th>
+				<td><input type="text" name="category" value="${qna.category }" style="width:327px" readonly></td>
+			</tr>			
+			<tr>
+				<th> 제목 </th>
+				<td><input type="text" name="title" value="${qna.title }" style="width:327px" readonly></td>
+			</tr>
+			<tr>
+				<th> 작성자 </th>
+				<td><input type="text" name="id" value="${qna.id }" style="width:327px" readonly></td>
+			</tr>
+			<tr>
+				<th> 등록일 </th>
+				<td>
+					<input type="date" name="regdate" value="<fmt:formatDate pattern='yyyy-MM-dd' value='${qna.regdate}'/>" style="width:330px" readonly>
+				</td>
+			</tr>
+		</table>
+		<h4 class="miniTitle">내용</h4>
+		<textarea class="inputDetail" name="content" cols="70" rows="16" readonly>${qna.content}</textarea>
+		
+		<div class="align_center">
+			<button data-oper='list' class="btn btn-default" onclick="location.href='/qna/list'">목록</button>
+			<button data-oper='modify' class="btn" onclick="location.href='/qna/modify?qno=<c:out value="${qna.qno}"/>'">수정	</button>
+		</div>
 	</div>
-
-	<div class="form-group">
-		<label>카테고리</label> <input class="form-control" name='category'
-			value='<c:out value="${qna.category }"/>' readonly="readonly">
-	</div>
-	
-	<div class="form-group">
-		<label>제목</label> <input class="form-control" name='title'
-			value='<c:out value="${qna.title }"/>' readonly="readonly">
-	</div>
-
-	<div class="form-group">
-		<label>내용</label>
-		<textarea class="form-control" rows="10" name='content'
-			readonly="readonly"><c:out value="${qna.content}" /></textarea>
-	</div>
-
-	<div class="form-group">
-		<label>작성자</label> <input class="form-control" name='id'
-			value='<c:out value="${qna.id }"/>' readonly="readonly">
-	</div>
-
-		<button data-oper='list' class="btn btn-default"
-			onclick="location.href='/qna/list'">목록</button>
-		<button data-oper='modify' class="btn"
-			onclick="location.href='/qna/modify?qno=<c:out value="${qna.qno}"/>'">수정
-		</button>
-
-<!-- 검색 처리 -->
+	<!-- 검색 처리 -->
 	<form id='operForm' action="/qna/modify" method="get">
 		<input type='hidden' id='qno' name='qno' value='<c:out value="${qna.qno}"/>'> 
 		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'> 
@@ -53,41 +45,26 @@
 		<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'> 
 		<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
 	</form>
-
+	
+	<div class="array_center">
+	   <div class="panel">        
+	      <i class="fa-regular fa-comment-dots"></i> 답변
+	      <c:if test="${member.grade eq 'S'}">
+	      <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>답변 작성하기</button>
+	      </c:if>
+	      <ul class="chat">
+			 </ul>         
+	   </div>  
+	</div>
 </div>
 
 <!-- 댓글 처리-->
-<div class="row">
-   <div class="col-lg-12">
-      <div class="panel panel-default">
-         <div class="panel-heading">
-            <i class="fa-regular fa-comment-dots"></i> 답변
-            <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>답변 작성하기</button>
-         </div>
-
-
-      </div>
-
-      <!-- /.panel-heading -->
-      <div class="panel-body">
-
-         <ul class="chat">
-         </ul>
-
-      </div>
-      <!-- /.panel .chat-panel -->
-     
-      <div class="panel-footer"></div>
-      
-   </div>
-</div>
-<!-- ./ end row -->
 
 <!-- Modal -->
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+      <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
+          <div class="modal-content medium-modal">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal"
                 aria-hidden="true">&times;</button>
@@ -106,7 +83,6 @@
                 <label>Reply Date</label> 
                 <input class="form-control" name='replyDate' value='2023-02-17 13:13'>
               </div>
-      
             </div>
 <div class="modal-footer">
         <button id='modalModBtn' type="button" class="btn btn-warning">수정</button>
@@ -119,18 +95,13 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
-      
 <script type="text/javascript" src="/resources/js/reply.js"></script>
-
 <script>
-
-
-
 $(document).ready(function () {
   
   var qnoValue = '<c:out value="${qna.qno}"/>';
   var replyUL = $(".chat");
-  
+  var modal = $("#myModal");
     showList(1);
     
     function showList(page){
@@ -138,11 +109,7 @@ $(document).ready(function () {
      	console.log("show list " + page);
         
         replyService.getList({qno:qnoValue,page: page|| 1 }, function(replyCnt, list) {
-          
-        console.log("replyCnt: "+ replyCnt );
-        console.log("list: " + list);
-        console.log(list);
-        
+                  
         if(page == -1){
           pageNum = Math.ceil(replyCnt/10.0);
           showList(pageNum);
@@ -157,11 +124,9 @@ $(document).ready(function () {
 
           for (var i = 0, len = list.length || 0; i < len; i++) {
              str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-             str +="  <div><div class='header'><strong class='primary-font'>["
-          	   +list[i].rno+"] "+list[i].replyer+"</strong>"; 
-             str +="    <small class='pull-right text-muted'>"
-                 +replyService.displayTime(list[i].replyDate)+"</small></div>";
-             str +="    <p>"+list[i].reply+"</p></div></li>";
+             str +="  <div><strong class='primary-font'>"+list[i].replyer+"</strong>"; 
+             str +="    <small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small></div>";
+             str +="    <p>"+list[i].reply+"</p></li>";
            }
          replyUL.html(str);
          
@@ -243,7 +208,8 @@ $(document).ready(function () {
     
      $("#modalCloseBtn").on("click", function(e){
     	
-    	modal.modal('hide');
+    	 modal.addClass("hidden");
+    	 $("body").removeClass("fix");
     });
     
     $("#addReplyBtn").on("click", function(e){
@@ -254,7 +220,8 @@ $(document).ready(function () {
       
       modalRegisterBtn.show();
       
-      $(".modal").modal("show");
+      modal.removeClass("hidden");
+		$("body").addClass("fix");
       
     });
     
@@ -271,7 +238,8 @@ $(document).ready(function () {
         alert(result);
         
         modal.find("input").val("");
-        modal.modal("hide");
+        modal.addClass("hidden");
+        $("body").removeClass("fix");
         
       showList(-1); 
         
@@ -297,7 +265,8 @@ $(document).ready(function () {
           modalModBtn.show();
           modalRemoveBtn.show();
           
-          $(".modal").modal("show");
+          modal.addClass("hidden");
+          $("body").removeClass("fix");
               
         });
       });
@@ -310,7 +279,8 @@ $(document).ready(function () {
       replyService.update(reply, function(result){
             
         alert(result);
-        modal.modal("hide");
+        modal.addClass("hidden");
+        $("body").removeClass("fix");
         showList(pageNum); //현재 보고 있는 댓글 페이지 번호 호출
         
       });
@@ -325,7 +295,8 @@ $(document).ready(function () {
   	  replyService.remove(rno, function(result){
   	        
   	      alert(result);
-  	      modal.modal("hide");
+  	    modal.addClass("hidden");
+  	  $("body").removeClass("fix");
   	      showList(pageNum);
   	      
   	  });
@@ -362,6 +333,4 @@ $(document).ready(function () {
 		});
 	});
 </script>
-
-     
 <%@include file="../includes/footer.jsp"%>

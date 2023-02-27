@@ -4,15 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@include file="../includes/header.jsp"%>
+<div class="contentWrap qnaWrap">
+	<h2 class="bigTitle">Q&amp;A</h2>
 
-<link rel="stylesheet" href="../../../resources/css/hosinsa.css">
+	<button id='regBtn' type="button" class="btn black">문의하기</button>
 
-<div class="container">
-	<h2>Q&A</h2>
-
-	<button id='regBtn' type="button" class="btn pull-right">문의하기</button>
-
-	<table class="table">
+	<table class="table4 qna">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -22,12 +19,10 @@
 				<th>작성일</th>
 			</tr>
 		</thead>
-
-<c:forEach items="${list}" var="qna">
+		<c:forEach items="${list}" var="qna">
 			<tr>
 				<td><c:out value="${qna.qno}" /></td>				
-				<td><c:out value="${qna.category }" /></td>
-				
+				<td><c:out value="${qna.category }" /></td>				
 				<td>
 				<a class='move' href='<c:out value="${qna.qno}"/>'>
 				<c:out value="${qna.title}" /> 
@@ -41,7 +36,7 @@
 	<div class='row'>
 		<div class="col-lg-12">
 			<!-- 검색 처리 -->
-			<form id='searchForm' action="/qna/list" method='get'>
+			<form id='searchForm' action="/qna/list" method='get' class="align_center">
 				<select name='type'>
 <%-- 					<option value=""
 						<c:out value="${pageMaker.cri.type == null?'selected':''}"/>>-검색 종류 선택-</option> --%>
@@ -105,7 +100,7 @@
 
 
 <!-- Modal  추가 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+<div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -134,6 +129,7 @@
 						var result = '<c:out value="${result}"/>';
 
 						checkModal(result);
+						var modal = $("#myModal");
 
 						//뒤로가기 문제
 						history.replaceState({}, null, null);
@@ -150,13 +146,18 @@
 												+ " 번이 등록되었습니다.");
 							}
 
-						$("#myModal").modal("show"); //모달창 보여주기
+							modal.removeClass("hidden");
+							$("body").addClass("fix");
 
 							
 						}
 						
 						//문의하기 버튼 처리
 						$("#regBtn").on("click", function() {
+							if("${member}"==""){
+								alert("로그인 후 작성 가능합니다.");
+								return false;
+							}
 
 							self.location = "/qna/register";
 
@@ -177,35 +178,30 @@
 								});
 
 						//게시물의 제목 클릭시 이동
-						$(".move").on("click",function(e) {
-
-											e.preventDefault();
-											actionForm.append("<input type='hidden' name='qno' value='"+ $(this).attr("href")+ "'>");
-											actionForm.attr("action", "/qna/get");
-											actionForm.submit();
-										});
+						$(".move").on("click",function(e) {						
+							e.preventDefault();
+							actionForm.append("<input type='hidden' name='qno' value='"+ $(this).attr("href")+ "'>");
+							actionForm.attr("action", "/qna/get");
+							actionForm.submit();
+						});
 
 						//검색 버튼 이벤트 처리
 						var searchForm = $("#searchForm");
 
 						$("#searchForm button").on("click",function(e) {
 
-									if (!searchForm.find("option:selected").val()) {
-										alert("검색 종류를 선택하세요");
-										return false;
-									}
-
-									if (!searchForm.find("input[name='keyword']").val()) {
-										alert("키워드를 입력하세요");
-										return false;
-									}
-
-									searchForm.find("input[name='pageNum']").val("1");
-									e.preventDefault();
-
-									searchForm.submit();
-
-								});
+								if (!searchForm.find("option:selected").val()) {
+									alert("검색 종류를 선택하세요");
+									return false;
+								}
+								if (!searchForm.find("input[name='keyword']").val()) {
+									alert("키워드를 입력하세요");
+									return false;
+								}
+								searchForm.find("input[name='pageNum']").val("1");
+								e.preventDefault();
+								searchForm.submit();
+							});
 					});
 </script>
 

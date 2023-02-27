@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
 <%@include file="../includes/header.jsp" %>
 <div class="contentWrap reviewForm">
 	<h2 class="bigTitle">리뷰 수정</h2>
@@ -30,7 +27,9 @@
 		<h4 class="miniTitle">내용</h4>
 		<textarea class="inputDetail" name="content" cols="70" rows="16">${review.content}</textarea>
 		<div class="btnWrap">
-		
+			<input type="hidden" name="photo1" value="${review.photo1 }">
+			<input type="hidden" name="photo2" value="${review.photo2 }">
+			<input type="hidden" name="photo3" value="${review.photo3 }">
 			<!-- accept="image/*" 업로드에 이미지만 허용함 파일 업로드할떼 이미지 이외에 선택 불가-->
 			<input type='file' name ='photoUpload' id="photoUpload" accept="image/*" multiple> 
 			<button data-oper="modify" class="btn modify">리뷰 수정</button>
@@ -79,10 +78,10 @@
 	
 		const photo = $("#photoUpload") 
 		if(photo[0].files.length > 3) {
-			alert("이미지는 3장 이상 업로드 불가합니다.");
-			location.reload();
+				alert("이미지는 3장 이상 업로드 불가합니다.");
+				location.reload();
 			}else{
-			confirm("업로드 성공");
+				//confirm("업로드 성공");
 			}
 		});
 	});

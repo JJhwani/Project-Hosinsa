@@ -1,5 +1,17 @@
 package com.hosinsa.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.List;
 
@@ -21,6 +33,7 @@ import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
+import com.hosinsa.service.KakaoService;
 import com.hosinsa.service.LikesService;
 import com.hosinsa.service.MemberService;
 
@@ -35,7 +48,7 @@ import lombok.extern.log4j.Log4j;
 public class MemberController {
 
 	private MemberService memberService;
-	
+	private KakaoService kakaoService;
 	private LikesService likesService;
 
 	@GetMapping("/agree")
@@ -144,13 +157,13 @@ public class MemberController {
 		model.addAttribute("already",memberService.getAlreadyList(vo.getId()));
 		model.addAttribute("member", vo);
 	}
-	
+
 	@GetMapping("/modify")
 	public void modifyGET(@ModelAttribute("member") MemberVO vo, Model model) {
 		log.info("modofyGET====");
 		model.addAttribute("member", vo);
 	}
-	
+
 	@PostMapping("/modify")
 	public String modifyPOST(MemberVO member,  MultipartFile uploadFile, RedirectAttributes rttr, Model model) {
 		
@@ -168,26 +181,95 @@ public class MemberController {
 		
 		log.info("modify : " + member);
 		model.addAttribute("member", member);
-		
+
 		if (memberService.modify(member)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/member/myPage";
 	}
-	
+
 	@GetMapping("/remove")
-	public String removePOST(@RequestParam("id") String id, RedirectAttributes rttr) {
-		log.info("remove----" + id);
-		
-		if (memberService.remove(id)) {
-			rttr.addFlashAttribute("result", "seccess");
+	public void removeGET(@ModelAttribute("member") MemberVO vo, Model model) {
+		log.info("removeGET====>");
+		model.addAttribute("member", vo);
+	}
+
+	@PostMapping("/remove")
+	public String removePOST(@ModelAttribute("member")MemberVO vo, SessionStatus session, RedirectAttributes rttr, Model model) {
+		log.info("removePOST====>");
+		int result = memberService.remove(vo);
+		if(result != 0) {
+			rttr.addFlashAttribute("result", "success");
+			session.setComplete();
+			return "redirect:/";
+		} else {
+			model.addAttribute("msg", result);
+			return "/member/myPage";
 		}
-		return "redirect:/member/list";
+	}
+	
+	// 카카오 로그인
+	@GetMapping("/kakaologin_page")
+	public String kakaoLogin_page(@RequestParam(value = "code", required = false) String code) {
+		StringBuffer loginUrl = new StringBuffer();
+        loginUrl.append("https://kauth.kakao.com/oauth/authorize?client_id=");
+        loginUrl.append("a8bea3904686bd773a43da6230b82b92"); 
+        loginUrl.append("&redirect_uri=");
+        loginUrl.append("http://localhost:8081/member/kakaologin"); 
+        loginUrl.append("&response_type=code");
+        
+        return "redirect:"+loginUrl.toString();
+	}
+	
+	@GetMapping("/kakaologin")
+	public String redirectKakao(MemberVO member, @RequestParam String code, Model model) throws Exception {
+		log.info("code : " + code);
+		
+		// 접속 토큰 GET
+		String kakaoToken = kakaoService.getAccessToken(code);
+		log.info("안나오는거야? " + kakaoToken);
+		
+		
+		
+		// 접속자 정보 GET
+		HashMap<String, Object> result = kakaoService.getUserInfo(kakaoToken);
+		log.info(result.get("nickname"));
+		log.info(result.get("profile_image"));
+		log.info(result.get("email"));
+		log.info(result.get("gender"));
+		
+		String name = (String)result.get("email");
+		
+		member.setId((String)result.get("email"));					// 아이디
+		member.setName((String)result.get("nickname"));				// 이름
+		member.setNickname((String)result.get("nickname"));			// 닉네임(이름과 동일)
+		member.setProfilimg((String)result.get("profile_image"));	// 프로필 이미지(카카오 프로필 사진)
+		member.setEmail((String)result.get("email"));				// 이메일(아이디와 동일)
+		member.setGender((String)result.get("gender"));				// 성별(male, female 로 받아짐)
+		
+		// 등급과 포인트는 임의값 지정
+		member.setGrade("C");
+		member.setPoint(100000);
+		
+		model.addAttribute("member", member);
+		
+		if (memberService.idCheck(name) != 0) {
+			
+		} else {
+			memberService.join(member);
+		}
+		return "redirect:/";
 	}
 	
 	@ResponseBody
 	@PostMapping("/likes")
 	public List<ProductVO> getLikesWithPaging(String id,Integer page) {
 		return memberService.getLikesListWithPaging(id,page);
+	}
+	
+	@GetMapping("/order/{ordernum}")
+	public String getOrder(@PathVariable long ordernum,Model model) {
+		model.addAttribute("order",memberService.getOrder(ordernum));
+		return "/member/order";
 	}
 }
