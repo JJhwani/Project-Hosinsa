@@ -60,7 +60,7 @@
 </select>
 
 <select id="getOrder" resultType="com.hosinsa.domain.OrderVO">
-	select * from hosinsa_order where ordernum = #{ordernum}
+	select * from hosinsa_order where ordernum = #{ordernum} and pronum = #{pronum}
 </select>
 
 <!-- INSERT 문 -->

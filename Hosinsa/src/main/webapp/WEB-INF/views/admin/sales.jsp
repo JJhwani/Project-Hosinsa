@@ -30,8 +30,8 @@
 		<c:forEach var="order" items="${orderList }">
 			<tr>
 				
-				<td class="ordernum"><a href="/admin/order/${order.ordernum}">${order.ordernum }</a></td>
-				<td>${order.pronum }</td>
+				<td class="ordernum"><a href="/admin/order/${order.ordernum}?pronum=${order.pronum}">${order.ordernum }</a></td>
+				<td class="pronum">${order.pronum }</td>
 				<td><a href="/product/${order.pronum}">${order.proname }</a></td>
 				<td>${order.quantity }</td>
 				<td>${order.price }</td>
@@ -60,6 +60,7 @@
  		  <label class="delivery">택배사 <input name="delivery"></label>
  		  <label class="trackingNum">운송장 번호 <input name="trackingNum"></label>
  		  <label class="reason">주문 취소 사유 <input name="reason" value=""></label>
+ 		  <input type="hidden" name="pronum">
  		  <input type="hidden" name="ordernum">
  		  <input type="hidden" name="process">
  		 </form>
@@ -85,7 +86,9 @@ $(document).ready(function(){
 	
 	$(".adminList button").on("click",function(e){
 		var ordernum = $(this).parent().siblings(".ordernum").text();
-		$("input[name=ordernum]").val(ordernum)
+		var pronum = $(this).parent().siblings(".pronum").text();
+		$("input[name=ordernum]").val(ordernum);
+		$("input[name=pronum]").val(pronum);
 		
 		if($(this).hasClass("modify")){
 			$(".reason").addClass("hidden");
@@ -119,6 +122,8 @@ $(document).ready(function(){
 		categoryForm.find("input[name='process']").val($(this).attr("href"));
 		categoryForm.submit();
 	});
+	
+	$(".ordernum a")
 })
 </script>
 

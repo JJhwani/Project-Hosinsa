@@ -8,7 +8,7 @@
 <div class="addressWrap">
 	<h2>배송지 변경</h2>
 	<button type="button" class="btn addRegister">신규 배송지 등록+</button>
-	<form class="address_Form" action="/order/address/listForm" method="get" >
+	<form class="address_Form" action="/order/address/list" method="get" >
 		<c:forEach var="addList" items="${addList}" varStatus="status">
 			<div class="addressInfo">
 				<p>
@@ -23,10 +23,14 @@
 				<input type="hidden" class="id" name="id" value="${addList.id}">
 	 			<input type="hidden" class="basic" name="basic" value="${addList.basic}">
 	 			<button type="button" class="btn addModify">수정</button>
+	 			<c:if test="${addList.basic eq 'X'}">
+						<button type="button" class="btn addRemove">삭제</button>
+				</c:if>
 	 			<button type="button" class="btn addChoice">선택</button>
 			</div>
 	 	</c:forEach>
-	 	<input type="text" id="userid" name="id" value="${userid}">
+	 	<input type="text" id="userid" name="id" value="${id}">
+	 	<iframe name="frame" style="display:none;"></iframe>
 	</form>
 	<!-- 페이지 처리 시작 -->
 	<ul class="pagination address">
@@ -70,7 +74,6 @@ $(document).ready(function(){
 		alert("주소 삭제가 성공적으로 처리되었습니다.");
 	}
 	
-	fu
 	
 });
 </script>

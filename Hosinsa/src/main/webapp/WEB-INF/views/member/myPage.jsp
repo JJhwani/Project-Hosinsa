@@ -96,7 +96,7 @@
 							<td><fmt:formatDate pattern="yyyy-MM-dd hh:MM:ss" value="${order.order_date}"></fmt:formatDate></td>
 							<td><a href="/product/${order.pronum}">${order.proname}</a></td>
 							<td>${order.price}</td>
-							<td><a href="/member/order/${order.ordernum }">${order.process}</a></td>
+							<td><a href="/member/order/${order.ordernum }?pronum=${order.pronum}">${order.process}</a></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>		
@@ -166,16 +166,16 @@
  	<div class="modal-dialog">
  	  <div class="modal-content">
  		<div class="modal-header">
- 		  <h4 class="modal-title" id="myModalLabel">댓글 작성</h4>
+ 		  <h4 class="modal-title" id="myModalLabel">회원 탈퇴</h4>
  		</div>
  		<div class="modal-body">
  		  <div class="form-group">
- 		  <input class="form-control" name="reply" placeholder="비속어를 포함한 내용은 예고 없이 제재될 수 있습니다.">
+ 		  <input class="form-control" name="password" placeholder="비밀번호 입력">
  		  </div>
  		</div>
  		
  		<div class="modal-footer">
- 			<button id="modalRegBtn" type="button" class="btn black">작성하기</button>
+ 			<button id="modalRegBtn" type="button" class="btn black">탈퇴하기</button>
  			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
  		</div>	
  	  </div>
@@ -371,7 +371,7 @@ $(document).ready(function(){
     	var check = confirm("정말 탈퇴하시겠습니까?");
     	
     	if(check) {
-			modalForm.submit();    	
+			modalForm.submit();  	
     	}
     });
 	

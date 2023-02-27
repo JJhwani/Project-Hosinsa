@@ -88,6 +88,7 @@
  		  <label class="trackingNum">운송장 번호 <input name="trackingNum"></label>
  		  <label class="reason">주문 취소 사유 <input name="reason"></label>
  		  <input type="hidden" name="ordernum" value="${order.ordernum}">
+ 		  <input type="hidden" name="pronum" value="${order.pronum }">
  		  <input type="hidden" name="process">
  		 </form>
  		</div> 		

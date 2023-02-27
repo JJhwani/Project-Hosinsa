@@ -20,6 +20,6 @@ public interface AdminService {
 	public int searchTotal(Criteria cri);
 	public List<OrderVO> getAllOrderList();
 	public List<OrderVO> getOrderList(String process);
-	public OrderVO getOrder(long orderNum);
+	public OrderVO getOrder(long orderNum,int pronum);
 	public boolean updateProcess(OrderVO vo);
 }
