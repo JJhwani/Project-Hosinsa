@@ -99,9 +99,7 @@ public class OrderContoller {
 	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo) {
 		
 		vo.setOrdernum((System.currentTimeMillis()));
-		log.info(vo.getOrdernum());
 		service.getOrderIn(vo, cartnum);
-		
 		
 		service.getOrder_del(cartnum);
 	}

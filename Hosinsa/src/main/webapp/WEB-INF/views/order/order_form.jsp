@@ -7,31 +7,16 @@
 <%@ include file="../includes/header.jsp"%>
 <div class="orderWrap">
 	<h2>Order / Payment</h2>
-	<div class="orderInfo" style="border: 1px solid;">
 		<!-- 배송지 정보 -->
 		<form action="/order/complete" method="post" id="orderForm">
-		<div class="titleArea">
-			<h1>배송지 입력</h1>
 			<input type="hidden" name="name" value="sangho">
 			<input type="hidden" name="address" value="sangho">
 			<input type="hidden" name="request" value="sangho">
 			<input type="hidden" name="phone" value="sangho">
 			<input type="hidden" name="id" value="admin">
-		</div>
 			<input type="hidden" name="cartnum" value="">
 	</form>
-	</div>
-	<br> <br>
-	<div class="orderInfo_pro" style="border: 1px solid;">
 		<!-- 결제 상품정보 -->
-		<div class="titleArea">
-			<h1>상품정보</h1>
-		</div>
-		<table width="100%">
-			<tr>
-					<th></th>
-					<th>주문 번호</th>
-					<th></th>
 	<div class="shippingInfo">
 		<h3>배송정보</h3>
 		<form class="order_form" action="/order" method="post" >
@@ -89,11 +74,6 @@
 					<li><p class="address">(${address.zipcode})&nbsp;${address.address}</p>
 					<li></li>
 				</ul>
-				<div class="inputArea">
-					<button type="submit" class="order_btn">주문</button>
-					<button type="button" class="cancel_btn">취소</button>
-				</div>
-				
 			</div>
 		</form>
 		<form class="popupForm" name="popupForm" action="/order/order_form" method="post" onsubmit="return false">
@@ -103,21 +83,21 @@
 	<div class="orderInfo">
 		<h2>상품정보</h2>
 		<table width="100%">
-			<div class="order_">
 				<tr>
-					<th>상품정보</th>
+					<th> </th>
 					<th>수량</th>
+					<th> </th>
 					<th>제품 번호</th>
 					<th>제품 이름</th>
 					<th>수량</th>
 					<th>가격</th>
-			</tr>
+				</tr>
 				<c:set var="total" value="${0}" />
 				<c:forEach items="${order}" var="order">
-					<tr class="odd_gradeX">
-						<td></td>
-						<td class="cartnum">${order.cartnum}</td>
-						<td>${order.proimg}</td>
+					<tr class="odd gradeX">
+						<td class="cartnum" style="display: none">${order.cartnum}</td>
+						<td>${order.quantity}</td>
+						<td><img src="${order.proimg}"></td>
 						<td>${order.pronum}</td>
 						<td><a class="move" href='${order.pronum}'>
 								${order.proname} </a></td>
