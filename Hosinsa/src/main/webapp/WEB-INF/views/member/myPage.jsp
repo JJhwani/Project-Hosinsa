@@ -161,6 +161,28 @@
 	</section>
 </div><!-- //contentWrap -->
 
+<!-- Modal -->
+ <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 	<div class="modal-dialog">
+ 	  <div class="modal-content">
+ 		<div class="modal-header">
+ 		  <h4 class="modal-title" id="myModalLabel">댓글 작성</h4>
+ 		</div>
+ 		<div class="modal-body">
+ 		  <div class="form-group">
+ 		  <input class="form-control" name="reply" placeholder="비속어를 포함한 내용은 예고 없이 제재될 수 있습니다.">
+ 		  </div>
+ 		</div>
+ 		
+ 		<div class="modal-footer">
+ 			<button id="modalRegBtn" type="button" class="btn black">작성하기</button>
+ 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+ 		</div>	
+ 	  </div>
+ 	</div> 		  
+ </div>
+<!-- Modal 끝 -->
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".tabWrap .tab").on("click",function(){

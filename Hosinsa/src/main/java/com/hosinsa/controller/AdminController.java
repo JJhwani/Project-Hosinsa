@@ -48,7 +48,7 @@ public class AdminController {
 
 	@GetMapping("/memberModify")
 	public void memberModifyGET(@RequestParam("id") String id, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("member", adminService.get(id));
+		model.addAttribute("memberInfo", adminService.get(id));
 	}
 
 	@PostMapping("/memberModify")
@@ -216,10 +216,15 @@ public class AdminController {
 	
 	@GetMapping("/sales")
 	public void adminSalesList(Model model,String process) {
-		model.addAttribute("orderList",adminService.getOrderList(process));
+		if(process==null) {
+			model.addAttribute("orderList",adminService.getAllOrderList());
+		}else {
+			model.addAttribute("orderList",adminService.getOrderList(process));
+		}
+		
 	}
 	
-	@PostMapping("/sales")
+	@PostMapping(value="/sales", produces="text/plain;charset=UTF-8")
 	public String SalesUpdate(RedirectAttributes rttr, OrderVO vo) {
 		if(adminService.updateProcess(vo)) {
 			rttr.addFlashAttribute("result","success");
