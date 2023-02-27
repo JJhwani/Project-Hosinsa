@@ -37,7 +37,41 @@
 			<button data-oper='modify' class="btn" onclick="location.href='/qna/modify?qno=<c:out value="${qna.qno}"/>'">수정	</button>
 		</div>
 	</div>
-	<!-- 검색 처리 -->
+
+	<div class="form-group">
+		<label>카테고리</label> <input class="form-control" name='category'
+			value='<c:out value="${qna.category }"/>' readonly="readonly">
+	</div>
+	
+	<div class="form-group">
+		<label>제목</label> <input class="form-control" name='title'
+			value='<c:out value="${qna.title }"/>' readonly="readonly">
+	</div>
+
+	<div class="form-group">
+		<label>내용</label>
+		<textarea class="form-control" rows="10" name='content'
+			readonly="readonly"><c:out value="${qna.content}" /></textarea>
+	</div>
+
+	<div class="form-group">
+		<label>작성자</label> <input class="form-control" name='id'
+			value='<c:out value="${qna.id }"/>' readonly="readonly">
+	</div>
+
+
+	<label>첨부파일</label>
+	<input name='photoUpload' value='<c :out value="${qna.photo1}"/>'>   
+	
+
+
+		<button data-oper='list' class="btn btn-default"
+			onclick="location.href='/qna/list'">목록</button>
+		<button data-oper='modify' class="btn"
+			onclick="location.href='/qna/modify?qno=<c:out value="${qna.qno}"/>'">수정
+		</button>
+
+<!-- 검색 처리 -->
 	<form id='operForm' action="/qna/modify" method="get">
 		<input type='hidden' id='qno' name='qno' value='<c:out value="${qna.qno}"/>'> 
 		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'> 
@@ -95,7 +129,9 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
-<script type="text/javascript" src="/resources/js/reply.js"></script>
+      
+
+
 <script>
 $(document).ready(function () {
   
@@ -333,4 +369,7 @@ $(document).ready(function () {
 		});
 	});
 </script>
+
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+     
 <%@include file="../includes/footer.jsp"%>
