@@ -13,7 +13,6 @@
 
 
 <script type="text/javascript">
-	//alert("주문이 완료되었습니다. 이용해주셔서 감사합니다.");
 	opener.document.getElementById("input").value="success";
 	opener.document.getElementById("orderForm").submit();
 	self.close();
