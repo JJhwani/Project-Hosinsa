@@ -96,9 +96,8 @@
 		<h2>상품정보</h2>
 		<table width="100%">
 				<tr>
-					<th> </th>
 					<th>수량</th>
-					<th> </th>
+					<th>제품 이미지</th>
 					<th>제품 번호</th>
 					<th>제품 이름</th>
 					<th>수량</th>
