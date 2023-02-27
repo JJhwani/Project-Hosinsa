@@ -44,17 +44,18 @@
 				<td><label class="basicLabel"><input type="checkbox" name="basicCheck">기본 배송지 설정</label></td>
 			</tr>
 		</table>
-		<input type="text" name="userid" value="${userid}">
+		<input type="text" name="userid" value="${id}">
 		<input type="hidden" name="id" value="">
 		<input type="hidden" name="address" value="">
-		<input type="hidden" name="teltel" value="">
-		<input type="hidden" name="basic" value="">
+		<input type="text" name="teltel" value="">
+		<input type="text" name="basic" value="">
 		<div class="registerBtn">
 			<button type="reset" class="btn cancle">취소</button>
+			<button type="button" class="btn back">돌아가기</button>
 			<button type="button" class="btn register">등록</button>
 		</div>	
 	</form>
-	<form class="address_searchForm" action="/order/address/register" method="post" onsubmit="return false;">
+	<form class="address_registerFormBasic" action="/order/address/registerWithBasic" method="post">
 	</form>
 </div>
 
