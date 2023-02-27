@@ -51,8 +51,12 @@ public class QnaController {
 	@PostMapping("/register") 
 	public String register(QnaVO qna, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model) {
 
+<<<<<<< Updated upstream
 		 String uploadFolder = // "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"
 				 "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
+=======
+		 String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";//호신사 프로젝트로 경로 수정 예정
+>>>>>>> Stashed changes
 		
 		int index = 1;
 		qna.setPhoto1("");
@@ -99,8 +103,12 @@ public class QnaController {
 
 	@PostMapping("/modify")
 	public String modify(QnaVO qna, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model) {
+<<<<<<< Updated upstream
 		 String uploadFolder = // "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"
 				 "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
+=======
+		 String uploadFolder ="C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";//호신사 프로젝트로 경로 수정 예정
+>>>>>>> Stashed changes
 	
 		 int index = 1;
 		 qna.setPhoto1("");
