@@ -78,7 +78,7 @@ $(document).ready(function(){
 		window.open("/order/address/registerForm?id="+userid,"register", popOption);
 		
 		popupForm.action="/order/address/registerForm?id="+userid;
-		popupForm.target="pop";
+		popupForm.target="register";
 		popupForm.submit();
 	}
 
@@ -116,7 +116,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		address_registerForm.attr("action", "/order/address/list");
 		address_registerForm.submit();
-		self.close();		
+		//self.close();		
 	});
 
 
@@ -148,17 +148,16 @@ $(document).ready(function(){
 		if($("input[name='basicCheck']:checkbox").is(":checked")){
 			//document.address_registerFormBasic.target = "frame";
 			address_registerFormBasic.submit();
-			window.parent.location.reload();
-			window.open("","_self","").close();
+			//window.parent.location.reload();
+			//window.open("","_self","").close();
 			
 
 		}
 		else {
 			address_registerForm.submit();
 			//document.address_registerForm.target = "frame";
-			address_registerForm.submit();
-			window.parent.location.reload();
-			window.open("","_self","").close();
+			//window.parent.location.reload();
+			//window.open("","_self","").close();
 			
 
 		}
