@@ -21,4 +21,74 @@
 	SELECT COUNT(PRONUM) FROM HOSINSA_PRODUCT WHERE PRONUM=#{pronum}
 </select>
 
+<!-- MEMBER -->
+<select id="getList" resultType="com.hosinsa.domain.MemberVO">
+	SELECT * FROM HOSINSA_MEMBER
+</select>
+
+<select id="getListWithPaging" resultType="com.hosinsa.domain.MemberVO">
+<![CDATA[
+SELECT ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE, NICKNAME, PROFILIMG, GRADE,
+    INTRODUCER, POINT FROM
+        (SELECT ROWNUM RN, ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE,
+            NICKNAME, PROFILIMG, GRADE, INTRODUCER, POINT  FROM HOSINSA_MEMBER
+            WHERE ROWNUM <= #{pageNum} * #{amount})
+            WHERE RN > (#{pageNum} -1) * #{amount}
+]]>
+</select>
+
+<select id="searchMember" resultType="com.hosinsa.domain.MemberVO">
+<![CDATA[
+	SELECT ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE, NICKNAME, PROFILIMG, GRADE,
+    INTRODUCER, POINT FROM
+            (SELECT   ROWNUM RN, ID, PW, NAME, GENDER, BIRTHDAY, EMAIL, PHONE,
+            NICKNAME, PROFILIMG, GRADE, INTRODUCER, POINT FROM
+                  (SELECT * FROM    HOSINSA_MEMBER WHERE
+                     (LOWER(ID) LIKE '%'||#{keyword}||'%' OR
+                      LOWER(NICKNAME) LIKE '%'||#{keyword}||'%' OR
+                      LOWER(NAME) LIKE '%'||#{keyword}||'%'))
+            WHERE ROWNUM <= #{pageNum} * #{amount})            
+         WHERE RN > (#{pageNum} - 1) * #{amount}
+]]>
+</select>
+
+<select id="searchTotal" resultType="int">
+	SELECT COUNT(*) FROM HOSINSA_MEMBER WHERE (
+			LOWER(ID) LIKE '%'||#{keyword}||'%' OR
+            LOWER(NICKNAME) LIKE '%'||#{keyword}||'%' OR
+            LOWER(NAME) LIKE '%'||#{keyword}||'%')
+</select>
+
+<select id="read" resultType="com.hosinsa.domain.MemberVO">
+	SELECT * FROM HOSINSA_MEMBER WHERE id = #{id}
+</select>
+
+<select id="getTotalCount" resultType="int">
+	SELECT COUNT(*) FROM HOSINSA_MEMBER
+</select>
+
+<update id="memberUpdate">
+	UPDATE HOSINSA_MEMBER SET
+	GRADE = #{grade, jdbcType=CHAR},
+	POINT = #{point, jdbcType=INTEGER}
+	WHERE ID = #{id}
+</update>
+
+<select id="getAllOrderList" resultType="com.hosinsa.domain.OrderVO">
+	SELECT * FROM HOSINSA_ORDER ORDER BY ORDER_DATE DESC
+</select>
+
+<select id="getOrderList" resultType="com.hosinsa.domain.OrderVO">
+	SELECT * FROM HOSINSA_ORDER WHERE PROCESS = #{PROCESS} ORDER BY ORDER_DATE DESC
+</select>
+
+<select id="getOrder" resultType="com.hosinsa.domain.OrderVO" parameterType="map">
+	SELECT * FROM HOSINSA_ORDER WHERE ORDERNUM = #{orderNum} AND PRONUM = #{pronum}
+</select>
+
+<update id="updateProcess">
+	UPDATE HOSINSA_ORDER SET PROCESS=#{process,jdbcType = VARCHAR}, DELIVERY=#{delivery}, TRACKINGNUM=#{trackingNum}, REASON=#{reason}
+	WHERE ORDERNUM=#{ordernum} AND PRONUM = #{pronum}
+</update>
+
 </mapper>

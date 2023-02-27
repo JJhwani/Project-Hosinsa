@@ -3,7 +3,7 @@ package com.hosinsa.service;
 import java.util.List;
 
 import com.hosinsa.domain.Criteria;
-import com.hosinsa.domain.NoticeVO;
+import com.hosinsa.domain.BoardNoticeVO;
 import com.hosinsa.domain.ReplyPageDTO;
 import com.hosinsa.domain.ReplyVO;
 

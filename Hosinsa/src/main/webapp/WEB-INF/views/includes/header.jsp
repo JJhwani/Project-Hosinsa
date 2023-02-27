@@ -24,7 +24,7 @@
 		</form>
 		<ul class="menu">
 			<c:if test="${empty member}">
-				<li><a>회원가입</a></li>
+				<li><a href="/member/agree">회원가입</a></li>
 			</c:if>
 			<li class="user_grade">
 				<c:choose>
@@ -50,16 +50,40 @@
 				</c:choose>
 			</li>
 			<c:if test="${not empty member}">
-				<li><a>마이페이지</a></li>
+				<li><a href="/member/myPage">마이페이지</a></li>
 			</c:if>
-			<li><a><i class="fa-solid fa-basket-shopping"></i> 장바구니</a></li>
+			<li><a href="/cart/list" class="cart_btn"><i class="fa-solid fa-basket-shopping"></i> 장바구니</a></li>
 			<c:if test="${member.grade eq 'S'}">
 				<li><a href="/admin/product">상품관리</a></li>
 				<li><a href="/admin/member">회원관리</a></li>
+				<li><a href="/admin/sales">판매관리</a></li>
 			</c:if>
 			<c:if test="${not empty member}">
-				<li><a>로그아웃</a></li>
+				<li><a href="/member/logout">로그아웃</a></li>
 			</c:if>
 		</ul>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	var formObj = $(".formObj");
+	
+	$(".move").on("click", function(e) {
+		e.preventDefault();
+		formObj.attr("action", "/member/myPage");
+		formObj.submit();
+	});
+	
+	
+	var member = "${member}";
+	$(".cart_btn").on("click", function(e) {
+		e.preventDefault();
+		if(member == "") {
+			self.location="/member/login";
+		}else {
+			self.location="/cart/list";
+		}
+	});
+});
+</script>

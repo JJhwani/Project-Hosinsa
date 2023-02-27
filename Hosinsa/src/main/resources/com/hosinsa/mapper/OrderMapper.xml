@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosinsa.mapper.OrderMapper">
+
+<select id="getOrder" resultType="com.hosinsa.domain.CartVO" parameterType="java.util.List">
+  	select * from hosinsa_cart where CARTNUM in 
+  	<foreach collection="list" item="cartnum" index="index" open="(" close=")" separator="," >
+	  	#{cartnum}
+	  </foreach>
+</select>
+
+<delete id="getOrder_del" parameterType="java.util.List">
+	delete hosinsa_cart where CARTNUM in
+		<foreach collection="list" item="cartnum" index="index" open="(" close=")" separator="," >
+	  	#{cartnum}
+	  </foreach>
+</delete>
+
+<update id="getOrderIn" parameterType="map">
+	<foreach collection="cartnum" item="cartnum" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+                 INTO hosinsa_order  (
+                       ordernum, 
+                       PRONUM, 
+                       QUANTITY, 
+                       PRICE,
+                       PRONAME,  
+					   NAME,
+					   ADDRESS,
+					   REQUEST,
+					   PHONE,
+					   ID,
+					   ORDER_DATE
+                ) VALUES(
+                     #{vo.ordernum},
+			(select pronum from hosinsa_cart where cartnum = #{cartnum}),
+    		(select QUANTITY from hosinsa_cart where cartnum = #{cartnum}),
+    		(select price from hosinsa_cart where cartnum = #{cartnum}),
+	    	(select PRONAME from hosinsa_cart where cartnum = #{cartnum}),
+	    	#{vo.name},#{vo.address},#{vo.request},#{vo.phone},#{vo.id},sysdate
+                )
+	</foreach>
+</update>
+
+
+
+
+</mapper>

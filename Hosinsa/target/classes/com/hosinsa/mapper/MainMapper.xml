@@ -28,7 +28,7 @@
 				(SELECT * FROM
 					(SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC)
 				WHERE CATEGORY = #{category})
-			WHERE ROWNUM <= 5
+			WHERE ROWNUM <= 6
 		]]>
 	</select>
 	
@@ -142,7 +142,7 @@
 			FROM
 				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 					FROM
-					(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE DESC)
+					(SELECT * FROM HOSINSA_PRODUCT ORDER BY REVIEW DESC)
 				WHERE ROWNUM <= #{pageNum} * #{amount})				
 			WHERE RN > (#{pageNum} - 1) * #{amount}
 		]]>
@@ -211,7 +211,7 @@
 				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 					FROM
 						(SELECT * FROM 
-							(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE DESC)
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY REVIEW DESC)
 						WHERE CATEGORY = #{category})
 				WHERE ROWNUM <= #{pageNum} * #{amount})				
 			WHERE RN > (#{pageNum} - 1) * #{amount}
@@ -288,7 +288,7 @@
 				(SELECT	ROWNUM RN, CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 					FROM
 						(SELECT * FROM
-							(SELECT * FROM HOSINSA_PRODUCT ORDER BY PRICE DESC)
+							(SELECT * FROM HOSINSA_PRODUCT ORDER BY REVIEW DESC)
 						WHERE (LOWER(PRONAME) LIKE '%'||#{keyword}||'%' OR
     						LOWER(BRAND) LIKE '%'||#{keyword}||'%' OR PRONUM LIKE '%'||#{keyword}||'%'))
 				WHERE ROWNUM <= #{pageNum} * #{amount})				
@@ -297,8 +297,6 @@
 	</select>	
 	<!-- getSearchProduct -->
 	<select id="getSearchProduct" resultType="com.hosinsa.domain.ProductVO" parameterType="com.hosinsa.domain.ProductVO">
-		<!-- SELECT * FROM HOSINSA_PRODUCT WHERE
-    		(LOWER(PRONAME) LIKE '%#{keyword}%' OR LOWER(BRAND) LIKE '%#{keyword}%' OR PRONUM LIKE '%#{keyword}%') -->
 		<![CDATA[
     		SELECT CATEGORY, PRONAME, PROIMG, BRAND, PRONUM, PRICE, STOCK, PROVIEW, DETAIL, REGDATE, UPDATE_DATE
 			FROM
@@ -317,5 +315,9 @@
 	<select id="getProductByPronum" resultType="com.hosinsa.domain.ProductVO" >
 		SELECT * FROM HOSINSA_PRODUCT WHERE PRONUM = #{pronum}
 	</select>
+	
+	<update id="updateView">
+		UPDATE HOSINSA_PRODUCT SET PROVIEW=PROVIEW+1 WHERE PRONUM = #{pronum}
+	</update>
 	
 </mapper>
