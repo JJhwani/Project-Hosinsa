@@ -18,12 +18,19 @@
 					<th>제품 번호</th>
 					<th>제품 이름</th>
 					<th>수량</th>
-					<th>이름</th>
 					<th>가격</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:if test = "${empty list}">
+					<tr>	
+						<td colspan="7">	
+							<p class='no_review'>장바구니가 비었습니다.</p>
+						</td>
+					</tr>
+				</c:if>
 				<c:forEach items="${list}" var="cart">
+				<c:set var = "sum" value="${sum + (cart.price * cart.quantity)}"/>
 					<tr class="odd gradeX">
 						<td><input type="checkbox" name="Chk_List" id="Chk_List"></td>
 						<td class="cartNum">${cart.cartnum}</td>
@@ -31,11 +38,11 @@
 						<td>${cart.pronum}</td>
 						<td><a class="move" href='/product/${cart.pronum}'>${cart.proname}</a></td>
 						<td>
-							<button class="quantity_btn_minus">-</button> ${cart.quantity}
+							<button class="quantity_btn_minus">-</button> <span class="quantity">${cart.quantity}</span>
 							<button class="quantity_btn_plus">+</button>
 						</td>
-						<td>${cart.id}</td>
-						<td>${cart.price}</td>
+						<td>${sum}</td>
+				<c:set var = "sum" value="${0}"/>
 					</tr>
 				</c:forEach>
 				
@@ -184,6 +191,14 @@ $(document).ready(function() {
 			location.reload();
 		}
 	});
+	
+	//수량 마이너스 막기
+	$(".quantity").each(function(){
+		if($(this).text()=="1"){
+			$(this).prev(".quantity_btn_minus").attr("disabled","disabled");
+		}
+	})
+	
 });
 
 </script>

@@ -48,7 +48,20 @@
 			<tr><th>이름</th><td>${member.name }</td></tr>
 			<tr><th>아이디</th><td>${member.id }</td></tr>
 			<tr><th>닉네임</th><td>${member.nickname }</td></tr>
-			<tr><th>성별</th><td>${member.gender }</td></tr>
+			<tr>
+				<th>성별</th>
+				<c:choose>
+					<c:when test="${member.gender eq 'male'}">
+						<td>남자</td>
+					</c:when>
+					<c:when test="${member.gender eq 'female'}">
+						<td>여자</td>
+					</c:when>
+					<c:otherwise>
+						<td>${member.gender}</td>
+					</c:otherwise>
+				</c:choose>
+			</tr>
 			<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/> </td></tr>
 			<tr><th>이메일</th><td>${member.email }</td></tr>
 			<tr><th>연락처</th><td>${member.phone }</td></tr>
@@ -130,6 +143,12 @@
 					</div>
 					<p class="reviewTitle">${already.title }</p>
 					<p class="content">${already.content }</p>
+					  <!-- 마이페이지 포토리뷰 -->
+					  <p class="photoreview">
+						<img src="${already.photo1 }" onerror="this.remove ? this.remove() : this.removeNode();">
+						<img src="${already.photo2 }" onerror="this.remove ? this.remove() : this.removeNode();" >
+						<img src="${already.photo3 }" onerror="this.remove ? this.remove() : this.removeNode();"> 
+					  </p> 
 					<p class="reReplyWrap"><button class="reReply">댓글 ${already.rereply }개</button></p>
 				</div>
 			</c:forEach>
@@ -137,7 +156,7 @@
 		<form class="reviewForm" action="/review/register" method="get">
 			<input type="hidden" name="pronum" value="">
 			<input type="hidden" name="ordernum" value="">
-			<input type="hidden" name="bno" vanlu="">
+			<input type="hidden" name="bno" value="">
 		</form>
 	</section>
 </div><!-- //contentWrap -->
@@ -228,6 +247,9 @@ $(document).ready(function(){
 					}
 					str += "<i>"+formatDate(time)+"</i></div>";
 					str += "<p class='content'>" + list[i].reply + "</p></div>";
+
+					
+					
 				}					
 				reviewWrap.append(str);
 				button.html("댓글 "+list.length+"개");
@@ -293,6 +315,49 @@ $(document).ready(function(){
 })
 </script>
 
-<script src="../../../resources/js/member.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var operForm = $("#operForm");
+    var removeForm = $("#removeForm");
+    var modalForm = $("#modalForm");
+    
+    $("button[data-oper='modify']").on("click",function(e){
+		operForm.attr("action","/member/modify").submit();
+  	});
+    
+    // 모달
+    var modal = $("#myModal");
+    var closeBtn = $("#modalCloseBtn");
+    
+    closeBtn.on("click",function(){
+		modal.find("input").val("");
+		modal.addClass("hidden");
+		$("body").removeClass("fix");
+	});   
+    
+    $("#remove").on("click", function() {
+    	modal.removeClass("hidden");
+		$("body").addClass("fix");
+    });
+    
+    $("#modalRegBtn").on("click", function() {
+    	if ($(".form-control").val() == "") {
+    		alert("비밀번호를 입력하세요");
+    		$(".form-control").focus();
+    		return false;
+    	}
+    	var check = confirm("정말 탈퇴하시겠습니까?");
+    	
+    	if(check) {
+			modalForm.submit();    	
+    	}
+    });
+	
+    if("${msg}"=="0"){
+    	modal.removeClass("hidden");
+		$("body").addClass("fix");
+    }
+});
+</script>
 
 <%@ include file="../includes/footer.jsp" %>

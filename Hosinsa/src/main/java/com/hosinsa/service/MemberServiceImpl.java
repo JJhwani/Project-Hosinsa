@@ -1,11 +1,22 @@
 package com.hosinsa.service;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
 import com.hosinsa.domain.PageDTO;
@@ -45,9 +56,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public boolean remove(String id) {
-		log.info("remove...." + id);
-		return memberMapper.delete(id) == 1;
+	public int remove(MemberVO member) {
+		log.info("remove...." + member);
+		return memberMapper.delete(member);
 	}
 
 	@Override
@@ -97,7 +108,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public OrderVO getOrder(int ordernum) {
+	public OrderVO getOrder(long ordernum) {
 		return memberMapper.getOrder(ordernum);
 	}
 }

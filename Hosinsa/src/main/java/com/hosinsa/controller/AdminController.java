@@ -215,8 +215,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/sales")
-	public void adminSalesList(Model model) {
-		model.addAttribute("orderList",adminService.getOrderList());
+	public void adminSalesList(Model model,String process) {
+		model.addAttribute("orderList",adminService.getOrderList(process));
 	}
 	
 	@PostMapping("/sales")
@@ -228,7 +228,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/order/{orderNum}")
-	public String getOrderDetail(@PathVariable int orderNum,Model model) {
+	public String getOrderDetail(@PathVariable long orderNum,Model model) {
 		model.addAttribute("order",adminService.getOrder(orderNum));
 		return "/admin/order";
 	}

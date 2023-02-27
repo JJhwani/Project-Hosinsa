@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.CartVO;
+import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
 import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.BoardPageDTO;
 import com.hosinsa.domain.MemberAddressVO;
@@ -52,11 +55,11 @@ public class OrderContoller {
 	MemberAddressService addService;
 
 	@PostMapping("/order_form")
-	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr, MemberAddressVO address,
-			Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
-		log.info("order________________");
-		log.info(valueArr);
-		model.addAttribute("order", service.getOrder(valueArr));
+	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
+			MemberAddressVO address, Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
+		log.info("order________________"); 
+		
+		model.addAttribute("order",service.getOrder(valueArr));
 		int total = addService.getTotalCountAddress(address);
 		model.addAttribute("total", total);
 		model.addAttribute("address", addService.getListBasic(address));
@@ -69,7 +72,65 @@ public class OrderContoller {
 	//@GetMapping("/address/listForm")
 	public String addressListForm(HttpSession session, MemberAddressVO address, String id, Model model) {
 		log.info("======================="+id);
-		model.addAttribute("userid", id);
+		model.addAttribute("id",id);
+		return "/order/address/list";
+	}
+	
+	@GetMapping("/success")
+	public void success() {
+				
+	}
+	
+	// 주문 취소시 화면 전환
+	@GetMapping("/cancel")
+	public void cancelPage() {
+		
+	}
+
+	// 주문 실패시 화면 전환
+	@GetMapping("/fail")
+	public void failPage() {
+		
+	}
+
+	// 주문 처리
+	@PostMapping("/complete")
+	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo) {
+		
+		vo.setOrdernum((System.currentTimeMillis()));
+		service.getOrderIn(vo, cartnum);
+		
+		service.getOrder_del(cartnum);
+	}
+	
+	@GetMapping("/complete")
+	public void complete() {
+		
+	}
+	
+	// 카카오페이 결제
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/list")
+	public String addressList(HttpSession session, MemberAddressVO address,  String id, Model model) {
+		log.info("------------------------"+id);
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("address", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		
+		return "/order/address";
+	}
+	
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/registerForm")
+	public String addressRegisterForm(HttpSession session, MemberAddressVO address, Model model) {
+		return "/order/addressRegister";
+	}
+	
+	@PostMapping("/address/register")
+	public String addressRegister(HttpSession session, MemberAddressVO address, Model model) {
+		if(addService.registerSelectKey(address)) {
+			model.addAttribute("register","success");
+		}
+		
 		int total = addService.getTotalCountAddress(address);
 		model.addAttribute("addList", addService.getListWithPaging(address));
 		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
@@ -77,37 +138,18 @@ public class OrderContoller {
 		return	"/order/address";
 	}
 
-	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST }, value = "/address/registerForm")
-	public String addressRegisterForm(HttpSession session, MemberAddressVO address, String id, Model model) {
-		model.addAttribute("userid",id);
-		return "/order/addressRegister";
-	}
 
-	@PostMapping("/address/register")
-	public String addressRegister(HttpSession session, MemberAddressVO address, String id,Model model) {
-		if (addService.registerSelectKey(address)) {
-			model.addAttribute("register", "success");
-		}
-		log.info("-----------------------------"+id);
-		model.addAttribute("userid", id);
-		int total = addService.getTotalCountAddress(address);
-		model.addAttribute("addList", addService.getListWithPaging(address));
-		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
-
-		return "/order/address";
-	}
 
 	@PostMapping("/address/modifyForm")
 	public String addressModifyForm(HttpSession session, MemberAddressVO address, Model model) {
 
 		return "/order/addressModify";
 	}
-
 	@RequestMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(Integer total) {
 		log.info("kakaopay________________");
-		log.info(total);
+		
 		try {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
 			HttpURLConnection link = (HttpURLConnection) address.openConnection();
@@ -118,10 +160,12 @@ public class OrderContoller {
 			link.setDoOutput(true);
 
 			String parm = "cid=TC0ONETIME&partner_order_id=partner_order_id"
-					+ "&partner_user_id=partner_user_id&item_name=호신사" + "&quantity=1&total_amount=" + total
-					+ "&vat_amount=200&tax_free_amount=0" + "&approval_url=http://localhost:8081/order/kakaopay"
-					+ "&fail_url=http://localhost:8081/cart/list" + "&cancel_url=http://localhost:8081/cart/list";
-
+					+ "&partner_user_id=partner_user_id&item_name=호신사"
+					+ "&quantity=1&total_amount="+total+"&vat_amount=200&tax_free_amount=0"
+					+ "&approval_url=http://localhost:8081/order/success"
+					+ "&fail_url=http://localhost:8081/order/fail"
+					+ "&cancel_url=http://localhost:8081/order/cancel";
+			
 			OutputStream os = link.getOutputStream();
 			DataOutputStream dos = new DataOutputStream(os);
 			dos.writeBytes(parm);

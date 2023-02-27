@@ -68,12 +68,12 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<OrderVO> getOrderList() {
-		return mapper.getOrderList();
+	public List<OrderVO> getOrderList(String process) {
+		return mapper.getOrderList(process);
 	}
 
 	@Override
-	public OrderVO getOrder(int orderNum) {		
+	public OrderVO getOrder(long orderNum) {		
 		return mapper.getOrder(orderNum);
 	}
 

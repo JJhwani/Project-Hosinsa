@@ -4,10 +4,7 @@
 	<div class="contentWrap">
 		<h2 class="bigTitle">주문 정보</h2>
 		<table class="table array_center table3">
-			<tr>
-				<th><label>관리번호</label></th>
-				<td>${order.o_no }</td>
-			</tr>
+			
 			<tr>
 				<th><label>주문번호</label></th>
 				<td>${order.ordernum }</td>
@@ -74,7 +71,7 @@
 			</tr>
 		</table>
 		<div class="array_center align_center">
-			<button class="modify">배송</button> <button class="delete">취소</button> <a href="/admin/sales">목록</a>
+			<button class="modify">배송</button> <button class="delete">취소</button> <a href="javascript:history.go(-1)">목록</a>
 		</div>
 	</div>
 	
@@ -125,7 +122,7 @@ $(document).ready(function(){
 			$(".reason").removeClass("hidden");
 			$(".delivery").addClass("hidden");
 			$(".trackingNum").addClass("hidden");
-			$("input[name=process]").val("주문 취소");
+			$("input[name=process]").val("주문취소");
 		}		
 		modal.removeClass("hidden");
 		$("body").addClass("fix");				

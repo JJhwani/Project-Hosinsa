@@ -39,9 +39,6 @@ public class ReviewVO {
 	private String nickname; // 닉네임
 	private String title; //제목
 	private String content; //내용
-	private String photo1;
-	private String photo2;
-	private String photo3;
 	private String proname; //제품명
 	private String proimg; //제품이미지
 	private String profilimg; //프로필이미지
@@ -49,5 +46,7 @@ public class ReviewVO {
 	private Date uploadDate; // 작성날짜
 	private int pronum; //품번
 	private int rereply; //리리플 수
-
+	private String photo1; //리뷰사진1
+	private String photo2; //리뷰사진2
+	private String photo3; //리뷰사진3
 }
