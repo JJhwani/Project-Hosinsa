@@ -19,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,13 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hosinsa.domain.CartVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
 import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.BoardPageDTO;
 import com.hosinsa.domain.MemberAddressVO;
-import com.hosinsa.domain.MemberVO;
 import com.hosinsa.mapper.MemberAddressMapper;
 import com.hosinsa.service.MemberAddressService;
 import com.hosinsa.service.OrderService;
@@ -68,13 +65,6 @@ public class OrderContoller {
 		return "/order/order_form";
 	}
 	
-	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST }, value = "/address/listForm")
-	//@GetMapping("/address/listForm")
-	public String addressListForm(HttpSession session, MemberAddressVO address, String id, Model model) {
-		log.info("======================="+id);
-		model.addAttribute("id",id);
-		return "/order/address/list";
-	}
 	
 	@GetMapping("/success")
 	public void success() {
@@ -108,43 +98,7 @@ public class OrderContoller {
 		
 	}
 	
-	// 카카오페이 결제
-	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/list")
-	public String addressList(HttpSession session, MemberAddressVO address,  String id, Model model) {
-		log.info("------------------------"+id);
-		
-		int total = addService.getTotalCountAddress(address);
-		model.addAttribute("address", addService.getListWithPaging(address));
-		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
-		
-		return "/order/address";
-	}
-	
-	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/registerForm")
-	public String addressRegisterForm(HttpSession session, MemberAddressVO address, Model model) {
-		return "/order/addressRegister";
-	}
-	
-	@PostMapping("/address/register")
-	public String addressRegister(HttpSession session, MemberAddressVO address, Model model) {
-		if(addService.registerSelectKey(address)) {
-			model.addAttribute("register","success");
-		}
-		
-		int total = addService.getTotalCountAddress(address);
-		model.addAttribute("addList", addService.getListWithPaging(address));
-		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
-		
-		return	"/order/address";
-	}
-
-
-
-	@PostMapping("/address/modifyForm")
-	public String addressModifyForm(HttpSession session, MemberAddressVO address, Model model) {
-
-		return "/order/addressModify";
-	}
+	//카카오페이 결제
 	@RequestMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(Integer total) {
@@ -189,5 +143,86 @@ public class OrderContoller {
 		}
 		return "{\"result\":\"NO\"}";
 	}
+	
+	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST }, value = "/address/listForm")
+	//@GetMapping("/address/listForm")
+	public String addressListForm(HttpSession session, MemberAddressVO address, String id, Model model) {
+		model.addAttribute("id",id);
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		return "/order/address";
+	}
+
+	//@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/list")
+	@GetMapping("/address/list")
+	public String addressList(HttpSession session, MemberAddressVO address,  String id, Model model) {
+		model.addAttribute("id",id);
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		
+		return "/order/address";
+	}
+	
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/registerForm")
+	public String addressRegisterForm(HttpSession session, MemberAddressVO address, String id, Model model) {
+		log.info("][][][][][][][][][][][]["+id);
+		model.addAttribute("id",id);
+		return "/order/addressRegister";
+	}
+	
+	@PostMapping("/address/registerWithBasic")
+	public String addressregisterWithBasic(HttpSession session, MemberAddressVO address, String id, Model model) {
+		addService.modifyBasic(address);
+		model.addAttribute("id",id);
+		if(addService.registerSelectKey(address)) {
+			model.addAttribute("register","success");
+		}
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		
+		return	"/order/address";
+	}
+	
+	@PostMapping("/address/register")
+	public String addressRegister(HttpSession session, MemberAddressVO address, String id, Model model) {
+		model.addAttribute("id",id);
+		if(addService.registerSelectKey(address)) {
+			model.addAttribute("register","success");
+		}
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		
+		return	"/order/address";
+	}
+
+
+
+	@PostMapping("/address/modifyForm")
+	public String addressModifyForm(HttpSession session, MemberAddressVO address, Model model) {
+
+		return "/order/addressModify";
+	}
+	
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/remove")
+	public String addressRemove(HttpSession session, MemberAddressVO address, Long address_no, String id, Model model) {
+		log.info("/////////////////////////////"+address_no);
+		model.addAttribute("id",id);
+		if(addService.remove(address_no)) {
+			model.addAttribute("remove", "success");
+		}
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		
+		return "/order/address";
+	}
+	
 
 }
