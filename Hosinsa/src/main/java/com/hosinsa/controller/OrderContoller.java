@@ -138,26 +138,6 @@ public class OrderContoller {
 		return	"/order/address";
 	}
 
-	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST }, value = "/address/registerForm")
-	public String addressRegisterForm(HttpSession session, MemberAddressVO address, String id, Model model) {
-		model.addAttribute("userid",id);
-		return "/order/addressRegister";
-	}
-
-	@PostMapping("/address/register")
-	public String addressRegister(HttpSession session, MemberAddressVO address, String id,Model model) {
-		if (addService.registerSelectKey(address)) {
-			model.addAttribute("register", "success");
-		}
-		log.info("-----------------------------"+id);
-		model.addAttribute("userid", id);
-		int total = addService.getTotalCountAddress(address);
-		model.addAttribute("addList", addService.getListWithPaging(address));
-		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
-
-		return "/order/address";
-	}
-
 	@PostMapping("/address/modifyForm")
 	public String addressModifyForm(HttpSession session, MemberAddressVO address, Model model) {
 
