@@ -54,14 +54,18 @@
 				readonly="readonly">
 		</div>
 
-		<!-- accept="image/*" 업로드에 이미지만 허용함 파일 업로드할떼 이미지 이외에 선택 불가-->
-		<input type='file' name='photoUpload' id="photoUpload"
-			accept="image/*" multiple>
+      <div class="btnWrap">
+         <input type="hidden" name="photo1" value="${qna.photo1 }">
+         <input type="hidden" name="photo2" value="${qna.photo2 }">
+         <input type="hidden" name="photo3" value="${qna.photo3 }">
+         <!-- accept="image/*" 업로드에 이미지만 허용함 파일 업로드할떼 이미지 이외에 선택 불가-->
+         <input type='file' name='photoUpload' id="photoUpload"accept="image/*" multiple>
+
 
 		<button type="submit" data-oper='modify' class="btn">수정</button>
 		<button type="submit" data-oper='list' class="btn btn-default">목록</button>
 		<button type="submit" data-oper='remove' class="btn btn-danger">삭제</button>
-
+</div>
 
 	</form>
 

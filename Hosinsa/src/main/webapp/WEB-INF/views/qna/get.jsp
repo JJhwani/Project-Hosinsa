@@ -39,12 +39,11 @@
 			value='<c:out value="${qna.id }"/>' readonly="readonly">
 	</div>
 
-
-	<label>첨부파일</label>
-	<input name='photoUpload' value='<c :out value="${qna.photo1}"/>'>   
+<div class="form-group">
+ <label>첨부파일</label>
+	 <img src="${qna.photo1}"> 
+	</div>
 	
-
-
 		<button data-oper='list' class="btn btn-default"
 			onclick="location.href='/qna/list'">목록</button>
 		<button data-oper='modify' class="btn"
@@ -126,6 +125,8 @@
       </div>
       <!-- /.modal -->
       
+      
+<script type="text/javascript" src="/resources/js/reply.js"></script>
 
 
 <script>
@@ -162,12 +163,21 @@ $(document).ready(function () {
          }         
 
           for (var i = 0, len = list.length || 0; i < len; i++) {
+              //첨부파일 나오게 수정
+           	  str += "<p class='qnaphoto'>";
+				//"'onerror='this.remove ? this.remove() : this.removeNode()'/>" -> 사진이 없을 경우 엑박이 안나옴
+				str += "<img src='"+list[i].photo1 + "'onerror='this.remove ? this.remove() : this.removeNode()'/>";
+				str += "<img src='"+list[i].photo2 + "'onerror='this.remove ? this.remove() : this.removeNode()'/>";
+				str += "<img src='"+list[i].photo3 + "'onerror='this.remove ? this.remove() : this.removeNode()'/>";
+				str += "</p>";
+				
              str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
              str +="  <div><div class='header'><strong class='primary-font'>["
           	   +list[i].rno+"] "+list[i].replyer+"</strong>"; 
              str +="    <small class='pull-right text-muted'>"
                  +replyService.displayTime(list[i].replyDate)+"</small></div>";
              str +="    <p>"+list[i].reply+"</p></div></li>";
+             
            }
          replyUL.html(str);
          
@@ -369,6 +379,6 @@ $(document).ready(function () {
 	});
 </script>
 
-<script type="text/javascript" src="/resources/js/reply.js"></script>
+
      
 <%@include file="../includes/footer.jsp"%>
