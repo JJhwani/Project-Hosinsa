@@ -224,7 +224,7 @@ public class AdminController {
 		
 	}
 	
-	@PostMapping(value="/sales", produces="text/plain;charset=UTF-8")
+	@PostMapping("/sales")
 	public String SalesUpdate(RedirectAttributes rttr, OrderVO vo) {
 		if(adminService.updateProcess(vo)) {
 			rttr.addFlashAttribute("result","success");
@@ -233,8 +233,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/order/{orderNum}")
-	public String getOrderDetail(@PathVariable long orderNum,Model model) {
-		model.addAttribute("order",adminService.getOrder(orderNum));
+	public String getOrderDetail(@PathVariable long orderNum,int pronum,Model model) {
+		model.addAttribute("order",adminService.getOrder(orderNum,pronum));
 		return "/admin/order";
 	}
 
