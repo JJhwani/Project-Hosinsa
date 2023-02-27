@@ -39,6 +39,12 @@
 			value='<c:out value="${qna.id }"/>' readonly="readonly">
 	</div>
 
+
+	<label>첨부파일</label>
+	<input name='photoUpload' value='<c :out value="${qna.photo1}"/>'>   
+	
+
+
 		<button data-oper='list' class="btn btn-default"
 			onclick="location.href='/qna/list'">목록</button>
 		<button data-oper='modify' class="btn"
@@ -120,7 +126,7 @@
       </div>
       <!-- /.modal -->
       
-<script type="text/javascript" src="/resources/js/reply.js"></script>
+
 
 <script>
 
@@ -363,5 +369,6 @@ $(document).ready(function () {
 	});
 </script>
 
+<script type="text/javascript" src="/resources/js/reply.js"></script>
      
 <%@include file="../includes/footer.jsp"%>
