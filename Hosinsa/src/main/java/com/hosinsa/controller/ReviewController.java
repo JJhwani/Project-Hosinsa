@@ -4,6 +4,8 @@ import java.io.Console;
 import java.io.File;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +59,7 @@ public class ReviewController {
 		 String uploadFolder = // "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"
 				 "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
 		
+		
 		int index = 1;
 		review.setPhoto1("");
 		review.setPhoto2("");
@@ -105,13 +108,15 @@ public class ReviewController {
 		model.addAttribute("review", service.get(bno));
 	}
 	
-	
+	@NotNull
 	@PostMapping("/modify")
 	public String modify(ReviewVO vo, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model) {
 		
+		
+		
 		 String uploadFolder = // "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"
 				 "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
-	
+		 
 		 int index = 1;
 		 vo.setPhoto1("");
 		 vo.setPhoto2("");
