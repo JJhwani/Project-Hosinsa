@@ -41,7 +41,9 @@
 
 <div class="form-group">
  <label>첨부파일</label>
-	 <img src="${qna.photo1}"> 
+	 <img src="${qna.photo1}">
+	 <img src="${qna.photo2}">
+	 <img src="${qna.photo3}">
 	</div>
 	
 		<button data-oper='list' class="btn btn-default"
