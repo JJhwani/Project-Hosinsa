@@ -37,41 +37,7 @@
 			<button data-oper='modify' class="btn" onclick="location.href='/qna/modify?qno=<c:out value="${qna.qno}"/>'">수정	</button>
 		</div>
 	</div>
-
-	<div class="form-group">
-		<label>카테고리</label> <input class="form-control" name='category'
-			value='<c:out value="${qna.category }"/>' readonly="readonly">
-	</div>
-	
-	<div class="form-group">
-		<label>제목</label> <input class="form-control" name='title'
-			value='<c:out value="${qna.title }"/>' readonly="readonly">
-	</div>
-
-	<div class="form-group">
-		<label>내용</label>
-		<textarea class="form-control" rows="10" name='content'
-			readonly="readonly"><c:out value="${qna.content}" /></textarea>
-	</div>
-
-	<div class="form-group">
-		<label>작성자</label> <input class="form-control" name='id'
-			value='<c:out value="${qna.id }"/>' readonly="readonly">
-	</div>
-
-
-	<label>첨부파일</label>
-	<input name='photoUpload' value='<c :out value="${qna.photo1}"/>'>   
-	
-
-
-		<button data-oper='list' class="btn btn-default"
-			onclick="location.href='/qna/list'">목록</button>
-		<button data-oper='modify' class="btn"
-			onclick="location.href='/qna/modify?qno=<c:out value="${qna.qno}"/>'">수정
-		</button>
-
-<!-- 검색 처리 -->
+	<!-- 검색 처리 -->
 	<form id='operForm' action="/qna/modify" method="get">
 		<input type='hidden' id='qno' name='qno' value='<c:out value="${qna.qno}"/>'> 
 		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'> 
@@ -129,9 +95,7 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
-      
-
-
+<script type="text/javascript" src="/resources/js/reply.js"></script>
 <script>
 $(document).ready(function () {
   
@@ -157,7 +121,6 @@ $(document).ready(function () {
          if(list == null || list.length == 0){
            return;
          }         
-
           for (var i = 0, len = list.length || 0; i < len; i++) {
              str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
              str +="  <div><strong class='primary-font'>"+list[i].replyer+"</strong>"; 
@@ -167,7 +130,6 @@ $(document).ready(function () {
          replyUL.html(str);
          
          showReplyPage(replyCnt);
-
      
        });//end function
          
@@ -261,7 +223,6 @@ $(document).ready(function () {
       
     });
     
-
     modalRegisterBtn.on("click",function(e){
       
       var reply = {
@@ -283,7 +244,6 @@ $(document).ready(function () {
       
     });
     
-
     //댓글 조회 클릭 이벤트 처리 
       $(".chat").on("click", "li", function(e){
         
@@ -322,7 +282,6 @@ $(document).ready(function () {
       });
       
     });
-
     //댓글 삭제후 댓글 목록 갱신
     modalRemoveBtn.on("click", function (e){
     	  
@@ -340,7 +299,6 @@ $(document).ready(function () {
   	}); 
   	
 });   
-
 </script>
 
 <script type="text/javascript">
@@ -351,25 +309,16 @@ $(document).ready(function () {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
 		var operForm = $("#operForm");
-
 		$("button[data-oper='modify']").on("click", function(e) {
-
 			operForm.attr("action", "/qna/modify").submit();
-
 		});
-
 		$("button[data-oper='list']").on("click", function(e) {
-
 			operForm.find("#qno").remove();
 			operForm.attr("action", "/qna/list")
 			operForm.submit();
-
 		});
 	});
 </script>
 
-<script type="text/javascript" src="/resources/js/reply.js"></script>
-     
 <%@include file="../includes/footer.jsp"%>

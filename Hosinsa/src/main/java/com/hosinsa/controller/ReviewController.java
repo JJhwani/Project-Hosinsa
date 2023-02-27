@@ -55,8 +55,8 @@ public class ReviewController {
 	@PostMapping("/register")
 	public String register(ReviewVO review, PreReviewVO pre, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model ) {
 		
-		String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";//호신사 프로젝트로 경로 수정 예정
-		
+		String uploadFolder = //"C:\\Works3\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";//호신사 프로젝트로 경로 수정 예정
+							"C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";
 		
 		int index = 1;
 		
@@ -115,8 +115,8 @@ public class ReviewController {
 	@PostMapping("/modify")
 	public String modify(ReviewVO vo, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model) {
 		
-		 String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
-		 		 
+		 String uploadFolder =// "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
+				 "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";
 		 int index = 1;
 		//업로드된 파일이 없을 경우 첨부 파일을 비우지 않고 기존 파일을 그대로 업로드
 		if((photoUpload[0].getSize()!=0)) {

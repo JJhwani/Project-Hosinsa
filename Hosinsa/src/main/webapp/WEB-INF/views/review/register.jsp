@@ -35,8 +35,9 @@
 		<a href="/member/myPage">마이페이지로</a>
 	</div>	
 </form>
-	<!-- 포토리뷰 작성시 이미지 3장 이상 업로드 불가 스크립트 -->
-	<script>
+
+<!-- 포토리뷰 작성시 이미지 3장 이상 업로드 불가 스크립트 -->
+<script>
 	$(document).ready(function(){
 		$("#submit").on("click",function(){
 	
@@ -49,7 +50,9 @@
 			}
 		});
 	});
-	</script>
+</script>
+	
+
 </div>
 
 <%@include file="../includes/footer.jsp" %>
