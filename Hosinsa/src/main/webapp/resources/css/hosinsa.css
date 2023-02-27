@@ -338,15 +338,17 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .remove input{width:200px;border:1px solid lightgray;padding:5px;margin-top:10px}
 .remove button{margin-top:15px}
 
-/* 회원가입 - 약관동의 */
+/* 회원가입 */
+.agreeWrap{width:723px;margin:50px auto}
 .checkbox_group{margin-top:20px}
 .checkbox_group .checkbox{margin-top:10px;letter-spacing:-1px}
 .checkbox_group textarea{margin-top:5px}
 .checkBtn{margin-top:30px}
 .checkBtn input{border:1px solid lightgray;padding:5px 10px;cursor:pointer;font-size:16px}
+#phone1{border:1px solid lightgray;padding:3px 10px;width:25%}
+#phone2,#phone3{width:30%}
 
 .align_center{text-align:center}
-
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
 
 /* board event - 이벤트 게시판 */

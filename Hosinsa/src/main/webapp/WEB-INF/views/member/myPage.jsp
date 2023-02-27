@@ -68,7 +68,7 @@
 		</table>
 		<div class="array_center align_center">
 			<button data-oper="modify" class="btn btn-default btn-info">회원정보 수정</button>
-			<button data-oper="remove" class="btn btn-default">탈퇴하기</button>
+			<button data-oper="remove" class="btn btn-default" id="remove">탈퇴하기</button>
 		</div>	
 		
 		<form id="operForm" action="/member/modify" method="get">
