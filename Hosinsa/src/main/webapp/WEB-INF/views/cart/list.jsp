@@ -18,11 +18,17 @@
 					<th>제품 번호</th>
 					<th>제품 이름</th>
 					<th>수량</th>
-					<th>이름</th>
 					<th>가격</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:if test = "${empty list}">
+					<tr>	
+						<td colspan="7">	
+							<p class='no_review'>장바구니가 비었습니다.</p>
+						</td>
+					</tr>
+				</c:if>
 				<c:forEach items="${list}" var="cart">
 				<c:set var = "sum" value="${sum + (cart.price * cart.quantity)}"/>
 					<tr class="odd gradeX">
@@ -35,7 +41,6 @@
 							<button class="quantity_btn_minus">-</button> <span class="quantity">${cart.quantity}</span>
 							<button class="quantity_btn_plus">+</button>
 						</td>
-						<td>${cart.id}</td>
 						<td>${sum}</td>
 				<c:set var = "sum" value="${0}"/>
 					</tr>

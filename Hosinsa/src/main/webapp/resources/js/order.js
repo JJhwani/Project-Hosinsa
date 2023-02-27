@@ -4,6 +4,8 @@ $(document).ready(function(){
 	var order_form = $(".order_form");
 	var address_shipping = $(".address_shipping");
 	var popupForm = $(".popupForm");
+	var address_Form = $(".address_Form");
+	var address_registerForm = $(".address_registerForm");
 	var address_searchForm = $(".address_searchForm");
 
 	//페이징처리
@@ -58,43 +60,56 @@ $(document).ready(function(){
 	});
 	
 
-	function registerPopup(){
-		var popOption = "width=600px, height=650px"
-		window.open("/order/address/registerForm","register", popOption);
-		
-		popupForm.action="/order/address/registerForm";
+	// 배송지 목록 팝업
+	function listPopup(){
+		var popOption = "width=500px, height=950px";
+		var userid = $(".shippingInfo .popupForm").find("input[id=userid]").val();
+		window.open("/order/address/listForm?id="+userid,"list", popOption);
+
+		popupForm.action="/order/address/listForm?id="+userid;
 		popupForm.target="pop";
 		popupForm.submit();
 	}
 
-	function listPopup(){
-		var popOption = "width=500px, height=950px"
-		var userid = $(".shippingInfo .popupForm").find("input[name=userid]").val();
-		var popup = window.open("about:_blank","list", popOption);
-
-		$.ajax({
-			url : "/order/address/listForm",
-			data : {id : userid},
-			type : "POST",
-			target : "pop",
-			success : function(data){
-				popup.location.href = "/order/address/list";
-				id = userid;
-			}
-		});
-
-		//popupForm.action="/order/address";
-		//popupForm.target="pop";
-		//popupForm.submit();
+	// 신규 배송지 등록 팝업
+	function registerPopup(){
+		var popOption = "width=600px, height=650px";
+		var userid = $(".shippingInfo .popupForm").find("input[id=userid]").val();
+		window.open("/order/address/registerForm","register", popOption);
+		
+		popupForm.action="/order/address/registerForm?id="+userid;
+		popupForm.target="pop";
+		popupForm.submit();
 	}
-	
 
+
+
+
+	// 배송지 목록 페이지에서 신규 배송지 등록 버튼 클릭시
+	$(".addressWrap .btn.addRegister").on("click", function(e) {
+		e.preventDefault();
+		var popOption = "width=600px, height=650px";
+		var userid =address_Form.find("input[id=userid]").val();
+		window.open("/order/address/registerForm","register", popOption);
+		
+		address_Form.find(".address_no").remove();
+		address_Form.find(".id").remove();
+		address_Form.find(".basic").remove();
+		address_Form.action="/order/address/registerForm?id="+userid;
+		address_Form.target="pop";		
+		address_Form.submit();
+	});
+
+
+	// 배송지 등록 페이지에서 등록 버튼 클릭시
 	$(".address_registerForm .btn.register").on("click", function(e) {
 		e.preventDefault();
 		var tel = address_registerForm.find("input[name='phone']").val();
 		var address = address_registerForm.find("input[name='address1']").val()+
-					address_registerForm.find("input[name='address2']").val();
-
+					" "+address_registerForm.find("input[name='address2']").val();
+		var userid = address_registerForm.find("input[name='userid']").val();
+		console.log(userid);
+		address_registerForm.find("input[name='id']").val(userid);
 		address_registerForm.find("input[name='address']").val(address);
 
 		if($("input[name='basicCheck']:checkbox").is(":checked")){
@@ -105,11 +120,12 @@ $(document).ready(function(){
 		}
 
 		if($("input[name='telCheck']:checkbox").is(":checked")){
-			$("input[name='tel']").val(tel);
+			address_registerForm.find("input[name='teltel']").attr("name", "tel");
+			address_registerForm.find("input[name='tel']").val(tel);
 		}
 
-
+		address_registerForm.submit();
+		self.close();
 	});
-	
 
 });

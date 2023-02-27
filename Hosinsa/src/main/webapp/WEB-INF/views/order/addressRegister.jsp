@@ -44,7 +44,10 @@
 				<td><label class="basicLabel"><input type="checkbox" name="basicCheck">기본 배송지 설정</label></td>
 			</tr>
 		</table>
+		<input type="text" name="userid" value="${userid}">
+		<input type="hidden" name="id" value="">
 		<input type="hidden" name="address" value="">
+		<input type="hidden" name="teltel" value="">
 		<input type="hidden" name="basic" value="">
 		<div class="registerBtn">
 			<button type="reset" class="btn cancle">취소</button>

@@ -80,6 +80,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public boolean updateProcess(OrderVO vo) {
 		return mapper.updateProcess(vo)==1?true:false;
+	}
+
+	@Override
+	public List<OrderVO> getAllOrderList() {		
+		return mapper.getAllOrderList();
 	}	
 
 }

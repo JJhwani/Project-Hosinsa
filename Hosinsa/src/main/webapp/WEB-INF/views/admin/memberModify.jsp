@@ -10,33 +10,33 @@
 		<table class="table array_center table3">
 			<tr>
 				<th><label>아이디</label></th>
-				<td><input name="id" value='<c:out value="${member.id}"/>' readonly="readonly"></td>
+				<td><input name="id" value='<c:out value="${memberInfo.id}"/>' readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th><label>이름</label></th>
-				<td><input name="name" value='<c:out value="${member.name}"/>' readonly="readonly"></td>
+				<td><input name="name" value='<c:out value="${memberInfo.name}"/>' readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th><label>닉네임</label></th>
-				<td><input name="nickname" value='<c:out value="${member.nickname}"/>' readonly="readonly"></td>
+				<td><input name="nickname" value='<c:out value="${memberInfo.nickname}"/>' readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th><label>등급</label></th>
 				<td class="grade">
 					<c:choose>
-		 				<c:when test="${member.grade eq 'C'}">
+		 				<c:when test="${memberInfo.grade eq 'C'}">
 		 					<input type="radio" name="grade" value="C" checked="checked">&nbsp;LV.1 브론즈
 		 					<input type="radio" name="grade" value="B">&nbsp;LV.2 실버
 		 					<input type="radio" name="grade" value="A">&nbsp;LV.3 골드
 							<input type="radio" name="grade" value="S">&nbsp;LV.4 운영자
 		 				</c:when>
-		 				<c:when test="${member.grade eq 'B'}">
+		 				<c:when test="${memberInfo.grade eq 'B'}">
 							<input type="radio" name="grade" value="C">&nbsp;LV.1 브론즈
 							<input type="radio" name="grade" value="B" checked="checked">&nbsp;LV.2 실버
 		 					<input type="radio" name="grade" value="A">&nbsp;LV.3 골드
 		 					<input type="radio" name="grade" value="S">&nbsp;LV.4 운영자
 		 				</c:when>
-		 				<c:when test="${member.grade eq 'A'}">
+		 				<c:when test="${memberInfo.grade eq 'A'}">
 							<input type="radio" name="grade" value="C">&nbsp;LV.1 브론즈
 							<input type="radio" name="grade" value="B">&nbsp;LV.2 실버
 		 					<input type="radio" name="grade" value="A" checked="checked">&nbsp;LV.3 골드
@@ -53,7 +53,7 @@
 			</tr>
 			<tr>
 				<th><label>Point</label></th>
-				<td><input id="point" name="point" value='<c:out value="${member.point}"/>'></td>
+				<td><input id="point" name="point" value='<c:out value="${memberInfo.point}"/>'></td>
 			</tr>
 		</table>
 		<div class="array_center align_center">

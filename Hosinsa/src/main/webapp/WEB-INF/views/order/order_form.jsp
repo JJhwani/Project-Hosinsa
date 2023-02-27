@@ -7,31 +7,19 @@
 <%@ include file="../includes/header.jsp"%>
 <div class="orderWrap">
 	<h2>Order / Payment</h2>
-		<!-- 배송지 정보 -->
-		<form action="/order/complete" method="post" id="orderForm">
-			<input type="hidden" name="name" value="sangho">
-			<input type="hidden" name="address" value="sangho">
-			<input type="hidden" name="request" value="sangho">
-			<input type="hidden" name="phone" value="sangho">
-			<input type="hidden" name="id" value="admin">
-			<input type="hidden" name="cartnum" value="">
-	</form>
-		<!-- 결제 상품정보 -->
 	<div class="shippingInfo">
 		<h3>배송정보</h3>
 		<form action="/order/complete" method="post" id="orderForm">
 	      <div class="titleArea">
-	         <h1>배송지 입력</h1>
-	         <input type="hidden" name="name" value="sangho">
-	         <input type="hidden" name="address" value="sangho">
-	         <input type="hidden" name="request" value="sangho">
-	         <input type="hidden" name="phone" value="sangho">
-	         <input type="hidden" name="id" value="admin">
+	         <input type="hidden" name="name" value="">
+	         <input type="hidden" name="address" value="">
+	         <input type="hidden" name="request" value="">
+	         <input type="hidden" name="phone" value="">
+	         <input type="hidden" name="id" value="${member.id}">
 	      </div>
 	         <input type="hidden" name="cartnum" value="">
 	   </form>
 		<form class="order_form" action="/order" method="post" >
-		
 			<div class="order_address">
 				<ul class="address_shipping">
 					<li>배송지</li>
@@ -89,14 +77,13 @@
 			</div>
 		</form>
 		<form class="popupForm" name="popupForm" action="/order/order_form" method="post" onsubmit="return false">
-			<input type="hidden" name="userid" value="${member.id}">
+			<input type="hidden" id="userid" name="userid" value="${member.id}">
 		</form>
 	</div>
-	<div class="orderInfo">
-		<h2>상품정보</h2>
+	<div class="orderInfo cart">
+		<h4 class="miniTitle">상품정보</h4>
 		<table width="100%">
 				<tr>
-					<th>수량</th>
 					<th>제품 이미지</th>
 					<th>제품 번호</th>
 					<th>제품 이름</th>
@@ -107,7 +94,6 @@
 				<c:forEach items="${order}" var="order">
 					<tr class="odd gradeX">
 						<td class="cartnum" style="display: none">${order.cartnum}</td>
-						<td>${order.quantity}</td>
 						<td><img src="${order.proimg}"></td>
 						<td>${order.pronum}</td>
 						<td><a class="move" href='${order.pronum}'>
@@ -119,31 +105,17 @@
 				</c:forEach>
 		</table>
 	</div>
-	<div>
-		<br>
-		<ul class="order_text">
-			<li>· 구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내 가상계좌 재주문이 불가합니다.</li>
-			<li>· 호신사 스토어는 기본적으로 대한민국 내 제주도 및 도서 산간 지역 포함 <span>전 지역,
-					전 상품 무료배송입니다.</span></li>
-			<li>· 해외 배송 상품이나 일부 업체의 경우, 교환/환불 시 반송료가 다를 수 있으며 상품 페이지에 별도
-				표기되어 있습니다.</li>
-			<li>· 2개 이상의 브랜드(업체) 상품을 주문하신 경우, 각 개별 배송됩니다.</li>
-		</ul>
-	</div>
+	<ul class="cart_info">
+		<li>구매 가능 수량이 1개로 제한된 상품은 주문 취소 시, 24시간 내 가상계좌 재주문이 불가합니다.</li>
+		<li>호신사 스토어는 기본적으로 대한민국 내 제주도 및 도서 산간 지역 포함 전 지역, 전 상품 무료배송입니다.</li>
+		<li>해외 배송 상품이나 일부 업체의 경우, 교환/환불 시 반송료가 다를 수 있으며 상품 페이지에 별도 표기되어 있습니다.</li>
+		<li>2개 이상의 브랜드(업체) 상품을 주문하신 경우, 각 개별 배송됩니다.</li>
+	</ul>
 
-	<button id="payBtn" type="button">
+	<button id="payBtn" type="button" class="black">
 		<span id="btn-pay_amt"> ${total} </span>원 결제하기
 	</button>
 	<input type="hidden" id="input">
-
-
-
-
-
-	
-	
-
-
 </div>
 
 <script>

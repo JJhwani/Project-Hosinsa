@@ -44,7 +44,7 @@
 		<h4 class="title">나의 정보</h4>
 		<table class="table3 member_info">
 			<tr><th>나의 등급</th><td>${member.grade }</td></tr>
-			<tr><th>프로필이미지</th><td><img src="../${member.profilimg }"></td></tr>
+			<tr><th>프로필이미지</th><td><img src="../${member.profilimg}"></td></tr>
 			<tr><th>이름</th><td>${member.name }</td></tr>
 			<tr><th>아이디</th><td>${member.id }</td></tr>
 			<tr><th>닉네임</th><td>${member.nickname }</td></tr>
@@ -62,13 +62,13 @@
 					</c:otherwise>
 				</c:choose>
 			</tr>
-			<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/> </td></tr>
+			<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/></td></tr>
 			<tr><th>이메일</th><td>${member.email }</td></tr>
 			<tr><th>연락처</th><td>${member.phone }</td></tr>
 		</table>
 		<div class="array_center align_center">
 			<button data-oper="modify" class="btn btn-default btn-info">회원정보 수정</button>
-			<button data-oper="remove" class="btn btn-default">탈퇴하기</button>
+			<button data-oper="remove" class="btn btn-default" id="remove">탈퇴하기</button>
 		</div>	
 		
 		<form id="operForm" action="/member/modify" method="get">
@@ -160,6 +160,28 @@
 		</form>
 	</section>
 </div><!-- //contentWrap -->
+
+<!-- Modal -->
+ <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 	<div class="modal-dialog">
+ 	  <div class="modal-content">
+ 		<div class="modal-header">
+ 		  <h4 class="modal-title" id="myModalLabel">댓글 작성</h4>
+ 		</div>
+ 		<div class="modal-body">
+ 		  <div class="form-group">
+ 		  <input class="form-control" name="reply" placeholder="비속어를 포함한 내용은 예고 없이 제재될 수 있습니다.">
+ 		  </div>
+ 		</div>
+ 		
+ 		<div class="modal-footer">
+ 			<button id="modalRegBtn" type="button" class="btn black">작성하기</button>
+ 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+ 		</div>	
+ 	  </div>
+ 	</div> 		  
+ </div>
+<!-- Modal 끝 -->
 
 <script type="text/javascript">
 $(document).ready(function(){
