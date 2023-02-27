@@ -27,15 +27,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hosinsa.domain.CartVO;
+import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
 import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.BoardPageDTO;
 import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.mapper.MemberAddressMapper;
 import com.hosinsa.service.MemberAddressService;
-import com.hosinsa.domain.CartVO;
-import com.hosinsa.domain.MemberVO;
-import com.hosinsa.domain.OrderVO;
 import com.hosinsa.service.OrderService;
 
 import lombok.AllArgsConstructor;
@@ -77,6 +77,39 @@ public class OrderContoller {
 		return "/order/address/list";
 	}
 	
+	@GetMapping("/success")
+	public void success() {
+				
+	}
+	
+	// 주문 취소시 화면 전환
+	@GetMapping("/cancel")
+	public void cancelPage() {
+		
+	}
+
+	// 주문 실패시 화면 전환
+	@GetMapping("/fail")
+	public void failPage() {
+		
+	}
+
+	// 주문 처리
+	@PostMapping("/complete")
+	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo) {
+		
+		vo.setOrdernum((System.currentTimeMillis()));
+		service.getOrderIn(vo, cartnum);
+		
+		service.getOrder_del(cartnum);
+	}
+	
+	@GetMapping("/complete")
+	public void complete() {
+		
+	}
+	
+	// 카카오페이 결제
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/list")
 	public String addressList(HttpSession session, MemberAddressVO address,  String id, Model model) {
 		log.info("------------------------"+id);
@@ -113,41 +146,6 @@ public class OrderContoller {
 		
 		return "/order/addressModify";
 	}
-	@GetMapping("/success")
-	public void success() {
-				
-	}
-	
-	// 주문 취소시 화면 전환
-	@GetMapping("/cancel")
-	public void cancelPage() {
-		
-	}
-
-	// 주문 실패시 화면 전환
-	@GetMapping("/fail")
-	public void failPage() {
-		
-	}
-
-	// 주문 처리
-	@PostMapping("/complete")
-	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo) {
-		
-		vo.setOrdernum((System.currentTimeMillis()));
-		log.info(vo.getOrdernum());
-		service.getOrderIn(vo, cartnum);
-		
-		
-		service.getOrder_del(cartnum);
-	}
-	
-	@GetMapping("/complete")
-	public void complete() {
-		
-	}
-	
-	// 카카오페이 결제
 	@RequestMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(Integer total) {
