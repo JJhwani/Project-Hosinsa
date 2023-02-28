@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
 <div class="contentWrap">
-	<h2 class="bigTitle">MUSINSA EVENT
+	<h2 class="bigTitle">HOSINSA EVENT
 	<c:if test="${member.grade eq 'S'}">
 		<a class="register" href="/board/event/register">이벤트 등록</a>
 	</c:if>
