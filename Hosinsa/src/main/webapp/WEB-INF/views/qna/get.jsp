@@ -265,8 +265,8 @@ $(document).ready(function () {
           modalModBtn.show();
           modalRemoveBtn.show();
           
-          modal.addClass("hidden");
-          $("body").removeClass("fix");
+          modal.removeClass("hidden");
+          $("body").addClass("fix");
               
         });
       });
