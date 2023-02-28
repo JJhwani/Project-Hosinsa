@@ -18,19 +18,18 @@
 					</c:if>
 				</p>
 				<p><span>${addList.phone} </span><span> | </span><span> ${addList.tel}</span></p><br>
-				<p><span>(${addList.zipcode})</span><span>${addList.address}</span></p><br>
+				<p><span>(${addList.zipcode})</span><span>${addList.address1}&nbsp;${addList.address2}</span></p><br>
 				<input type="hidden" class="address_no" name="address_no" value="${addList.address_no}">
 				<input type="hidden" class="id" name="id" value="${addList.id}">
-	 			<input type="hidden" class="basic" name="basic" value="${addList.basic}">
+	 			<input type="text" class="basic" name="basic" value="${addList.basic}">	 			
 	 			<button type="button" class="btn addModify">수정</button>
 	 			<c:if test="${addList.basic eq 'X'}">
-						<button type="button" class="btn addRemove">삭제</button>
+					<button type="button" class="btn addRemove">삭제</button>
 				</c:if>
 	 			<button type="button" class="btn addChoice">선택</button>
 			</div>
 	 	</c:forEach>
-	 	<input type="text" id="userid" name="id" value="${id}">
-	 	<iframe name="frame" style="display:none;"></iframe>
+	 	<input type="hidden" id="userid" name="id" value="${id}">
 	</form>
 	<!-- 페이지 처리 시작 -->
 	<ul class="pagination address">

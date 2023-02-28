@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,11 +47,11 @@ public class QnaController {
 	public void register() {
 	}
 
+	@Transactional
 	@PostMapping("/register") 
 	public String register(QnaVO qna, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model) {
 
-		 String uploadFolder = // "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"
-				 "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
+		 String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";//호신사 프로젝트로 경로 수정 예정
 		
 		int index = 1;
 		qna.setPhoto1("");
@@ -97,8 +98,7 @@ public class QnaController {
 
 	@PostMapping("/modify")
 	public String modify(QnaVO qna, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model) {
-		 String uploadFolder = // "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"
-				 "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
+		 String uploadFolder ="C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";//호신사 프로젝트로 경로 수정 예정
 	
 		 int index = 1;
 		 qna.setPhoto1("");

@@ -33,7 +33,8 @@
 				 			<input type="hidden" class="hidden" name="phone" value="${address.phone}">
 				 			<input type="hidden" class="hidden" name="tel" value="${address.tel}">
 				 			<input type="hidden" class="hidden" name="zipcode" value="${address.zipcode}">
-				 			<input type="hidden" class="hidden" name="address" value="${address.address}">
+				 			<input type="hidden" class="hidden" name="address1" value="${address.address1}">
+				 			<input type="hidden" class="hidden" name="address2" value="${address.address2}">
 				 			<input type="hidden" class="hidden" name="basic" value="${address.basic}">
 						</div>
 						<c:forEach var="shipping" items="${shipping}" varStatus="status">									
@@ -46,7 +47,8 @@
 					 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
 					 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
 					 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
-					 			<input type="hidden" class="hidden" name="address" value="${shipping.address}">
+					 			<input type="hidden" class="hidden" name="address1" value="${address.address1}">
+				 				<input type="hidden" class="hidden" name="address2" value="${address.address2}">
 					 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
 							</div>
 					 	</c:forEach>
@@ -71,7 +73,7 @@
 				</ul>
 				<ul class="address_info2">		
 					<li>주소</li>
-					<li><p class="address">(${address.zipcode})&nbsp;${address.address}</p>
+					<li><p class="address">(${address.zipcode})&nbsp;${address.address1}&nbsp;${address.address2}</p>
 					<li></li>
 				</ul>
 			</div>

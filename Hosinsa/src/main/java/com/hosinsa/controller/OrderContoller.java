@@ -167,12 +167,11 @@ public class OrderContoller {
 	
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/registerForm")
 	public String addressRegisterForm(HttpSession session, MemberAddressVO address, String id, Model model) {
-		log.info("][][][][][][][][][][][]["+id);
 		model.addAttribute("id",id);
 		return "/order/addressRegister";
 	}
 	
-	@PostMapping("/address/registerWithBasic")
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/registerWithBasic")
 	public String addressregisterWithBasic(HttpSession session, MemberAddressVO address, String id, Model model) {
 		addService.modifyBasic(address);
 		model.addAttribute("id",id);
@@ -187,7 +186,7 @@ public class OrderContoller {
 		return	"/order/address";
 	}
 	
-	@PostMapping("/address/register")
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/register")
 	public String addressRegister(HttpSession session, MemberAddressVO address, String id, Model model) {
 		model.addAttribute("id",id);
 		if(addService.registerSelectKey(address)) {
@@ -202,16 +201,48 @@ public class OrderContoller {
 	}
 
 
-
-	@PostMapping("/address/modifyForm")
-	public String addressModifyForm(HttpSession session, MemberAddressVO address, Model model) {
-
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/modifyForm")
+	public String addressModifyForm(HttpSession session, MemberAddressVO address, String id, Long address_no, Model model) {
+		model.addAttribute("id",id);
+		model.addAttribute("address_no",address_no);
+		model.addAttribute("address",addService.read(address));
+		
 		return "/order/addressModify";
+	}
+	
+	// 기본배송지 수정
+	@PostMapping("/address/modifyBasic")
+	public String addressModifyBasic(HttpSession session, MemberAddressVO address, String id, Long address_no, Model model) {
+		model.addAttribute("id",id);
+		addService.modifyBasic(address);
+		if(addService.modify(address)) {
+			model.addAttribute("modify","success");
+		}
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		
+		return "/order/address";
+	}
+	
+	// 기본배송지 수정X
+	@PostMapping("/address/modify")
+	public String addressModify(HttpSession session, MemberAddressVO address, String id, Long address_no, Model model) {
+		model.addAttribute("id",id);
+		if(addService.modify(address)) {
+			model.addAttribute("modify","success");
+		}
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		
+		return "/order/address";
 	}
 	
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/remove")
 	public String addressRemove(HttpSession session, MemberAddressVO address, Long address_no, String id, Model model) {
-		log.info("/////////////////////////////"+address_no);
 		model.addAttribute("id",id);
 		if(addService.remove(address_no)) {
 			model.addAttribute("remove", "success");

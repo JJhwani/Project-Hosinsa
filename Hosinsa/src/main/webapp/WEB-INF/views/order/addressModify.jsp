@@ -7,51 +7,55 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 <div class="addressWrap">
 	<h2>신규 배송지</h2>
-	<form class="address_registerForm" action="/order/address/register" method="post" >
-		<table class="registerTable">
+	<form class="address_modifyForm" action="/order/address/modify" method="post" >
+		<table class="modifyTable">
 			<tr>
 				<th> 이름 </th>
-				<td><input type="text" name="recipient" value="" placeholder="수령인"></td>
+				<td><input type="text" name="recipient" value="${address.recipient}" placeholder="수령인"></td>
 			</tr>
 			<tr>
 				<th> 배송지명(선택) </th>
-				<td><input type="text" name="shipping" value="" placeholder="배송지명"></td>
+				<td><input type="text" name="shipping" value="${address.shipping}" placeholder="배송지명"></td>
 			</tr>
 			<tr>
 				<th> 휴대전화 </th>
-				<td><input type="text" name="phone" value=""></td>
+				<td><input type="text" name="phone" value="${address.phone}"></td>
 			</tr>
 			<tr>
 				<th> 전화번호 </th>
-				<td><input type="text" name="tel" value=""></td>
+				<td><input type="text" name="tel" value="${address.tel}"></td>
 				<td><label class="telLabel"><input type="checkbox" name="telCheck">없음</label></td>
 			</tr>
 			<tr>
 				<th> 배송지주소 </th>
-				<td><input type="text" id="zipcode" name="zipcode" value="" readonly></td>
+				<td><input type="text" id="zipcode" name="zipcode" value="${address.zipcode}" readonly></td>
 				<td><button type="button" class="btn search">주소검색</button></td>
 			</tr>
 			<tr>
 				<th></th>
-				<td><input type="text" id="address1" name="address1" value="" readonly></td>
+				<td><input type="text" id="address1" name="address1" value="${address.address1}" readonly></td>
 			</tr>
 			<tr>
 				<th></th>
-				<td><input type="text" id="address2" name="address2" value=""></td>
+				<td><input type="text" id="address2" name="address2" value="${address.address2}"></td>
 			</tr>
-			<tr>
-				<th></th>
-				<td><label class="basicLabel"><input type="checkbox" name="basicCheck">기본 배송지 설정</label></td>
-			</tr>
+			<c:if test="${address.basic eq 'X'}">
+				<tr>				
+					<th></th>
+					<td>					
+						<label class="basicLabel"><input type="checkbox" name="basicCheck">기본 배송지 설정</label>
+					</td>
+				</tr>
+			</c:if>
 		</table>
 		<input type="text" name="userid" value="${id}">
+		<input type="hidden" name="address_no" value="${address_no}">
 		<input type="hidden" name="id" value="">
-		<input type="text" name="teltel" value="">
-		<input type="text" name="basic" value="">
-		<div class="registerBtn">
+		<input type="hidden" name="teltel" value="">
+		<input type="hidden" name="basic" value="">
+		<div class="modifyBtn">
 			<button type="reset" class="btn cancle">취소</button>
-			<button type="button" class="btn back">돌아가기</button>
-			<button type="button" class="btn register">등록</button>
+			<button type="button" class="btn modify">수정완료</button>
 		</div>	
 	</form>
 </div>
@@ -102,8 +106,6 @@ $(document).ready(function(){
 	$(".registerTable .btn.search").on("click", function(e) {
 		addressSearch();
 	});
-	
-	
 	
 });
 </script>
