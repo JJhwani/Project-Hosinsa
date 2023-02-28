@@ -311,6 +311,7 @@ $(document).ready(function () {
   	    modal.addClass("hidden");
   	  $("body").removeClass("fix");
   	      showList(pageNum);
+  	      location.reload();
   	      
   	  });
   	  

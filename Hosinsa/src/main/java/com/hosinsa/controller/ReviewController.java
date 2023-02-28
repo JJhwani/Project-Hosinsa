@@ -175,7 +175,7 @@ public class ReviewController {
 	
 	
 	@GetMapping("/register")
-	public void register(@RequestParam("pronum") int pronum,@RequestParam("ordernum") int ordernum,@ModelAttribute("member") MemberVO vo, Model model) {
+	public void register(@RequestParam("pronum") int pronum,@RequestParam("ordernum") long ordernum,@ModelAttribute("member") MemberVO vo, Model model) {
 		
 		model.addAttribute("product",service.getProduct(pronum));
 		model.addAttribute("ordernum",ordernum);

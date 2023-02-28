@@ -25,4 +25,5 @@ public interface AdminMapper {
 	public List<OrderVO> getOrderList(String process);
 	public OrderVO getOrder(@Param("orderNum")long orderNum,@Param("pronum")int pronum);
 	public int updateProcess(OrderVO vo);
+	public void sendToReview(OrderVO vo);
 }

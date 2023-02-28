@@ -85,6 +85,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<OrderVO> getAllOrderList() {		
 		return mapper.getAllOrderList();
+	}
+
+	@Override
+	public void sendToReview(OrderVO vo) {
+		mapper.sendToReview(vo);		
 	}	
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -224,8 +225,13 @@ public class AdminController {
 		
 	}
 	
+	@Transactional
 	@PostMapping("/sales")
 	public String SalesUpdate(RedirectAttributes rttr, OrderVO vo) {
+		if(vo.getProcess().equals("배송중")) {
+			vo = adminService.getOrder(vo.getOrdernum(), vo.getPronum());
+			adminService.sendToReview(vo);
+		};
 		if(adminService.updateProcess(vo)) {
 			rttr.addFlashAttribute("result","success");
 		}

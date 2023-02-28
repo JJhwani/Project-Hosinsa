@@ -47,8 +47,8 @@
 					 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
 					 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
 					 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
-					 			<input type="hidden" class="hidden" name="address1" value="${address.address1}">
-				 				<input type="hidden" class="hidden" name="address2" value="${address.address2}">
+					 			<input type="hidden" class="hidden" name="address1" value="${shipping.address1}">
+				 				<input type="hidden" class="hidden" name="address2" value="${shipping.address2}">
 					 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
 							</div>
 					 	</c:forEach>
