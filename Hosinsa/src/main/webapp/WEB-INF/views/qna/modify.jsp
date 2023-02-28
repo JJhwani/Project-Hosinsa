@@ -109,11 +109,6 @@
 		});
 	});
 </script>
-<<<<<<< Updated upstream
 
 
-=======
-	
-	
->>>>>>> Stashed changes
 <%@include file="../includes/footer.jsp"%>
