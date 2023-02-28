@@ -9,6 +9,7 @@
 
 <div class="contentWrap">
 	<form id="joinForm" action="/member/join" method="post"	accept-charset="utf-8">
+		<input type="hidden" name="snsid" value="X">
 		<input type="hidden" name="grade" value="C">
 		<input type="hidden" name="point" value="">	
 		<!--    <input type="hidden" name="profilimg" value="cccccc">
