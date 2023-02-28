@@ -6,22 +6,21 @@
 <link rel="stylesheet" href="../../../resources/css/hosinsa.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 <div class="addressWrap">
-	<h2>배송지 변경</h2>
-	<button type="button" class="btn addRegister">신규 배송지 등록+</button>
+	<h2>배송지 변경<button type="button" class="btn addRegister">신규 배송지 등록 +</button></h2>	
 	<form class="address_Form" action="/order/address/list" method="get" >
 		<c:forEach var="addList" items="${addList}" varStatus="status">
 			<div class="addressInfo">
 				<p>
-					<span>${addList.recipient}</span>&nbsp;&nbsp;<span>${addList.shipping}</span>
+					<span>${addList.recipient}</span>&nbsp;<span class="shippingName">[${addList.shipping}]</span>
 					<c:if test="${addList.basic eq 'O'}">
-						<button type="button" class="btn basic">기본배송지</button><br>
+						<button type="button" class="btn basic">기본배송지</button>
 					</c:if>
 				</p>
-				<p><span>${addList.phone} </span><span> | </span><span> ${addList.tel}</span></p><br>
-				<p><span>(${addList.zipcode})</span><span>${addList.address1}&nbsp;${addList.address2}</span></p><br>
+				<p><span>${addList.phone} </span><span> | </span><span> ${addList.tel}</span></p>
+				<p><span>(${addList.zipcode})</span><span>${addList.address1}&nbsp;${addList.address2}</span></p>
 				<input type="hidden" class="address_no" name="address_no" value="${addList.address_no}">
 				<input type="hidden" class="id" name="id" value="${addList.id}">
-	 			<input type="text" class="basic" name="basic" value="${addList.basic}">	 			
+	 			<input type="hidden" class="basic" name="basic" value="${addList.basic}">	 			
 	 			<button type="button" class="btn addModify">수정</button>
 	 			<c:if test="${addList.basic eq 'X'}">
 					<button type="button" class="btn addRemove">삭제</button>

@@ -142,6 +142,7 @@ $(document).ready(function(){
 			address_modifyForm.find("input[name='basic']").val("X");
 		}
 		
+		var address_no = address_modifyForm.find("input[name='address_no']").val();
 		var recipient = address_modifyForm.find("input[name='recipient']").val();
 		var shipping = address_modifyForm.find("input[name='shipping']").val();
 		var phone = address_modifyForm.find("input[name='phone']").val();
@@ -154,7 +155,8 @@ $(document).ready(function(){
 		if($("input[name='basicCheck']:checkbox").is(":checked")){
 			$.ajax({
 				url : "/order/address/modifyBasic",
-				data : {"id":userid,"recipient":recipient,"shipping":shipping,
+				type : "post",
+				data : {"address_no":address_no, "id":userid,"recipient":recipient,"shipping":shipping,
 						"phone":phone,"tel":teltel,"zipcode":zipcode,"address1":address1,
 						"address2":address2,"basic":basic},
 				success : function(data){
@@ -168,7 +170,8 @@ $(document).ready(function(){
 		else {
 			$.ajax({
 				url : "/order/address/modify",
-				data : {"id":userid,"recipient":recipient,"shipping":shipping,
+				type : "post",
+				data : {"address_no":address_no, "id":userid,"recipient":recipient,"shipping":shipping,
 						"phone":phone,"tel":teltel,"zipcode":zipcode,"address1":address1,
 						"address2":address2,"basic":basic},
 				success : function(data){
@@ -185,21 +188,21 @@ $(document).ready(function(){
 	// 배송지 목록 페이지에서 삭제 버튼 클릭시
 	$(".address_Form .btn.addRemove").on("click", function(e) {
 		e.preventDefault();
-		var address_no = $(".address_Form").find("input[class=address_no]").val();
-
+		var address_no = $(this).siblings("input[class=address_no]").val();
 		address_Form.find(".id").remove();
 		address_Form.find(".basic").remove();
-		address_Form.attr("action","/order/address/remove?address_no="+address_no);
+		address_Form.find(".address_no").val(address_no);
+		address_Form.attr("action","/order/address/remove");
 		address_Form.submit();
 	});
 
 
 	// 배송지 등록 페이지에서 돌아가기 버튼 클릭시
 	$(".address_registerForm .btn.back").on("click", function(e) {
-		e.preventDefault();
-		address_registerForm.attr("action", "/order/address/list");
-		address_registerForm.submit();
-		//self.close();		
+		//e.preventDefault();
+		//address_registerForm.attr("action", "/order/address/list");
+		//address_registerForm.submit();
+		self.close();
 	});
 
 	// 배송지 등록 페이지에서 등록 버튼 클릭시
@@ -262,5 +265,17 @@ $(document).ready(function(){
 		
 		
 	});
+
+	//배송지 등록 페이지에서 선택 버튼 클릭시
+	$(".addChoice").on("click",function(e){
+	
+		var address_no = $(this).siblings(".address_no").val();
+		$(opener.document).find("input[name=address_no]").each(function(){
+			if($(this).val()==address_no){
+				$(this).prev("label").trigger("click");
+			}
+		})
+		window.open("","_self","").close();
+	})
 
 });

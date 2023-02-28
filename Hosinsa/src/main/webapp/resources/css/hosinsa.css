@@ -418,6 +418,19 @@ button.del_Btn{margin-top:10px}
 .complete{display:block;margin:0 auto 20px;width:200px}
 .complete_text{text-align:center}
 
+/* 배송지 팝업 */
+.addressWrap h2{background:black;padding:20px 10px;color:white}
+.addressWrap h2 .addRegister{float:right;margin-top:-5px}
+.addressWrap .addressInfo{padding:20px;border-bottom:1px solid lightgray;}
+.addressWrap .addressInfo p{margin-bottom:10px}
+.addressWrap .addressInfo p span.shippingName{font-weight:bold}
+.addressWrap .pagination{width:100%}
+.addressWrap table{margin:20px auto}
+.addressWrap table th{width:30%;padding:5px}
+.addressWrap table td{width:70%;padding:5px}
+.addressWrap table input{border:1px solid lightgray;padding:6px}
+.addressWrap table input:disabled{background:lightgray}
+
 /* 모달 팝업 */
 .fade{overflow:hidden;position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(0,0,0,0.5)}
 .modal-content{position:absolute;top:50%;left:50%;width:600px;height:200px;margin:-100px 0 0 -300px;background:white;}

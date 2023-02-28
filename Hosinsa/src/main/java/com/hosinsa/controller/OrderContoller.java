@@ -227,7 +227,7 @@ public class OrderContoller {
 	}
 	
 	// 기본배송지 수정X
-	@PostMapping("/address/modify")
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/modify")
 	public String addressModify(HttpSession session, MemberAddressVO address, String id, Long address_no, Model model) {
 		model.addAttribute("id",id);
 		if(addService.modify(address)) {
@@ -255,5 +255,9 @@ public class OrderContoller {
 		return "/order/address";
 	}
 	
-
+	@ResponseBody
+	@RequestMapping("/address/getList")
+	public List<MemberAddressVO> refreshAddressList(Model model,MemberAddressVO address){
+		return addService.getListOrder(address);
+	}
 }
