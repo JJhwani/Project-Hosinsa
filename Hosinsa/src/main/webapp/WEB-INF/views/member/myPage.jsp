@@ -170,7 +170,9 @@
  		</div>
  		<div class="modal-body">
  		  <div class="form-group">
- 		  <input class="form-control" name="password" placeholder="비밀번호 입력">
+ 		  	<form id="modalForm" action="/member/remove" method="post">
+ 		  		<input class="form-control" name="password" placeholder="비밀번호 입력">
+ 		  	</form>
  		  </div>
  		</div>
  		

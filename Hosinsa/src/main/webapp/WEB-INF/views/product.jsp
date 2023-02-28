@@ -75,7 +75,7 @@
 			<button type="button" name="cart" class="cart_in">addToCart</button>
 		</c:if>
 		
-		<button class="btn list" onclick="javascript:history.go(-1);">뒤로</button>
+		<button class="btn list" onclick="javascript:history.back();">뒤로</button>
 	</div>	
 	<form class="productForm" action="/cart/cartIn" method="post">
 		<input type="hidden" name="pronum" value="${product.pronum}">

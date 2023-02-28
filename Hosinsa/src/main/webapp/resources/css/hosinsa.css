@@ -184,7 +184,7 @@ float:left;
 .pagination li.next a,.pagination li.previous a{width:auto}
 .pagination li a:hover{background:rgb(245,245,245)}
 
-.notice{float:left;margin-bottom:50px;width:calc(40% - 20px);margin-right:20px;}
+.notice{float:left;margin-bottom:50px;width:calc(40% - 20px);height:145px;margin-right:20px;}
 .notice .title{margin:5px 0 10px}
 .notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px;color:black}
 .notice form>a,.event form>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;color:black}
