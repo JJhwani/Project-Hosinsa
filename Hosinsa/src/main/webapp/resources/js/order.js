@@ -17,7 +17,7 @@ $(document).ready(function(){
 
 	
 	
-	// 오더 페이지에서 배송지 클릭시 클릭시
+	// 오더 페이지에서 배송지 클릭시
 	function check(){
 		var address_no = $(this).siblings("input[name='address_no']").val();
 		var recipient = $(this).siblings("input[name='recipient']").val();
@@ -25,7 +25,8 @@ $(document).ready(function(){
 		var phone = $(this).siblings("input[name='phone']").val();
 		var tel = $(this).siblings("input[name='tel']").val();
 		var zipcode = $(this).siblings("input[name='zipcode']").val();
-		var address = $(this).siblings("input[name='address']").val();
+		var address1 = $(this).siblings("input[name='address1']").val();
+		var address2 = $(this).siblings("input[name='address2']").val();
 		var basic = $(this).siblings("input[name='basic']").val();
 		
 //		$(".address_info1 li").find("input[name='address_no']").val(address_no);
@@ -40,7 +41,7 @@ $(document).ready(function(){
 		$(".address_info1 li").find(".recipient").text(recipient);
 		$(".address_info1 li").find(".phone").text(phone);
 		$(".address_info1 li").find(".tel").text(tel);
-		$(".address_info2 li").find(".address").text("("+zipcode+")"+address);
+		$(".address_info2 li").find(".address").text("("+zipcode+") "+address1+" "+address2);
 
 	}
 	$(".address_shipping label").on("click", check);
@@ -157,11 +158,12 @@ $(document).ready(function(){
 						"phone":phone,"tel":teltel,"zipcode":zipcode,"address1":address1,
 						"address2":address2,"basic":basic},
 				success : function(data){
-					alert("주소 수정이 성공적으로 처리되었습니다.");					
+					alert("주소 수정이 성공적으로 처리되었습니다.");
+					opener.location.reload();
+					window.open("","_self","").close();			
 				}
 			});
-			opener.location.reload();
-			window.open("","_self","").close();
+			
 		}
 		else {
 			$.ajax({
@@ -171,10 +173,11 @@ $(document).ready(function(){
 						"address2":address2,"basic":basic},
 				success : function(data){
 					alert("주소 수정이 성공적으로 처리되었습니다.");
+					opener.location.reload();
+					window.open("","_self","").close();
 				}
 			});
-			opener.location.reload();
-			window.open("","_self","").close();
+			
 		}
 
 	});
@@ -235,11 +238,11 @@ $(document).ready(function(){
 						"phone":phone,"tel":teltel,"zipcode":zipcode,"address1":address1,
 						"address2":address2,"basic":basic},
 				success : function(data){
-					alert("주소 등록이 성공적으로 처리되었습니다.");					
+					alert("주소 등록이 성공적으로 처리되었습니다.");
+					opener.location.reload();
+					window.open("","_self","").close();				
 				}
 			});
-			opener.location.reload();
-			window.open("","_self","").close();
 		}
 		else {
 			$.ajax({
@@ -249,10 +252,11 @@ $(document).ready(function(){
 						"address2":address2,"basic":basic},
 				success : function(data){
 					alert("주소 등록이 성공적으로 처리되었습니다.");
+					opener.location.reload();
+					window.open("","_self","").close();
 				}
 			});
-			opener.location.reload();
-			window.open("","_self","").close();
+			
 		}
 
 		
