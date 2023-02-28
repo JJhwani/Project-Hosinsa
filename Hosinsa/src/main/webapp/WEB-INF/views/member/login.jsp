@@ -27,7 +27,7 @@
 							type="password" name="pw">
 					</div>
 					
-					<c:if test="${result == 0}">
+					<c:if test="${result == '0'}">
 						<div class="login_warn">ID 또는 비밀번호를 잘못 입력하였습니다.</div>
 					</c:if>
 					<div>
