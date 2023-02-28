@@ -36,6 +36,7 @@
 	<mybatis-spring:scan base-package="com.hosinsa.mapper"/>
 	
 	<context:annotation-config></context:annotation-config>
+	
 	<context:component-scan base-package="com.hosinsa.service" />
 	<context:component-scan base-package="com.hosinsa.aop" />
 	

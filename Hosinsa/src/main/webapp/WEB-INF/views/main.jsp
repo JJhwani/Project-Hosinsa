@@ -147,7 +147,7 @@
 	<div class="cs">
 		<h4 class="title">고객센터</h4>
 		<a href="/qna/list">QnA</a>
-		<a>1:1 문의</a>
+		<a class="kakaoQnA">1:1 문의</a>
 	</div>
 	
 	<div class="event">
@@ -171,6 +171,16 @@
 		<a href="javascript:window.scrollTo({top:0,behavior: 'smooth'})">TOP</a>
 	</div>
 </div>
+
 <script src="../../../resources/js/main.js"></script>
+
+<script>
+$(document).ready(function(){
+	$(".kakaoQnA").on("click",function(){
+		$("#kakao-talk-channel-chat-button a img").trigger("click");
+	})
+});
+
+</script>
 
 <%@ include file="includes/footer.jsp" %>

@@ -4,6 +4,7 @@ import java.io.Console;
 import java.io.File;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +56,7 @@ public class ReviewController {
 	public String register(ReviewVO review, PreReviewVO pre, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model ) {
 		
 		String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";//호신사 프로젝트로 경로 수정 예정
+							//"C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";
 		
 		int index = 1;
 		
@@ -109,12 +111,12 @@ public class ReviewController {
 		model.addAttribute("review", service.get(bno));
 	}
 	
-	
+
 	@PostMapping("/modify")
 	public String modify(ReviewVO vo, @ModelAttribute("cri") ReviewCriteria cri, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model) {
 		
-		 String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload"; //호신사 프로젝트로 경로 수정 예정
-		 		 
+		 String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";
+				 			//"C:\\Works3\\Project\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";
 		 int index = 1;
 		//업로드된 파일이 없을 경우 첨부 파일을 비우지 않고 기존 파일을 그대로 업로드
 		if((photoUpload[0].getSize()!=0)) {
