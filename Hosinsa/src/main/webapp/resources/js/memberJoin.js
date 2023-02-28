@@ -104,7 +104,7 @@ $(document).ready(function(){
                     $('#idCheckSpan').text('사용 가능한 아이디입니다.');		
                     $('#idCheckSpan').css('color', 'green');
                 } else {
-                    $('#idCheckSpan').text('이미 사용중인 아이디입니다.');
+                    $('#idCheckSpan').text('사용하실 수 없는 아이디입니다.');
                     $('#idCheckSpan').css('color', 'red');
                 } 
             }
@@ -141,7 +141,7 @@ $(document).ready(function(){
                     $('#nickCheckSpan').text('사용 가능한 닉네임입니다.');
                     $('#nickCheckSpan').css('color', 'green');
                 } else {
-                    $('#nickCheckSpan').text('이미 사용중인 아이디입니다.');
+                    $('#nickCheckSpan').text('이미 사용중인 닉네임입니다.');
                     $('#nickCheckSpan').css('color', 'red');
                 }
             }
