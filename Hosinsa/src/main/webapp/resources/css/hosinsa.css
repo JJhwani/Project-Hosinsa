@@ -72,6 +72,7 @@ h1.logo a{color:white;font-size:40px;font-weight:bold;letter-spacing:-1px;}
 .mainBanner li:nth-child(3){z-index:5;left:50%;margin-left:-256px}
 .mainBanner li:nth-child(4){left:50%;margin-left:44px;transform:scale(0.8)}
 .mainBanner li:nth-child(5){left:150%}
+.mainBanner li a img{width:512px;height:512px}
 .mainBanner .arrow{position:absolute;top:220px;z-index:4;width:100%}
 .mainBanner .arrow button{position:absolute;background:transparent;width:50px;height:100px;cursor:pointer;border:0;font-size:40px}
 .mainBanner .arrow .left{left:50%;margin-left:-600px}
