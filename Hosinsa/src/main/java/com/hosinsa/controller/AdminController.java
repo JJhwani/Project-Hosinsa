@@ -41,8 +41,8 @@ public class AdminController {
 	public void adminMemberList(Criteria cri, Model model) {
 		int total = adminService.getTotal(cri);
 		
-		model.addAttribute("list", adminService.getList(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("list", adminService.getList(cri));
 		
 	}
 

@@ -23,28 +23,34 @@
 		</thead>
 		<c:forEach items="${list}" var="member">
 			<tr>
-				<td>
-					<a class="move" href="${member.id}"> 
-						<c:out value="${member.id}" />
-					</a>
-				</td>
-				<td><c:out value="${member.name}" /></td>
-				<td><c:out value="${member.nickname}" /></td>
-				<c:choose>
-					<c:when test="${member.grade eq 'C' }">
-						<td>LV.1 브론즈</td>
-					</c:when>
-					<c:when test="${member.grade eq 'B' }">
-						<td>LV.2 실버</td>
-					</c:when>
-					<c:when test="${member.grade eq 'A' }">
-						<td>LV.3 골드</td>
-					</c:when>
-					<c:otherwise>
-						<td>LV.4 운영자</td>
-					</c:otherwise>
-				</c:choose>
-				<td><c:out value="${member.point}" /></td>
+				<c:if test="${member.name eq null }">
+					<td style="color: red;"><c:out value="${member.id}"/></td>
+					<td colspan="4" style="color: red;">탈퇴한 회원</td>
+				</c:if>
+				<c:if test="${member.name ne null}">
+					<td>
+						<a class="move" href="${member.id}"> 
+							<c:out value="${member.id}" />
+						</a>
+					</td>
+					<td><c:out value="${member.name}" /></td>
+					<td><c:out value="${member.nickname}" /></td>
+					<c:choose>
+						<c:when test="${member.grade eq 'C' }">
+							<td>LV.1 브론즈</td>
+						</c:when>
+						<c:when test="${member.grade eq 'B' }">
+							<td>LV.2 실버</td>
+						</c:when>
+						<c:when test="${member.grade eq 'A' }">
+							<td>LV.3 골드</td>
+						</c:when>
+						<c:otherwise>
+							<td>LV.4 운영자</td>
+						</c:otherwise>
+					</c:choose>
+					<td><c:out value="${member.point}" /></td>
+				</c:if>
 			</tr>
 		</c:forEach>
 	</table>

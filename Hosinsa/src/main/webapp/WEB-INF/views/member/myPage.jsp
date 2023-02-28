@@ -171,11 +171,11 @@
  		<div class="modal-body">
  		  <div class="form-group">
  		  	<form id="modalForm" action="/member/remove" method="post">
- 		  		<input class="form-control" name="password" placeholder="비밀번호 입력">
+ 		  		<input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호 입력">
  		  	</form>
  		  </div>
+ 		  <div align="center"><span id="pwCheckSpan"></span></div>
  		</div>
- 		
  		<div class="modal-footer">
  			<button id="modalRegBtn" type="button" class="btn black">탈퇴하기</button>
  			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
@@ -370,16 +370,20 @@ $(document).ready(function(){
     		$(".form-control").focus();
     		return false;
     	}
-    	var check = confirm("정말 탈퇴하시겠습니까?");
+    	var check = confirm("정말 탈퇴하시겠습니까? 탈퇴하시면 가입한 아이디로 재가입 하실 수 없습니다.");
     	
     	if(check) {
-			modalForm.submit();  	
+			modalForm.submit();
+			alert("탈퇴되었습니다.");
+    	} else {
+    		return false;
     	}
     });
 	
     if("${msg}"=="0"){
     	modal.removeClass("hidden");
 		$("body").addClass("fix");
+		$('#pwCheckSpan').text('비밀번호가 틀립니다.');
     }
 });
 </script>
