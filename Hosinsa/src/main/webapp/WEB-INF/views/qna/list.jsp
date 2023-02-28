@@ -105,14 +105,10 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
 			</div>
 			<div class="modal-body">처리가 완료되었습니다.</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-default" id="modalCloseBtn">Close</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -128,8 +124,8 @@
 
 						var result = '<c:out value="${result}"/>';
 
-						checkModal(result);
 						var modal = $("#myModal");
+						checkModal(result);
 
 						//뒤로가기 문제
 						history.replaceState({}, null, null);
@@ -202,6 +198,12 @@
 								e.preventDefault();
 								searchForm.submit();
 							});
+						
+						//모달 닫기
+						$("#modalCloseBtn").on("click",function(){
+							modal.addClass("hidden");
+							$("body").removeClass("fix");
+						})
 					});
 </script>
 
