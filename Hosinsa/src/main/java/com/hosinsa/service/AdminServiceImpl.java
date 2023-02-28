@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.mapper.AdminMapper;
 
@@ -64,6 +65,26 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int searchTotal(Criteria cri) {
 		return mapper.searchTotal(cri)	;
+	}
+
+	@Override
+	public List<OrderVO> getOrderList(String process) {
+		return mapper.getOrderList(process);
+	}
+
+	@Override
+	public OrderVO getOrder(long orderNum, int pronum) {		
+		return mapper.getOrder(orderNum,pronum);
+	}
+
+	@Override
+	public boolean updateProcess(OrderVO vo) {
+		return mapper.updateProcess(vo)==1?true:false;
+	}
+
+	@Override
+	public List<OrderVO> getAllOrderList() {		
+		return mapper.getAllOrderList();
 	}	
 
 }

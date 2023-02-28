@@ -28,7 +28,7 @@
 				(SELECT * FROM
 					(SELECT * FROM HOSINSA_PRODUCT ORDER BY PROVIEW DESC)
 				WHERE CATEGORY = #{category})
-			WHERE ROWNUM <= 5
+			WHERE ROWNUM <= 6
 		]]>
 	</select>
 	

@@ -106,4 +106,9 @@ public class MemberServiceImpl implements MemberService {
 	public List<ProductVO> getLikesListWithPaging(String id,int page) {
 		return memberMapper.getLikesListWithPaging(id,page);
 	}
+
+	@Override
+	public OrderVO getOrder(long ordernum,int pronum) {
+		return memberMapper.getOrder(ordernum,pronum);
+	}
 }

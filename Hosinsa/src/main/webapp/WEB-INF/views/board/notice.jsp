@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="../../../resources/css/hosinsa.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
-<div class="mainWrap">
+<div class="contentWrap">
 	<h2 class="bigTitle">공지사항
 		<c:if test="${member.grade eq 'S'}">
 			<a class="register" href="/board/notice/register">공지사항 등록</a>

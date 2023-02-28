@@ -14,7 +14,7 @@
 				<tr>
 					<th>프로필이미지</th>
 					<td><img src = "../${member.profilimg }" class="proimg">
-					<input type="file" name="uploadFile" class="proimgFile hidden">
+					<input type="file" name="uploadFile" class="proimgFile hidden" accept="image/*">
 					<input name="profilimg" type="hidden" value="${member.profilimg }">
 					</td>
 				</tr>

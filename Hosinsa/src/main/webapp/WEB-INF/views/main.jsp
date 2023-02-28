@@ -145,8 +145,8 @@
 	</div>
 	
 	<div class="cs">
-		<a>고객센터</a>
-		<a>QnA</a>
+		<h4 class="title">고객센터</h4>
+		<a href="/qna/list">QnA</a>
 		<a>1:1 문의</a>
 	</div>
 	

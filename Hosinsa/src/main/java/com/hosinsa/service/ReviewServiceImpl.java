@@ -101,5 +101,4 @@ public class ReviewServiceImpl implements ReviewService{
 		mapper.deletePre(vo);		
 	}
 
-
 }

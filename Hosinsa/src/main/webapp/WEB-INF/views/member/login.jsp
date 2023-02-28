@@ -13,32 +13,32 @@
 	<br>
 	<div class="slider">
 		<div class="login">
-			<form id="loginForm" method="post" action="/login">
+			<form id="loginForm" method="post" action="/member/login">
+				<p class="welcome">* WELCOME TO MY HOSINSA *</p>
 				<input type="hidden" name="grade" value="${member.grade}">
 				<div class="login_box">
 					<div>
 						<span style="text-align: center;">ID</span> <input type="text"
 							name="id" id="id">
 					</div>
-					<br> <br>
+				
 					<div>
 						<span style="text-align: center;">PASSWORD</span> <input id="pw"
 							type="password" name="pw">
 					</div>
-					<br> <br>
+					
 					<c:if test="${result == 0}">
 						<div class="login_warn">ID 또는 비밀번호를 잘못 입력하였습니다.</div>
 					</c:if>
 					<div>
-						<input type="button" value="LOG IN" class="input_login"
-							id="loginBtn"> <br> <br>
+						<input type="button" value="LOG IN" class="input_login black"
+							id="loginBtn">
 						<button id="JoinBtn" type="button">JOIN MEMBER</button>
 					</div>
-					<br>
 					<div align="center">
 						<a id="kakao-login-btn"	href="/member/kakaologin_page">
-							<img src="../../../resources/images/kakao_login_medium_narrow.png"
-							width="222" alt="카카오 로그인 버튼" />
+							<i class="fa-solid fa-comment"></i> 카카오톡 로그인<!-- <img src="../../../resources/images/kakao_login_medium_narrow.png"
+							width="222" alt="카카오 로그인 버튼" /> -->
 						</a>
 					</div>
 				</div>
@@ -61,9 +61,16 @@
 			$("#loginForm").attr("action", "/member/login");
 			$("#loginForm").submit();
 		});
+		
+		$("#loginForm").keypress(function(e){
+			if(e.keyCode===13){
+				$(this).submit();
+			}
+		})
+		
+		
 	});
-</script>
-<script type="text/javascript">
+	
 	var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "fdRP3NakqhfzrLjSpibY",

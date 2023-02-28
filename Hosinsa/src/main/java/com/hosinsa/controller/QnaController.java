@@ -1,13 +1,17 @@
 package com.hosinsa.controller;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.Criteria;
@@ -43,9 +47,44 @@ public class QnaController {
 	public void register() {
 	}
 
+	@Transactional
 	@PostMapping("/register") 
-	public String register(QnaVO qna, RedirectAttributes rttr) {
+	public String register(QnaVO qna, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model) {
 
+		 String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";//호신사 프로젝트로 경로 수정 예정
+		
+		int index = 1;
+		qna.setPhoto1("");
+		qna.setPhoto2("");
+		qna.setPhoto3("");
+		
+		for (MultipartFile multipartFile : photoUpload) {
+			
+			log.info("===============");
+			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
+			log.info("Upload File Size: " + multipartFile.getSize()); 
+		
+
+			File saveFile = new File(uploadFolder,qna.getId()+multipartFile.getOriginalFilename());
+				
+			if(index==1) {
+				qna.setPhoto1("../../resources/photoUpload/"+qna.getId()+multipartFile.getOriginalFilename());
+			}else if(index==2){
+				qna.setPhoto2("../../resources/photoUpload/"+qna.getId()+multipartFile.getOriginalFilename());
+			}else if(index==3) {
+				qna.setPhoto3 ("../../resources/photoUpload/"+qna.getId()+multipartFile.getOriginalFilename());
+			}
+			index++;
+		
+			try {
+				multipartFile.transferTo(saveFile);
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}//end catch
+		
+		}
+		
+		
 		log.info("register: " + qna);
 		service.register(qna);
 		rttr.addFlashAttribute("result", qna.getQno());
@@ -58,8 +97,39 @@ public class QnaController {
 	}
 
 	@PostMapping("/modify")
-	public String modify(QnaVO qna, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		log.info("modify:"+ qna);
+	public String modify(QnaVO qna, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr, MultipartFile[] photoUpload, Model model) {
+		 String uploadFolder ="C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\photoUpload";//호신사 프로젝트로 경로 수정 예정
+	
+		 int index = 1;
+		 qna.setPhoto1("");
+		 qna.setPhoto2("");
+		 qna.setPhoto3("");
+			
+			for (MultipartFile multipartFile : photoUpload) {
+				
+				log.info("===============");
+				log.info("Upload File Name: " + multipartFile.getOriginalFilename());
+				log.info("Upload File Size: " + multipartFile.getSize()); 
+			
+
+				File saveFile = new File(uploadFolder,qna.getId()+multipartFile.getOriginalFilename());
+					
+				if(index==1) {
+					qna.setPhoto1("../../resources/photoUpload/"+qna.getId()+multipartFile.getOriginalFilename());
+				}else if(index==2){
+					qna.setPhoto2("../../resources/photoUpload/"+qna.getId()+multipartFile.getOriginalFilename());
+				}else if(index==3) {
+					qna.setPhoto3 ("../../resources/photoUpload/"+qna.getId()+multipartFile.getOriginalFilename());
+				}
+				index++;
+			
+				try {
+					multipartFile.transferTo(saveFile);
+				} catch (Exception e) {
+					log.error(e.getMessage());
+				}//end catch
+			
+			}
 
 		if (service.modify(qna)) {
 			rttr.addFlashAttribute("result", "success");

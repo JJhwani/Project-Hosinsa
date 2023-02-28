@@ -53,27 +53,10 @@ public class CartContoller {
 	
 	@GetMapping("/list")
 	public void list(Model model, @ModelAttribute("member") MemberVO vo) {
-
 		String id = vo.getId();
 		log.info("list.............2");
 		model.addAttribute("list", service.getList(id));
 	}
-	
-	@PostMapping("/order")
-	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
-		Model model, @ModelAttribute("member") MemberVO member) {
-		log.info(valueArr); 
-		
-		model.addAttribute("order",service.getOrder(valueArr));
-		
-		return "/cart/order";
-	}
-	
-	@GetMapping("/order")
-	public void orderPage(Model model) {
-		
-	}
-	
 	
 	@ResponseBody
 	@PostMapping(value = "/deleteCart")
@@ -93,7 +76,6 @@ public class CartContoller {
 	
 	@PostMapping("/cartIn")
 	public String cartIn(CartVO vo,RedirectAttributes rttr) {
-		
 		service.cartIn(vo);
 		rttr.addFlashAttribute("cartIn","success");	
 		rttr.addAttribute("pronum",vo.getPronum());
@@ -121,7 +103,6 @@ public class CartContoller {
 		
 		return "redirect:/product/{pronum}";
 	}
-	
 	
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/plusQuantity")
 	public String plusQuantity(CartVO vo,RedirectAttributes rttr) {

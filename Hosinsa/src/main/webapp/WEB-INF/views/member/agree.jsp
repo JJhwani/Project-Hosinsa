@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>Agree Page</h1>
+<div class="agreeWrap">
+	<h2 class="title">약관 동의</h2>
 	<div class="checkbox_group">
 		<div class="checkbox">
 			<input type="checkbox" id="check_all"> <label for="check_all">개인정보
@@ -231,12 +225,9 @@ HOSINSA 에서는 기본적인 회원 서비스 제공을 위한 필수정보로
 				<input id="cancleBtn" type="button" value="취소">
 				<input id="agreeBtn" type="button" class="black" value="동의">
 			</div>
+		</div>
 	</div>
-
-
-
-</body>
-
+</div>
 <script type="text/javascript">
 $(document).ready(function(){
 	//체크박스 전체 선택

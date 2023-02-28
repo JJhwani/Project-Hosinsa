@@ -28,7 +28,7 @@ var replyService = (function(){
 		var qno = param.qno;
 		var page = param.page || 1;
 
-		$.getJSON("/reply/pages/" + qno + "/" + page + ".json", 
+		$.getJSON("/qreplies/pages/" + qno + "/" + page + ".json", 
 				function(data) {
 					if (callback) {
 						callback(data.replyCnt, data.list);
