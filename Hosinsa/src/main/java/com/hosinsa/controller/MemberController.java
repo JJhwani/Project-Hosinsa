@@ -250,7 +250,6 @@ public class MemberController {
 		// 등급과 포인트는 임의값 지정
 		member.setGrade("C");
 		member.setPoint(100000);
-		member.setSnsid("O");
 		
 		model.addAttribute("member", member);
 		

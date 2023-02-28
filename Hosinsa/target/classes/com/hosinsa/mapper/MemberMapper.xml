@@ -67,7 +67,7 @@
 <insert id="insert">
 	insert into hosinsa_member values
 	(#{id}, #{pw, jdbcType=VARCHAR}, #{name}, #{gender}, #{birthday, jdbcType=DATE}, #{email}, 
-	#{phone, jdbcType=VARCHAR}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point}, #{snsid})
+	#{phone, jdbcType=VARCHAR}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point})
 </insert>
 
 <!-- DELETE 문 -->
