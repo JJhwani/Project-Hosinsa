@@ -232,7 +232,7 @@ public class MemberController {
 		member.setId((String)result.get("email"));					// 아이디
 		member.setName((String)result.get("nickname"));				// 이름
 		member.setNickname((String)result.get("nickname"));			// 닉네임(이름과 동일)
-		//member.setProfilimg((String)result.get("profile_image"));	// 프로필 이미지(카카오 프로필 사진)
+		member.setProfilimg((String)result.get("profile_image"));	// 프로필 이미지(카카오 프로필 사진)
 		member.setEmail((String)result.get("email"));				// 이메일(아이디와 동일)
 		member.setGender((String)result.get("gender"));				// 성별(male, female 로 받아짐)
 		

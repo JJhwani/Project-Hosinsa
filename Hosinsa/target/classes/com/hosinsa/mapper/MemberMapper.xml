@@ -100,7 +100,7 @@
 	GRADE = null,
 	INTRODUCER = null,
 	POINT = null
-	WHERE ID = #{id}
+	WHERE ID = #{id} and PW = #{pw}
 </update>
 
 </mapper>
