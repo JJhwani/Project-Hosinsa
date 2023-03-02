@@ -44,7 +44,7 @@
 		<h4 class="title">나의 정보</h4>
 		<table class="table3 member_info">
 			<tr><th>나의 등급</th><td>${member.grade }</td></tr>
-			<tr><th>프로필이미지</th><td><img src="../${member.profilimg }"></td></tr>
+			<tr><th>프로필이미지</th><td><img src="../${member.profilimg}"></td></tr>
 			<tr><th>이름</th><td>${member.name }</td></tr>
 			<tr><th>아이디</th><td>${member.id }</td></tr>
 			<tr><th>닉네임</th><td>${member.nickname }</td></tr>
@@ -62,13 +62,13 @@
 					</c:otherwise>
 				</c:choose>
 			</tr>
-			<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/> </td></tr>
+			<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/></td></tr>
 			<tr><th>이메일</th><td>${member.email }</td></tr>
 			<tr><th>연락처</th><td>${member.phone }</td></tr>
 		</table>
 		<div class="array_center align_center">
 			<button data-oper="modify" class="btn btn-default btn-info">회원정보 수정</button>
-			<button data-oper="remove" class="btn btn-default">탈퇴하기</button>
+			<button data-oper="remove" class="btn btn-default" id="remove">탈퇴하기</button>
 		</div>	
 		
 		<form id="operForm" action="/member/modify" method="get">
@@ -96,7 +96,7 @@
 							<td><fmt:formatDate pattern="yyyy-MM-dd hh:MM:ss" value="${order.order_date}"></fmt:formatDate></td>
 							<td><a href="/product/${order.pronum}">${order.proname}</a></td>
 							<td>${order.price}</td>
-							<td><a href="/member/order/${order.ordernum }">${order.process}</a></td>
+							<td><a href="/member/order/${order.ordernum }?pronum=${order.pronum}">${order.process}</a></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>		
@@ -160,6 +160,30 @@
 		</form>
 	</section>
 </div><!-- //contentWrap -->
+
+<!-- Modal -->
+ <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 	<div class="modal-dialog">
+ 	  <div class="modal-content">
+ 		<div class="modal-header">
+ 		  <h4 class="modal-title" id="myModalLabel">회원 탈퇴</h4>
+ 		</div>
+ 		<div class="modal-body">
+ 		  <div class="form-group">
+ 		  	<form id="modalForm" action="/member/remove" method="post">
+ 		  		<input class="form-control" name="password" placeholder="비밀번호 입력">
+ 		  	</form>
+ 		  </div>
+ 		</div>
+ 		
+ 		<div class="modal-footer">
+ 			<button id="modalRegBtn" type="button" class="btn black">탈퇴하기</button>
+ 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+ 		</div>	
+ 	  </div>
+ 	</div> 		  
+ </div>
+<!-- Modal 끝 -->
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -349,7 +373,7 @@ $(document).ready(function(){
     	var check = confirm("정말 탈퇴하시겠습니까?");
     	
     	if(check) {
-			modalForm.submit();    	
+			modalForm.submit();  	
     	}
     });
 	

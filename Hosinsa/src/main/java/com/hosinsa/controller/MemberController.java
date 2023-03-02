@@ -243,7 +243,7 @@ public class MemberController {
 		member.setId((String)result.get("email"));					// 아이디
 		member.setName((String)result.get("nickname"));				// 이름
 		member.setNickname((String)result.get("nickname"));			// 닉네임(이름과 동일)
-		member.setProfilimg((String)result.get("profile_image"));	// 프로필 이미지(카카오 프로필 사진)
+		//member.setProfilimg((String)result.get("profile_image"));	// 프로필 이미지(카카오 프로필 사진)
 		member.setEmail((String)result.get("email"));				// 이메일(아이디와 동일)
 		member.setGender((String)result.get("gender"));				// 성별(male, female 로 받아짐)
 		
@@ -256,6 +256,16 @@ public class MemberController {
 		if (memberService.idCheck(name) != 0) {
 			
 		} else {
+			//프로필이미지 저장
+			File saveFile = new File(
+					"C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\profile",
+					member.getId()+".jpg");
+			try {
+				((MultipartFile)result.get("profile_image")).transferTo(saveFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
+			member.setProfilimg("../../resources/images/profile/"+member.getId()+".jpg");			
 			memberService.join(member);
 		}
 		return "redirect:/";
@@ -268,8 +278,8 @@ public class MemberController {
 	}
 	
 	@GetMapping("/order/{ordernum}")
-	public String getOrder(@PathVariable int ordernum,Model model) {
-		model.addAttribute("order",memberService.getOrder(ordernum));
+	public String getOrder(@PathVariable long ordernum,int pronum,Model model) {
+		model.addAttribute("order",memberService.getOrder(ordernum,pronum));
 		return "/member/order";
 	}
 }

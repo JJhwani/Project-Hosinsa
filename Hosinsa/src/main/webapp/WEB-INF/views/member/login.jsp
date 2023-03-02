@@ -13,7 +13,7 @@
 	<br>
 	<div class="slider">
 		<div class="login">
-			<form id="loginForm" method="post" action="/login">
+			<form id="loginForm" method="post" action="/member/login">
 				<p class="welcome">* WELCOME TO MY HOSINSA *</p>
 				<input type="hidden" name="grade" value="${member.grade}">
 				<div class="login_box">
@@ -27,7 +27,7 @@
 							type="password" name="pw">
 					</div>
 					
-					<c:if test="${result == 0}">
+					<c:if test="${result == '0'}">
 						<div class="login_warn">ID 또는 비밀번호를 잘못 입력하였습니다.</div>
 					</c:if>
 					<div>
@@ -61,9 +61,16 @@
 			$("#loginForm").attr("action", "/member/login");
 			$("#loginForm").submit();
 		});
+		
+		$("#loginForm").keypress(function(e){
+			if(e.keyCode===13){
+				$(this).submit();
+			}
+		})
+		
+		
 	});
-</script>
-<script type="text/javascript">
+	
 	var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "fdRP3NakqhfzrLjSpibY",

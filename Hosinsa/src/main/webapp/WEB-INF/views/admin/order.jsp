@@ -4,10 +4,7 @@
 	<div class="contentWrap">
 		<h2 class="bigTitle">주문 정보</h2>
 		<table class="table array_center table3">
-			<tr>
-				<th><label>관리번호</label></th>
-				<td>${order.o_no }</td>
-			</tr>
+			
 			<tr>
 				<th><label>주문번호</label></th>
 				<td>${order.ordernum }</td>
@@ -74,7 +71,7 @@
 			</tr>
 		</table>
 		<div class="array_center align_center">
-			<button class="modify">배송</button> <button class="delete">취소</button> <a href="/admin/sales">목록</a>
+			<button class="modify">배송</button> <button class="delete">취소</button> <a href="javascript:history.go(-1)">목록</a>
 		</div>
 	</div>
 	
@@ -91,6 +88,7 @@
  		  <label class="trackingNum">운송장 번호 <input name="trackingNum"></label>
  		  <label class="reason">주문 취소 사유 <input name="reason"></label>
  		  <input type="hidden" name="ordernum" value="${order.ordernum}">
+ 		  <input type="hidden" name="pronum" value="${order.pronum }">
  		  <input type="hidden" name="process">
  		 </form>
  		</div> 		

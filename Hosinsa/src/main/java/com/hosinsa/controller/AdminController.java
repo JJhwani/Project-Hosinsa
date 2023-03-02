@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -48,7 +49,7 @@ public class AdminController {
 
 	@GetMapping("/memberModify")
 	public void memberModifyGET(@RequestParam("id") String id, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("member", adminService.get(id));
+		model.addAttribute("memberInfo", adminService.get(id));
 	}
 
 	@PostMapping("/memberModify")
@@ -216,11 +217,21 @@ public class AdminController {
 	
 	@GetMapping("/sales")
 	public void adminSalesList(Model model,String process) {
-		model.addAttribute("orderList",adminService.getOrderList(process));
+		if(process==null) {
+			model.addAttribute("orderList",adminService.getAllOrderList());
+		}else {
+			model.addAttribute("orderList",adminService.getOrderList(process));
+		}
+		
 	}
 	
+	@Transactional
 	@PostMapping("/sales")
 	public String SalesUpdate(RedirectAttributes rttr, OrderVO vo) {
+		if(vo.getProcess().equals("배송중")) {
+			vo = adminService.getOrder(vo.getOrdernum(), vo.getPronum());
+			adminService.sendToReview(vo);
+		};
 		if(adminService.updateProcess(vo)) {
 			rttr.addFlashAttribute("result","success");
 		}
@@ -228,8 +239,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/order/{orderNum}")
-	public String getOrderDetail(@PathVariable int orderNum,Model model) {
-		model.addAttribute("order",adminService.getOrder(orderNum));
+	public String getOrderDetail(@PathVariable long orderNum,int pronum,Model model) {
+		model.addAttribute("order",adminService.getOrder(orderNum,pronum));
 		return "/admin/order";
 	}
 

@@ -34,7 +34,8 @@ public class MemberAddressVO extends BoardCriteria{
 	private String phone;
 	private String tel;
 	private int zipcode;
-	private String address;
+	private String address1;
+	private String address2;
 	private String basic;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date regdate;

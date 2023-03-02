@@ -35,9 +35,9 @@
 		<tr>
 			<th> 브랜드 </th> <td>${product.brand}</td>
 		</tr>
-		<c:if test="${loginUser.grade eq 'S'}">
+		<c:if test="${member.grade eq 'S'}">
 			<tr>
-				<th > 재고 </th> <td> ${product.stock} </td>
+				<th> 재고 </th> <td class="stock">${product.stock}</td>
 			</tr>   
 		</c:if>      
 	</table>
@@ -63,14 +63,19 @@
 	</table>
 
 	<div class="btnWrap">
+		<c:if test="${product.stock==0}">
+			<b class="soldOut"><i class="fa-solid fa-face-sad-tear"></i> SOLD OUT <i class="fa-solid fa-face-sad-tear"></i></b>
+		</c:if>
 		<c:if test="${member.grade eq 'S'}">
 			<button class="btn modify">제품 수정</button>
 			<button class="btn delete">제품 삭제</button>
-		</c:if>      
-		<input type="number" class="cart_quan" min="1" value="1">
-		<button type="button" name="cart" class="cart_in">addToCart</button>
+		</c:if>
+		<c:if test="${product.stock!=0}">
+			<input type="number" class="cart_quan" min="1" value="1">
+			<button type="button" name="cart" class="cart_in">addToCart</button>
+		</c:if>
 		
-		<button class="btn list" onclick="javascript:history.go(-1);">뒤로</button>
+		<button class="btn list" onclick="javascript:history.back();">뒤로</button>
 	</div>	
 	<form class="productForm" action="/cart/cartIn" method="post">
 		<input type="hidden" name="pronum" value="${product.pronum}">

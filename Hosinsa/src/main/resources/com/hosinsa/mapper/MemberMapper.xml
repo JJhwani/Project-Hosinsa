@@ -60,7 +60,7 @@
 </select>
 
 <select id="getOrder" resultType="com.hosinsa.domain.OrderVO">
-	select * from hosinsa_order where ordernum = #{ordernum}
+	select * from hosinsa_order where ordernum = #{ordernum} and pronum = #{pronum}
 </select>
 
 <!-- INSERT 문 -->
@@ -69,17 +69,6 @@
 	(#{id}, #{pw, jdbcType=VARCHAR}, #{name}, #{gender}, #{birthday, jdbcType=DATE}, #{email}, 
 	#{phone, jdbcType=VARCHAR}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point})
 </insert>
-
-<!-- Kakao 로그인 -->
-<insert id="kakaoInsert">
-	INSERT INTO HOSINSA_MEMBER (ID, PW, NAME, EMAIL, SNSID) VALUES
-    (#{id}, #{pw}, #{name}, #{email}, #{snsId})
-</insert>
-
-<!-- DELETE 문 -->
-<delete id="delete">
-	delete from hosinsa_member where id = #{id} and pw = #{pw}
-</delete>
 
 <!-- UPDATE 문 -->
 <update id="update">
@@ -95,6 +84,22 @@
 	GRADE = #{grade, jdbcType=CHAR},
 	INTRODUCER = #{introducer, jdbcType=VARCHAR},
 	POINT = #{point, jdbcType=INTEGER}
+	WHERE ID = #{id}
+</update>
+
+<update id="delete">
+	update hosinsa_member set
+	PW = null,
+	NAME = null,
+	GENDER = null,
+	BIRTHDAY = null,
+	EMAIL = null,
+	PHONE = null,
+	NICKNAME = null,
+	PROFILIMG = null,
+	GRADE = null,
+	INTRODUCER = null,
+	POINT = null
 	WHERE ID = #{id}
 </update>
 

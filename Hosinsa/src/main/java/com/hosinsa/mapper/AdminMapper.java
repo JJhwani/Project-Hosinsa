@@ -2,6 +2,8 @@ package com.hosinsa.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
@@ -19,7 +21,9 @@ public interface AdminMapper {
 	public List<MemberVO> getListWithPaging(Criteria cri);
 	public List<MemberVO> searchMember(Criteria cri);
 	public int searchTotal(Criteria cri);
+	public List<OrderVO> getAllOrderList();
 	public List<OrderVO> getOrderList(String process);
-	public OrderVO getOrder(int orderNum);
+	public OrderVO getOrder(@Param("orderNum")long orderNum,@Param("pronum")int pronum);
 	public int updateProcess(OrderVO vo);
+	public void sendToReview(OrderVO vo);
 }

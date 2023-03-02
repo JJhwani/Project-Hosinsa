@@ -23,13 +23,11 @@
 			</tr>
 			<tr>
 				<th> 전화번호 </th>
-				<td><input type="text" name="tel" value=""></td>
-				<td><label class="telLabel"><input type="checkbox" name="telCheck">없음</label></td>
+				<td><input type="text" name="tel" value=""><label class="telLabel"><input type="checkbox" name="telCheck">없음</label></td>
 			</tr>
 			<tr>
 				<th> 배송지주소 </th>
-				<td><input type="text" id="zipcode" name="zipcode" value="" readonly></td>
-				<td><button type="button" class="btn search">주소검색</button></td>
+				<td><input type="text" id="zipcode" name="zipcode" value="" readonly> <button type="button" class="btn search black">주소검색</button></td>
 			</tr>
 			<tr>
 				<th></th>
@@ -44,14 +42,15 @@
 				<td><label class="basicLabel"><input type="checkbox" name="basicCheck">기본 배송지 설정</label></td>
 			</tr>
 		</table>
-		<input type="hidden" name="address" value="">
+		<input type="hidden" name="userid" value="${id}">
+		<input type="hidden" name="id" value="">
+		<input type="hidden" name="teltel" value="">
 		<input type="hidden" name="basic" value="">
-		<div class="registerBtn">
+		<div class="registerBtn align_center">
 			<button type="reset" class="btn cancle">취소</button>
-			<button type="button" class="btn register">등록</button>
+			<button type="button" class="btn back">돌아가기</button>
+			<button type="button" class="btn register black">등록</button>
 		</div>	
-	</form>
-	<form class="address_searchForm" action="/order/address/register" method="post" onsubmit="return false;">
 	</form>
 </div>
 

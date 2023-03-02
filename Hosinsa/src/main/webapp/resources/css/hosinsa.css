@@ -72,6 +72,7 @@ h1.logo a{color:white;font-size:40px;font-weight:bold;letter-spacing:-1px;}
 .mainBanner li:nth-child(3){z-index:5;left:50%;margin-left:-256px}
 .mainBanner li:nth-child(4){left:50%;margin-left:44px;transform:scale(0.8)}
 .mainBanner li:nth-child(5){left:150%}
+.mainBanner li a img{width:512px;height:512px}
 .mainBanner .arrow{position:absolute;top:220px;z-index:4;width:100%}
 .mainBanner .arrow button{position:absolute;background:transparent;width:50px;height:100px;cursor:pointer;border:0;font-size:40px}
 .mainBanner .arrow .left{left:50%;margin-left:-600px}
@@ -184,11 +185,12 @@ float:left;
 .pagination li.next a,.pagination li.previous a{width:auto}
 .pagination li a:hover{background:rgb(245,245,245)}
 
-.notice{float:left;margin-bottom:50px;width:calc(40% - 20px);margin-right:20px;}
+.notice{float:left;margin-bottom:50px;width:calc(40% - 20px);height:145px;margin-right:20px;}
 .notice .title{margin:5px 0 10px}
 .notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px;color:black}
 .notice form>a,.event form>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;color:black}
 .cs{width:calc(30% - 20px);margin-right:20px;float:left;}
+.cs .title{margin-bottom:20px}
 .cs a{display:block;padding:10px 0;margin:10px 0;width:100%;text-align:center;border:1px solid lightgray;cursor:pointer;color:black}
 .cs a:hover{cursor:pointer;background:rgb(245, 245, 245)}
 .event{width:30%;float:left;}
@@ -200,7 +202,7 @@ float:left;
 .recent img{height:100%}
 .recent>a{display:block;width:100px;height:40px;text-align:center;color:white;margin-top:10px;background:black;font-weight:bold;line-height:40px;cursor:pointer}
 
-.contentWrap{position:relative;overflow:hidden;width:1400px;margin:50px auto;}
+.contentWrap{position:relative;overflow:hidden;width:1400px;margin:40px auto;padding:10px 0}
 .contentWrap .productName{float:left;background:black;width:1120px;padding:12px 5px;color:white;}
 .contentWrap .imgWrap{width:500px;min-height:500px;float:left;margin-top:10px;padding:20px 10px 15px;border:1px solid lightgray}
 .contentWrap .imgWrap img{width:500px;cursor:pointer}
@@ -226,6 +228,7 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .tabWrap .tab{display:block;float:left;border-radius:0;border:1px solid lightgray;box-sizing:border-box;background:white;font-size:24px;letter-spacing:-1px;padding:10px 0;margin-right:-1px}
 .tabWrap .tab:hover{cursor:pointer;background:rgb(245,245,245)}
 .tabWrap.tab2 .tab{width:50%;}
+.soldOut{color:red;font-weight:bold;vertical-align:sub;padding:5px 5px 0 0 ;}
 
 .detailView{overflow:hidden;clear:both;text-align:center}
 .reviewArea .reviewWrap{margin-top:20px;border:1px solid lightgray;}
@@ -338,15 +341,17 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .remove input{width:200px;border:1px solid lightgray;padding:5px;margin-top:10px}
 .remove button{margin-top:15px}
 
-/* 회원가입 - 약관동의 */
+/* 회원가입 */
+.agreeWrap{width:723px;margin:50px auto}
 .checkbox_group{margin-top:20px}
 .checkbox_group .checkbox{margin-top:10px;letter-spacing:-1px}
 .checkbox_group textarea{margin-top:5px}
 .checkBtn{margin-top:30px}
 .checkBtn input{border:1px solid lightgray;padding:5px 10px;cursor:pointer;font-size:16px}
+#phone1{border:1px solid lightgray;padding:3px 10px;width:25%}
+#phone2,#phone3{width:30%}
 
 .align_center{text-align:center}
-
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
 
 /* board event - 이벤트 게시판 */
@@ -383,7 +388,7 @@ button.del_Btn{margin-top:10px}
 .cart_info li{font-size:14px;color:gray;padding:2px}
 
 /* 주문 */
-.orderWrap{width:1200px;margin:20px auto;border:1px solid lightgray;border-radius:0 }
+.orderWrap{width:1200px;margin:40px auto 100px;border:1px solid lightgray;border-radius:0 }
 .orderWrap h2{display:flex;align-items:center;height:50px;padding-left:20px;font-weight:bold;border-bottom:1px solid lightgray;}
 .orderWrap h3{font-weight:bold;margin:0 0 20px 20px}
 .orderInfo table img{max-width:100px;max-height:100px;}
@@ -409,9 +414,23 @@ button.del_Btn{margin-top:10px}
 .order_address .address_info2 li:nth-child(2){width:55%}
 .order_address .address_info2 li:nth-child(3){width:30%}
 .order_address .address_info2 li p{padding: 0 5px;}
+.orderInfo table img{max-width:100px;max-height:100px;}
+#payBtn{float:right;margin-top:10px;font-size:20px}
+.complete{display:block;margin:0 auto 20px;width:200px}
+.complete_text{text-align:center}
 
-
-
+/* 배송지 팝업 */
+.addressWrap h2{background:black;padding:20px 10px;color:white}
+.addressWrap h2 .addRegister{float:right;margin-top:-5px}
+.addressWrap .addressInfo{padding:20px;border-bottom:1px solid lightgray;}
+.addressWrap .addressInfo p{margin-bottom:10px}
+.addressWrap .addressInfo p span.shippingName{font-weight:bold}
+.addressWrap .pagination{width:100%}
+.addressWrap table{margin:20px auto}
+.addressWrap table th{width:30%;padding:5px}
+.addressWrap table td{width:70%;padding:5px}
+.addressWrap table input{border:1px solid lightgray;padding:6px}
+.addressWrap table input:disabled{background:lightgray}
 
 /* 모달 팝업 */
 .fade{overflow:hidden;position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(0,0,0,0.5)}
