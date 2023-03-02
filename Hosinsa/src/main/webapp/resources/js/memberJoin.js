@@ -68,7 +68,7 @@ $(document).ready(function(){
             $("#introCheckBtn").focus();
             return false;
         } else if ($("#introducer").val() == "") {
-            $('input[name=point]').attr('value', 50000);
+            $('input[name=point]').attr('value', 100000);
         }
 
     });
@@ -163,12 +163,12 @@ $(document).ready(function(){
                 if(result == 'success') {
                     $('#introCheckSpan').text('추천인이 확인되었습니다.');
                     $('#introCheckSpan').css('color', 'green');
-                    $('input[name=point]').attr('value', 150000);
+                    $('input[name=point]').attr('value', 200000);
                 } else if(result != 'success') {
                     $('#introCheckSpan').text('추천인이 확인되지 않았습니다.');
                     $('#introCheckSpan').css('color', 'red');
                     $('#introducer').val("");
-                    $('input[name=point]').attr('value', 50000);
+                    $('input[name=point]').attr('value', 100000);
                 }
             }
         });
