@@ -15,6 +15,7 @@
 	         <input type="hidden" name="address" value="">
 	         <input type="hidden" name="request" value="">
 	         <input type="hidden" name="phone" value="">
+	         <input type="hidden" name="tel" value="">
 	         <input type="hidden" name="id" value="${member.id}">
 	      </div>
 	         <input type="hidden" name="cartnum" value="">
@@ -74,7 +75,7 @@
 				<ul class="address_info2">		
 					<li>주소</li>
 					<li><p class="address">(${address.zipcode})&nbsp;${address.address1}&nbsp;${address.address2}</p>
-					<li></li>
+					<li>요청사항 <input type="text" class="request"/></li>
 				</ul>
 			</div>
 		</form>
@@ -140,6 +141,23 @@ $(document).ready(function() {
 				alert(error);
 			}
 		});
+    	
+    	var recipient = $(".recipient").text();
+    	var phone = $(".phone").text();
+    	var tel = $(".tel").text();
+    	var address = $(".address").text();
+    	var request = $(".request").val();
+    	
+    	var orderForm = $("#orderForm");
+    	orderForm.find("input[name=name]").val(recipient);
+    	orderForm.find("input[name=address]").val(address);
+    	orderForm.find("input[name=request]").val(request);
+    	orderForm.find("input[name=phone]").val(phone);
+    	orderForm.find("input[name=tel]").val(tel);
+    	
+    	
+    	
+    	
     });
 	
 	

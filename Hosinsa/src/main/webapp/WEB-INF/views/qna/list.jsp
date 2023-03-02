@@ -27,7 +27,7 @@
 				<a class='move' href='<c:out value="${qna.qno}"/>'>
 				<c:out value="${qna.title}" /> 
 				<b>[ <c:out value="${qna.replyCnt}" /> ]</b></a></td>
-				<td><c:out value="${qna.id}" /></td>
+				<td class="id"><c:out value="${qna.id}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${qna.regdate}" /></td>
 			</tr>
 		</c:forEach>
@@ -175,10 +175,16 @@
 
 						//게시물의 제목 클릭시 이동
 						$(".move").on("click",function(e) {						
-							e.preventDefault();
-							actionForm.append("<input type='hidden' name='qno' value='"+ $(this).attr("href")+ "'>");
-							actionForm.attr("action", "/qna/get");
-							actionForm.submit();
+							var id=$(this).parent().siblings(".id").text();
+							var myId="${member.id}";
+							if(id==myId||"${member.grade}" == "S"){
+								e.preventDefault();
+								actionForm.append("<input type='hidden' name='qno' value='"+ $(this).attr("href")+ "'>");
+								actionForm.attr("action", "/qna/get");
+								actionForm.submit();
+							}else{
+								alert("자신이 작성한 글만 볼 수 있습니다.")
+							}
 						});
 
 						//검색 버튼 이벤트 처리

@@ -69,7 +69,8 @@ public class BoardController {
 		//==========================배포 전 경로 Works3로 수정해 주세요.
 		//String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\eventBanner\\";
 		
-		
+		//테스트용 수정예정
+		String uploadFolder = "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\eventBanner\\"; 
 		
 		String fileName = uploadFile.getOriginalFilename();
 		File saveFile = new File(uploadFolder, fileName);

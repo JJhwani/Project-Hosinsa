@@ -229,8 +229,8 @@ public class AdminController {
 	@PostMapping("/sales")
 	public String SalesUpdate(RedirectAttributes rttr, OrderVO vo) {
 		if(vo.getProcess().equals("배송중")) {
-			vo = adminService.getOrder(vo.getOrdernum(), vo.getPronum());
-			adminService.sendToReview(vo);
+			OrderVO order = adminService.getOrder(vo.getOrdernum(), vo.getPronum());
+			adminService.sendToReview(order);
 		};
 		if(adminService.updateProcess(vo)) {
 			rttr.addFlashAttribute("result","success");
