@@ -1,19 +1,23 @@
 $(document).ready(function(){      
 	
-	var paging = $(".paging");
+	var paging = $(".paging.board");
 	var eventForm = $(".eventForm");
 	var eventRegister = $(".eventRegister");
 	var eventModify = $(".eventModify");
-	
+	var noticeSearch = $(".noticeSearch");
+	var noticeRead = $(".noticeRead")
+	var noticeModify = $(".noticeModify")
+
+
 	//페이징처리
-	$(".paginate_button a").on("click", function(e) {
+	$(".board_paginate_button a").on("click", function(e) {
 		e.preventDefault();
-		paging.find("input[name='pageNum']").val($(this).attr("href"));
+		paging.find("input[name='b_pageNum']").val($(this).attr("href"));
 		paging.submit();
 	});
 
 	// 이벤트 리스트 페이지에서 개별 이벤트 페이지로 이동
-	$(".move").on("click", function(e){
+	$(".event_box .move").on("click", function(e){
 		e.preventDefault();
 		paging.find("input[name='event_no']").remove();
 		paging.append("<input type='hidden' name='event_no' value='"+$(this).attr("href")+"'>");
@@ -119,6 +123,63 @@ $(document).ready(function(){
         }
     }	
 
-	
+	// 공지사항 게시판에서 개별 공지사항 페이지로 이동
+	$(".Notice .move").on("click", function(e){
+		e.preventDefault();
+		paging.find("input[name='nno']").remove();
+		paging.append("<input type='hidden' name='nno' value='"+$(this).attr("href")+"'>");
+		paging.attr("action", "/board/notice/read");
+		paging.submit();
+	});
 
+	// 공지사항 게시판에서 검색버튼 클릭시
+	$(".noticeSearch button").on("click", function(e){
+		if(search.find("input[name='keyword']").val() === ""){
+			alert("키워드를 입력하세요.");
+			return false;
+		}		
+		e.preventDefault();
+		noticeSearch.find("input[name='b_pageNum']").val("1");
+		noticeSearch.find("input[name='b_amount']").val("12");
+		noticeSearch.submit();
+	});
+
+	// 개별 공지사항 페이지에서 공지사항 수정 페이지로 이동
+	$(".noticeRead .btn.modify").on("click",function(e){
+		noticeRead.attr("method","get")
+		noticeRead.attr("action","/board/notice/modify");
+		noticeRead.submit();
+	});
+	
+	// 개별 공지사항 페이지에서 공지사항 게시판으로 이동
+	$(".noticeRead .btn.list").on("click",function(e){
+		noticeRead.find("input[name='nno']").remove();
+		if(noticeRead.find("input[name='b_keyword']").val() !== ""){
+			noticeRead.attr("action","/board/notice/search");
+			noticeRead.attr("method","get")
+			noticeRead.submit();			
+		}
+		else {
+			noticeRead.attr("action","/board/notice/list");
+			noticeRead.submit();
+		}
+	})
+
+
+	// 공지사항 수정 페이지에서 공지사항 게시판으로 가기
+	$(".noticeModify .btn.list").on("click",function(e){		
+		e.preventDefault();
+		noticeModify.attr("action","/board/notice/list");
+		noticeModify.attr("method","post");
+		noticeModify.submit();
+	})
+
+	// 공지사항 수정 페이지에서 공지사항 삭제 페이지로 가기
+	$(".noticeModify .btn.remove").on("click",function(e){		
+		e.preventDefault();
+		noticeModify.append("<input type='hidden' name='nno' value='"
+			+noticeModify.find("input[name=nno]").val()+"'>");
+		noticeModify.attr("action","/board/notice/remove");
+		noticeModify.submit();
+	})
  });

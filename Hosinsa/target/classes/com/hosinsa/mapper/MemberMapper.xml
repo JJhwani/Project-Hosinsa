@@ -14,6 +14,11 @@
 	select count(*) from hosinsa_member where id = #{id}
 </select>
 
+<!-- 카카오 ID 체크 -->
+<select id="kakaoIdCheck" resultType="com.hosinsa.domain.MemberVO">
+	select * from hosinsa_member where id = #{id}
+</select>
+
 <!-- NickName 중복체크 -->
 <select id="nickCheck" resultType="int">
 	select count(*) from hosinsa_member where nickname = #{nickname}
@@ -33,33 +38,69 @@
 	select * from hosinsa_member where id = #{id} and pw = #{pw}
 </select>
 
+<select id="getOrderList" resultType="com.hosinsa.domain.OrderVO">
+	select * from hosinsa_order where id = #{id} order by order_date desc
+</select>
+
+<select id="getPreList" resultType="com.hosinsa.domain.PreReviewVO">
+	select * from hosinsa_p_review where id = #{id} order by expiredate asc
+</select>
+
+<select id="getAlreadyList" resultType="com.hosinsa.domain.ReviewVO">
+	select * from hosinsa_review where id=#{id} order by bno desc
+</select>
+
+<select id="getLikesListWithPaging" resultType="com.hosinsa.domain.ProductVO" parameterType="Map">
+	<![CDATA[
+		select * from 
+			(select rownum rn, p.* from hosinsa_product p, hosinsa_likes l 
+			where p.pronum=l.pronum and l.id=#{id} and rownum <= 14*#{page})
+		where rn > 14*(#{page}-1)
+	]]>
+</select>
+
+<select id="getOrder" resultType="com.hosinsa.domain.OrderVO">
+	select * from hosinsa_order where ordernum = #{ordernum} and pronum = #{pronum}
+</select>
+
 <!-- INSERT 문 -->
 <insert id="insert">
 	insert into hosinsa_member values
-	(#{id}, #{pw}, #{name}, #{gender}, #{birthday}, #{email}, 
-	#{phone}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point})
+	(#{id}, #{pw, jdbcType=VARCHAR}, #{name}, #{gender}, #{birthday, jdbcType=DATE}, #{email}, 
+	#{phone, jdbcType=VARCHAR}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point})
 </insert>
-
-<!-- DELETE 문 -->
-<delete id="delete">
-	delete from hosinsa_member where id = #{id}
-</delete>
 
 <!-- UPDATE 문 -->
 <update id="update">
 	update hosinsa_member set
-	pw = #{pw, jdbcType=VARCHAR},
-	name = #{name, jdbcType=VARCHAR},
-	gender = #{gender, jdbcType=VARCHAR},
-	birthday = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
-	email = #{email, jdbcType=VARCHAR},
-	phone = #{phone, jdbcType=CHAR},
-	nickname = #{nickname, jdbcType=VARCHAR},
-	profilimg = #{profilimg, jdbcType=VARCHAR},
-	grade = #{grade, jdbcType=CHAR},
-	introducer = #{introducer, jdbcType=VARCHAR},
-	point = #{point}
-	where id = #{id}
+	PW = #{pw, jdbcType=VARCHAR},
+	NAME = #{name, jdbcType=VARCHAR},
+	GENDER = #{gender, jdbcType=VARCHAR},
+	BIRTHDAY = to_date(#{birthday, jdbcType=DATE},'yyyy-MM-dd'),
+	EMAIL = #{email, jdbcType=VARCHAR},
+	PHONE = #{phone, jdbcType=CHAR},
+	NICKNAME = #{nickname, jdbcType=VARCHAR},
+	PROFILIMG = #{profilimg, jdbcType=VARCHAR},
+	GRADE = #{grade, jdbcType=CHAR},
+	INTRODUCER = #{introducer, jdbcType=VARCHAR},
+	POINT = #{point, jdbcType=INTEGER}
+	WHERE ID = #{id}
+</update>
+
+<update id="delete">
+	update hosinsa_member set
+	PW = null,
+	NAME = null,
+	GENDER = null,
+	BIRTHDAY = null,
+	EMAIL = null,
+	PHONE = null,
+	NICKNAME = null,
+	PROFILIMG = null,
+	GRADE = null,
+	INTRODUCER = null,
+	POINT = null
+	WHERE ID = #{id}
 </update>
 
 </mapper>

@@ -1,4 +1,4 @@
-@charset "UTF-8";
+ @charset "UTF-8";
 
 /*CSS reset*/
 html, body, div, span, applet, object, iframe,
@@ -47,6 +47,7 @@ table {
 a{text-decoration:none;}
 
 .hidden{display:none}
+.fix{width:100%;height:100%;overflow:hidden;}
 .alert{color:red}
 .headerWrap{position:relative;background:black;color:white;z-index:5}
 .header{width:1400px;margin:0 auto;overflow:hidden;padding:20px 40px}
@@ -71,6 +72,7 @@ h1.logo a{color:white;font-size:40px;font-weight:bold;letter-spacing:-1px;}
 .mainBanner li:nth-child(3){z-index:5;left:50%;margin-left:-256px}
 .mainBanner li:nth-child(4){left:50%;margin-left:44px;transform:scale(0.8)}
 .mainBanner li:nth-child(5){left:150%}
+.mainBanner li a img{width:512px;height:512px}
 .mainBanner .arrow{position:absolute;top:220px;z-index:4;width:100%}
 .mainBanner .arrow button{position:absolute;background:transparent;width:50px;height:100px;cursor:pointer;border:0;font-size:40px}
 .mainBanner .arrow .left{left:50%;margin-left:-600px}
@@ -84,7 +86,7 @@ h1.logo a{color:white;font-size:40px;font-weight:bold;letter-spacing:-1px;}
 .category_menu li a:hover{background:rgb(245, 245, 245)}
 .category_menu.horizental{width:100%;margin:20px 0;height:auto;}
 .category_menu.horizental.tab10 li{float:left;width:10%;text-align:center;}
-
+.category_menu.horizental.tab4 li{float:left;width:25%;text-align:center;}
 .bestWrap, .newWrap{float:left;margin-bottom:30px}
 
 .bigTitle{text-align:center;font-weight:bold;font-size:30px;margin-bottom:20px;}
@@ -183,12 +185,13 @@ float:left;
 .pagination li.next a,.pagination li.previous a{width:auto}
 .pagination li a:hover{background:rgb(245,245,245)}
 
-.notice{float:left;margin-bottom:50px;width:calc(40% - 20px);margin-right:20px;}
-.notice .title{margin-bottom:10px}
-.notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px}
-.notice>a,.event>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;}
+.notice{float:left;margin-bottom:50px;width:calc(40% - 20px);height:145px;margin-right:20px;}
+.notice .title{margin:5px 0 10px}
+.notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px;color:black}
+.notice form>a,.event form>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;color:black}
 .cs{width:calc(30% - 20px);margin-right:20px;float:left;}
-.cs a{display:block;padding:10px 0;margin:10px 0;width:100%;text-align:center;border:1px solid lightgray;cursor:pointer}
+.cs .title{margin-bottom:20px}
+.cs a{display:block;padding:10px 0;margin:10px 0;width:100%;text-align:center;border:1px solid lightgray;cursor:pointer;color:black}
 .cs a:hover{cursor:pointer;background:rgb(245, 245, 245)}
 .event{width:30%;float:left;}
 .event .title{margin-bottom:10px}
@@ -199,7 +202,7 @@ float:left;
 .recent img{height:100%}
 .recent>a{display:block;width:100px;height:40px;text-align:center;color:white;margin-top:10px;background:black;font-weight:bold;line-height:40px;cursor:pointer}
 
-.contentWrap{overflow:hidden;width:1400px;margin:50px auto;}
+.contentWrap{position:relative;overflow:hidden;width:1400px;margin:40px auto;padding:10px 0}
 .contentWrap .productName{float:left;background:black;width:1120px;padding:12px 5px;color:white;}
 .contentWrap .imgWrap{width:500px;min-height:500px;float:left;margin-top:10px;padding:20px 10px 15px;border:1px solid lightgray}
 .contentWrap .imgWrap img{width:500px;cursor:pointer}
@@ -212,18 +215,20 @@ float:left;
 
 .btnWrap{float:right;padding:20px 20px 0 0}
 input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid lightgray;text-align:center;}
-.btnWrap button{border-radius:0;height:27px;vertical-align:top;background-color:white;border:1px solid lightgray;cursor:pointer}
+.btnWrap button{border-radius:0;height:27px;vertical-align:top;background-color:white;border:1px solid lightgray;cursor:pointer;padding:1px 6px}
 .btnWrap button:hover{background:rgb(245,245,245)}
 .btnWrap button.cart_in{background-color:black;color:white}
 .btnWrap.right{clear:both;padding-right:330px}
-.btnWrap .register{background:black;color:white;border:none}
+.btnWrap .register{background:black;color:white;border:none;vertical-align:middle}
 .btnWrap .register:hover{background:black;}
+.btnWrap>a{border:1px solid lightgray;font-size:12px;color:black;padding:4px;position:relative}
 .black{background:black!important;border:none;color:white!important}
 
 .tabWrap{overflow:hidden;clear:both;text-align:center;padding:50px 0 20px;}
 .tabWrap .tab{display:block;float:left;border-radius:0;border:1px solid lightgray;box-sizing:border-box;background:white;font-size:24px;letter-spacing:-1px;padding:10px 0;margin-right:-1px}
 .tabWrap .tab:hover{cursor:pointer;background:rgb(245,245,245)}
 .tabWrap.tab2 .tab{width:50%;}
+.soldOut{color:red;font-weight:bold;vertical-align:sub;padding:5px 5px 0 0 ;}
 
 .detailView{overflow:hidden;clear:both;text-align:center}
 .reviewArea .reviewWrap{margin-top:20px;border:1px solid lightgray;}
@@ -237,13 +242,30 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .reviewArea .proimg{width:50px;height:50px;margin-right:5px}
 .reviewArea .reviewTitle{font-weight:bold;font-size:20px;padding:20px}
 .reviewArea .content{padding:0 20px 20px}
+.reviewArea .photoreview{padding:0 0 20px 20px}
+.reviewArea .photoreview img{max-width:300px;max-height:300px;margin-right:10px}
 .reviewArea span{font-size:0}
 .reviewArea .no_review{text-align:center;font-size:20px;padding:50px 0;line-height:30px;font-weight:bold;letter-spacing:-2px;}
 .reviewArea #searchForm>i{border:1px solid lightgray}
 .reviewArea .reReplyWrap{margin:0 20px 20px;}
 .reviewArea .reviewWrap2{margin-top:10px;border:1px solid lightgray;}
 .reviewArea .reviewWrap2 .content{padding-top:20px}
+.reviewArea .reviewWrap2 .topper i{margin-top:5px}
 .reviewArea .reReply_register{float:right}
+
+#kakaotalk-sharing-btn{width:40px;height:40px;position:absolute;top:60px;right:40px}
+#kakaotalk-sharing-btn img{width:100%}
+.likes{position:absolute;top:50px;right:80px}
+.likes button{border:none;}
+.likes button span{font-size:30px;font-family:sans-serif;color:red;letter-spacing:-5px}
+
+/* 로그인 폼 */
+#loginForm{width:400px;margin:0 auto}
+#loginForm input, #loginForm button{width:100%;border-radius:0;padding:10px;margin:5px 0 10px;font-size:16px;box-sizing:border-box;border:1px solid lightgray}
+#loginForm p.welcome{font-size:20px;margin-bottom:30px;font-weight:bold;text-align:center;letter-spacing:-1px}
+#loginForm #loginBtn{margin-bottom:0}
+#loginForm #loginBtn,#loginForm #JoinBtn{cursor:pointer}
+#kakao-login-btn{display:block;width:100%;height:40px;background:rgb(254,229,0);color:rgb(24,22,0);border:1px solid rgb(24,22,0);line-height:40px;}
 
 /*admin - 제품관리 */
 h2 .register{float:right;background:black;color:white;border-radius:0;margin-top:5px;font-size:16px;padding:10px 15px;cursor:pointer;}
@@ -270,20 +292,203 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .productName input[name='proname']{width:calc(100% - 100px)}
 .inputDetail{padding:10px;margin-left:20px}
 
+/* admin - 회원관리 */
+.search_area .searchForm{text-align:right;margin-bottom:10px;margin-top:-20px}
+.search_area .searchForm input{padding:5px;border-radius:0;border:1px solid lightgray}
+.array_center{width:550px;margin:0 auto}
+.table3{padding:10px 0;margin-bottom:30px;border-bottom:1px solid lightgray;border-top:3px solid black}
+.table3 img{width:100px;height:100px}
+.table3 th{width:20%;vertical-align:middle;padding:10px 0}
+.table3 td{width:80%;padding:10px}
+.table3 input{width:100%;padding:5px;border-radius:0;border:1px solid lightgray}
+.table3 input[type=radio]{width:auto;margin-right:0;vertical-align:top}
+.table3 input[type=button]{margin-top:5px;font-size:12px;cursor:pointer;box-sizing:content-box;}
+.table3 .grade{font-size:14px}
+.member_info{margin-top:10px}
+.table3 .proimg{cursor:pointer}
+
+/* admin - 판매관리 */
+.table6{width:100%}
+
+/* 나의 정보 */
+.myInfo .title{padding:20px 0;}
+.info0 .pagination{margin-bottom:50px}
+.info1{width:50%;float:left;padding-right:50px;box-sizing:border-box;}
+.info1 table{width:100%;margin:0 0 20px}
+.info2{width:50%;max-height:528px;overflow-y:scroll;float:left;padding-right:20px;box-sizing:border-box;}
+.info2 table tr{border-bottom:1px solid lightgray}
+.info2 table th,.info2 table td{padding:10px;text-align:center;vertical-align:middle}
+.info2 table th:nth-child(1),.info2 table td:nth-child(1){width:14%}
+.info2 table th:nth-child(2),.info2 table td:nth-child(2){width:20%}
+.info2 table th:nth-child(3),.info2 table td:nth-child(3){width:35%}
+.info2 table th:nth-child(4),.info2 table td:nth-child(4){width:15%}
+.info2 table th:nth-child(5),.info2 table td:nth-child(5){width:16%}
+.info2 table a{color:black}
+.info3{clear:both;padding-top:60px}
+.info3 .tabWrap {padding:10px 0}
+.info3 .reviewWrap{margin-top:10px}
+
+/* 리뷰쓰기 */
+.reviewForm{width:550px}
+.reviewForm .proimg{box-sizing:border-box;float:left;width:100px;margin-top:9px;border:1px solid lightgray;}
+.reviewForm .infoTable{width:440px;box-sizing:border-box;padding-left:10px}
+.reviewForm .infoTable td{display:block;width:auto;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+.reviewForm form{clear:both}
+.reviewForm input[name=title]{margin-left:20px;width:530px;box-sizing:border-box;padding:5px}
+
+/* 탈퇴하기 */
+.remove header{padding:15px 20px;background:black;color:white;margin-bottom:15px}
+.remove input{width:200px;border:1px solid lightgray;padding:5px;margin-top:10px}
+.remove button{margin-top:15px}
+
+/* 회원가입 */
+.agreeWrap{width:723px;margin:50px auto}
+.checkbox_group{margin-top:20px}
+.checkbox_group .checkbox{margin-top:10px;letter-spacing:-1px}
+.checkbox_group textarea{margin-top:5px}
+.checkBtn{margin-top:30px}
+.checkBtn input{border:1px solid lightgray;padding:5px 10px;cursor:pointer;font-size:16px}
+#phone1{border:1px solid lightgray;padding:3px 10px;width:25%}
+#phone2,#phone3{width:30%}
+
+.align_center{text-align:center}
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
 
 /* board event - 이벤트 게시판 */
-.event_area .event_box{
-	float:left;
-	overflow:hidden;
-	height:300px;
-	text-align: center;
-	margin:3px;
-	padding-top:20px;
-	border:1px solid #ddd
-}
-.event_img img{
-	width:200px ;
-	height:200px;
+.event_area{display:flex;flex-wrap:wrap;justify-content:center}
+.event_area .event_box{width:20%;position:relative;float:left;overflow:hidden;height:290px;text-align: center;margin:10px 3px;padding:20px 0;border:1px solid #ddd}
+.event_area .event_box a{color:black}
+.event_area .event_box p{padding-bottom:10px;letter-spacing:-1px}
+.event_area .event_box .event_img{margin-bottom:5px}
+.event_area .event_box .period{font-weight:bold;letter-spacing:-1px}
+.event_area .event_box .title{overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding:3px 10px;}
+.event_area .event_box .subtext{overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding-bottom:0}
+.event_area .event_box .event_area .event_box{padding:5px 0}
+.event_area .event_box.complete::after{position:absolute;top:0;left:0;content:'';display:block;background:rgba(0,0,0,0.5);width:100%;height:100%}
+.event_img img{width:200px;height:200px;}
+.eventRead{padding:10px 0;border-top:1px solid lightgray;border-bottom:1px solid lightgray;}
+.eventRead h2{font-weight:bold;padding-bottom:10px}
+.eventRead h5{border-bottom:1px solid lightgray;padding-bottom:10px}
+.eventRead h5+.modify{float:right;margin-top:-45px;margin-right:10px}
+.eventRead img{display:block;margin:0 auto}
+.eventRead+.list{margin-top:10px;float:right}
 
-}
+/* 장바구니 */
+.cart table{border-top:1px solid lightgray;margin-top:30px}
+.cart table tr{border-bottom:1px solid lightgray}
+.cart table th,.cart table td{padding:10px;vertical-align:middle;text-align:center;}
+.cart table td a{color:black;}
+.cart table input[type=checkbox]{width:20px;height:20px;vertical-align:middle}
+.cart table img{max-width:100px;max-height:100px;}
+button{border-radius:0;background:white;border:1px solid lightgray;padding:5px 10px;cursor:pointer}
+button.order{float:right;font-size:24px;padding:10px 20px;margin-top:-195px;font-weight:bold}
+button.del_Btn{margin-top:10px}
+.cart_info{list-style: none;padding:10px}
+.cart_info li::before {content: "+ ";}
+.cart_info li{font-size:14px;color:gray;padding:2px}
+
+/* 주문 */
+.orderWrap{width:1200px;margin:40px auto 100px;border:1px solid lightgray;border-radius:0 }
+.orderWrap h2{display:flex;align-items:center;height:50px;padding-left:20px;font-weight:bold;border-bottom:1px solid lightgray;}
+.orderWrap h3{font-weight:bold;margin:0 0 20px 20px}
+.orderInfo table img{max-width:100px;max-height:100px;}
+.shippingInfo{margin:20px 0 20px 0}
+.shippingInfo .order_address{margin:0 20px 0 20px;border:1px solid lightgray;border-radius:0}
+.shippingInfo .order_address .address_shipping{display:flex;align-items:center;width:100%;height:40px;border-bottom:1px solid lightgray;border-radius:0}
+.shippingInfo .order_address .address_shipping li{float:left;list-style:none;padding-left: 10px}
+.shippingInfo .order_address .address_shipping div{float:left;padding-right:10px}
+.order_address .address_shipping li:nth-child(1){width:15%;font-weight:bold}
+.order_address .address_shipping li:nth-child(2){float:left;width:25%}
+.order_address .address_shipping li:nth-child(3){width:60%}
+.shippingInfo .order_address .address_info1{display:flex;align-items:center;width:100%;height:40px;border-bottom:1px solid lightgray;border-radius:0}
+.shippingInfo .order_address .address_info1 li{float:left;list-style:none;padding-left: 10px}
+.order_address .address_info1 li:nth-child(1){width:15%;font-weight:bold}
+.order_address .address_info1 li:nth-child(2){position:relative;}
+.order_address .address_info1 li:nth-child(3){position:relative;}
+.order_address .address_info1 li:nth-child(2)::after{position:absolute;right:-8px;top:0;content:"|";color:lightgray;}
+.order_address .address_info1 li:nth-child(3)::after{position:absolute;right:-8px;top:0;content:"|";color:lightgray;}
+.order_address .address_info1 li p{padding: 0 5px;}
+.shippingInfo .order_address .address_info2{display:flex;align-items:center;width:100%;height:40px;border-bottom:1px solid lightgray;border-radius:0}
+.shippingInfo .order_address .address_info2 li{float:left;list-style:none;padding-left: 10px}
+.order_address .address_info2 li:nth-child(1){width:15%;font-weight:bold}
+.order_address .address_info2 li:nth-child(2){width:55%}
+.order_address .address_info2 li:nth-child(3){width:30%}
+.order_address .address_info2 li p{padding: 0 5px;}
+.orderInfo table img{max-width:100px;max-height:100px;}
+#payBtn{float:right;margin-top:10px;font-size:20px}
+.complete{display:block;margin:0 auto 20px;width:200px}
+.complete_text{text-align:center}
+
+/* 배송지 팝업 */
+.addressWrap h2{background:black;padding:20px 10px;color:white}
+.addressWrap h2 .addRegister{float:right;margin-top:-5px}
+.addressWrap .addressInfo{padding:20px;border-bottom:1px solid lightgray;}
+.addressWrap .addressInfo p{margin-bottom:10px}
+.addressWrap .addressInfo p span.shippingName{font-weight:bold}
+.addressWrap .pagination{width:100%}
+.addressWrap table{margin:20px auto}
+.addressWrap table th{width:30%;padding:5px}
+.addressWrap table td{width:70%;padding:5px}
+.addressWrap table input{border:1px solid lightgray;padding:6px}
+.addressWrap table input:disabled{background:lightgray}
+
+/* 모달 팝업 */
+.fade{overflow:hidden;position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;background:rgba(0,0,0,0.5)}
+.modal-content{position:absolute;top:50%;left:50%;width:600px;height:200px;margin:-100px 0 0 -300px;background:white;}
+.modal-content.medium-modal{height:300px;margin-top:-150px}
+.modal-header{background:black;color:white;padding:20px;}
+.modal-body{padding:30px 20px;}
+.modal-body input{border:1px solid lightgray;font-size:14px;width:100%;padding:5px;box-sizing:border-box}
+.modal-content.medium-modal .modal-body input{margin-bottom:15px}
+.modal-footer{padding:0 20px;text-align:center}
+/* board notice - 공지사항 게시판 */
+.table4{width:100%;margin:0 0 30px 0;border:1px solid lightgray}
+.table4 th{padding:10px;border:1px solid lightgray}
+.table4 th:nth-child(1){width:5%}
+.table4 th:nth-child(2){width:65%}
+.table4 th:nth-child(3){width:10%}
+.table4 th:nth-child(4){width:10%}
+.table4 th:nth-child(5){width:10%}
+.table4 td{text-align:center;padding:10px;border:1px solid lightgray}
+.table4 td:nth-child(2){text-align:left}
+.table4 a{text-decoration:none;color:#333}
+.searchNotice {float:right;width:400px;}
+.searchNotice input{width:350px;height:20px;border:1px solid lightgray;border-radius:0}
+.searchNotice button{height:24px;border:1px solid lightgray;border-radius:0}
+.noticeRead {width:540px; margin:0 auto}
+.noticeRead .infoTable{margin:10px 10px 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray}
+.noticeRead .miniTitle{width:520px;padding:10px 10px 10px 10px;font-size:20px;font-weight:bold;letter-spacing:-1px}
+.noticeRead .noticeBtn{text-align:center}
+.noticeRead .inputDetail{padding:10px;width:518px;margin:0 auto;}
+.noticeModify {width:540px; margin:0 auto}
+.noticeModify .infoTable{margin:10px 10px 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray}
+.noticeModify .miniTitle{width:520px;padding:10px 10px 10px 10px;font-size:20px;font-weight:bold;letter-spacing:-1px}
+.noticeModify .noticeBtn{text-align:center}
+.noticeModify .inputDetail{padding:10px;width:518px;margin:0 auto;}
+.noticeRegister {width:540px; margin:0 auto}
+.noticeRegister .infoTable{margin:10px 10px 10px 10px;padding-bottom:10px;width:500px;border-bottom:1px solid lightgray}
+.noticeRegister .miniTitle{width:520px;padding:10px 10px 10px 10px;font-size:20px;font-weight:bold;letter-spacing:-1px}
+.noticeRegister .noticeBtn{text-align:center}
+.noticeRegister .inputDetail{padding:10px;width:518px;margin:0 auto;}
+.noticeBtn .btn{margin:20px 0 0 0}
+
+/* qna 게시판 */
+.qnaWrap #regBtn{float:right;margin-bottom:10px}
+.qna th:nth-child(1),.qna td:nth-child(1) {width:5%}
+.qna th:nth-child(2),.qna td:nth-child(2) {width:10%;text-align:center}
+.qna th:nth-child(3),.qna td:nth-child(3) {width:65%}
+.qna td:nth-child(3){text-align:left}
+.qna th:nth-child(4),.qna td:nth-child(4) {width:10%}
+.qna th:nth-child(5),.qna td:nth-child(5) {width:10%}
+.qnaWrap #searchForm select,.qnaWrap #searchForm input{border-raduius:0;padding:5px;border:1px solid lightgray}
+.qnaWrap #searchForm input{padding:6px}
+.qnaTable{clear:both}
+.panel{margin-top:20px;border:1px solid gray;padding:10px}
+.panel .chat{padding:5px;margin-top:5px}
+.panel .chat strong{font-weight:bold;}
+.panel .chat small{float:right;font-size:12px}
+.panel .chat p{padding-top:5px}
+.infoTable~.align_center{margin-top:20px}
+.align_center a{border:1px solid lightgray;color:black;padding:5px 10px;font-size:14px}
+
+#kakao-talk-channel-chat-button{position:fixed;top:800px;right:10px;z-index:4;}

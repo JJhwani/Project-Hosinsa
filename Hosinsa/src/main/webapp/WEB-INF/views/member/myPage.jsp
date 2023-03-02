@@ -4,113 +4,186 @@
 <%@ include file="../includes/header.jsp" %>
 
 <div class="contentWrap">
-	<h2 class="title">마이페이지</h2>
 	
-	<h4 class="miniTitle">나의 정보</h4>
-	
-	<p class="grade">나의 등급 : ${member.grade }</p>
-	<table class="table1 member_info">
-		<tr><th>프로필이미지</th><td>${member.profilimg }</td></tr>
-		<tr><th>이름</th><td>${member.name }</td></tr>
-		<tr><th>아이디</th><td>${member.id }</td></tr>
-		<tr><th>닉네임</th><td>${member.nickname }</td></tr>
-		<tr><th>성별</th><td>${member.gender }</td></tr>
-		<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/> </td></tr>
-		<tr><th>이메일</th><td>${member.email }</td></tr>
-		<tr><th>연락처</th><td>${member.phone }</td></tr>
-	</table>
-	<button data-oper="modify" class="btn btn-default btn-info">회원정보 수정</button>
-	<button data-oper="delete" class="btn btn-default">탈퇴하기</button>
-	
-	<form id="operForm" action="/member/modify" method="get">
-		<input type="hidden" id="id" name="id" value="${member.id}">
-	</form>
-	
-	<h4 class="miniTitle">배송지 관리</h4>
-	<table class="table1">
-		<tr><th>번호</th><th>이름</th><th>수신인</th><th>전화번호</th><th>주소</th><th>관리</th></tr>
-		<tr><td>1</td><td>우리집</td><td>이상호</td><td>010-101-0101</td><td>서울시 권선구 평택로 231</td><td><button>수정</button><button>삭제</button></td></tr>
-	</table>
-	<button>배송지 추가</button>
-	
-	<h4 class="miniTitle">주문내역</h4>	
-	<table class="table1">
-		<c:choose>
-			<c:when test="${empty orderList}">
-				<tr><td>주문 내역이 없습니다.</td><tr>
-			</c:when>
-			<c:otherwise>
-				<tr>
-					<th>주문번호</th><th>주문날짜</th><th>주문상품</th><th>주문금액</th><th>진행상태</th>
-				</tr>
-				<c:forEach var="orderList" items="${orderList}">
+	<h2 class="bigTitle">마이페이지</h2>
+	<section class="myInfo info0">
+		<h4 class="title align_center"><i class="fa-solid fa-heart"></i> 내 찜 목록 <i class="fa-solid fa-heart"></i></h4>
+		<section class="productList">
+			<c:if test = "${empty LikesList}">		
+				<p class='no_review'><i class="fa-sharp fa-solid fa-heart-circle-xmark"></i> 아직 찜한 아이템이 없습니다.</p>
+			</c:if>
+			<c:forEach var="LikesList" items="${LikesList}">
+	 			<div class="list_box">
+	 				<a href="/product/${LikesList.pronum }">
+						<div class="list_img">
+							<img src="${LikesList.proimg}">
+						</div>
+						<div class="article_info">
+							<p class="pbrand">${LikesList.brand}</p>
+							<p class="pname">${LikesList.proname}</p>
+							<p class="price">${LikesList.price}</p>
+							<p class="view"><i class="fa-solid fa-eye"></i> ${LikesList.proview}</p>
+						</div>
+					</a>
+				</div>
+	 		</c:forEach>
+		</section>
+		<ul class="pagination">
+			<c:if test="${pageMaker.prev}">
+				<li class="paginate_button previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
+			</c:if>
+			<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+				<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active':''}"><a href="${num}">${num}</a></li>							
+			</c:forEach>
+			<c:if test="${pageMaker.next}">
+				<li class="paginate_button next"><a href="${pageMaker.endPage+1}">Next</a></li>
+			</c:if>
+		</ul>
+	</section>
+	<section class="myInfo info1">
+		<h4 class="title">나의 정보</h4>
+		<table class="table3 member_info">
+			<tr><th>나의 등급</th><td>${member.grade }</td></tr>
+			<tr><th>프로필이미지</th><td><img src="../${member.profilimg}"></td></tr>
+			<tr><th>이름</th><td>${member.name }</td></tr>
+			<tr><th>아이디</th><td>${member.id }</td></tr>
+			<tr><th>닉네임</th><td>${member.nickname }</td></tr>
+			<tr>
+				<th>성별</th>
+				<c:choose>
+					<c:when test="${member.gender eq 'male'}">
+						<td>남자</td>
+					</c:when>
+					<c:when test="${member.gender eq 'female'}">
+						<td>여자</td>
+					</c:when>
+					<c:otherwise>
+						<td>${member.gender}</td>
+					</c:otherwise>
+				</c:choose>
+			</tr>
+			<tr><th>생일</th><td><fmt:formatDate pattern="yyyy-MM-dd" value="${member.birthday }"/></td></tr>
+			<tr><th>이메일</th><td>${member.email }</td></tr>
+			<tr><th>연락처</th><td>${member.phone }</td></tr>
+		</table>
+		<div class="array_center align_center">
+			<button data-oper="modify" class="btn btn-default btn-info">회원정보 수정</button>
+			<button data-oper="remove" class="btn btn-default" id="remove">탈퇴하기</button>
+		</div>	
+		
+		<form id="operForm" action="/member/modify" method="get">
+			<input type="hidden" id="id" name="id" value="${member.id}">
+		</form>
+		
+		<form id="removeForm" action="/member/remove" method="get">
+			<input type="hidden" id="id" name="id" value="${member.id}">
+		</form>
+	</section>
+	<section class="myInfo info2">
+	<h4 class="title">주문내역</h4>	
+		<table class="table3">
+			<c:choose>
+				<c:when test="${empty order}">
+					<tr><td>주문 내역이 없습니다.</td><tr>
+				</c:when>
+				<c:otherwise>
 					<tr>
-						<td>{orderList.ordernum}</td><td>{orderList.orderDate}</td><td>{orderList.product}</td><td>{orderList.price}</td><td>{orderList.process}</td>
+						<th>주문번호</th><th>주문날짜</th><th>주문상품</th><th>주문금액</th><th>진행상태</th>
 					</tr>
-				</c:forEach>
-			</c:otherwise>		
-		</c:choose>		
-	</table>
+					<c:forEach var="order" items="${order}">
+						<tr>
+							<td>${order.ordernum}</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd hh:MM:ss" value="${order.order_date}"></fmt:formatDate></td>
+							<td><a href="/product/${order.pronum}">${order.proname}</a></td>
+							<td>${order.price}</td>
+							<td><a href="/member/order/${order.ordernum }?pronum=${order.pronum}">${order.process}</a></td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>		
+			</c:choose>		
+		</table>
+	</section>
 	
-	<h4 class="miniTitle">내 리뷰 관리</h4>
-	<div class="tabWrap tab2">
-		<button class="tab tab_possible">작성 가능한 리뷰</button>
-		<button class="tab tab_already">내가 작성한 리뷰</button>
-	</div>
-	<div class="tabArea area1 reviewArea">
-		<div class="reviewWrap">
-			<div class="topper">
-				<img class="proimg" src="../../resources/images/upload.jpg">
-				<span class="ordernum">2</span>
-				<b class="brand">브랜드브랜드</b>
-				<a href="/product/{pronum}"><b>상품이름</b></a>
-				<button class="review_register black">작성하기</button>
-				<i>~2023-02-13</i>
-			</div>
+	<section class="myInfo info3">
+		<h4 class="title">내 리뷰 관리</h4>
+		<div class="tabWrap tab2">
+			<button class="tab tab_possible">작성 가능한 리뷰</button>
+			<button class="tab tab_already">내가 작성한 리뷰</button>
 		</div>
-		<div class="reviewWrap">
-			<div class="topper">
-				<img class="proimg" src="../../resources/images/upload.jpg">
-				<span class="ordernum">2</span>
-				<b class="brand">브랜드브랜드</b>
-				<a href="/product/{pronum}"><b>상품이름</b></a>
-				<button class="review_register black">작성하기</button>
-				<i>~2023-02-13</i>
-			</div>
+		<div class="tabArea area1 reviewArea">
+			<c:if test = "${empty possible}">		
+				<p class='no_review'>작성 가능 리뷰가 없습니다.<br>호신사에서 쇼핑하고 리뷰를 작성해 보세요!</p>
+			</c:if>
+			<c:forEach var="possible" items="${possible}">
+				<div class="reviewWrap">
+					<div class="topper">
+						<img class="proimg" src="${possible.proimg}">
+						<span class="ordernum">${possible.ordernum }</span>
+						<b class="brand">${possible.brand }</b>
+						<a href="/product/${possible.pronum }" class="pronum" data-pronum="${possible.pronum }"><b>${possible.proname }</b></a>
+						<button class="review_register black">작성하기</button>
+						<i>~<fmt:formatDate pattern="yyyy-MM-dd" value="${possible.expiredate }"></fmt:formatDate></i>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
-	</div>
-	<div class="tabArea area2 reviewArea hidden">
-		<div class="reviewWrap">
-			<div class="topper">
-				<img class="proimg" src="../../resources/images/upload.jpg">
-				<span class="bno">2</span>
-				<a href="/product/{pronum}"><b>상품이름</b></a>
-				<button class="review_modify">수정</button>
-				<button class="review_delete">삭제</button>
-				<i>2023-02-13</i>
-			</div>
-			<p class="reviewTitle">집에가고싶다2</p>
-			<p class="content">기절하겠네</p>
-			<p class="reReply">댓글 0개</p>
+		<div class="tabArea area2 reviewArea hidden">
+			<c:if test = "${empty already}">
+				<p class='no_review'>아직 리뷰가 없습니다.<br>호신사에서 쇼핑하고 첫 리뷰를 작성해 보세요!</p>
+			</c:if>
+			<c:forEach var="already" items="${already}">
+				<div class="reviewWrap">
+					<div class="topper">
+						<img class="proimg" src="${already.proimg}">
+						<span class="bno">${already.bno }</span>
+						<a href="/product/${already.pronum}"><b>${already.proname }</b></a>
+						<button class="review_modify">수정</button>
+						<button class="review_delete">삭제</button>
+						<i><fmt:formatDate pattern="yyyy-MM-dd" value="${already.uploadDate }"></fmt:formatDate></i>
+					</div>
+					<p class="reviewTitle">${already.title }</p>
+					<p class="content">${already.content }</p>
+					  <!-- 마이페이지 포토리뷰 -->
+					  <p class="photoreview">
+						<img src="${already.photo1 }" onerror="this.remove ? this.remove() : this.removeNode();">
+						<img src="${already.photo2 }" onerror="this.remove ? this.remove() : this.removeNode();" >
+						<img src="${already.photo3 }" onerror="this.remove ? this.remove() : this.removeNode();"> 
+					  </p> 
+					<p class="reReplyWrap"><button class="reReply">댓글 ${already.rereply }개</button></p>
+				</div>
+			</c:forEach>
 		</div>
-		<div class="reviewWrap">
-			<div class="topper">
-				<img class="proimg" src="../../resources/images/upload.jpg">
-				<span class="bno">2</span>
-				<a href="/product/{pronum}"><b>상품이름</b></a>
-				<button class="review_modify">수정</button>
-				<button class="review_delete">삭제</button>
-				<i>2023-02-13</i>
-			</div>
-			<p class="reviewTitle">집에가고싶다2</p>
-			<p class="content">기절하겠네</p>
-			<p class="reReplyWrap"><button class="reReply">댓글 0개</button></p>
-		</div>
-	</div>
-	<form class="reviewForm" action="/review/register" method="get">
-		<input type="hidden" name="ordernum" value="">
-	</form>
+		<form class="reviewForm" action="/review/register" method="get">
+			<input type="hidden" name="pronum" value="">
+			<input type="hidden" name="ordernum" value="">
+			<input type="hidden" name="bno" value="">
+		</form>
+	</section>
 </div><!-- //contentWrap -->
+
+<!-- Modal -->
+ <div class="modal fade hidden" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 	<div class="modal-dialog">
+ 	  <div class="modal-content">
+ 		<div class="modal-header">
+ 		  <h4 class="modal-title" id="myModalLabel">회원 탈퇴</h4>
+ 		</div>
+ 		<div class="modal-body">
+ 		  <div class="form-group">
+ 		  	<form id="modalForm" action="/member/remove" method="post">
+ 		  		<input class="form-control" name="password" placeholder="비밀번호 입력">
+ 		  	</form>
+ 		  </div>
+ 		</div>
+ 		
+ 		<div class="modal-footer">
+ 			<button id="modalRegBtn" type="button" class="btn black">탈퇴하기</button>
+ 			<button id="modalCloseBtn" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+ 		</div>	
+ 	  </div>
+ 	</div> 		  
+ </div>
+<!-- Modal 끝 -->
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -123,9 +196,192 @@ $(document).ready(function(){
 			$(".area2").removeClass("hidden");
 		}
 	})
+	
+	var reviewForm = $(".reviewForm");
+	
+	$(".review_register").on("click",function(){
+		reviewForm.find("input[name=pronum]").val($(this).siblings(".pronum").attr("data-pronum"));
+		reviewForm.find("input[name=ordernum]").val($(this).siblings(".ordernum").text());
+		reviewForm.attr("action","/review/register");
+		reviewForm.submit();
+	})
+	
+	$(".review_modify").on("click",function(){
+		reviewForm.find("input[name=bno]").val($(this).siblings(".bno").text());
+		reviewForm.attr("action","/review/modify");
+		reviewForm.submit();
+	})
+		
+	$(".review_delete").on("click",function(){
+		if(confirm("정말로 리뷰를 삭제하시겠습니까?")){
+			reviewForm.find("input[name=bno]").val($(this).siblings(".bno").text());
+			reviewForm.attr("action","/review/remove");
+			reviewForm.submit();
+		}else{
+			return false;
+		}
+	})
+	
+	if("${review}"=="success"){
+		alert("리뷰 작성이 완료되었습니다.");
+	}
+	
+	if("${modify}"=="success"){
+		alert("리뷰 수정이 완료되었습니다.");
+	}
+	
+	if("${remove}"=="success"){
+		alert("리뷰 삭제가 완료되었습니다.");
+	}
+	
+	//날짜 포맷 변경 함수
+	function formatDate(date) {
+	    
+	    var d = new Date(date),
+	    
+	    month = '' + (d.getMonth() + 1) , 
+	    day = '' + d.getDate(), 
+	    year = d.getFullYear();
+	    
+	    if (month.length < 2) month = '0' + month; 
+	    if (day.length < 2) day = '0' + day; 
+	    
+	    return [year, month, day].join('-');
+	    
+    }
+	
+	//대댓글 표시
+	$(document).on("click",".reReply",function(e){
+		var replyNum = $(this).parent().siblings(".topper").find(".bno").text();
+		var reviewWrap = $(this).parent(".reReplyWrap");
+		var button = $(this);
+		$(this).attr("disabled","disabled");		
+		$.ajax({
+			type:'get',
+			url:'/replies/'+replyNum,
+			dataType:'json',
+			success:function(list){	
+				var str="";
+				for(var i=0, len=list.length; i<len ; i++){
+					
+					var time = new Date(list[i].replyDate);
+					str += "<div class='reviewWrap2'><div class='topper'><span class='bno'>"+list[i].rno+"</span><b>"+list[i].replyer+"</b>";
+					if(list[i].id == "${member.id}"){
+						str+= "<button class='reReply_delete'>삭제</button>";
+					}
+					str += "<i>"+formatDate(time)+"</i></div>";
+					str += "<p class='content'>" + list[i].reply + "</p></div>";
+
+					
+					
+				}					
+				reviewWrap.append(str);
+				button.html("댓글 "+list.length+"개");
+			}
+		})
+		
+	})//대댓글 표시 끝
+	
+	//대댓글 삭제
+	$(document).on("click",".reReply_delete",function(e){
+		var rno = $(this).siblings(".bno").text();
+		var selectDiv = $(this).parents(".reReplyWrap")
+		
+		
+		if(confirm("댓글을 삭제하시겠습니까?")){
+			replyService.remove(rno,function(){
+				alert("삭제되었습니다.");
+				selectDiv.find(".reviewWrap2").remove();
+				selectDiv.find(".reReply").removeAttr("disabled").trigger("click").attr("disabled","disabled");
+			});
+		}else{
+			return false;
+		}
+	})
+		
+	//찜목록 페이징 처리
+	$(".pagination li a").on("click",function(e){
+		e.preventDefault();
+		var page = $(this).attr("href");
+		
+		var form = {
+				id : "${member.id}",
+				page : page
+		}
+		
+		$.ajax({
+			type : 'Post',
+            url : '/member/likes',
+            data : form,
+            dataType : 'json',
+            success : function(list) {
+            	var str=""
+            	for(i=0;i<list.length;i++){
+            		str+='<div class="list_box">';
+            		str+='<a href="/product/'+list[i].pronum+'">';
+            		str+='<div class="list_img">';
+            		str+='<img src="'+list[i].proimg+'">';
+            		str+='</div>';
+            		str+='<div class="article_info">';
+            		str+='<p class="pbrand">'+list[i].brand+'</p>';
+            		str+='<p class="pname">'+list[i].pname+'</p>';
+            		str+='<p class="price">'+list[i].price+'</p>';
+            		str+='<p class="view"><i class="fa-solid fa-eye"></i> '+list[i].proview+'</p>';
+            		str+='</div></a></div>';
+            	}
+            	$(".productList").html(str);
+            }
+		})
+		
+		$(".paginate_button").removeClass("active");
+		$(this).parent().addClass("active");
+	})
 })
 </script>
 
-<script src="../../../resources/js/member.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var operForm = $("#operForm");
+    var removeForm = $("#removeForm");
+    var modalForm = $("#modalForm");
+    
+    $("button[data-oper='modify']").on("click",function(e){
+		operForm.attr("action","/member/modify").submit();
+  	});
+    
+    // 모달
+    var modal = $("#myModal");
+    var closeBtn = $("#modalCloseBtn");
+    
+    closeBtn.on("click",function(){
+		modal.find("input").val("");
+		modal.addClass("hidden");
+		$("body").removeClass("fix");
+	});   
+    
+    $("#remove").on("click", function() {
+    	modal.removeClass("hidden");
+		$("body").addClass("fix");
+    });
+    
+    $("#modalRegBtn").on("click", function() {
+    	if ($(".form-control").val() == "") {
+    		alert("비밀번호를 입력하세요");
+    		$(".form-control").focus();
+    		return false;
+    	}
+    	var check = confirm("정말 탈퇴하시겠습니까?");
+    	
+    	if(check) {
+			modalForm.submit();  	
+    	}
+    });
+	
+    if("${msg}"=="0"){
+    	modal.removeClass("hidden");
+		$("body").addClass("fix");
+    }
+});
+</script>
 
 <%@ include file="../includes/footer.jsp" %>

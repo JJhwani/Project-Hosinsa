@@ -15,7 +15,7 @@
 			<button class="left"><i class="fa-solid fa-chevron-left"></i></button>
 			<button class="right"><i class="fa-solid fa-chevron-right"></i></button>
 		</div>
-	</div>
+	</div>	
 	
 	<ul class="category_menu">
 		<li><a class="category" href="인기">인기</a></li>
@@ -133,19 +133,21 @@
 	<!-- 페이지 처리 끝 -->
 
 	<div class="notice">
-		<h4 class="title">공지사항</h4>
-		<ul>
-			<li><a>공지사항 1</a></li>
-			<li><a>공지사항 2</a></li>
-			<li><a>공지사항 3</a></li>
-		</ul>
-		<a>전체보기</a>
+		<form class="noticeBoard" action="/board/notice/list" method="post">
+			<h4 class="title">공지사항</h4>
+			<ul>
+				<c:forEach var="notice" items="${notice}">
+					<li><a href="${notice.nno}">${notice.title}</a></li>
+				</c:forEach>
+			</ul>
+			<a href="">전체보기</a>
+		</form>
 	</div>
 	
 	<div class="cs">
-		<a>고객센터</a>
-		<a>QnA</a>
-		<a>1:1 문의</a>
+		<h4 class="title">고객센터</h4>
+		<a href="/qna/list">QnA</a>
+		<a class="kakaoQnA">1:1 문의</a>
 	</div>
 	
 	<div class="event">
@@ -169,6 +171,16 @@
 		<a href="javascript:window.scrollTo({top:0,behavior: 'smooth'})">TOP</a>
 	</div>
 </div>
+
 <script src="../../../resources/js/main.js"></script>
+
+<script>
+$(document).ready(function(){
+	$(".kakaoQnA").on("click",function(){
+		$("#kakao-talk-channel-chat-button a img").trigger("click");
+	})
+});
+
+</script>
 
 <%@ include file="includes/footer.jsp" %>

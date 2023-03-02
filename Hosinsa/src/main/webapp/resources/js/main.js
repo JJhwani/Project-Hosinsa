@@ -86,6 +86,13 @@ $(document).ready(function(){
 		eventBoard.submit();
 	});
 
+	// 공지사항 게시판으로 이동
+	$(".noticeBoard a").on("click", function(e) {
+		e.preventDefault();
+		noticeBoard.attr("action","/board/notice/list");
+		noticeBoard.submit();
+	});
+
 
 
 

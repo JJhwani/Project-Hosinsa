@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.MemberVO;
+import com.hosinsa.domain.OrderVO;
 import com.hosinsa.domain.ProductVO;
 
 public interface AdminService {
@@ -17,4 +18,9 @@ public interface AdminService {
 	public int getTotal(Criteria cri);
 	public List<MemberVO> searchMember(Criteria cri);
 	public int searchTotal(Criteria cri);
+	public List<OrderVO> getAllOrderList();
+	public List<OrderVO> getOrderList(String process);
+	public OrderVO getOrder(long orderNum,int pronum);
+	public boolean updateProcess(OrderVO vo);
+	public void sendToReview(OrderVO vo);
 }
