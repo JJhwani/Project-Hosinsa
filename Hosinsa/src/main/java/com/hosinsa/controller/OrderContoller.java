@@ -92,31 +92,20 @@ public class OrderContoller {
 		vo.setOrdernum((System.currentTimeMillis()));
 		service.getOrderIn(vo, cartnum);
 		
+		
+		for (Integer i : cartnum) {
+			log.info(i + "포문 돌아가는 중");
+			service.getProduct_del(i);
+		}
 		service.getOrder_del(cartnum);
+		
 	}
 	
 	@GetMapping("/complete")
 	public void complete() {
 		
 	}
-	
 
-	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/list")
-	public String addressList(HttpSession session, MemberAddressVO address,  String id, Model model) {
-		log.info("------------------------"+id);
-		
-		int total = addService.getTotalCountAddress(address);
-		model.addAttribute("address", addService.getListWithPaging(address));
-		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
-		
-		return "/order/address";
-	}
-	
-	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/registerForm")
-	public String addressRegisterForm(HttpSession session, MemberAddressVO address, Model model) {
-		return "/order/addressRegister";
-	}
-	
 	@PostMapping("/address/register")
 	public String addressRegister(HttpSession session, MemberAddressVO address, Model model) {
 		if(addService.registerSelectKey(address)) {
