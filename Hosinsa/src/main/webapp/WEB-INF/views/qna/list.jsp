@@ -26,8 +26,15 @@
 				<td>
 				<a class='move' href='<c:out value="${qna.qno}"/>'>
 				<c:out value="${qna.title}" /> 
-				<b>[ <c:out value="${qna.replyCnt}" /> ]</b></a></td>
+				<b>[ <c:out value="${qna.replyCnt}" /> ]</b></a>
+				<c:if test="${qna.photo1 !=null }">
+                    <i class="fa-solid fa-camera"></i>
+                  </c:if> 
+				</td>
 				<td class="id"><c:out value="${qna.id}" /></td>
+				
+			
+                  
 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${qna.regdate}" /></td>
 			</tr>
 		</c:forEach>
