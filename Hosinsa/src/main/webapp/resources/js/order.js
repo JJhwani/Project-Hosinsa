@@ -56,12 +56,17 @@ $(document).ready(function(){
 		var popOption = "width=500px, height=950px";
 		var userid = $(".shippingInfo .popupForm").find("input[id=userid]").val();
 		var valueArr = $(".shippingInfo .popupForm").find("input[id=valueArr]").val();
-		window.open("/order/address/listForm?id="+userid+"&valueArr="+valueArr,"list", popOption);
- 
-		popupForm.action="/order/address/listForm?id="+userid+"&valueArr="+valueArr;
-		popupForm.target="pop";
+		var reg = /[\{\}\[\]\/%20?.;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+		var replaced = valueArr.replace(reg,"");
+		var decode = decodeURI(replaced);
+		var uri = "/order/address/listForm?id="+userid+"&valueArr="+decode;
 
-		popupForm.submit();
+		window.open(uri,"list", popOption);
+ 
+		popupForm.action = uri;
+		popupForm.target = "pop";
+
+		//popupForm.submit();
 	}
  
 	// 신규 배송지 등록 팝업
@@ -249,24 +254,15 @@ $(document).ready(function(){
 
 	//배송지 등록 페이지에서 선택 버튼 클릭시
 	$(".addChoice").on("click",function(e){
-	
 		var address_no = $(this).siblings(".address_no").val();
 		$(opener.document).find("input[name=address_no]").each(function(){
-			$.ajax({
-				url : "/order/order_form",
-				data : {"address_no":address_no},
-				type : "post",
-				success : function(data){
-					alert("에베베베베");
-				}
-			});
-			
 			if($(this).val()==address_no){
 				$(this).prev("label").trigger("click");
 			}
-			//opener.location.reload();
-			window.open("","_self","").close();
 		})
+
+		window.open("","_self","").close();
+
 	})
 
 });

@@ -20,6 +20,7 @@
 				<p><span>(${addList.zipcode})</span><span>${addList.address1}&nbsp;${addList.address2}</span></p>
 				<input type="hidden" class="address_no" name="address_no" value="${addList.address_no}">
 				<input type="hidden" class="id" name="id" value="${addList.id}">
+				<input type="hidden" class="valueArr" name="valueArr" value="${valueArr}">
 	 			<input type="hidden" class="basic" name="basic" value="${addList.basic}">	 			
 	 			<button type="button" class="btn addModify">수정</button>
 	 			<c:if test="${addList.basic eq 'X'}">
@@ -29,7 +30,7 @@
 			</div>
 	 	</c:forEach>
 	 	<input type="hidden" id="userid" name="id" value="${id}">
-		<input type="hidden" name="valueArr" value="${valueArr}">
+		<input type="text" name="valueArr" value="${valueArr}">
 	</form>
 	<!-- 페이지 처리 시작 -->
 	<ul class="pagination address">

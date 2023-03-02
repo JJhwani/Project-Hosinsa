@@ -52,7 +52,9 @@ public class OrderContoller {
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/order_form")
 	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
 			MemberAddressVO address, Long address_no, Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
-		log.info("order________________"); 
+		log.info("order________________");
+		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+address_no);
+		log.info("--------------------------------"+valueArr);
 		
 		model.addAttribute("order",service.getOrder(valueArr));
 		model.addAttribute("valueArr", valueArr);
