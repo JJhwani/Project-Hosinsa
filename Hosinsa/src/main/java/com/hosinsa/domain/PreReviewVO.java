@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class PreReviewVO {
 	private String id;
-	private int ordernum;
+	private long ordernum;
 	private int pronum;
 	private String proimg;
 	private String brand;

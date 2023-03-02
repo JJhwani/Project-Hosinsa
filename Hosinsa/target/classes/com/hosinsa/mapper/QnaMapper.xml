@@ -32,11 +32,11 @@
 		resultType="com.hosinsa.domain.QnaVO">
   <![CDATA[
    select 
-     qno, category, title, content, id, regdate, replycnt
+     qno, category, title, content, id, regdate, replycnt, photo1, photo2, photo3
    from 
        (
        select /*+INDEX_DESC(hosinsa_qna pk_qna) */
-         rownum rn, qno, category, title, content, id, regdate, replycnt
+         rownum rn, qno, category, title, content, id, regdate, replycnt, photo1, photo2, photo3
        from 
          hosinsa_qna
       where
@@ -53,8 +53,8 @@
 	
 	
 	<insert id="insert">
-		insert into hosinsa_qna(qno, category, title, content, id)
-		values(seq_qna.nextval, #{category}, #{title}, #{content}, #{id})
+		insert into hosinsa_qna(qno, category, title, content, id, photo1, photo2, photo3)
+		values(seq_qna.nextval, #{category}, #{title}, #{content}, #{id}, #{photo1}, #{photo2}, #{photo3})
 	</insert>
 
 
@@ -63,8 +63,8 @@
 			resultType="long">
 			select seq_qna.nextval from dual
 		</selectKey>
-		insert into hosinsa_qna(qno, category, title, content, id)
-		values(#{qno}, #{category}, #{title}, #{content}, #{id})
+		insert into hosinsa_qna(qno, category, title, content, id, photo1, photo2, photo3)
+		values(#{qno}, #{category}, #{title}, #{content}, #{id}, #{photo1}, #{photo2}, #{photo3})
 	</insert>
 	
 	
@@ -81,7 +81,10 @@
 		set
 		category = #{category},
 		title= #{title},
-		content= #{content}
+		content= #{content},
+		photo1 = #{photo1},
+	 	photo2 = #{photo2},
+	 	photo3 = #{photo3}
 		where qno = #{qno}
 	</update>
 	

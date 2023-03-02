@@ -67,13 +67,8 @@
 <insert id="insert">
 	insert into hosinsa_member values
 	(#{id}, #{pw, jdbcType=VARCHAR}, #{name}, #{gender}, #{birthday, jdbcType=DATE}, #{email}, 
-	#{phone, jdbcType=VARCHAR}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point}, #{snsid})
+	#{phone, jdbcType=VARCHAR}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point})
 </insert>
-
-<!-- DELETE 문 -->
-<delete id="delete">
-	delete from hosinsa_member where id = #{id} and pw = #{pw}
-</delete>
 
 <!-- UPDATE 문 -->
 <update id="update">
@@ -89,6 +84,22 @@
 	GRADE = #{grade, jdbcType=CHAR},
 	INTRODUCER = #{introducer, jdbcType=VARCHAR},
 	POINT = #{point, jdbcType=INTEGER}
+	WHERE ID = #{id}
+</update>
+
+<update id="delete">
+	update hosinsa_member set
+	PW = null,
+	NAME = null,
+	GENDER = null,
+	BIRTHDAY = null,
+	EMAIL = null,
+	PHONE = null,
+	NICKNAME = null,
+	PROFILIMG = null,
+	GRADE = null,
+	INTRODUCER = null,
+	POINT = null
 	WHERE ID = #{id}
 </update>
 

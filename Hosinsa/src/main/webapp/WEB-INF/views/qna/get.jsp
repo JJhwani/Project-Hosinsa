@@ -31,7 +31,15 @@
 		</table>
 		<h4 class="miniTitle">내용</h4>
 		<textarea class="inputDetail" name="content" cols="70" rows="16" readonly>${qna.content}</textarea>
-		
+
+		<!-- 첨부파일 -->
+		<div class="form-group">
+			<label>첨부파일</label> 
+			<img src="${qna.photo1 }">
+			<img src="${qna.photo2 }">
+			<img src="${qna.photo3 }">
+		</div>
+
 		<div class="align_center">
 			<button data-oper='list' class="btn btn-default" onclick="location.href='/qna/list'">목록</button>
 			<button data-oper='modify' class="btn" onclick="location.href='/qna/modify?qno=<c:out value="${qna.qno}"/>'">수정	</button>
@@ -122,20 +130,28 @@ $(document).ready(function () {
            return;
          }         
 
-          for (var i = 0, len = list.length || 0; i < len; i++) {
-             str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-             str +="  <div><strong class='primary-font'>"+list[i].replyer+"</strong>"; 
-             str +="    <small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small></div>";
-             str +="    <p>"+list[i].reply+"</p></li>";
-           }
-         replyUL.html(str);
-         
-         showReplyPage(replyCnt);
+         for (var i = 0, len = list.length || 0; i < len; i++) {
+       	  //첨부파일 나오게 수정
+          	  str += "<p class='qnaphoto'>";
+				//"'onerror='this.remove ? this.remove() : this.removeNode()'/>" -> 사진이 없을 경우 엑박이 안나옴
+			str += "<img src='"+list[i].photo1 + "'onerror='this.remove ? this.remove() : this.removeNode()'/>";
+			str += "<img src='"+list[i].photo2 + "'onerror='this.remove ? this.remove() : this.removeNode()'/>";
+			str += "<img src='"+list[i].photo3 + "'onerror='this.remove ? this.remove() : this.removeNode()'/>";
+			str += "</p>";
+				
+            str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
+            str +="  <div><strong class='primary-font'>"+list[i].replyer+"</strong>"; 
+            str +="    <small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small></div>";
+            str +="    <p>"+list[i].reply+"</p></li>";
+          }
+        replyUL.html(str);
+        
+        showReplyPage(replyCnt);
 
-     
-       });//end function
-         
-     }//end showList
+    
+      });//end function
+        
+    }//end showList
      
      
     var pageNum = 1;
@@ -225,7 +241,6 @@ $(document).ready(function () {
       
     });
     
-
     modalRegisterBtn.on("click",function(e){
       
       var reply = {
@@ -247,7 +262,6 @@ $(document).ready(function () {
       
     });
     
-
     //댓글 조회 클릭 이벤트 처리 
       $(".chat").on("click", "li", function(e){
         
@@ -265,8 +279,8 @@ $(document).ready(function () {
           modalModBtn.show();
           modalRemoveBtn.show();
           
-          modal.addClass("hidden");
-          $("body").removeClass("fix");
+          modal.removeClass("hidden");
+          $("body").addClass("fix");
               
         });
       });
@@ -286,7 +300,6 @@ $(document).ready(function () {
       });
       
     });
-
     //댓글 삭제후 댓글 목록 갱신
     modalRemoveBtn.on("click", function (e){
     	  
@@ -298,13 +311,13 @@ $(document).ready(function () {
   	    modal.addClass("hidden");
   	  $("body").removeClass("fix");
   	      showList(pageNum);
+  	      location.reload();
   	      
   	  });
   	  
   	}); 
   	
 });   
-
 </script>
 
 <script type="text/javascript">
@@ -315,21 +328,14 @@ $(document).ready(function () {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
 		var operForm = $("#operForm");
-
 		$("button[data-oper='modify']").on("click", function(e) {
-
 			operForm.attr("action", "/qna/modify").submit();
-
 		});
-
 		$("button[data-oper='list']").on("click", function(e) {
-
 			operForm.find("#qno").remove();
 			operForm.attr("action", "/qna/list")
 			operForm.submit();
-
 		});
 	});
 </script>

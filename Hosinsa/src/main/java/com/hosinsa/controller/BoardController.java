@@ -68,6 +68,8 @@ public class BoardController {
 	public String eventRegister(BoardEventVO bevo, BoardCriteria cri, MultipartFile uploadFile, Model model) {
 		//==========================배포 전 경로 Works3로 수정해 주세요.
 		String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\eventBanner\\";
+		
+	
 		String fileName = uploadFile.getOriginalFilename();
 		File saveFile = new File(uploadFolder, fileName);
 		
@@ -90,7 +92,7 @@ public class BoardController {
 		model.addAttribute("today", today);
 		model.addAttribute("pageMaker_b", new BoardPageDTO(cri, total));
 		
-		return "/board/event";
+		return "redirect:/board/event";
 	}
 	// 이벤트 수정 폼
 	@GetMapping("/event/modify")

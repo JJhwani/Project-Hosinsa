@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.QnaVO;
-import com.hosinsa.service.QnaService;
 
 import lombok.extern.log4j.Log4j;
 
