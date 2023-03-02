@@ -8,7 +8,6 @@ import lombok.Data;
 
 /*
 CREATE TABLE HOSINSA_ORDER(
-    O_NO          NUMBER(20),   
     ORDERNUM      NUMBER(20), 
     PRONUM        NUMBER(8),
     QUANTITY      NUMBER(8),
@@ -17,7 +16,7 @@ CREATE TABLE HOSINSA_ORDER(
     SALE          VARCHAR2(50),
     NAME          VARCHAR2(15),
     ADDRESS       VARCHAR2(100),
-    REQUESTS      VARCHAR2(100),
+    REQUEST      VARCHAR2(100),
     PHONE         CHAR(13),
     ID            VARCHAR2(30),
     ORDER_DATE    DATE DEFAULT SYSDATE,

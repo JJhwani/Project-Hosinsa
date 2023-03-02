@@ -83,20 +83,50 @@ public class OrderContoller {
 
 	// 주문 처리
 	@PostMapping("/complete")
-	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo) {
+	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo, Model model) {
+		
+		model.addAttribute("order", service.getOrder(cartnum));
 		
 		vo.setOrdernum((System.currentTimeMillis()));
 		service.getOrderIn(vo, cartnum);
 		
+		
+		for (Integer i : cartnum) {
+			log.info(i + "포문 돌아가는 중");
+			service.getProduct_del(i);
+		}
 		service.getOrder_del(cartnum);
+		
 	}
 	
 	@GetMapping("/complete")
 	public void complete() {
 		
 	}
+
+	@PostMapping("/address/register")
+	public String addressRegister(HttpSession session, MemberAddressVO address, Model model) {
+		if(addService.registerSelectKey(address)) {
+			model.addAttribute("register","success");
+		}
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		
+		return "/order/address";
+	}
 	
-	//카카오페이 결제
+	
+	@PostMapping("/address/modifyForm")
+	public String addressModifyForm(HttpSession session, MemberAddressVO address, Model model) {
+		
+		
+		return "/order/addressModify";
+	}
+	
+	
+	// 카카오페이 결제
 	@RequestMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(Integer total) {

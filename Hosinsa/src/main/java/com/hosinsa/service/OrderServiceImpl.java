@@ -26,6 +26,12 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	@Override
+	public boolean getProduct_del(int cartnum) {
+		System.out.println(cartnum + "서비스 임플까지 들어옴");
+		return mapper.Product_del(cartnum)==1? true : false;
+	}
+	
+	@Override
 	public void getOrderIn(OrderVO vo, List<Integer> cartnum) {
 		mapper.getOrderIn(vo, cartnum);
 		

@@ -30,8 +30,8 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	@Override
-	public boolean plusQuantity(CartVO vo) {
-		return mapper.plusQuantity(vo)==1?true:false;
+	public boolean plusQuantity(long cartnum) {
+		return mapper.plusQuantity(cartnum)==1?true:false;
 	}
 	
 	@Override
@@ -47,6 +47,10 @@ public class CartServiceImpl implements CartService {
 		return mapper.checkCart(vo);
 	}
 
+	@Override
+	public int checkQuantity(long pronum) {
+		return mapper.checkQuantity(pronum);
+	}
 	
 }
 
