@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../resources/css/hosinsa.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 <div class="addressWrap">
-	<h2>신규 배송지</h2>
+	<h2>배송지 수정</h2>
 	<form class="address_modifyForm" action="/order/address/modify" method="post" >
 		<table class="modifyTable">
 			<tr>
@@ -23,13 +23,11 @@
 			</tr>
 			<tr>
 				<th> 전화번호 </th>
-				<td><input type="text" name="tel" value="${address.tel}"></td>
-				<td><label class="telLabel"><input type="checkbox" name="telCheck">없음</label></td>
+				<td><input type="text" name="tel" value="${address.tel}"> <label class="telLabel"><input type="checkbox" name="telCheck">없음</label></td>
 			</tr>
 			<tr>
 				<th> 배송지주소 </th>
-				<td><input type="text" id="zipcode" name="zipcode" value="${address.zipcode}" readonly></td>
-				<td><button type="button" class="btn search">주소검색</button></td>
+				<td><input type="text" id="zipcode" name="zipcode" value="${address.zipcode}" readonly> <button type="button" class="btn search">주소검색</button></td>
 			</tr>
 			<tr>
 				<th></th>
@@ -48,14 +46,14 @@
 				</tr>
 			</c:if>
 		</table>
-		<input type="text" name="userid" value="${id}">
+		<input type="hidden" name="userid" value="${id}">
 		<input type="hidden" name="address_no" value="${address_no}">
 		<input type="hidden" name="id" value="">
 		<input type="hidden" name="teltel" value="">
 		<input type="hidden" name="basic" value="">
-		<div class="modifyBtn">
+		<div class="modifyBtn align_center">
 			<button type="reset" class="btn cancle">취소</button>
-			<button type="button" class="btn modify">수정완료</button>
+			<button type="button" class="btn modify black">수정완료</button>
 		</div>	
 	</form>
 </div>

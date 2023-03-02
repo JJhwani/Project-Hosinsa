@@ -1,15 +1,8 @@
 $(document).ready(function(){
-    $(document).on("keyup", "#phone", function() {
-        $(this).val( $(this).val().replace(/[^0-9]/g, "") // 숫자를 제외한 모든 문자 제거
-        // 00-000-0000 또는 000-0000-0000 전화번호를 (2, 3) - (3, 4) - (4) 자리에 숫자 그룹을 지어 묶어준다.
-        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`,"$1-$2-$3")
-        .replace("--", "-") );
-    });
     var count = 0;
+    var count2 = 0;
+    var count3 = 0;
     $("#joinBtn").click(function(){
-        // $("#joinForm").attr("action", "/member/join");
-        // $("#joinForm").submit();
-
         if($("#id").val() == "") {
             alert("아이디를 입력해주세요.");
             $("#id").focus();
@@ -63,12 +56,21 @@ $(document).ready(function(){
             $("#nickname").focus();
             return false;
         } else if (count < 1) {
-            alert("중복체크를 해주세요.");
+            alert("아이디 중복체크를 해주세요.");
             $("#idCheckBtn").focus();
             return false;
-        } 
+        } else if (count2 < 1) {
+            alert("닉네임 중복체크를 해주세요.");
+            $("#nickCheckBtn").focus();
+            return false;
+        } else if ($("#introducer").val().length > 1 && count3 < 1) {
+            alert("추천인 확인을 해주세요.");
+            $("#introCheckBtn").focus();
+            return false;
+        } else if ($("#introducer").val() == "") {
+            $('input[name=point]').attr('value', 50000);
+        }
 
-        $('input[name=point]').attr('value', 50000);
     });
     
     $("#idCheckBtn").on("click", function(){
@@ -102,7 +104,7 @@ $(document).ready(function(){
                     $('#idCheckSpan').text('사용 가능한 아이디입니다.');		
                     $('#idCheckSpan').css('color', 'green');
                 } else {
-                    $('#idCheckSpan').text('이미 사용중인 아이디입니다.');
+                    $('#idCheckSpan').text('사용하실 수 없는 아이디입니다.');
                     $('#idCheckSpan').css('color', 'red');
                 } 
             }
@@ -110,6 +112,7 @@ $(document).ready(function(){
     });
 
     $("#nickCheckBtn").on("click", function(){
+        count2++;
         if($("#nickname").val() == ""){
             alert("닉네임을 입력해주세요.");
             $("#nickname").focus();
@@ -138,7 +141,7 @@ $(document).ready(function(){
                     $('#nickCheckSpan').text('사용 가능한 닉네임입니다.');
                     $('#nickCheckSpan').css('color', 'green');
                 } else {
-                    $('#nickCheckSpan').text('이미 사용중인 아이디입니다.');
+                    $('#nickCheckSpan').text('이미 사용중인 닉네임입니다.');
                     $('#nickCheckSpan').css('color', 'red');
                 }
             }
@@ -146,6 +149,7 @@ $(document).ready(function(){
     });
 
     $("#introCheckBtn").on("click", function() {
+        count3++;
         var memberIntroducer = $("#introducer").val();
         console.log(memberIntroducer);
         var data = {memberIntroducer : memberIntroducer};

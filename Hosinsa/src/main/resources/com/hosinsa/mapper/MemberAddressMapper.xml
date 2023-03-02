@@ -44,7 +44,7 @@
 	</update>
 	<!-- modify -->
 	<update id="modify">
-		UPDATE HOSINSA_MEMBER_ADDRESS SET
+		UPDATE HOSINSA_MEMBER_ADDRESS SET 
 		RECIPIENT = #{recipient},
 		SHIPPING = #{shipping},
 		PHONE = #{phone},
@@ -52,8 +52,8 @@
 		ZIPCODE = #{zipcode},
 		ADDRESS1 = #{address1},
 		ADDRESS2 = #{address2},
-		BASIC = #{basic}
-		UPDATE_DATE = SYSDATE,
+		BASIC = #{basic},
+		UPDATE_DATE = SYSDATE
 		WHERE ADDRESS_NO = #{address_no}
 	</update>
 	<!-- remove -->

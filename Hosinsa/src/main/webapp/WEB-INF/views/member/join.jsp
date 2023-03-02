@@ -11,9 +11,8 @@
 	<form id="joinForm" action="/member/join" method="post"	accept-charset="utf-8">
 		<input type="hidden" name="snsid" value="X">
 		<input type="hidden" name="grade" value="C">
-		<input type="hidden" name="point" value="">	
-		<!--    <input type="hidden" name="profilimg" value="cccccc">
-   	<input type="hidden" name="introducer" value="member"> -->
+		<input type="hidden" name="point" value="">
+		<input type="hidden" name="phone" value="">	
 		<table class="table array_center table3">
 			<tr>
 				<th>아이디 *</th>
@@ -54,10 +53,6 @@
 				<th>이메일 *</th>
 				<td><input type="text" name="email" id="email"></td>
 			</tr>
-			<!-- <tr>
-				<th>휴대전화 *</th>
-				<td><input type="text" name="phone" id="phone"></td>
-			</tr> -->
 			<tr>
    				<th>휴대전화 * </th>
    				<td>
@@ -113,8 +108,8 @@ $(document).ready(function(){
 		var phone1 = $("#phone1").val();
 		var phone2 = $("#phone2").val();
 		var phone3 = $("#phone3").val();
-		var phone = phone1 + phone2 + phone3;
-		alert(phone);
+		var phone = phone1 + "-" + phone2 + "-" + phone3;
+		$('input[name=phone]').attr('value', phone);
 		
 	});
 	
