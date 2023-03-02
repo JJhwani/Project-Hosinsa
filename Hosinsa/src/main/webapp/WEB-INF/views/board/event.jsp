@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
 <div class="contentWrap">
-	<h2 class="bigTitle">MUSINSA EVENT
+	<h2 class="bigTitle">HOSINSA EVENT
 	<c:if test="${member.grade eq 'S'}">
 		<a class="register" href="/board/event/register">이벤트 등록</a>
 	</c:if>
@@ -100,6 +100,10 @@
 <script src="../../../resources/js/board.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	$(".event_box").on("click",function(){
+		$(this).find("a").click();
+	})
+	
 	if("${register}"==="success"){
 		alert("이벤트 등록이 성공적으로 처리되었습니다.");
 	}

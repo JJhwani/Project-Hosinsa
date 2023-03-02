@@ -27,7 +27,7 @@
 				<a class='move' href='<c:out value="${qna.qno}"/>'>
 				<c:out value="${qna.title}" /> 
 				<b>[ <c:out value="${qna.replyCnt}" /> ]</b></a></td>
-				<td><c:out value="${qna.id}" /></td>
+				<td class="id"><c:out value="${qna.id}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${qna.regdate}" /></td>
 			</tr>
 		</c:forEach>
@@ -105,14 +105,10 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
 			</div>
 			<div class="modal-body">처리가 완료되었습니다.</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-default" id="modalCloseBtn">Close</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -128,8 +124,8 @@
 
 						var result = '<c:out value="${result}"/>';
 
-						checkModal(result);
 						var modal = $("#myModal");
+						checkModal(result);
 
 						//뒤로가기 문제
 						history.replaceState({}, null, null);
@@ -179,10 +175,16 @@
 
 						//게시물의 제목 클릭시 이동
 						$(".move").on("click",function(e) {						
-							e.preventDefault();
-							actionForm.append("<input type='hidden' name='qno' value='"+ $(this).attr("href")+ "'>");
-							actionForm.attr("action", "/qna/get");
-							actionForm.submit();
+							var id=$(this).parent().siblings(".id").text();
+							var myId="${member.id}";
+							if(id==myId||"${member.grade}" == "S"){
+								e.preventDefault();
+								actionForm.append("<input type='hidden' name='qno' value='"+ $(this).attr("href")+ "'>");
+								actionForm.attr("action", "/qna/get");
+								actionForm.submit();
+							}else{
+								alert("자신이 작성한 글만 볼 수 있습니다.")
+							}
 						});
 
 						//검색 버튼 이벤트 처리
@@ -202,6 +204,12 @@
 								e.preventDefault();
 								searchForm.submit();
 							});
+						
+						//모달 닫기
+						$("#modalCloseBtn").on("click",function(){
+							modal.addClass("hidden");
+							$("body").removeClass("fix");
+						})
 					});
 </script>
 

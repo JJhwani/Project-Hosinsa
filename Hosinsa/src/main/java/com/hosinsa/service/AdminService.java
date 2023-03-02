@@ -22,4 +22,5 @@ public interface AdminService {
 	public List<OrderVO> getOrderList(String process);
 	public OrderVO getOrder(long orderNum,int pronum);
 	public boolean updateProcess(OrderVO vo);
+	public void sendToReview(OrderVO vo);
 }

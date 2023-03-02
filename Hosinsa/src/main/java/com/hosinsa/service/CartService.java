@@ -12,7 +12,9 @@ public interface CartService {
 	public boolean cartIn(CartVO vo);
 	public boolean cartUpdate(CartVO vo);
 	public int checkCart(CartVO vo);
-	public boolean plusQuantity(CartVO vo);
+	public boolean plusQuantity(long cartnum);
 	public boolean minusQuantity(CartVO vo);
+	
+	public int checkQuantity(long pronum);
 	
 }

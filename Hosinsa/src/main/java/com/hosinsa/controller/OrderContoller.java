@@ -24,14 +24,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.OrderVO;
 import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.BoardPageDTO;
 import com.hosinsa.domain.MemberAddressVO;
-import com.hosinsa.mapper.MemberAddressMapper;
 import com.hosinsa.service.MemberAddressService;
 import com.hosinsa.service.OrderService;
 
@@ -51,16 +49,30 @@ public class OrderContoller {
 	@Autowired
 	MemberAddressService addService;
 
-	@PostMapping("/order_form")
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/order_form")
 	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
-			MemberAddressVO address, Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
-		log.info("order________________"); 
+			MemberAddressVO address, Long address_no, Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
+		log.info("order________________");
+		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+address_no);
+		log.info("--------------------------------"+valueArr);
 		
 		model.addAttribute("order",service.getOrder(valueArr));
-		int total = addService.getTotalCountAddress(address);
-		model.addAttribute("total", total);
-		model.addAttribute("address", addService.getListBasic(address));
-		model.addAttribute("shipping", addService.getListOrder(address));
+		model.addAttribute("valueArr", valueArr);
+		
+		if(address_no == null) {
+			int total = addService.getTotalCountAddress(address);
+			model.addAttribute("total", total);
+			model.addAttribute("address", addService.getListBasic(address));
+			model.addAttribute("shipping", addService.getListOrder(address));
+		}
+		else {
+			int total = addService.getTotalCountAddress(address);
+			model.addAttribute("total", total);
+			model.addAttribute("address", addService.getListBasic(address));
+			model.addAttribute("shipping", addService.getListOrder(address));
+			model.addAttribute("choice", addService.read(address));
+		}
+		
 
 		return "/order/order_form";
 	}
@@ -85,12 +97,20 @@ public class OrderContoller {
 
 	// 주문 처리
 	@PostMapping("/complete")
-	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo) {
+	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo, Model model) {
+		
+		model.addAttribute("order", service.getOrder(cartnum));
 		
 		vo.setOrdernum((System.currentTimeMillis()));
 		service.getOrderIn(vo, cartnum);
 		
+		
+		for (Integer i : cartnum) {
+			log.info(i + "포문 돌아가는 중");
+			service.getProduct_del(i);
+		}
 		service.getOrder_del(cartnum);
+		
 	}
 	
 	@GetMapping("/complete")
@@ -98,7 +118,7 @@ public class OrderContoller {
 		
 	}
 	
-	//카카오페이 결제
+	// 카카오페이 결제
 	@RequestMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(Integer total) {
@@ -146,7 +166,10 @@ public class OrderContoller {
 	
 	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST }, value = "/address/listForm")
 	//@GetMapping("/address/listForm")
-	public String addressListForm(HttpSession session, MemberAddressVO address, String id, Model model) {
+	public String addressListForm(HttpSession session, MemberAddressVO address, String id,@RequestParam("valueArr") List<Integer> valueArr, Model model) {
+		log.info("====================================="+valueArr);
+		model.addAttribute("order",service.getOrder(valueArr));
+		model.addAttribute("valueArr", valueArr);
 		model.addAttribute("id",id);
 		int total = addService.getTotalCountAddress(address);
 		model.addAttribute("addList", addService.getListWithPaging(address));
@@ -156,7 +179,9 @@ public class OrderContoller {
 
 	//@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/list")
 	@GetMapping("/address/list")
-	public String addressList(HttpSession session, MemberAddressVO address,  String id, Model model) {
+	public String addressList(HttpSession session, MemberAddressVO address,  String id,@RequestParam("valueArr") List<Integer> valueArr, Model model) {
+		model.addAttribute("order",service.getOrder(valueArr));
+		model.addAttribute("valueArr", valueArr);
 		model.addAttribute("id",id);
 		int total = addService.getTotalCountAddress(address);
 		model.addAttribute("addList", addService.getListWithPaging(address));
@@ -167,12 +192,11 @@ public class OrderContoller {
 	
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/registerForm")
 	public String addressRegisterForm(HttpSession session, MemberAddressVO address, String id, Model model) {
-		log.info("][][][][][][][][][][][]["+id);
 		model.addAttribute("id",id);
 		return "/order/addressRegister";
 	}
 	
-	@PostMapping("/address/registerWithBasic")
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/registerWithBasic")
 	public String addressregisterWithBasic(HttpSession session, MemberAddressVO address, String id, Model model) {
 		addService.modifyBasic(address);
 		model.addAttribute("id",id);
@@ -187,7 +211,7 @@ public class OrderContoller {
 		return	"/order/address";
 	}
 	
-	@PostMapping("/address/register")
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/register")
 	public String addressRegister(HttpSession session, MemberAddressVO address, String id, Model model) {
 		model.addAttribute("id",id);
 		if(addService.registerSelectKey(address)) {
@@ -202,16 +226,48 @@ public class OrderContoller {
 	}
 
 
-
-	@PostMapping("/address/modifyForm")
-	public String addressModifyForm(HttpSession session, MemberAddressVO address, Model model) {
-
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/modifyForm")
+	public String addressModifyForm(HttpSession session, MemberAddressVO address, String id, Long address_no, Model model) {
+		model.addAttribute("id",id);
+		model.addAttribute("address_no",address_no);
+		model.addAttribute("address",addService.read(address));
+		
 		return "/order/addressModify";
+	}
+	
+	// 기본배송지 수정
+	@PostMapping("/address/modifyBasic")
+	public String addressModifyBasic(HttpSession session, MemberAddressVO address, String id, Long address_no, Model model) {
+		model.addAttribute("id",id);
+		addService.modifyBasic(address);
+		if(addService.modify(address)) {
+			model.addAttribute("modify","success");
+		}
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		
+		return "/order/address";
+	}
+	
+	// 기본배송지 수정X
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/modify")
+	public String addressModify(HttpSession session, MemberAddressVO address, String id, Long address_no, Model model) {
+		model.addAttribute("id",id);
+		if(addService.modify(address)) {
+			model.addAttribute("modify","success");
+		}
+		
+		int total = addService.getTotalCountAddress(address);
+		model.addAttribute("addList", addService.getListWithPaging(address));
+		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
+		
+		return "/order/address";
 	}
 	
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/remove")
 	public String addressRemove(HttpSession session, MemberAddressVO address, Long address_no, String id, Model model) {
-		log.info("/////////////////////////////"+address_no);
 		model.addAttribute("id",id);
 		if(addService.remove(address_no)) {
 			model.addAttribute("remove", "success");
@@ -224,5 +280,9 @@ public class OrderContoller {
 		return "/order/address";
 	}
 	
-
+	@ResponseBody
+	@RequestMapping("/address/getList")
+	public List<MemberAddressVO> refreshAddressList(Model model,MemberAddressVO address){
+		return addService.getListOrder(address);
+	}
 }

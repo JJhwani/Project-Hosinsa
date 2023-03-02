@@ -33,7 +33,7 @@
 		<textarea class="inputDetail" name="content" cols="70" rows="16" readonly>${qna.content}</textarea>
 
 		<!-- 첨부파일 -->
-		<div class="form-group">
+		<div class="qnafile form-group">
 			<label>첨부파일</label> 
 			<img src="${qna.photo1 }">
 			<img src="${qna.photo2 }">
@@ -241,7 +241,6 @@ $(document).ready(function () {
       
     });
     
-
     modalRegisterBtn.on("click",function(e){
       
       var reply = {
@@ -263,7 +262,6 @@ $(document).ready(function () {
       
     });
     
-
     //댓글 조회 클릭 이벤트 처리 
       $(".chat").on("click", "li", function(e){
         
@@ -302,7 +300,6 @@ $(document).ready(function () {
       });
       
     });
-
     //댓글 삭제후 댓글 목록 갱신
     modalRemoveBtn.on("click", function (e){
     	  
@@ -314,13 +311,13 @@ $(document).ready(function () {
   	    modal.addClass("hidden");
   	  $("body").removeClass("fix");
   	      showList(pageNum);
+  	      location.reload();
   	      
   	  });
   	  
   	}); 
   	
 });   
-
 </script>
 
 <script type="text/javascript">
@@ -331,21 +328,14 @@ $(document).ready(function () {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
 		var operForm = $("#operForm");
-
 		$("button[data-oper='modify']").on("click", function(e) {
-
 			operForm.attr("action", "/qna/modify").submit();
-
 		});
-
 		$("button[data-oper='list']").on("click", function(e) {
-
 			operForm.find("#qno").remove();
 			operForm.attr("action", "/qna/list")
 			operForm.submit();
-
 		});
 	});
 </script>

@@ -13,7 +13,7 @@
 			<thead>
 				<tr>
 					<th><input type="checkbox" name="Chk_SelectAll"></th>
-					<th class="cartNum">카트번호</th>
+					<th class="cartNum" style="display: none"></th>
 					<th>제품 이미지</th>
 					<th>제품 번호</th>
 					<th>제품 이름</th>
@@ -33,9 +33,9 @@
 				<c:set var = "sum" value="${sum + (cart.price * cart.quantity)}"/>
 					<tr class="odd gradeX">
 						<td><input type="checkbox" name="Chk_List" id="Chk_List"></td>
-						<td class="cartNum">${cart.cartnum}</td>
+						<td class="cartNum" style="display: none">${cart.cartnum}</td>
 						<td><img src="${cart.proimg}"></td>
-						<td>${cart.pronum}</td>
+						<td class="pronum">${cart.pronum}</td>
 						<td><a class="move" href='/product/${cart.pronum}'>${cart.proname}</a></td>
 						<td>
 							<button class="quantity_btn_minus">-</button> <span class="quantity">${cart.quantity}</span>
@@ -69,18 +69,15 @@
 			</ul>
 		</div>
 
-		<!-- <form action="/cart/order" method="get" class="cartForm">
-			<input type="hidden" name="cartnum" value="">
-		</form> -->
-		
 		<!-- 수량 조정 form -->
 		<form action="/cart/plusQuantity" method="post" class="quantity_plus_form">
 			<input type="hidden" name="cartnum" value="">
+			<input type="hidden" name="quantity" value="">
+			<input type="hidden" name="pronum" value="">
 		</form>
 		<form action="/cart/minusQuantity" method="post" class="quantity_minus_form">
 			<input type="hidden" name="cartnum" value="">
 		</form>
-					
 					
 	</div>
 	<div>
@@ -91,6 +88,10 @@
 		<input type="hidden" name="valueArr" value="">
 		<input type="hidden" name="id" value="${member.id}">
 	</form>
+	
+	<form action="/cart/quantity_chk" method="post" class="quantity_chk_Form">
+		
+	</form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -100,7 +101,13 @@ $(document).ready(function() {
 	$(".quantity_btn_plus").on("click", function(e) {
 		var number = $(this).parent().siblings(".cartNum").text()
 		$(".quantity_plus_form").find("input[name=cartnum]").val(number);
-		$(".quantity_plus_form").submit();
+		
+		var quantity = $(this).siblings(".quantity").text();
+		var pronum = $(this).parent().siblings(".pronum").text();
+		$(".quantity_plus_form").find("input[name=quantity]").val(quantity);
+		$(".quantity_plus_form").find("input[name=pronum]").val(pronum);
+		
+		$(".quantity_plus_form").submit();	
 	});
 	
 	$(".quantity_btn_minus").on("click",function(e) {
@@ -108,8 +115,12 @@ $(document).ready(function() {
 		$(".quantity_minus_form").find("input[name=cartnum]").val(number);
 		$(".quantity_minus_form").submit();
 	});
+	
+	
+	
+	
 
-	// 오더 목록
+	// 오더 목록 
 	$("#order").on("click", function(e) {
 		var text = $("tbody input[type='checkbox']:checked").parent().next().text();
 		var list = $("tbody input[type='checkbox']");
@@ -198,6 +209,10 @@ $(document).ready(function() {
 			$(this).prev(".quantity_btn_minus").attr("disabled","disabled");
 		}
 	})
+	
+	if("${message}" != "") {
+		alert("${message}");
+	}
 	
 });
 

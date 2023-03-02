@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,10 +25,7 @@ import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.AdminService;
 import com.hosinsa.service.MainService;
 
-import lombok.extern.log4j.Log4j;
-
 @Controller
-@Log4j
 @RequestMapping("/admin/*")
 public class AdminController {
 
@@ -224,8 +222,13 @@ public class AdminController {
 		
 	}
 	
+	@Transactional
 	@PostMapping("/sales")
 	public String SalesUpdate(RedirectAttributes rttr, OrderVO vo) {
+		if(vo.getProcess().equals("배송중")) {
+			OrderVO order = adminService.getOrder(vo.getOrdernum(), vo.getPronum());
+			adminService.sendToReview(order);
+		};
 		if(adminService.updateProcess(vo)) {
 			rttr.addFlashAttribute("result","success");
 		}

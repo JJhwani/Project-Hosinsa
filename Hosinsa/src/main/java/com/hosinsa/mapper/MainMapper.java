@@ -2,9 +2,6 @@ package com.hosinsa.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
-import com.hosinsa.domain.BoardEventVO;
 import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.ProductVO;
 
