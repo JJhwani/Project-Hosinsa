@@ -189,6 +189,7 @@ float:left;
 .notice ul li a,.event ul li a{display:block; white-space:nowrap;text-overflow:ellipsis;overflow: hidden;margin-bottom:10px;color:black}
 .notice form>a,.event form>a{display:block;padding:5px 0;border:1px solid lightgray;text-align:center;cursor:pointer;color:black}
 .cs{width:calc(30% - 20px);margin-right:20px;float:left;}
+.cs .title{margin-bottom:20px}
 .cs a{display:block;padding:10px 0;margin:10px 0;width:100%;text-align:center;border:1px solid lightgray;cursor:pointer;color:black}
 .cs a:hover{cursor:pointer;background:rgb(245, 245, 245)}
 .event{width:30%;float:left;}
@@ -226,6 +227,7 @@ input.cart_quan{border-radius:0;font-size:20px;width:40px;border:1px solid light
 .tabWrap .tab{display:block;float:left;border-radius:0;border:1px solid lightgray;box-sizing:border-box;background:white;font-size:24px;letter-spacing:-1px;padding:10px 0;margin-right:-1px}
 .tabWrap .tab:hover{cursor:pointer;background:rgb(245,245,245)}
 .tabWrap.tab2 .tab{width:50%;}
+.soldOut{color:red;font-weight:bold;vertical-align:sub;padding:5px 5px 0 0 ;}
 
 .detailView{overflow:hidden;clear:both;text-align:center}
 .reviewArea .reviewWrap{margin-top:20px;border:1px solid lightgray;}
@@ -338,15 +340,17 @@ h2 .register{float:right;background:black;color:white;border-radius:0;margin-top
 .remove input{width:200px;border:1px solid lightgray;padding:5px;margin-top:10px}
 .remove button{margin-top:15px}
 
-/* 회원가입 - 약관동의 */
+/* 회원가입 */
+.agreeWrap{width:723px;margin:50px auto}
 .checkbox_group{margin-top:20px}
 .checkbox_group .checkbox{margin-top:10px;letter-spacing:-1px}
 .checkbox_group textarea{margin-top:5px}
 .checkBtn{margin-top:30px}
 .checkBtn input{border:1px solid lightgray;padding:5px 10px;cursor:pointer;font-size:16px}
+#phone1{border:1px solid lightgray;padding:3px 10px;width:25%}
+#phone2,#phone3{width:30%}
 
 .align_center{text-align:center}
-
 .footer{clear:both;background:black;padding:20px 0 50px;margin-top:50px;color:white;text-align:center}
 
 /* board event - 이벤트 게시판 */

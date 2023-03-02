@@ -44,5 +44,5 @@ public class MemberVO {
 	private String introducer;
 	private int point;
 	
-	private String snsId;
+	private String snsid;
 }

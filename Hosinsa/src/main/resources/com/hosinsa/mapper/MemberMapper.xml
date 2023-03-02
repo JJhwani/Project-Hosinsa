@@ -60,20 +60,14 @@
 </select>
 
 <select id="getOrder" resultType="com.hosinsa.domain.OrderVO">
-	select * from hosinsa_order where ordernum = #{ordernum}
+	select * from hosinsa_order where ordernum = #{ordernum} and pronum = #{pronum}
 </select>
 
 <!-- INSERT 문 -->
 <insert id="insert">
 	insert into hosinsa_member values
 	(#{id}, #{pw, jdbcType=VARCHAR}, #{name}, #{gender}, #{birthday, jdbcType=DATE}, #{email}, 
-	#{phone, jdbcType=VARCHAR}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point})
-</insert>
-
-<!-- Kakao 로그인 -->
-<insert id="kakaoInsert">
-	INSERT INTO HOSINSA_MEMBER (ID, PW, NAME, EMAIL, SNSID) VALUES
-    (#{id}, #{pw}, #{name}, #{email}, #{snsId})
+	#{phone, jdbcType=VARCHAR}, #{nickname}, #{profilimg, jdbcType=VARCHAR}, #{grade}, #{introducer, jdbcType=VARCHAR}, #{point}, #{snsid})
 </insert>
 
 <!-- DELETE 문 -->

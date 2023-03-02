@@ -48,7 +48,7 @@ public class AdminController {
 
 	@GetMapping("/memberModify")
 	public void memberModifyGET(@RequestParam("id") String id, @ModelAttribute("cri") Criteria cri, Model model) {
-		model.addAttribute("member", adminService.get(id));
+		model.addAttribute("memberInfo", adminService.get(id));
 	}
 
 	@PostMapping("/memberModify")
@@ -216,7 +216,12 @@ public class AdminController {
 	
 	@GetMapping("/sales")
 	public void adminSalesList(Model model,String process) {
-		model.addAttribute("orderList",adminService.getOrderList(process));
+		if(process==null) {
+			model.addAttribute("orderList",adminService.getAllOrderList());
+		}else {
+			model.addAttribute("orderList",adminService.getOrderList(process));
+		}
+		
 	}
 	
 	@PostMapping("/sales")
@@ -228,8 +233,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("/order/{orderNum}")
-	public String getOrderDetail(@PathVariable long orderNum,Model model) {
-		model.addAttribute("order",adminService.getOrder(orderNum));
+	public String getOrderDetail(@PathVariable long orderNum,int pronum,Model model) {
+		model.addAttribute("order",adminService.getOrder(orderNum,pronum));
 		return "/admin/order";
 	}
 

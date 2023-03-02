@@ -196,7 +196,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		address_registerForm.attr("action", "/order/address/list");
 		address_registerForm.submit();
-		self.close();		
+		//self.close();		
 	});
 
 	// 배송지 등록 페이지에서 등록 버튼 클릭시
@@ -219,14 +219,12 @@ $(document).ready(function(){
 			address_registerForm.find("input[name='basic']").val("X");
 		}
 		
-		var recipient = address_registerForm.find("input[name='recipient']").val();
-		var shipping = address_registerForm.find("input[name='shipping']").val();
-		var phone = address_registerForm.find("input[name='phone']").val();
-		var teltel = address_registerForm.find("input[name='tel']").val();
-		var zipcode = address_registerForm.find("input[name='zipcode']").val();
-		var address1 = address_registerForm.find("input[name='address1']").val();
-		var address2 = address_registerForm.find("input[name='address2']").val();
-		var basic = address_registerForm.find("input[name='basic']").val();
+		if($("input[name='basicCheck']:checkbox").is(":checked")){
+			//document.address_registerFormBasic.target = "frame";
+			address_registerFormBasic.submit();
+			//window.parent.location.reload();
+			//window.open("","_self","").close();
+			
 
 		if($("input[name='basicCheck']:checkbox").is(":checked")){
 			$.ajax({
@@ -242,17 +240,12 @@ $(document).ready(function(){
 			window.open("","_self","").close();
 		}
 		else {
-			$.ajax({
-				url : "/order/address/register",
-				data : {"id":userid,"recipient":recipient,"shipping":shipping,
-						"phone":phone,"tel":teltel,"zipcode":zipcode,"address1":address1,
-						"address2":address2,"basic":basic},
-				success : function(data){
-					alert("주소 등록이 성공적으로 처리되었습니다.");
-				}
-			});
-			opener.location.reload();
-			window.open("","_self","").close();
+			address_registerForm.submit();
+			//document.address_registerForm.target = "frame";
+			//window.parent.location.reload();
+			//window.open("","_self","").close();
+			
+
 		}
 
 		

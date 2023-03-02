@@ -36,6 +36,6 @@ public interface MemberMapper {
 	//찜한 목록 불러오기
 	public List<ProductVO> getLikesListWithPaging(@Param("id") String id,@Param("page") int page);	
 	//주문 정보 불러오기
-	public OrderVO getOrder(long ordernum);
+	public OrderVO getOrder(@Param("ordernum")long ordernum,@Param("pronum")int pronum);
 
 }
