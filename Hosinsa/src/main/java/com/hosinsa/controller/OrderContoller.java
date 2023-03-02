@@ -49,16 +49,28 @@ public class OrderContoller {
 	@Autowired
 	MemberAddressService addService;
 
-	@PostMapping("/order_form")
+	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/order_form")
 	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
 			MemberAddressVO address, Long address_no, Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
 		log.info("order________________"); 
 		
 		model.addAttribute("order",service.getOrder(valueArr));
-		int total = addService.getTotalCountAddress(address);
-		model.addAttribute("total", total);
-		model.addAttribute("address", addService.getListBasic(address));
-		model.addAttribute("shipping", addService.getListOrder(address));
+		model.addAttribute("valueArr", valueArr);
+		
+		if(address_no == null) {
+			int total = addService.getTotalCountAddress(address);
+			model.addAttribute("total", total);
+			model.addAttribute("address", addService.getListBasic(address));
+			model.addAttribute("shipping", addService.getListOrder(address));
+		}
+		else {
+			int total = addService.getTotalCountAddress(address);
+			model.addAttribute("total", total);
+			model.addAttribute("address", addService.getListBasic(address));
+			model.addAttribute("shipping", addService.getListOrder(address));
+			model.addAttribute("choice", addService.read(address));
+		}
+		
 
 		return "/order/order_form";
 	}
@@ -103,28 +115,6 @@ public class OrderContoller {
 	public void complete() {
 		
 	}
-
-	@PostMapping("/address/register")
-	public String addressRegister(HttpSession session, MemberAddressVO address, Model model) {
-		if(addService.registerSelectKey(address)) {
-			model.addAttribute("register","success");
-		}
-		
-		int total = addService.getTotalCountAddress(address);
-		model.addAttribute("addList", addService.getListWithPaging(address));
-		model.addAttribute("pageMaker_b", new BoardPageDTO(address, total));
-		
-		return "/order/address";
-	}
-	
-	
-	@PostMapping("/address/modifyForm")
-	public String addressModifyForm(HttpSession session, MemberAddressVO address, Model model) {
-		
-		
-		return "/order/addressModify";
-	}
-	
 	
 	// 카카오페이 결제
 	@RequestMapping("/kakaopay")
@@ -174,7 +164,10 @@ public class OrderContoller {
 	
 	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST }, value = "/address/listForm")
 	//@GetMapping("/address/listForm")
-	public String addressListForm(HttpSession session, MemberAddressVO address, String id, Model model) {
+	public String addressListForm(HttpSession session, MemberAddressVO address, String id,@RequestParam("valueArr") List<Integer> valueArr, Model model) {
+		log.info("====================================="+valueArr);
+		model.addAttribute("order",service.getOrder(valueArr));
+		model.addAttribute("valueArr", valueArr);
 		model.addAttribute("id",id);
 		int total = addService.getTotalCountAddress(address);
 		model.addAttribute("addList", addService.getListWithPaging(address));
@@ -184,7 +177,9 @@ public class OrderContoller {
 
 	//@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/list")
 	@GetMapping("/address/list")
-	public String addressList(HttpSession session, MemberAddressVO address,  String id, Model model) {
+	public String addressList(HttpSession session, MemberAddressVO address,  String id,@RequestParam("valueArr") List<Integer> valueArr, Model model) {
+		model.addAttribute("order",service.getOrder(valueArr));
+		model.addAttribute("valueArr", valueArr);
 		model.addAttribute("id",id);
 		int total = addService.getTotalCountAddress(address);
 		model.addAttribute("addList", addService.getListWithPaging(address));

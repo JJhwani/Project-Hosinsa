@@ -29,6 +29,7 @@
 			</div>
 	 	</c:forEach>
 	 	<input type="hidden" id="userid" name="id" value="${id}">
+		<input type="hidden" name="valueArr" value="${valueArr}">
 	</form>
 	<!-- 페이지 처리 시작 -->
 	<ul class="pagination address">

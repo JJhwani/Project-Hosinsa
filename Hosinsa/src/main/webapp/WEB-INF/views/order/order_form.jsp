@@ -53,19 +53,21 @@
 					 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
 							</div>
 					 	</c:forEach>
-					 	<div>
-							<label><input type="radio" class="check" name="shipping">${shipping.shipping}</label>
-							<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
-							<input type="hidden" class="hidden" name="id" value="${shipping.id}">
-				 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
-				 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
-				 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
-				 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
-				 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
-				 			<input type="hidden" class="hidden" name="address1" value="${shipping.address1}">
-			 				<input type="hidden" class="hidden" name="address2" value="${shipping.address2}">
-				 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
-						</div>
+					 	<c:if test="${!choice.shipping eq ''}">
+						 	<div>
+								<label><input type=radio class="check" name="shipping">${choice.shipping}</label>
+								<input type="hidden" class="hidden" name="address_no" value="${choice.address_no}">
+								<input type="hidden" class="hidden" name="id" value="${choice.id}">
+					 			<input type="hidden" class="hidden" name="recipient" value="${choice.recipient}">
+					 			<input type="hidden" class="hidden" name="shipping" value="${choice.shipping}">
+					 			<input type="hidden" class="hidden" name="phone" value="${choice.phone}">
+					 			<input type="hidden" class="hidden" name="tel" value="${choice.tel}">
+					 			<input type="hidden" class="hidden" name="zipcode" value="${choice.zipcode}">
+					 			<input type="hidden" class="hidden" name="address1" value="${choice.address1}">
+				 				<input type="hidden" class="hidden" name="address2" value="${choice.address2}">
+					 			<input type="hidden" class="hidden" name="basic" value="${choice.basic}">
+							</div>
+						</c:if>
 					 </li>
 					 <li>
 					 	<c:choose>
@@ -94,6 +96,7 @@
 		</form>
 		<form class="popupForm" name="popupForm" action="/order/order_form" method="post" onsubmit="return false">
 			<input type="hidden" id="userid" name="userid" value="${member.id}">
+			<input type="hidden" id="valueArr" name="valueArr" value="${valueArr}">
 		</form>
 	</div>
 	<div class="orderInfo cart">
