@@ -18,6 +18,14 @@
 	  </foreach>
 </delete>
 
+<update id="Product_del">
+	UPDATE HOSINSA_PRODUCT
+	SET 
+	STOCK = STOCK - (SELECT QUANTITY FROM HOSINSA_CART WHERE CARTNUM = #{cartnum})
+	WHERE PRONUM = (SELECT PRONUM FROM HOSINSA_CART WHERE CARTNUM = #{cartnum})
+</update>
+
+
 <update id="getOrderIn" parameterType="map">
 	<foreach collection="cartnum" item="cartnum" index="index" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
                  INTO hosinsa_order  (

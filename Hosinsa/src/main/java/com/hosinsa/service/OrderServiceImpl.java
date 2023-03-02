@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.hosinsa.domain.CartVO;
 import com.hosinsa.domain.OrderVO;
-import com.hosinsa.mapper.CartMapper;
 import com.hosinsa.mapper.OrderMapper;
 
 @Service
@@ -24,6 +23,12 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public void getOrder_del(List<Integer> chArr) {
 		mapper.getOrder_del(chArr);
+	}
+	
+	@Override
+	public boolean getProduct_del(int cartnum) {
+		System.out.println(cartnum + "서비스 임플까지 들어옴");
+		return mapper.Product_del(cartnum)==1? true : false;
 	}
 	
 	@Override

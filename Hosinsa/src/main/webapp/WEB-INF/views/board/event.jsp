@@ -100,6 +100,10 @@
 <script src="../../../resources/js/board.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	$(".event_box").on("click",function(){
+		$(this).find("a").click();
+	})
+	
 	if("${register}"==="success"){
 		alert("이벤트 등록이 성공적으로 처리되었습니다.");
 	}

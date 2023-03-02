@@ -25,10 +25,7 @@ import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.AdminService;
 import com.hosinsa.service.MainService;
 
-import lombok.extern.log4j.Log4j;
-
 @Controller
-@Log4j
 @RequestMapping("/admin/*")
 public class AdminController {
 

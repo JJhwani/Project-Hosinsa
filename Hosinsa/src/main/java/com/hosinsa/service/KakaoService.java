@@ -71,7 +71,6 @@ public class KakaoService {
 			bw.close();
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -121,7 +120,6 @@ public class KakaoService {
 			userInfo.put("gender", gender);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

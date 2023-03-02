@@ -2,9 +2,6 @@ package com.hosinsa.service;
 
 import java.util.List;
 
-import javax.xml.stream.events.Namespace;
-
-import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +30,8 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	@Override
-	public boolean plusQuantity(CartVO vo) {
-		return mapper.plusQuantity(vo)==1?true:false;
+	public boolean plusQuantity(long cartnum) {
+		return mapper.plusQuantity(cartnum)==1?true:false;
 	}
 	
 	@Override
@@ -50,6 +47,10 @@ public class CartServiceImpl implements CartService {
 		return mapper.checkCart(vo);
 	}
 
+	@Override
+	public int checkQuantity(long pronum) {
+		return mapper.checkQuantity(pronum);
+	}
 	
 }
 

@@ -9,10 +9,7 @@ import com.hosinsa.domain.Criteria;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.mapper.MainMapper;
 
-import lombok.extern.log4j.Log4j;
-
 @Service
-@Log4j
 public class MainServiceImpl implements MainService{
 	
 	@Autowired
