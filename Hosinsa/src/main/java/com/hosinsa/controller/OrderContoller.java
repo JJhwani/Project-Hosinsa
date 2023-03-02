@@ -96,7 +96,9 @@ public class OrderContoller {
 
 	// 주문 처리
 	@PostMapping("/complete")
-	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo) {
+	public void complete(@RequestParam("cartnum") List<Integer> cartnum, OrderVO vo, Model model) {
+		
+		model.addAttribute("order", service.getOrder(cartnum));
 		
 		vo.setOrdernum((System.currentTimeMillis()));
 		service.getOrderIn(vo, cartnum);
@@ -109,7 +111,7 @@ public class OrderContoller {
 		
 	}
 	
-	// 카카오페이 결제
+
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/address/list")
 	public String addressList(HttpSession session, MemberAddressVO address,  String id, Model model) {
 		log.info("------------------------"+id);
@@ -146,6 +148,9 @@ public class OrderContoller {
 		
 		return "/order/addressModify";
 	}
+	
+	
+	// 카카오페이 결제
 	@RequestMapping("/kakaopay")
 	@ResponseBody
 	public String kakaopay(Integer total) {

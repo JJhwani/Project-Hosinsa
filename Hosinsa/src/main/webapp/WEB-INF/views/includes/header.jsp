@@ -75,11 +75,12 @@ $(document).ready(function() {
 		formObj.submit();
 	});
 	
-	
 	var member = "${member}";
+	
 	$(".cart_btn").on("click", function(e) {
 		e.preventDefault();
 		if(member == "") {
+			alert("로그인 후 이용이 가능합니다.");
 			self.location="/member/login";
 		}else {
 			self.location="/cart/list";

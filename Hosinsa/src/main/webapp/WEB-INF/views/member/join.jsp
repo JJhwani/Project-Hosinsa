@@ -113,8 +113,6 @@ $(document).ready(function(){
 		var phone2 = $("#phone2").val();
 		var phone3 = $("#phone3").val();
 		var phone = phone1 + phone2 + phone3;
-		alert(phone);
-		
 	});
 	
 });

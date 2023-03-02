@@ -7,16 +7,15 @@
 <%@ include file="../includes/header.jsp"%>
 <div class="orderWrap">
 	<h2>Order / Payment</h2>
-		<!-- 배송지 정보 -->
-		<form action="/order/complete" method="post" id="orderForm">
-			<input type="hidden" name="name" value="sangho">
-			<input type="hidden" name="address" value="sangho">
-			<input type="hidden" name="request" value="sangho">
-			<input type="hidden" name="phone" value="sangho">
-			<input type="hidden" name="id" value="admin">
+		<form action="/order/complete" method="post" id="orderForm" >
+			<input type="hidden" name="name" value="">
+			<input type="hidden" name="address" value="">
+			<input type="hidden" name="request" value="">
+			<input type="hidden" name="phone" value="">
+			<input type="hidden" name="id" value="${member.id}">
 			<input type="hidden" name="cartnum" value="">
-	</form>
-		<!-- 결제 상품정보 -->
+		</form>
+		<!-- 배송지 정보 -->
 	<div class="shippingInfo">
 		<h3>배송정보</h3>
 		<form class="order_form" action="/order" method="post" >

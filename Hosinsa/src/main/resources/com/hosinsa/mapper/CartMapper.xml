@@ -38,6 +38,10 @@
 	select count(*) from hosinsa_cart where pronum = #{pronum} and id = #{id}
 </select>
 
+<select id="checkQuantity" resultType="Integer">
+	select stock from hosinsa_product where pronum = #{pronum}
+</select>
+
 <update id="cartUpdate">
 	update hosinsa_cart set quantity = quantity + #{quantity} where pronum = #{pronum} and id = #{id}
 </update>
