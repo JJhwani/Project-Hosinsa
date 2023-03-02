@@ -2,9 +2,6 @@ package com.hosinsa.service;
 
 import java.util.List;
 
-import javax.xml.stream.events.Namespace;
-
-import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

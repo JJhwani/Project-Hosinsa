@@ -1,7 +1,6 @@
 package com.hosinsa.domain;
 
 import lombok.Data;
-import lombok.Getter;
 
 /*
  CREATE TABLE HOSINSA_LIKES(

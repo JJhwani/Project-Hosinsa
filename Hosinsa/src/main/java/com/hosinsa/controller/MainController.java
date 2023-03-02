@@ -3,11 +3,7 @@ package com.hosinsa.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,25 +11,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.hosinsa.domain.BoardEventVO;
 import com.hosinsa.domain.BoardNoticeVO;
-import com.hosinsa.domain.Criteria;
-import com.hosinsa.domain.MemberVO;
 import com.hosinsa.domain.PageDTO;
 import com.hosinsa.domain.ProductVO;
 import com.hosinsa.service.BoardService;
-import com.hosinsa.service.LikesService;
 import com.hosinsa.service.MainService;
-
-import lombok.extern.log4j.Log4j;
 
 @Controller
 @SessionAttributes({"recentView"})
-@Log4j
 public class MainController {
 
 	@Autowired

@@ -20,8 +20,6 @@ import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.BoardEventVO;
 import com.hosinsa.domain.BoardNoticeVO;
 import com.hosinsa.domain.BoardPageDTO;
-import com.hosinsa.domain.Criteria;
-import com.hosinsa.domain.PageDTO;
 import com.hosinsa.service.BoardService;
 
 import lombok.extern.log4j.Log4j;
