@@ -51,7 +51,7 @@ public class OrderContoller {
 
 	@PostMapping("/order_form")
 	public String order(HttpSession session, @RequestParam("valueArr") List<Integer> valueArr,
-			MemberAddressVO address, Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
+			MemberAddressVO address, Long address_no, Model model, @ModelAttribute("member") MemberVO member, String id, BoardCriteria cri) {
 		log.info("order________________"); 
 		
 		model.addAttribute("order",service.getOrder(valueArr));

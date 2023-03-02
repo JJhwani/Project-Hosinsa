@@ -52,6 +52,19 @@
 					 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
 							</div>
 					 	</c:forEach>
+					 	<div>
+							<label><input type="radio" class="check" name="shipping">${shipping.shipping}</label>
+							<input type="hidden" class="hidden" name="address_no" value="${shipping.address_no}">
+							<input type="hidden" class="hidden" name="id" value="${shipping.id}">
+				 			<input type="hidden" class="hidden" name="recipient" value="${shipping.recipient}">
+				 			<input type="hidden" class="hidden" name="shipping" value="${shipping.shipping}">
+				 			<input type="hidden" class="hidden" name="phone" value="${shipping.phone}">
+				 			<input type="hidden" class="hidden" name="tel" value="${shipping.tel}">
+				 			<input type="hidden" class="hidden" name="zipcode" value="${shipping.zipcode}">
+				 			<input type="hidden" class="hidden" name="address1" value="${shipping.address1}">
+			 				<input type="hidden" class="hidden" name="address2" value="${shipping.address2}">
+				 			<input type="hidden" class="hidden" name="basic" value="${shipping.basic}">
+						</div>
 					 </li>
 					 <li>
 					 	<c:choose>

@@ -29,15 +29,6 @@ $(document).ready(function(){
 		var address2 = $(this).siblings("input[name='address2']").val();
 		var basic = $(this).siblings("input[name='basic']").val();
 		
-//		$(".address_info1 li").find("input[name='address_no']").val(address_no);
-//		$(".address_info1 li").find("input[name='recipient']").val(recipient);
-//		$(".address_info1 li").find("input[name='shipping']").val(shipping);
-//		$(".address_info1 li").find("input[name='phone']").val(phone);
-//		$(".address_info1 li").find("input[name='tel']").val(tel);
-//		$(".address_info2 li").find("input[name='zipcode']").val(zipcode);
-//		$(".address_info2 li").find("input[name='address']").val(address);
-//		$(".address_info2 li").find("input[name='basic']").val(basic);
-		
 		$(".address_info1 li").find(".recipient").text(recipient);
 		$(".address_info1 li").find(".phone").text(phone);
 		$(".address_info1 li").find(".tel").text(tel);
@@ -164,8 +155,7 @@ $(document).ready(function(){
 					opener.location.reload();
 					window.open("","_self","").close();			
 				}
-			});
-			
+			});			
 		}
 		else {
 			$.ajax({
@@ -179,10 +169,8 @@ $(document).ready(function(){
 					opener.location.reload();
 					window.open("","_self","").close();
 				}
-			});
-			
+			});			
 		}
-
 	});
  
 	// 배송지 목록 페이지에서 삭제 버튼 클릭시
@@ -258,12 +246,8 @@ $(document).ready(function(){
 					opener.location.reload();
 					window.open("","_self","").close();
 				}
-			});
-			
-		}
-
-		
-		
+			});			
+		}		
 	});
 
 	//배송지 등록 페이지에서 선택 버튼 클릭시
@@ -275,6 +259,7 @@ $(document).ready(function(){
 				$(this).prev("label").trigger("click");
 			}
 		})
+		opener.opener.location.reload();
 		window.open("","_self","").close();
 	})
 
