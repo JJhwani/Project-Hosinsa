@@ -56,7 +56,7 @@ $(document).ready(function(){
 		var popOption = "width=500px, height=950px";
 		var userid = $(".shippingInfo .popupForm").find("input[id=userid]").val();
 		var valueArr = $(".shippingInfo .popupForm").find("input[id=valueArr]").val();
-		var reg = /[\{\}\[\]\/%20?.;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+		var reg = /[\{\}\[\]\/%?.;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
 		var replaced = valueArr.replace(reg,"");
 		var decode = decodeURI(replaced);
 		var uri = "/order/address/listForm?id="+userid+"&valueArr="+decode;
