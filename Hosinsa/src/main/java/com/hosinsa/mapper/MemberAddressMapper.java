@@ -2,7 +2,6 @@ package com.hosinsa.mapper;
 
 import java.util.List;
 
-import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.MemberAddressVO;
 
 public interface MemberAddressMapper {

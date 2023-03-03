@@ -490,5 +490,6 @@ button.del_Btn{margin-top:10px}
 .panel .chat p{padding-top:5px}
 .infoTable~.align_center{margin-top:20px}
 .align_center a{border:1px solid lightgray;color:black;padding:5px 10px;font-size:14px}
+.qnafile.form-group img{max-width:540px;max-height:500px;}
 
 #kakao-talk-channel-chat-button{position:fixed;top:800px;right:10px;z-index:4;}

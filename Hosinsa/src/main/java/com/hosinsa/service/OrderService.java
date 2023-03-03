@@ -8,6 +8,8 @@ import com.hosinsa.domain.OrderVO;
 public interface OrderService {
 	public List<CartVO> getOrder(List<Integer> chArr);
 	public void getOrder_del(List<Integer> chArr);
+	public boolean getProduct_del(int cartnum);
 	
 	public void getOrderIn(OrderVO vo, List<Integer> cartnum);
+	
 }

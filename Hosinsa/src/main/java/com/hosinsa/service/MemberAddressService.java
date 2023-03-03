@@ -2,7 +2,6 @@ package com.hosinsa.service;
 
 import java.util.List;
 
-import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.MemberAddressVO;
 
 public interface MemberAddressService {

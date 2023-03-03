@@ -1,5 +1,5 @@
 $(document).ready(function(){      
-	
+   
 	var paging = $(".paging.board");
 	var order_form = $(".order_form");
 	var address_shipping = $(".address_shipping");
@@ -7,14 +7,14 @@ $(document).ready(function(){
 	var address_Form = $(".address_Form");
 	var address_registerForm = $(".address_registerForm");
 	var address_modifyForm = $(".address_modifyForm");
-
+ 
 	//페이징처리
 	$(".board_paginate_button a").on("click", function(e) {
 		e.preventDefault();
 		paging.find("input[name='b_pageNum']").val($(this).attr("href"));
 		paging.submit();
 	});
-
+ 
 	
 	
 	// 오더 페이지에서 배송지 클릭시
@@ -29,67 +29,64 @@ $(document).ready(function(){
 		var address2 = $(this).siblings("input[name='address2']").val();
 		var basic = $(this).siblings("input[name='basic']").val();
 		
-//		$(".address_info1 li").find("input[name='address_no']").val(address_no);
-//		$(".address_info1 li").find("input[name='recipient']").val(recipient);
-//		$(".address_info1 li").find("input[name='shipping']").val(shipping);
-//		$(".address_info1 li").find("input[name='phone']").val(phone);
-//		$(".address_info1 li").find("input[name='tel']").val(tel);
-//		$(".address_info2 li").find("input[name='zipcode']").val(zipcode);
-//		$(".address_info2 li").find("input[name='address']").val(address);
-//		$(".address_info2 li").find("input[name='basic']").val(basic);
-		
 		$(".address_info1 li").find(".recipient").text(recipient);
 		$(".address_info1 li").find(".phone").text(phone);
 		$(".address_info1 li").find(".tel").text(tel);
 		$(".address_info2 li").find(".address").text("("+zipcode+") "+address1+" "+address2);
-
 	}
+
 	$(".address_shipping label").on("click", check);
-
-
+ 
+ 
 	// 오더 페이지에서 배송지 등록 버튼 클릭시
 	$(".address_shipping .address_register").on("click", function(e) {
 		e.preventDefault();
-		registerPopup();
-
+		registerPopup(); 
 	});
-
+ 
 	// 오더 페이지에서 배송지 변경 버튼 클릭시
 	$(".address_shipping .address_modify").on("click", function(e) {
 		e.preventDefault();
 		listPopup();
 	});
 	
-
+ 
 	// 배송지 목록 팝업
 	function listPopup(){
 		var popOption = "width=500px, height=950px";
 		var userid = $(".shippingInfo .popupForm").find("input[id=userid]").val();
-		window.open("/order/address/listForm?id="+userid,"list", popOption);
+		var valueArr = $(".shippingInfo .popupForm").find("input[id=valueArr]").val();
+		var reg = /[\{\}\[\]\/%20?.;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
+		var replaced = valueArr.replace(reg,"");
+		var decode = decodeURI(replaced);
+		var uri = "/order/address/listForm?id="+userid+"&valueArr="+decode;
 
-		popupForm.action="/order/address/listForm?id="+userid;
-		popupForm.target="pop";
-		popupForm.submit();
+		window.open(uri,"list", popOption);
+ 
+		popupForm.action = uri;
+		popupForm.target = "pop";
+
+		//popupForm.submit();
 	}
-
+ 
 	// 신규 배송지 등록 팝업
 	function registerPopup(){
 		var popOption = "width=600px, height=650px";
 		var userid = $(".shippingInfo .popupForm").find("input[id=userid]").val();
 		window.open("/order/address/registerForm?id="+userid,"register", popOption);
-		
+	   
 		popupForm.action="/order/address/registerForm?id="+userid;
 		popupForm.target="register";
 		popupForm.submit();
 	}
-
+ 
 	// 배송지 목록 페이지에서 신규 배송지 등록 버튼 클릭시
 	$(".addressWrap .btn.addRegister").on("click", function(e) {
 		e.preventDefault();
 		var popOption = "width=600px, height=650px";
 		var userid =address_Form.find("input[id=userid]").val();
 		window.open("/order/address/registerForm?id="+userid,"register", popOption);
-		
+	   
 		address_Form.find(".address_no").remove();
 		address_Form.find(".id").remove();
 		address_Form.find(".basic").remove();
@@ -97,7 +94,7 @@ $(document).ready(function(){
 		address_Form.target="pop";
 		address_Form.submit();
 	});
-
+ 
 	// 배송지 목록 페이지에서 수정 버튼 클릭시
 	$(".address_Form .btn.addModify").on("click", function(e) {
 		e.preventDefault();
@@ -105,7 +102,7 @@ $(document).ready(function(){
 		var userid =address_Form.find("input[id=userid]").val();
 		var address_no = $(this).siblings("input[name=address_no]").val();
 		window.open("/order/address/modifyForm?id="+userid+"&address_no="+address_no,"modify", popOption);
-
+ 
 		address_Form.find(".address_no").remove();
 		address_Form.find(".id").remove();
 		address_Form.find(".basic").remove();
@@ -113,14 +110,13 @@ $(document).ready(function(){
 		address_Form.target="pop";
 		address_Form.submit();
 	});
-
+ 
 	// 배송지 수정 페이지에서 취소 버튼 클릭시
 	$(".address_modifyForm .btn.cancle").on("click", function(e) {
 		e.preventDefault();
-		self.close();
-
+		self.close(); 
 	});
-
+ 
 	// 배송지 수정 페이지에서 수정완료 버튼 클릭시
 	$(".address_modifyForm .btn.modify").on("click", function(e) {
 		e.preventDefault();
@@ -164,8 +160,7 @@ $(document).ready(function(){
 					opener.location.reload();
 					window.open("","_self","").close();			
 				}
-			});
-			
+			});			
 		}
 		else {
 			$.ajax({
@@ -179,12 +174,10 @@ $(document).ready(function(){
 					opener.location.reload();
 					window.open("","_self","").close();
 				}
-			});
-			
+			});			
 		}
-
 	});
-
+ 
 	// 배송지 목록 페이지에서 삭제 버튼 클릭시
 	$(".address_Form .btn.addRemove").on("click", function(e) {
 		e.preventDefault();
@@ -195,16 +188,13 @@ $(document).ready(function(){
 		address_Form.attr("action","/order/address/remove");
 		address_Form.submit();
 	});
-
-
+ 
+ 
 	// 배송지 등록 페이지에서 돌아가기 버튼 클릭시
 	$(".address_registerForm .btn.back").on("click", function(e) {
-		//e.preventDefault();
-		//address_registerForm.attr("action", "/order/address/list");
-		//address_registerForm.submit();
 		self.close();
 	});
-
+ 
 	// 배송지 등록 페이지에서 등록 버튼 클릭시
 	$(".address_registerForm .btn.register").on("click", function(e) {
 		e.preventDefault();
@@ -259,23 +249,20 @@ $(document).ready(function(){
 					window.open("","_self","").close();
 				}
 			});
-			
-		}
-
-		
-		
+		}		
 	});
 
 	//배송지 등록 페이지에서 선택 버튼 클릭시
 	$(".addChoice").on("click",function(e){
-	
 		var address_no = $(this).siblings(".address_no").val();
 		$(opener.document).find("input[name=address_no]").each(function(){
 			if($(this).val()==address_no){
 				$(this).prev("label").trigger("click");
 			}
 		})
+
 		window.open("","_self","").close();
+
 	})
 
 });

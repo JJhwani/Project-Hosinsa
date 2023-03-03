@@ -1,8 +1,6 @@
 package com.hosinsa.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,7 +105,17 @@ public class CartContoller {
 	@RequestMapping(method= {RequestMethod.GET, RequestMethod.POST}, value="/plusQuantity")
 	public String plusQuantity(CartVO vo,RedirectAttributes rttr) {
 		log.info("수량 + 버튼");
-		service.plusQuantity(vo);
+		long quantity = vo.getQuantity() + 1;
+		long pronum = vo.getPronum();
+		long cartnum = vo.getCartnum();
+		long p_quantity = service.checkQuantity(pronum);
+
+		if(p_quantity < quantity) {
+			rttr.addFlashAttribute("message","재고 수량이 부족합니다.");
+		}else {
+			service.plusQuantity(cartnum);
+		}
+		
 		return "redirect:/cart/list";
 	}
 	
@@ -117,5 +125,9 @@ public class CartContoller {
 		service.minusQuantity(vo);
 		return "redirect:/cart/list";
 	}
+	
+		
+	
+	
 	
 }

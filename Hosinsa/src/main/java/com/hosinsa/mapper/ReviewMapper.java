@@ -3,11 +3,9 @@ package com.hosinsa.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import com.hosinsa.domain.PreReviewVO;
 import com.hosinsa.domain.ReviewCriteria;
-import com.hosinsa.domain.ReviewReplyVO;
 import com.hosinsa.domain.ReviewVO;
 
 
