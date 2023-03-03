@@ -33,7 +33,7 @@
 		<textarea class="inputDetail" name="content" cols="70" rows="16" readonly>${qna.content}</textarea>
 
 		<!-- 첨부파일 -->
-		<div class="form-group">
+		<div class="qnafile form-group">
 			<label>첨부파일</label> 
 			<img src="${qna.photo1 }">
 			<img src="${qna.photo2 }">

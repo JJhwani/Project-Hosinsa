@@ -4,16 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.MemberAddressVO;
 import com.hosinsa.mapper.MemberAddressMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
 @Service
 @AllArgsConstructor
-@Log4j
 public class MemberAddressServiceImpl implements MemberAddressService{
 
 	private MemberAddressMapper mapper;
