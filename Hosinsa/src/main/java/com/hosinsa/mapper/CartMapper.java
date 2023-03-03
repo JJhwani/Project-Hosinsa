@@ -14,7 +14,7 @@ public interface CartMapper {
 	public int cartIn(CartVO vo);
 	public int cartUpdate(CartVO vo);
 	public int checkCart(CartVO vo);
-	public int plusQuantity(CartVO vo);
+	public int plusQuantity(long cartnum);
 	public int minusQuantity(CartVO vo);
-	
+	public int checkQuantity(long pronum);
 }

@@ -20,8 +20,6 @@ import com.hosinsa.domain.BoardCriteria;
 import com.hosinsa.domain.BoardEventVO;
 import com.hosinsa.domain.BoardNoticeVO;
 import com.hosinsa.domain.BoardPageDTO;
-import com.hosinsa.domain.Criteria;
-import com.hosinsa.domain.PageDTO;
 import com.hosinsa.service.BoardService;
 
 import lombok.extern.log4j.Log4j;
@@ -67,9 +65,11 @@ public class BoardController {
 	@PostMapping("/event/register")
 	public String eventRegister(BoardEventVO bevo, BoardCriteria cri, MultipartFile uploadFile, Model model) {
 		//==========================배포 전 경로 Works3로 수정해 주세요.
-		String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\eventBanner\\";
+		//String uploadFolder = "C:\\Works3\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\eventBanner\\";
 		
-	
+		//테스트용 수정예정
+		String uploadFolder = "C:\\Works3\\Project\\Project-Hosinsa\\Project-Hosinsa\\Hosinsa\\src\\main\\webapp\\resources\\images\\eventBanner\\"; 
+		
 		String fileName = uploadFile.getOriginalFilename();
 		File saveFile = new File(uploadFolder, fileName);
 		
