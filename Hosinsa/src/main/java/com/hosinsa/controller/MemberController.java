@@ -1,8 +1,19 @@
 package com.hosinsa.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -152,7 +163,7 @@ public class MemberController {
 		log.info("modofyGET====");
 		model.addAttribute("member", vo);
 	}
-
+	
 	@PostMapping("/modify")
 	public String modifyPOST(MemberVO member,  MultipartFile uploadFile, RedirectAttributes rttr, Model model) {
 		
@@ -235,7 +246,7 @@ public class MemberController {
 		member.setProfilimg((String)result.get("profile_image"));	// 프로필 이미지(카카오 프로필 사진)
 		member.setEmail((String)result.get("email"));				// 이메일(아이디와 동일)
 		member.setGender((String)result.get("gender"));				// 성별(male, female 로 받아짐)
-		
+
 		// 등급과 포인트는 임의값 지정
 		member.setGrade("C");
 		member.setPoint(100000);
